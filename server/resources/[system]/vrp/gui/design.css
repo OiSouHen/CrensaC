@@ -1,0 +1,126 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+	font-family: "Roboto";
+}
+
+.console {
+	color: red;
+	background-color: white;
+}
+
+.requestManager {
+	width: 450px;
+	bottom: 50px;
+	position: absolute;
+	left: calc(50% - 225px);
+}
+
+#NotifyBackground {
+	color: #ccc;
+	float: left;
+	width: 400px;
+	padding: 25px;
+	font-size: 14px;
+	margin-top: 25px;
+ 	line-height: 20px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	font-family: "Roboto";
+	background: rgba(15,15,15,.75);
+}
+
+#NotifyBackground b {
+	color: #fff;
+	font-weight: 300;
+}
+
+#NotifyY {
+	float: left;
+	width: 200px;
+	color: #d6ffea;
+	font-size: 13px;
+	position: relative;
+	padding: 20px 10px;
+	margin-right: 10px;
+	text-align: center;
+	border-radius: 4px;
+	letter-spacing: 2px;
+	font-family: "Roboto";
+	background: rgba(43,135,86,.75);
+}
+
+#NotifyU {
+	float: left;
+	width: 200px;
+	color: #fedcdc;
+	font-size: 13px;
+	position: relative;
+	padding: 20px 10px;
+	text-align: center;
+	border-radius: 4px;
+	letter-spacing: 3px;
+	font-family: "Roboto";
+	background: rgba(237,105,106,.75);
+}
+
+#NotifyY::before {
+	left: 95px;
+	width: 27px;
+	color: #ccc;
+	content: "Y";
+	bottom: -15px;
+	font-size: 14px;
+	position: absolute;
+	border-radius: 100%;
+	padding: 7px 0 6px 2px;
+	background: rgba(15,15,15,.75);
+}
+
+#NotifyU::before {
+	left: 95px;
+	width: 26px;
+	color: #ccc;
+	content: "U";
+	bottom: -15px;
+	font-size: 14px;
+	position: absolute;
+	border-radius: 100%;
+	padding: 7px 0 6px 3px;
+	background: rgba(15,15,15,.75);
+}
+
+#deathDiv {
+	width: 100%;
+	bottom: 50px;
+	display: none;
+	position: fixed;
+}
+
+#deathText {
+	width: 300px;
+	margin: 0 auto;
+	font-size: 13px;
+	line-height: 20px;
+	padding: 15px 20px;
+	border-radius: 4px;
+	text-align: center;
+	font-family: "Roboto";
+	text-shadow: 1px 1px #000;
+	color: rgba(255,255,255,0.75);
+	background: rgba(15,15,15,.75);
+}
+
+#deathText color {
+	color: #92ac29;
+}
+
+#deathText color2 {
+	color: #bd962e;
+}
