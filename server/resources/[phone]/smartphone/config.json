@@ -1,0 +1,46 @@
+{
+  "token": "",
+
+  "client": {
+    "bankType": "fleeca",
+    "uploadServer": "https://discord.com/api/webhooks/939341831257358427/FxMKdX9ahTZG0VAx6v3utWqFenc3IHPhhpzgtyjT6vKK2Fi-nS_ARi4SSfyYyk7-2jNR",
+    "videoServer": "ws://131.196.198.238:8080/",
+    "case": "s9",
+    "isAndroid": false,
+    "allowUnsafeURL":true,
+    "useGameClock": false,
+    "phone_template": "XXX-XXX",
+    "backgroundURL": "images/wallpaper.jpg",
+    "db_driver": "oxmysql",
+    "disabledApps": "twitter,minesweeper,truco,paypal,olx"
+  },
+
+  "call_mode": "pma-voice",
+  "webhookURL": "https://discord.com/api/webhooks/939342234015375410/w7LqimHaBL6o5C2e2JTl4k0-cpi8g9qRr7f_9WtjqN8XR5iUt3aOv-bO9KQtztxy1-3e",
+  "instagram_verify": "Admin",
+  "moderator": "Admin",
+  "item": "cellphone",
+
+  "services": [
+    {
+      "name": "Policia",
+      "number": "190",
+      "permission": "Police"
+    },
+    {
+      "name": "Paramédico",
+      "number": "192",
+      "permission": "Paramedic"
+    },
+    {
+      "name": "Mecânico",
+      "number": "0800 042",
+      "permission": "Mechanic"
+    },
+    {
+      "name": "Taxi",
+      "number": "0800 075",
+      "permission": "Taxi"
+    }
+  ]
+}
