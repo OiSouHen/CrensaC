@@ -14,52 +14,57 @@
     <div class="display-limiter">
         <div class="tablet-container">
             <header>
-                <p>LAPTOP</p>
+                <p>NOTEBOOK</p>
                 <p>VEHICLE PERFORMANCE MOBILE</p>
             </header>
             <section>
                 <div class="values-field">
                     <div class="field-area">
                         <div class="text">
-                            <label for="boost">PROPULSÃO</label>
+                            <label for="boost">FORÇA DO MOTOR</label>
                             <p class="value"></p>
                         </div>
                         <input type="range" id="boost" class="styled-slider slider-progress" min="0.1" max="0.30" value="0.25" step="0.01">
                     </div>
+
                     <div class="field-area">
                         <div class="text">
-                            <label for="fuelmix">COMBINAÇÃO DE COMBUSTÍVEIS</label>
+                            <label for="curve">FORÇA NAS CURVAS</label>
                             <p class="value"></p>
                         </div>
-                        <input type="range" id="fuelmix" class="styled-slider slider-progress" min="1" max="1.6" value="1.3" step="0.01">
+                        <input type="range" id="curve" class="styled-slider slider-progress" min="20.0" max="25.0" value="22.5" step="0.01">
                     </div>
+
                     <div class="field-area">
                         <div class="text">
-                            <label for="gearchange">VARIAÇÃO DE VELOCIDADE</label>
+                            <label for="lowspeed">TRAÇÃO EM BAIXA VELOCIDADE</label>
                             <p class="value"></p>
                         </div>
-                        <input type="range" id="gearchange" class="styled-slider slider-progress" min="1" max="15" value="9">
+                        <input type="range" id="lowspeed" class="styled-slider slider-progress" min="0.1" max="0.5" value="0.3" step="0.01">
                     </div>
+
                     <div class="field-area">
                         <div class="text">
-                            <label for="braking">FRENAGEM</label>
+                            <label for="trafront">TRAÇÃO DIANTEIRA</label>
                             <p class="value"></p>
                         </div>
-                        <input type="range" id="braking" class="styled-slider slider-progress" max="1" value="0.5" step="0.05">
+                        <input type="range" id="trafront" class="styled-slider slider-progress" min="0.28" max="0.68" value="0.48" step="0.01">
                     </div>
+
                     <div class="field-area">
                         <div class="text">
-                            <label for="brakeforce">FORÇA DE FRENAGEM</label>
+                            <label for="clutchup">TROCA DE MARCHAS MAIORES</label>
                             <p class="value"></p>
                         </div>
-                        <input type="range" id="brakeforce" class="styled-slider slider-progress" max="1.5" value="1.4" step="0.05">
+                        <input type="range" id="clutchup" class="styled-slider slider-progress" min="5.0" max="9.0" value="7.0" step="0.01">
                     </div>
+
                     <div class="field-area">
                         <div class="text">
-                            <label for="drivetrain">SISTEMA DE TRAÇÃO</label>
+                            <label for="clutchdown">TROCA DE MARCHAS MENORES</label>
                             <p class="value"></p>
                         </div>
-                        <input type="range" id="drivetrain" class="styled-slider slider-progress" max="0.75" value="0.5" step="0.05">
+                        <input type="range" id="clutchdown" class="styled-slider slider-progress" min="4.0" max="8.0" value="6.0" step="0.01">
                     </div>
                 </div>
                 <div class="button-field">

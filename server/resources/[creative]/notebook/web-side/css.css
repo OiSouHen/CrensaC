@@ -4,7 +4,7 @@ body,
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+	font-family: "Roboto";
     outline: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -110,9 +110,9 @@ body:focus,
     letter-spacing: 2px;
     text-transform: uppercase;
     border: 0px;
-    color: #a0ceb6;
-    border-radius: 3px;
-    background-color: #2e6e4c;
+    color: #4a380c;
+    border-radius: 4px;
+    background-color: #fec026;
     cursor: pointer;
     width: 100%;
     padding: 15px 0;

@@ -281,8 +281,7 @@ const updateDrag = () => {
 			if (shiftPressed) amount = ui.draggable.data("amount");
 
 			$.post("http://inventory/Deliver",JSON.stringify({
-				slot: itemData.slot,
-				amount: parseInt(amount)
+				slot: itemData.slot
 			}));
 
 			$(".amount").val("");
@@ -313,12 +312,15 @@ const updateDrag = () => {
 	$(".populated").tooltip({
 		create: function(event,ui){
 			var max = $(this).attr("data-max");
-			var type = $(this).attr("data-type");
 			var name = $(this).attr("data-name-key");
+			var Vehkey = $(this).attr("data-Vehkey");
+			var economy = $(this).attr("data-economy");
+			var Suitcase = $(this).attr("data-Suitcase");
 			var description = $(this).attr("data-description");
+			var contents = `<item>${name}</item>${description !== "undefined" ? "<br><description>"+description+"</description>":""}<br><legenda>${Vehkey !== "undefined" ? "Placa: <r>"+ Vehkey +"</r>":`Economia: <r>$${economy}</r>`} <s>|</s> Máximo: <r>${max !== "undefined" ? max:"S/L"}</r></legenda>`;
 
 			$(this).tooltip({
-				content: `<item>${name}</item>${description !== "undefined" ? "<br><description>"+description+"</description>":""}<br><legenda>Tipo: <r>${type}</r> <s>|</s> Máximo: <r>${max !== "undefined" ? max:"S/L"}</r></legenda>`,
+				content: contents,
 				position: { my: "center top+10", at: "center bottom", collision: "flipfit" },
 				show: { duration: 10 },
 				hide: { duration: 10 }
@@ -363,15 +365,18 @@ const updateMochila = () => {
 			const slot = x.toString();
 
 			if (data["inventario"][slot] !== undefined){
-				const v = data["inventario"][slot];
-				const maxDurability = 86400 * v["days"];
-				const newDurability = (maxDurability - v["durability"]) / maxDurability;
-				var actualPercent = parseInt(newDurability * 100);
+				var v = data["inventario"][slot];
+				var maxDurability = 86400 * v["days"];
+				var newDurability = (maxDurability - v["durability"]) / maxDurability;
+				var actualPercent = newDurability * 100;
+
+				if (v["charges"] !== undefined)
+					actualPercent = v["charges"];
 
 				if (actualPercent <= 1)
 					actualPercent = 1;
 
-				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-type="${v["type"]}" data-description="${v["desc"]}" style="background-image: url('images/${v["index"]}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v["amount"]}" data-peso="${v["peso"]}" data-item-key="${v["key"]}" data-name-key="${v["name"]}" data-slot="${slot}">
+				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-economy="${v["economy"]}" data-description="${v["desc"]}" style="background-image: url('images/${v["index"]}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v["amount"]}" data-peso="${v["peso"]}" data-item-key="${v["key"]}" data-name-key="${v["name"]}" data-slot="${slot}" data-idName="${v["idName"]}" data-idNacionalidade="${v["idNacionalidade"]}" data-idPort="${v["idPort"]}" data-idBlood="${v["idBlood"]}" data-idGems="${v["idGems"]}" data-idPremium="${v["idPremium"]}" data-idRolepass="${v["idRolepass"]}" data-Suitcase="${v["Suitcase"]}" data-Vehkey="${v["Vehkey"]}">
 					<div class="top">
 						<div class="itemWeight">${(v["peso"] * v["amount"]).toFixed(2)}</div>
 						<div class="itemAmount">${formatarNumero(v["amount"])}x</div>
@@ -393,10 +398,13 @@ const updateMochila = () => {
 			const slot = x.toString();
 
 			if (nameList2[x - 1] !== undefined){
-				const v = nameList2[x - 1];
-				const maxDurability = 86400 * v["days"];
-				const newDurability = (maxDurability - v["durability"]) / maxDurability;
+				var v = nameList2[x - 1];
+				var maxDurability = 86400 * v["days"];
+				var newDurability = (maxDurability - v["durability"]) / maxDurability;
 				var actualPercent = newDurability * 100;
+
+				if (v["charges"] !== undefined)
+					actualPercent = v["charges"];
 
 				if (actualPercent <= 1)
 					actualPercent = 1;

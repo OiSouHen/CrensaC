@@ -1,13 +1,14 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VEHICLEDATA
 -----------------------------------------------------------------------------------------------------------------------------------------
-function vehicleData(vehicle)
+function vehicleData(Vehicle)
 	local vehBoost = {
-		boost = GetVehicleHandlingFloat(vehicle,"CHandlingData","fInitialDriveForce"),
-		fuelmix = GetVehicleHandlingFloat(vehicle,"CHandlingData","fDriveInertia"),
-		braking = GetVehicleHandlingFloat(vehicle,"CHandlingData","fBrakeBiasFront"),
-		drivetrain = GetVehicleHandlingFloat(vehicle,"CHandlingData","fDriveBiasFront"),
-		brakeforce = GetVehicleHandlingFloat(vehicle,"CHandlingData","fBrakeForce")
+		boost = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fInitialDriveForce"),
+		curve = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fTractionCurveLateral"),
+		lowspeed = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fLowSpeedTractionLossMult"),
+		trafront = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fTractionBiasFront"),
+		clutchup = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fClutchChangeRateScaleUpShift"),
+		clutchdown = GetVehicleHandlingFloat(Vehicle,"CHandlingData","fClutchChangeRateScaleDownShift")
 	}
 
 	return vehBoost
@@ -15,14 +16,13 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SAVEDATA
 -----------------------------------------------------------------------------------------------------------------------------------------
-function saveData(vehicle,data)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fDriveInertia",data["fuelmix"] * 1.0)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fBrakeForce",data["brakeforce"] * 1.0)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fBrakeBiasFront",data["braking"] * 1.0)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fInitialDriveForce",data["boost"] * 1.0)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fDriveBiasFront",data["drivetrain"] * 1.0)
-	SetVehicleHandlingFloat(vehicle,"CHandlingData","fHandBrakeForce",0.75)
-	SetVehicleEnginePowerMultiplier(vehicle,data["gearchange"] * 1.0)
+function saveData(Vehicle,data)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fTractionCurveLateral",data["curve"] * 1.0)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fInitialDriveForce",data["boost"] * 1.0)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fLowSpeedTractionLossMult",data["lowspeed"] * 1.0)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fTractionBiasFront",data["trafront"] * 1.0)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fClutchChangeRateScaleUpShift",data["clutchup"] * 1.0)
+	SetVehicleHandlingFloat(Vehicle,"CHandlingData","fClutchChangeRateScaleDownShift",data["clutchdown"] * 1.0)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TOGGLEMENU
