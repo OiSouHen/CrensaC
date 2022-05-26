@@ -89,7 +89,7 @@ RegisterNetEvent("smartphone:callReady",function()
 		inCall = true
 
 		while inCall do
-			Citizen.Wait(0)
+			Wait(0)
 			drawTxt("PRESSIONE  ~g~G~w~  PARA DESLIGAR A CHAMADA")
 
 			if IsControlJustPressed(1,47) then
@@ -115,7 +115,8 @@ function drawTxt(text)
 	DrawText(0.5,0.93)
 end
 
-exports("closeSmartphone",function()
+RegisterNetEvent("smartphone:Close")
+AddEventHandler("smartphone:Close",function()
 	if IsNuiOpen then
 		IsNuiOpen = false
 		SetNuiFocus(false)

@@ -47,7 +47,7 @@ html,body {
 
 #displayBoxes text {
 	padding: 4px 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-right: 10px;
 	text-transform: uppercase;
 	background: rgba(15,15,15,.75);
@@ -56,7 +56,7 @@ html,body {
 #displayBoxes active {
 	color: #4a380c;
 	padding: 4px 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-right: 10px;
 	text-transform: uppercase;
 	background: #fec026;
@@ -65,7 +65,7 @@ html,body {
 
 #displayBoxes inative {
 	padding: 4px 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-right: 10px;
 	text-transform: uppercase;
 	background: rgba(15,15,15,.75);
@@ -86,7 +86,7 @@ html,body {
 	float: right;
 	height: 34px;
 	margin-left: 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	position: relative !important;
 	background: rgba(15,15,15,.75);
 }
@@ -104,49 +104,49 @@ html,body {
 .oxigen {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(77,87,105,.75);
 }
 
 .stress {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(112,78,136,.75);
 }
 
 .food {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(204,112,22,.75);
 }
 
 .water {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(64,116,187,.75);
 }
 
 .armour {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(165,43,66,.75);
 }
 
 .health {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(53,133,77,.75);
 }
 
 .parachute {
 	width: 34px;
 	height: 34px;
-	border-radius: 4px;
+	border-radius: 3px;
 }
 
 #oxigen {
@@ -160,14 +160,14 @@ html,body {
 	height: 10px;
 	display: none;
 	position: absolute;
-	border-radius: 2px;
+	border-radius: 3px;
 	background: rgba(15,15,15,.75);
 }
 
 .progress {
 	width: 0;
 	height: 10px;
-	border-radius: 2px;
+	border-radius: 3px;
 	background: rgba(255,255,255,.75);
 }
 
@@ -217,7 +217,7 @@ html,body {
 	float: right;
 	padding: 5px 0;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-right: 10px;
 	letter-spacing: 1px;
 	background: rgba(15,15,15,.75);
@@ -229,7 +229,7 @@ html,body {
 	float: right;
 	padding: 5px 0;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(15,15,15,.75);
 }
 
@@ -258,7 +258,7 @@ opacity {
 	float: left;
 	height: 34px;
 	margin-right: 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-bottom: 10px;
 	position: relative !important;
 	background: rgba(15,15,15,.75);
@@ -268,7 +268,7 @@ opacity {
 	width: 34px;
 	float: left;
 	height: 34px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-bottom: 10px;
 	position: relative !important;
 	background: rgba(15,15,15,.75);
@@ -279,7 +279,7 @@ opacity {
 	float: left;
 	height: 34px;
 	margin-right: 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	position: relative !important;
 	background: rgba(15,15,15,.75);
 }
@@ -288,7 +288,7 @@ opacity {
 	width: 34px;
 	float: left;
 	height: 34px;
-	border-radius: 4px;
+	border-radius: 3px;
 	position: relative !important;
 	background: rgba(15,15,15,.75);
 }
@@ -306,28 +306,28 @@ opacity {
 .Nitro {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(37,162,143,.75);
 }
 
 .Locked {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(137,160,46,.75);
 }
 
 .Fuel {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(189,46,46,.75);
 }
 
 .Belt {
 	width: 34px;
 	height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(57,155,41,.75);
 }
 

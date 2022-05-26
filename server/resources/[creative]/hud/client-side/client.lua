@@ -778,6 +778,7 @@ function nitroDisable()
 	local ped = PlayerPedId()
 	if IsPedInAnyVehicle(ped) then
 		local Vehicle = GetVehiclePedIsUsing(ped)
+		local vehPlate = GetVehicleNumberPlateText(Vehicle)
 
 		if nitroFlame then
 			SetVehicleRocketBoostActive(Vehicle,false)
