@@ -534,7 +534,7 @@ function cRP.requestShop(name)
 		local shopSlots = 20
 		local inventoryShop = {}
 		for k,v in pairs(shops[name]["list"]) do
-			table.insert(inventoryShop,{ key = k, price = parseInt(v), name = itemName(k), index = itemIndex(k), peso = itemWeight(k), type = itemType(k), max = itemMaxAmount(k), desc = itemDescription(k) })
+			table.insert(inventoryShop,{ key = k, price = parseInt(v), name = itemName(k), index = itemIndex(k), peso = itemWeight(k), type = itemType(k), max = itemMaxAmount(k), desc = itemDescription(k), economy = itemEconomy(k) })
 		end
 
 		local inventoryUser = {}
@@ -547,6 +547,7 @@ function cRP.requestShop(name)
 			v["max"] = itemMaxAmount(v["item"])
 			v["type"] = itemType(v["item"])
 			v["desc"] = itemDescription(v["item"])
+			v["economy"] = itemEconomy(v["item"])
 			v["key"] = v["item"]
 			v["slot"] = k
 

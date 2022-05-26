@@ -10,18 +10,18 @@ local vehMenu = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADFOCUS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VEHCONTROL
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("enterVehmenus",function(source,args,rawCommand)
-	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not vehMenu and MumbleIsConnected() then
+	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not vehMenu and MumbleIsConnected() and LocalPlayer["state"]["Route"] < 900000 then
 		local ped = PlayerPedId()
 		if not IsEntityInWater(ped) and GetEntityHealth(ped) > 101 then
-			local vehicle = vRP.vehList(7)
-			if vehicle then
+			local Vehicle = vRP.vehList(7)
+			if Vehicle then
 				SendNUIMessage({ show = true })
 				SetCursorLocation(0.5,0.8)
 				SetNuiFocus(true,true)
@@ -49,14 +49,7 @@ end)
 RegisterNUICallback("menuActive",function(data)
 	local ped = PlayerPedId()
 	if GetVehiclePedIsTryingToEnter(ped) <= 0 then
-		if data["active"] == "chest" then
-			TriggerServerEvent("trunkchest:openTrunk")
-
-			SendNUIMessage({ show = false })
-			SetCursorLocation(0.5,0.5)
-			SetNuiFocus(false,false)
-			vehMenu = false
-		elseif data["active"] == "door1" then
+		if data["active"] == "door1" then
 			TriggerServerEvent("player:Doors","1")
 		elseif data["active"] == "door2" then
 			TriggerServerEvent("player:Doors","2")

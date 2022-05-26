@@ -1360,7 +1360,7 @@ function cRP.requestCrafting(craftType)
 				table.insert(craftList,{ name = itemName(k), amount = v })
 			end
 
-			table.insert(inventoryShop,{ name = itemName(k), index = itemIndex(k), key = k, peso = itemWeight(k), list = craftList, amount = parseInt(v["amount"]), desc = itemDescription(k) })
+			table.insert(inventoryShop,{ name = itemName(k), index = itemIndex(k), key = k, peso = itemWeight(k), list = craftList, amount = parseInt(v["amount"]), desc = itemDescription(k), economy = itemEconomy(k) })
 		end
 
 		local inventoryUser = {}
@@ -1370,6 +1370,7 @@ function cRP.requestCrafting(craftType)
 			v["name"] = itemName(v["item"])
 			v["peso"] = itemWeight(v["item"])
 			v["index"] = itemIndex(v["item"])
+			v["economy"] = itemEconomy(v["item"])
 			v["key"] = v["item"]
 			v["slot"] = k
 

@@ -12,7 +12,7 @@ html,body {
 }
 
 #vehicleMenu {
-	left: 18%;
+	left: 20%;
 	bottom: 50px;
 	display: none;
 	cursor: default;
@@ -23,14 +23,30 @@ html,body {
 .vehicleButton {
 	float: left;
 	width: 150px;
-	margin-top: 5px;
-	margin-right: 5px;
-	border-radius: 3px;
-	padding: 10px 15px;
+	margin-top: 8px;
+	margin-right: 10px;
+	border-radius: 4px;
+	position: relative;
+	padding: 10px 15px 10px 12px;
 	background: rgba(15,15,15,.75);
 }
 
+.vehicleButton::before {
+	top: 20%;
+	left: -2px;
+	width: 4px;
+	height: 60%;
+	bottom: 20%;
+	content: "";
+	position: absolute;
+	border-radius: 4px;
+	background: #fec026;
+}
+
 .vehicleButton:hover {
-	color: #a0ceb6;
-	background: #2e6e4c;
+	background: rgba(10,10,10,.75);
+}
+
+.vehicleButton:hover::before {
+	background: #ffd97b;
 }

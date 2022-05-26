@@ -244,12 +244,12 @@ const updateDrag = () => {
 	$(".populated").tooltip({
 		create: function(event,ui){
 			var max = $(this).attr("data-max");
-			var type = $(this).attr("data-type");
 			var name = $(this).attr("data-name-key");
+			var economy = $(this).attr("data-economy");
 			var description = $(this).attr("data-description");
 
 			$(this).tooltip({
-				content: `<item>${name}</item>${description !== "undefined" ? "<br><description>"+description+"</description>":""}<br><legenda>Tipo: <r>${type}</r> <s>|</s> Máximo: <r>${max !== "undefined" ? max:"S/L"}</r></legenda>`,
+				content: `<item>${name}</item>${description !== "undefined" ? "<br><description>"+description+"</description>":""}<br><legenda>Economia: <r>$${economy}</r> <s>|</s> Máximo: <r>${max !== "undefined" ? max:"S/L"}</r></legenda>`,
 				position: { my: "center top+10", at: "center bottom", collision: "flipfit" },
 				show: { duration: 10 },
 				hide: { duration: 10 }
@@ -295,14 +295,17 @@ const requestChest = () => {
 
 			if (data.myInventory[slot] !== undefined){
 				const v = data.myInventory[slot];
-				const maxDurability = 86400 * v["days"];
-				const newDurability = (maxDurability - v["durability"]) / maxDurability;
+				var maxDurability = 86400 * v["days"];
+				var newDurability = (maxDurability - v["durability"]) / maxDurability;
 				var actualPercent = newDurability * 100;
+
+				if (v["charges"] !== undefined)
+					actualPercent = v["charges"];
 
 				if (actualPercent <= 1)
 					actualPercent = 1;
 
-				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-type="${v["type"]}" data-description="${v["desc"]}" style="background-image: url('nui://inventory/web-side/images/${v.index}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v.amount}" data-peso="${v.peso}" data-item-key="${v.key}" data-name-key="${v.name}" data-slot="${slot}">
+				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-economy="${v["economy"]}" data-description="${v["desc"]}" style="background-image: url('nui://inventory/web-side/images/${v.index}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v.amount}" data-peso="${v.peso}" data-item-key="${v.key}" data-name-key="${v.name}" data-slot="${slot}">
 					<div class="top">
 						<div class="itemWeight">${(v.peso * v.amount).toFixed(2)}</div>
 						<div class="itemAmount">${formatarNumero(v.amount)}x</div>
@@ -325,14 +328,17 @@ const requestChest = () => {
 
 			if (data.myChest[slot] !== undefined){
 				const v = data.myChest[slot];
-				const maxDurability = 86400 * v["days"];
-				const newDurability = (maxDurability - v["durability"]) / maxDurability;
+				var maxDurability = 86400 * v["days"];
+				var newDurability = (maxDurability - v["durability"]) / maxDurability;
 				var actualPercent = newDurability * 100;
+
+				if (v["charges"] !== undefined)
+					actualPercent = v["charges"];
 
 				if (actualPercent <= 1)
 					actualPercent = 1;
 
-				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-type="${v["type"]}" data-description="${v["desc"]}" style="background-image: url('nui://inventory/web-side/images/${v.index}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v.amount}" data-peso="${v.peso}" data-item-key="${v.key}" data-name-key="${v.name}" data-slot="${slot}">
+				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-economy="${v["economy"]}" data-description="${v["desc"]}" style="background-image: url('nui://inventory/web-side/images/${v.index}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v.amount}" data-peso="${v.peso}" data-item-key="${v.key}" data-name-key="${v.name}" data-slot="${slot}">
 					<div class="top">
 						<div class="itemWeight">${(v.peso * v.amount).toFixed(2)}</div>
 						<div class="itemAmount">${formatarNumero(v.amount)}x</div>

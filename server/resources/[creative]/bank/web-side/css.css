@@ -11,7 +11,7 @@ body {
 	padding: 0;
 	color: #fff;
 	font-size: 13px;
-	font-family: "Roboto",Arial,Helvetica,sans-serif;
+	font-family: "Roboto";
 }
 
 * {
@@ -31,32 +31,32 @@ body {
 #content {
 	width: 390px;
 	padding: 20px;
-	border-radius: 3px;
+	border-radius: 4px;
 	background: rgba(15,15,15,.75);
 }
 
 #deposit {
-	color: #a0ceb6;
+	color: #4a380c;
 	float: left;
 	width: 190px;
 	padding: 16px;
 	font-size: 18px;
-	border-radius: 3px;
+	border-radius: 4px;
 	margin-right: 10px;
 	text-align: center;
-	background: #2e6e4c;
+	background: #fec026;
 	letter-spacing: 2px;
 }
 
 #withdraw {
-	color: #a0ceb6;
+	color: #4a380c;
 	float: left;
 	width: 150px;
 	padding: 16px;
 	font-size: 18px;
-	border-radius: 3px;
+	border-radius: 4px;
 	text-align: center;
-	background: #2e6e4c;
+	background: #fec026;
 	letter-spacing: 2px;
 }
 
@@ -66,7 +66,7 @@ body {
 	width: 350px;
 	padding: 20px;
 	font-size: 18px;
-	border-radius: 3px;
+	border-radius: 4px;
 	text-align: center;
 	margin-bottom: 10px;
 	text-transform: uppercase;

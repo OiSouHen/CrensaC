@@ -49,6 +49,7 @@ function cRP.openChest(chestName)
 			v["max"] = itemMaxAmount(v["item"])
 			v["type"] = itemType(v["item"])
 			v["desc"] = itemDescription(v["item"])
+			v["economy"] = itemEconomy(v["item"])
 			v["key"] = v["item"]
 			v["slot"] = k
 
@@ -79,6 +80,7 @@ function cRP.openChest(chestName)
 			v["max"] = itemMaxAmount(v["item"])
 			v["type"] = itemType(v["item"])
 			v["desc"] = itemDescription(v["item"])
+			v["economy"] = itemEconomy(v["item"])
 			v["key"] = v["item"]
 			v["slot"] = k
 
