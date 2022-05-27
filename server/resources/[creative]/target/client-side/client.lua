@@ -8,19 +8,179 @@ vRP = Proxy.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Zones = {}
 local Models = {}
-local innerEntity = {}
-local sucessTarget = false
-local targetActive = false
+local Selected = {}
+local Sucess = false
+local Dismantleds = 1
+LocalPlayer["state"]["Target"] = false
 -----------------------------------------------------------------------------------------------------------------------------------------
--- LOCATELOCS
+-- TOWS
 -----------------------------------------------------------------------------------------------------------------------------------------
-local locateLocs = {
-	{ -832.41,-393.87,31.32,"Desmanche" },
-	{ 2645.42,4253.48,44.79,"Desmanche" },
-	{ 963.18,-1856.79,31.19,"Desmanche" },
-	{ -142.24,-1174.19,23.76,"Reboque" },
-	{ 1724.84,3715.31,34.22,"Reboque" },
-	{ -305.45,6117.62,31.49,"Reboque" }
+local Tows = {
+	{ -142.24,-1174.19,23.76 },
+	{ 1724.84,3715.31,34.22 },
+	{ -305.45,6117.62,31.49 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISMANTLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Dismantles = {
+	{ 943.23,-1497.87,30.11 },
+	{ -1172.57,-2037.65,13.75 },
+	{ -524.94,-1680.63,19.21 },
+	{ 1358.14,-2095.41,52.0 },
+	{ 602.47,-437.82,24.75 },
+	{ -413.86,-2179.29,10.31 },
+	{ 146.51,320.62,112.14 },
+	{ 520.91,169.14,99.36 },
+	{ 1137.99,-794.32,57.59 },
+	{ -93.07,-2549.6,6.0 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:DISMANTLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("target:Dismantles")
+AddEventHandler("target:Dismantles",function()
+	Dismantleds = math.random(#Dismantles)
+	TriggerEvent("NotifyPush",{ code = 20, title = "Localização do Desmanche", x = Dismantles[Dismantleds][1], y = Dismantles[Dismantleds][2], z = Dismantles[Dismantleds][3], blipColor = 60 })
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TYRELIST
+-----------------------------------------------------------------------------------------------------------------------------------------
+local tyreList = {
+	["wheel_lf"] = 0,
+	["wheel_rf"] = 1,
+	["wheel_lm"] = 2,
+	["wheel_rm"] = 3,
+	["wheel_lr"] = 4,
+	["wheel_rr"] = 5
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- FUELS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Fuels = {
+	{ 273.83,-1253.46,28.29 },
+	{ 273.83,-1261.29,28.29 },
+	{ 273.83,-1268.63,28.29 },
+	{ 265.06,-1253.46,28.29 },
+	{ 265.06,-1261.29,28.29 },
+	{ 265.06,-1268.63,28.29 },
+	{ 256.43,-1253.46,28.29 },
+	{ 256.43,-1261.29,28.29 },
+	{ 256.43,-1268.63,28.29 },
+	{ 2680.90,3266.40,54.39 },
+	{ 2678.51,3262.33,54.39 },
+	{ -2104.53,-311.01,12.16 },
+	{ -2105.39,-319.21,12.16 },
+	{ -2106.06,-325.57,12.16 },
+	{ -2097.48,-326.48,12.16 },
+	{ -2096.81,-320.11,12.16 },
+	{ -2096.09,-311.90,12.16 },
+	{ -2087.21,-312.81,12.16 },
+	{ -2088.08,-321.03,12.16 },
+	{ -2088.75,-327.39,12.16 },
+	{ -2551.39,2327.11,32.24 },
+	{ -2558.02,2326.70,32.24 },
+	{ -2558.48,2334.13,32.24 },
+	{ -2552.60,2334.46,32.24 },
+	{ -2558.77,2341.48,32.24 },
+	{ -2552.39,2341.89,32.24 },
+	{ 186.97,6606.21,31.06 },
+	{ 179.67,6604.93,31.06 },
+	{ 172.33,6603.63,31.06 },
+	{ 818.99,-1026.24,25.44 },
+	{ 810.7,-1026.24,25.44 },
+	{ 810.7,-1030.94,25.44 },
+	{ 818.99,-1030.94,25.44 },
+	{ 818.99,-1026.24,25.44 },
+	{ 827.3,-1026.24,25.64 },
+	{ 827.3,-1030.94,25.64 },
+	{ 1207.07,-1398.16,34.39 },
+	{ 1204.2,-1401.03,34.39 },
+	{ 1210.07,-1406.9,34.39 },
+	{ 1212.94,-1404.03,34.39 },
+	{ 1178.97,-339.54,68.37 },
+	{ 1186.4,-338.23,68.36 },
+	{ 1184.89,-329.7,68.31 },
+	{ 1177.46,-331.01,68.32 },
+	{ 1175.71,-322.3,68.36 },
+	{ 1183.13,-320.99,68.36 },
+	{ 629.64,263.84,102.27 },
+	{ 629.64,273.97,102.27 },
+	{ 620.99,273.97,102.27 },
+	{ 621.0,263.84,102.27 },
+	{ 612.44,263.84,102.27 },
+	{ 612.43,273.96,102.27 },
+	{ 2588.41,358.56,107.66 },
+	{ 2588.65,364.06,107.66 },
+	{ 2581.18,364.39,107.66 },
+	{ 2580.94,358.89,107.66 },
+	{ 2573.55,359.21,107.66 },
+	{ 2573.79,364.71,107.66 },
+	{ 174.99,-1568.44,28.33 },
+	{ 181.81,-1561.96,28.33 },
+	{ 176.03,-1555.91,28.33 },
+	{ 169.3,-1562.26,28.33 },
+	{ -329.81,-1471.63,29.73 },
+	{ -324.74,-1480.41,29.73 },
+	{ -317.26,-1476.09,29.73 },
+	{ -322.33,-1467.31,29.73 },
+	{ -314.92,-1463.03,29.73 },
+	{ -309.85,-1471.79,29.73 },
+	{ 1786.08,3329.86,40.42 },
+	{ 1785.04,3331.48,40.35 },
+	{ 50.31,2778.54,57.05 },
+	{ 48.92,2779.59,57.05 },
+	{ 264.98,2607.18,43.99 },
+	{ 263.09,2606.8,43.99 },
+	{ 1035.45,2674.44,38.71 },
+	{ 1043.22,2674.45,38.71 },
+	{ 1043.22,2667.92,38.71 },
+	{ 1035.45,2667.91,38.71 },
+	{ 1209.59,2658.36,36.9 },
+	{ 1208.52,2659.43,36.9 },
+	{ 1205.91,2662.05,36.9 },
+	{ 2539.8,2594.81,36.96 },
+	{ 2001.55,3772.21,31.4 },
+	{ 2003.92,3773.48,31.4 },
+	{ 2006.21,3774.96,31.4 },
+	{ 2009.26,3776.78,31.4 },
+	{ 1684.6,4931.66,41.23 },
+	{ 1690.1,4927.81,41.23 },
+	{ 1705.74,6414.61,31.77 },
+	{ 1701.73,6416.49,31.77 },
+	{ 1697.76,6418.35,31.77 },
+	{ -97.06,6416.77,30.65 },
+	{ -91.29,6422.54,30.65 },
+	{ -1808.71,799.96,137.69 },
+	{ -1803.62,794.4,137.69 },
+	{ -1797.22,800.56,137.66 },
+	{ -1802.31,806.12,137.66 },
+	{ -1795.93,811.97,137.7 },
+	{ -1790.83,806.41,137.7 },
+	{ -1438.07,-268.69,45.41 },
+	{ -1444.5,-274.23,45.41 },
+	{ -1435.5,-284.68,45.41 },
+	{ -1429.07,-279.15,45.41 },
+	{ -732.64,-932.51,18.22 },
+	{ -732.64,-939.32,18.22 },
+	{ -724.0,-939.32,18.22 },
+	{ -724.0,-932.51,18.22 },
+	{ -715.43,-932.51,18.22 },
+	{ -715.43,-939.32,18.22 },
+	{ -532.28,-1212.71,17.33 },
+	{ -529.51,-1213.96,17.33 },
+	{ -524.92,-1216.15,17.33 },
+	{ -522.23,-1217.42,17.33 },
+	{ -518.52,-1209.5,17.33 },
+	{ -521.21,-1208.23,17.33 },
+	{ -525.8,-1206.04,17.33 },
+	{ -528.57,-1204.8,17.33 },
+	{ -72.03,-1765.1,28.53 },
+	{ -69.45,-1758.01,28.55 },
+	{ -77.59,-1755.05,28.81 },
+	{ -80.17,-1762.14,28.8 },
+	{ -63.61,-1767.93,28.27 },
+	{ -61.03,-1760.85,28.31 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSYSTEM
@@ -1367,14 +1527,14 @@ function playerTargetEnable()
 	if LocalPlayer["state"]["Active"] then
 		local ped = PlayerPedId()
 
-		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or sucessTarget or IsPedArmed(ped,6) or IsPedInAnyVehicle(ped) or not MumbleIsConnected() then
+		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or Sucess or IsPedArmed(ped,6) or IsPedInAnyVehicle(ped) or not MumbleIsConnected() then
 			return
 		end
 
 		SendNUIMessage({ response = "openTarget" })
 
-		targetActive = true
-		while targetActive do
+		LocalPlayer["state"]["Target"] = true
+		while LocalPlayer["state"]["Target"] do
 			local coords = GetEntityCoords(ped)
 			local hit,entCoords,entity = RayCastGamePlayCamera(10.0)
 
@@ -1391,7 +1551,7 @@ function playerTargetEnable()
 								vehNet = VehToNet(entity)
 							end
 
-							innerEntity = { vehPlate,vRP.vehicleModel(vehModel),entity,vehNet }
+							Selected = { vehPlate,vRP.vehicleModel(vehModel),entity,vehNet }
 
 							if LocalPlayer["state"]["Police"] then
 								SendNUIMessage({ response = "validTarget", data = policeVeh })
@@ -1411,8 +1571,8 @@ function playerTargetEnable()
 								end
 							end
 
-							sucessTarget = true
-							while sucessTarget and targetActive do
+							Sucess = true
+							while Sucess and LocalPlayer["state"]["Target"] do
 								local ped = PlayerPedId()
 								local coords = GetEntityCoords(ped)
 								local _,entCoords,entity = RayCastGamePlayCamera(10.0)
@@ -1425,7 +1585,7 @@ function playerTargetEnable()
 								end
 
 								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
-									sucessTarget = false
+									Sucess = false
 								end
 
 								Wait(1)
@@ -1438,7 +1598,7 @@ function playerTargetEnable()
 							local index = NetworkGetPlayerIndexFromPed(entity)
 							local source = GetPlayerServerId(index)
 
-							innerEntity = { source }
+							Selected = { source }
 
 							if LocalPlayer["state"]["Police"] then
 								SendNUIMessage({ response = "validTarget", data = policeMenu })
@@ -1446,8 +1606,8 @@ function playerTargetEnable()
 								SendNUIMessage({ response = "validTarget", data = paramedicMenu })
 							end
 
-							sucessTarget = true
-							while sucessTarget and targetActive do
+							Sucess = true
+							while Sucess and LocalPlayer["state"]["Target"] do
 								local ped = PlayerPedId()
 								local coords = GetEntityCoords(ped)
 								local _,entCoords,entity = RayCastGamePlayCamera(10.0)
@@ -1460,7 +1620,7 @@ function playerTargetEnable()
 								end
 
 								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
-									sucessTarget = false
+									Sucess = false
 								end
 
 								Wait(1)
@@ -1478,12 +1638,12 @@ function playerTargetEnable()
 											objNet = ObjToNet(entity)
 										end
 
-										innerEntity = { entity,k,objNet,GetEntityCoords(entity) }
+										Selected = { entity,k,objNet,GetEntityCoords(entity) }
 
 										SendNUIMessage({ response = "validTarget", data = Models[k]["options"] })
 
-										sucessTarget = true
-										while sucessTarget and targetActive do
+										Sucess = true
+										while Sucess and LocalPlayer["state"]["Target"] do
 											local ped = PlayerPedId()
 											local coords = GetEntityCoords(ped)
 											local _,entCoords,entity = RayCastGamePlayCamera(10.0)
@@ -1496,7 +1656,7 @@ function playerTargetEnable()
 											end
 
 											if GetEntityType(entity) == 0 or #(coords - entCoords) > Models[k]["distance"] then
-												sucessTarget = false
+												Sucess = false
 											end
 
 											Wait(1)
@@ -1516,11 +1676,11 @@ function playerTargetEnable()
 							SendNUIMessage({ response = "validTarget", data = Zones[k]["targetoptions"]["options"] })
 
 							if v["targetoptions"]["shop"] ~= nil then
-								innerEntity = { v["targetoptions"]["shop"] }
+								Selected = { v["targetoptions"]["shop"] }
 							end
 
-							sucessTarget = true
-							while sucessTarget and targetActive do
+							Sucess = true
+							while Sucess and LocalPlayer["state"]["Target"] do
 								local ped = PlayerPedId()
 								local coords = GetEntityCoords(ped)
 								local _,entCoords = RayCastGamePlayCamera(10.0)
@@ -1533,7 +1693,7 @@ function playerTargetEnable()
 								end
 
 								if not Zones[k]:isPointInside(entCoords) or #(coords - Zones[k]["center"]) > v["targetoptions"]["distance"] then
-									sucessTarget = false
+									Sucess = false
 								end
 
 								Wait(1)
@@ -1565,10 +1725,10 @@ AddEventHandler("target:animDeitar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
 		local ped = PlayerPedId()
 		if GetEntityHealth(ped) > 101 then
-			local objCoords = GetEntityCoords(innerEntity[1])
+			local objCoords = GetEntityCoords(Selected[1])
 
-			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + beds[innerEntity[2]][1],1,0,0,0)
-			SetEntityHeading(ped,GetEntityHeading(innerEntity[1]) + beds[innerEntity[2]][2] - 180.0)
+			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + beds[Selected[2]][1],1,0,0,0)
+			SetEntityHeading(ped,GetEntityHeading(Selected[1]) + beds[Selected[2]][2] - 180.0)
 
 			vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
 		end
@@ -1638,14 +1798,14 @@ AddEventHandler("target:animSentar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
 		local ped = PlayerPedId()
 		if GetEntityHealth(ped) > 101 then
-			local objCoords = GetEntityCoords(innerEntity[1])
+			local objCoords = GetEntityCoords(Selected[1])
 
-			FreezeEntityPosition(innerEntity[1],true)
-			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + chairs[innerEntity[2]],1,0,0,0)
-			if chairs[innerEntity[2]] == 0.7 then
-				SetEntityHeading(ped,GetEntityHeading(innerEntity[1]))
+			FreezeEntityPosition(Selected[1],true)
+			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + chairs[Selected[2]],1,0,0,0)
+			if chairs[Selected[2]] == 0.7 then
+				SetEntityHeading(ped,GetEntityHeading(Selected[1]))
 			else
-				SetEntityHeading(ped,GetEntityHeading(innerEntity[1]) - 180.0)
+				SetEntityHeading(ped,GetEntityHeading(Selected[1]) - 180.0)
 			end
 
 			vRP.playAnim(false,{ task = "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" },false)
@@ -1656,36 +1816,36 @@ end)
 -- PLAYERTARGETDISABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function playerTargetDisable()
-	if sucessTarget or not targetActive then
+	if Sucess or not LocalPlayer["state"]["Target"] then
 		return
 	end
 
-	targetActive = false
+	LocalPlayer["state"]["Target"] = false
 	SendNUIMessage({ response = "closeTarget" })
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SELECTTARGET
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("selectTarget",function(data)
-	sucessTarget = false
-	targetActive = false
+	Sucess = false
+	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
 	SendNUIMessage({ response = "closeTarget" })
 
 	if data["tunnel"] == "client" then
-		TriggerEvent(data["event"],innerEntity)
+		TriggerEvent(data["event"],Selected)
 	elseif data["tunnel"] == "server" then
-		TriggerServerEvent(data["event"],innerEntity)
+		TriggerServerEvent(data["event"],Selected)
 	elseif data["tunnel"] == "shop" then
-		TriggerEvent(data["event"],innerEntity[1])
+		TriggerEvent(data["event"],Selected[1])
 	elseif data["tunnel"] == "boxes" then
-		TriggerServerEvent(data["event"],innerEntity[1],data["service"])
+		TriggerServerEvent(data["event"],Selected[1],data["service"])
 	elseif data["tunnel"] == "paramedic" then
-		TriggerServerEvent(data["event"],innerEntity[1])
+		TriggerServerEvent(data["event"],Selected[1])
 	elseif data["tunnel"] == "police" then
-		TriggerServerEvent(data["event"],innerEntity,data["service"])
+		TriggerServerEvent(data["event"],Selected,data["service"])
 	elseif data["tunnel"] == "objects" then
-		TriggerServerEvent(data["event"],innerEntity[3])
+		TriggerServerEvent(data["event"],Selected[3])
 	else
 		TriggerServerEvent(data["event"])
 	end
@@ -1694,8 +1854,8 @@ end)
 -- CLOSETARGET
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("closeTarget",function()
-	sucessTarget = false
-	targetActive = false
+	Sucess = false
+	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
 	SendNUIMessage({ response = "closeTarget" })
 end)
@@ -1704,8 +1864,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("target:resetDebug")
 AddEventHandler("target:resetDebug",function()
-	sucessTarget = false
-	targetActive = false
+	Sucess = false
+	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
 	SendNUIMessage({ response = "closeTarget" })
 end)
