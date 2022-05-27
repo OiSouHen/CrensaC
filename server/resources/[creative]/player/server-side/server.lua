@@ -123,9 +123,9 @@ AddEventHandler("player:Doors",function(number)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- RECEIVESALARY
+-- GETSALARY
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.receiveSalary()
+function cRP.getSalary()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
