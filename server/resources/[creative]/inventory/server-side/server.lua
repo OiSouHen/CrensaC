@@ -123,29 +123,28 @@ local tableList = {
 		[9] = { ["timer"] = 5, ["item"] = "cokeseed", ["itemAmount"] = 1 },
 		[10] = { ["timer"] = 5, ["item"] = "mushseed", ["itemAmount"] = 1 },
 		[11] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
-		[12] = { ["timer"] = 5, ["item"] = "heroine", ["itemAmount"] = 1 },
-		[13] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
-		[14] = { ["timer"] = 5, ["item"] = "brokenpick", ["itemAmount"] = 1 },
-		[15] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
-		[16] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
-		[17] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
-		[18] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
-		[19] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
-		[20] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
-		[21] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
-		[22] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
-		[23] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
-		[24] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
-		[25] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
-		[26] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
-		[27] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
-		[28] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
-		[29] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
-		[30] = { ["timer"] = 5, ["item"] = "brick", ["itemAmount"] = 1 },
-		[31] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
-		[32] = { ["timer"] = 5, ["item"] = "sneakers", ["itemAmount"] = 1 },
-		[33] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
-		[34] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
+		[12] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
+		[13] = { ["timer"] = 5, ["item"] = "brokenpick", ["itemAmount"] = 1 },
+		[14] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
+		[15] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
+		[16] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
+		[17] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
+		[18] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
+		[19] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
+		[20] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
+		[21] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
+		[22] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
+		[23] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
+		[24] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
+		[25] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
+		[26] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
+		[27] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
+		[28] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
+		[29] = { ["timer"] = 5, ["item"] = "brick", ["itemAmount"] = 1 },
+		[30] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
+		[31] = { ["timer"] = 5, ["item"] = "sneakers", ["itemAmount"] = 1 },
+		[32] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
+		[33] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
 	},
 	["fishfillet"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
@@ -275,9 +274,8 @@ local lootItens = {
 			[13] = { ["item"] = "weedseed", ["min"] = 2, ["max"] = 3 },
 			[14] = { ["item"] = "cokeseed", ["min"] = 2, ["max"] = 3 },
 			[15] = { ["item"] = "mushseed", ["min"] = 2, ["max"] = 3 },
-			[16] = { ["item"] = "heroine", ["min"] = 1, ["max"] = 1 },
-			[17] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 },
-			[18] = { ["item"] = "fertilizer", ["min"] = 2, ["max"] = 4 }
+			[16] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 },
+			[17] = { ["item"] = "fertilizer", ["min"] = 2, ["max"] = 4 }
 		}
 	}
 }
@@ -1138,30 +1136,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							vRP.downgradeThirst(user_id,5)
 							vRP.downgradeStress(user_id,20)
 							vPLAYER.movementClip(source,"move_m@shadyped@a")
-						end
-					end
-
-					Wait(100)
-				until Active[user_id] == nil
-			return end
-
-			if nameItem == "lean" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				vRPC.playAnim(source,true,{"mp_suicide","pill"},true)
-				TriggerClientEvent("inventory:Buttons",source,true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							vRP.chemicalTimer(user_id,10)
-							vRP.downgradeStress(user_id,25)
-							TriggerClientEvent("cleanEffectDrugs",source)
 						end
 					end
 
