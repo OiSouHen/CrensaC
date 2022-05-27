@@ -305,19 +305,6 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CLEANEFFECTDRUGS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("cleanEffectDrugs")
-AddEventHandler("cleanEffectDrugs",function()
-	if GetScreenEffectIsActive("MinigameTransitionIn") then
-		StopScreenEffect("MinigameTransitionIn")
-	end
-
-	if GetScreenEffectIsActive("DMT_flight") then
-		StopScreenEffect("DMT_flight")
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- SYNCHOODOPTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("player:syncHoodOptions")
