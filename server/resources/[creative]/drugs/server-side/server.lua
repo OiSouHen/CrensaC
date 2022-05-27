@@ -18,7 +18,6 @@ local userAmount = {}
 -- ITEMLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local itemList = {
-	{ item = "lean", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "ecstasy", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "cocaine", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "meth", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
