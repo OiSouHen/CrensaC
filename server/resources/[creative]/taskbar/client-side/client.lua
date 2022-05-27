@@ -10,101 +10,49 @@ Tunnel.bindInterface("taskbar",cRP)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
-local chance = 0
-local skillGap = 0
-local activeTasks = 0
-local taskInProcess = false
+local Status = ""
+local Progress = false
 -----------------------------------------------------------------------------------------------------------------------------------------
--- OPENGUI
+-- TASKBAR:FAIL
 -----------------------------------------------------------------------------------------------------------------------------------------
-function openGui(sentLength,taskID,chancesent,skillGapSent)
-	SetNuiFocus(true,false)
-	SendNUIMessage({ runProgress = true, Length = sentLength, Task = taskID, chance = chancesent, skillGap = skillGapSent })
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATEGUI
------------------------------------------------------------------------------------------------------------------------------------------
-function updateGui(sentLength,taskID,chancesent,skillGapSent)
-	SendNUIMessage({ runUpdate = true, Length = sentLength, Task = taskID, chance = chancesent, skillGap = skillGapSent })
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- CLOSEGUI
------------------------------------------------------------------------------------------------------------------------------------------
-function closeGui()
+RegisterNUICallback("failure",function()
 	SetNuiFocus(false,false)
-	SendNUIMessage({ closeProgress = true })
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- CLOSENORMALGUI
------------------------------------------------------------------------------------------------------------------------------------------
-function closeNormalGui()
-	SetNuiFocus(false,false)
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- TASKEND
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("taskEnd",function(data)
-	closeNormalGui()
-
-	if (tonumber(data["taskResult"]) > chance) and tonumber(data["taskResult"]) < (chance + skillGap + 3) then
-		activeTasks = 3
-	else
-		activeTasks = 2
-	end
+	Status = "failure"
+	Progress = false
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- TASKBAR
+-- TASKBAR:SUCESS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function taskBar(difficulty,skillGapSent)
-	skillGap = skillGapSent
+RegisterNUICallback("success",function()
+	SetNuiFocus(false,false)
+	Status = "success"
+	Progress = false
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TASKBAR:TASKBAR
+-----------------------------------------------------------------------------------------------------------------------------------------
+function taskBar(Timer)
+	if Progress then return end
 
-	if skillGap < 5 then
-		skillGap = 5
+	Progress = true
+	SetNuiFocus(true,false)
+	SendNUIMessage({ type = "open", time = Timer })
+
+	while Progress do
+		Wait(0)
 	end
 
-	if taskInProcess then
-		return false
-	end
-
-	chance = math.random(20,80)
-
-	local length = math.ceil(difficulty * 1.0)
-
-	taskInProcess = true
-	local taskIdentifier = "taskid"..math.random(1000000)
-	openGui(length,taskIdentifier,chance,skillGap)
-	activeTasks = 1
-
-	local maxcount = GetGameTimer() + length
-
-	while activeTasks == 1 do
-		Citizen.Wait(1)
-
-		local curTime = GetGameTimer()
-		if curTime > maxcount then
-			activeTasks = 2
-		end
-
-		local updater = 100 - (((maxcount - curTime) / length) * 100)
-		updater = math.min(100,updater)
-		updateGui(updater,taskIdentifier,chance,skillGap)
-	end
-
-	closeGui()
-	taskInProcess = false
-
-	if activeTasks == 2 then
-		return false
-	else
+	if Status == "success" then
 		return true
 	end
+
+	return false
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TASKTABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskTable()
-	local finished = taskBar(2000,10)
-	if finished then
+	if taskBar(2000) then
 		return true
 	end
 
@@ -114,8 +62,7 @@ end
 -- TASKONE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskOne()
-	local finished = taskBar(1500,12)
-	if finished then
+	if taskBar(1500) then
 		return true
 	end
 
@@ -125,10 +72,8 @@ end
 -- TASKTWO
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskTwo()
-	local finished = taskBar(2000,12)
-	if finished then
-		local finished = taskBar(1500,10)
-		if finished then
+	if taskBar(2000) then
+		if taskBar(1500) then
 			return true
 		end
 	end
@@ -139,12 +84,9 @@ end
 -- TASKTHREE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskThree()
-	local finished = taskBar(2500,14)
-	if finished then
-		local finished = taskBar(2000,12)
-		if finished then
-			local finished = taskBar(1500,10)
-			if finished then
+	if taskBar(2500) then
+		if taskBar(2000) then
+			if taskBar(1500) then
 				return true
 			end
 		end
@@ -156,14 +98,10 @@ end
 -- TASKMECHANIC
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskMechanic()
-	local finished = taskBar(7500,16)
-	if finished then
-		local finished = taskBar(5000,14)
-		if finished then
-			local finished = taskBar(2500,12)
-			if finished then
-				local finished = taskBar(1000,10)
-				if finished then
+	if taskBar(7500) then
+		if taskBar(5000) then
+			if taskBar(2500) then
+				if taskBar(1000) then
 					return true
 				end
 			end
@@ -176,10 +114,8 @@ end
 -- TASKTYRE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskTyre()
-	local finished = taskBar(7500,10)
-	if finished then
-		local finished = taskBar(5000,10)
-		if finished then
+	if taskBar(7500) then
+		if taskBar(5000) then
 			return true
 		end
 	end
@@ -190,23 +126,10 @@ end
 -- TASKFISHING
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskFishing()
-	local finished = taskBar(20000,8)
-	if finished then
-		local finished = taskBar(10000,6)
-		if finished then
+	if taskBar(20000) then
+		if taskBar(10000) then
 			return true
 		end
-	end
-
-	return false
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- TASKHANDCUFF
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.taskHandcuff()
-	local finished = taskBar(1000,10)
-	if finished then
-		return true
 	end
 
 	return false
@@ -215,12 +138,9 @@ end
 -- TASKTHREE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskLockpick()
-	local finished = taskBar(2500,14)
-	if finished then
-		local finished = taskBar(2000,12)
-		if finished then
-			local finished = taskBar(1500,10)
-			if finished then
+	if taskBar(2500) then
+		if taskBar(2000) then
+			if taskBar(1500) then
 				return true
 			end
 		end
@@ -232,14 +152,26 @@ end
 -- STEALTRUNK
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.stealTrunk()
-	local finished = taskBar(4500,16)
-	if finished then
-		local finished = taskBar(3500,14)
-		if finished then
-			local finished = taskBar(2500,12)
-			if finished then
-				local finished = taskBar(1500,10)
-				if finished then
+	if taskBar(4500) then
+		if taskBar(3500) then
+			if taskBar(2500) then
+				if taskBar(1500) then
+					return true
+				end
+			end
+		end
+	end
+
+	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WEEDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.Weeds()
+	if taskBar(1000) then
+		if taskBar(750) then
+			if taskBar(500) then
+				if taskBar(250) then
 					return true
 				end
 			end
@@ -252,29 +184,9 @@ end
 -- TASKTHREE
 -----------------------------------------------------------------------------------------------------------------------------------------
 exports("taskThree",function()
-	local finished = taskBar(2500,14)
-	if finished then
-		local finished = taskBar(2000,12)
-		if finished then
-			local finished = taskBar(1500,10)
-			if finished then
-				return true
-			end
-		end
-	end
-
-	return false
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- TASKHOMES
------------------------------------------------------------------------------------------------------------------------------------------
-exports("taskHomes",function()
-	local finished = taskBar(4500,14)
-	if finished then
-		local finished = taskBar(3500,12)
-		if finished then
-			local finished = taskBar(2500,10)
-			if finished then
+	if taskBar(2500) then
+		if taskBar(2000) then
+			if taskBar(1500) then
 				return true
 			end
 		end
@@ -286,9 +198,32 @@ end)
 -- TASKDOORS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.taskDoors()
-	local finished = taskBar(1000,10)
-	if finished then
+	if taskBar(1000) then
 		return true
+	end
+
+	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- UPGRADEVEHICLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.UpgradeVehicle()
+	if taskBar(2000) then
+		if taskBar(1750) then
+			if taskBar(1500) then
+				if taskBar(1250) then
+					if taskBar(1000) then
+						if taskBar(750) then
+							if taskBar(500) then
+								if taskBar(250) then
+									return true
+								end
+							end
+						end
+					end
+				end
+			end
+		end
 	end
 
 	return false

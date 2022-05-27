@@ -7,7 +7,7 @@ local numberBlips = 0
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADFOCUS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -34,9 +34,16 @@ AddEventHandler("NotifyPush",function(data)
 	numberBlips = numberBlips + 1
 
 	timeBlips[numberBlips] = 60
-	showBlips[numberBlips] = AddBlipForRadius(data["x"],data["y"],data["z"],150.0)
+	showBlips[numberBlips] = AddBlipForCoord(data["x"],data["y"],data["z"])
+
+	SetBlipSprite(showBlips[numberBlips],270)
+	SetBlipDisplay(showBlips[numberBlips],4)
+	SetBlipAsShortRange(showBlips[numberBlips],true)
 	SetBlipColour(showBlips[numberBlips],data["blipColor"])
-	SetBlipAlpha(showBlips[numberBlips],150)
+	SetBlipScale(showBlips[numberBlips],0.9)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString(data["title"])
+	EndTextCommandSetBlipName(showBlips[numberBlips])
 
 	if parseInt(data["code"]) == 13 then
 		TriggerEvent("sounds:source","deathcop",0.7)
@@ -45,7 +52,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLIPS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		for k,v in pairs(timeBlips) do
 			if timeBlips[k] > 0 then
@@ -59,7 +66,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -23,7 +23,7 @@ html,body {
 	margin-top: 12px;
 	line-height: 20px;
 	position: relative;
-	border-radius: 4px;
+	border-radius: 3px;
 	text-shadow: 1px 1px #000;
 	padding: 15px 20px 15px 45px;
 }
@@ -35,7 +35,7 @@ html,body {
 	content: "";
 	bottom: -2px;
 	position: absolute;
-	border-radius: 4px;
+	border-radius: 3px;
 	background: rgba(150,150,150,.75);
 }
 
@@ -51,7 +51,7 @@ html,body {
 	z-index: 9999;
 	margin-top: 13px;
 	position: absolute;
-	border-radius: 4px;
+	border-radius: 3px;
 	background-color: #fafafa;
 }
 
@@ -151,7 +151,7 @@ html,body {
 	width: 100px;
 	height: 100px;
 	font-size: 10px;
-	border-radius: 4px;
+	border-radius: 3px;
 	position: relative;
 	margin-bottom: 30px;
 	background-position: center;

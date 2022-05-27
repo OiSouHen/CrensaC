@@ -5,14 +5,14 @@
 * {
 	color: #ccc;
 	font-size: 13px;
+	font-family: "Roboto";
 	-webkit-user-select: none;
-	font-family: "Roboto",Arial,Helvetica,sans-serif;
 }
 
 .body {
-	right: 0;
-	top: 15%;
-	height: 62%;
+	top: 4%;
+	right: 43px;
+	height: 75%;
 	width: 300px;
 	overflow: hidden;
 	position: absolute;
@@ -20,13 +20,16 @@
 
 .notification {
 	float: left;
-	width: 275px;
+	width: 270px;
+	border-radius: 3px;
+	position: relative;
 	margin-bottom: 10px;
 	padding: 15px 10px 15px 15px;
 	background: rgba(15,15,15,.75);
-	border-left: 5px solid #2e6e4c;
-	border-top-left-radius: 3px;
-	border-bottom-left-radius: 3px;
+}
+
+.notification:last-child {
+	margin-bottom: 0;
 }
 
 .content {
@@ -61,14 +64,12 @@
 
 .code {
 	float: left;
-	color: #a0ceb6;
+	color: #4a380c;
 	font-size: 11px;
 	padding: 5px 10px;
 	border-radius: 3px;
 	margin-right: 10px;
-	background: #2e6e4c;
-	box-shadow: 0 1px 0 #2c303c;
-	text-shadow: 1px 1px #225138;
+	background: #fec026;
 }
 
 .titulo {
