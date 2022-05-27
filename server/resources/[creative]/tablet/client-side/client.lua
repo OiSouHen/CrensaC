@@ -9,7 +9,7 @@ vSERVER = Tunnel.getInterface("tablet")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADFOCUS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -139,11 +139,11 @@ RegisterNUICallback("requestDrive",function(data)
 		LocalPlayer["state"]["Commands"] = true
 		TriggerEvent("Notify","azul","Teste iniciado, para finalizar saia do veículo.",5000)
 
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		vehCreate(data["name"],vehPlate)
 
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		SetPedIntoVehicle(ped,vehDrive,-1)
 		benDrive = true
@@ -157,7 +157,7 @@ function vehCreate(vehName,vehPlate)
 
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if HasModelLoaded(mHash) then
@@ -170,7 +170,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADDRIVE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if benDrive then
@@ -179,7 +179,7 @@ Citizen.CreateThread(function()
 
 			local ped = PlayerPedId()
 			if not IsPedInAnyVehicle(ped) then
-				Citizen.Wait(1000)
+				Wait(1000)
 
 				benDrive = false
 				vSERVER.removeDrive()
@@ -190,7 +190,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ local Vehicles = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADVEHICLES
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
@@ -254,7 +254,7 @@ Citizen.CreateThread(function()
 
 					RequestModel(mHash)
 					while not HasModelLoaded(mHash) do
-						Citizen.Wait(1)
+						Wait(1)
 					end
 
 					if HasModelLoaded(mHash) then
@@ -275,6 +275,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)

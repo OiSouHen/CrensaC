@@ -387,7 +387,7 @@ function cRP.entranceHomes(homeName,v,interior,theft)
 	end
 
 	FreezeEntityPosition(ped,true)
-	Citizen.Wait(1000)
+	Wait(1000)
 	FreezeEntityPosition(ped,false)
 	DoScreenFadeIn(1000)
 
@@ -411,7 +411,7 @@ function cRP.entranceHomes(homeName,v,interior,theft)
 
 			RequestModel(mHash)
 			while not HasModelLoaded(mHash) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			if HasModelLoaded(mHash) then
@@ -440,7 +440,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADROBBERYS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 
 	while true do
@@ -494,13 +494,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADINTERN
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if homes["open"] ~= "" then
@@ -553,7 +553,7 @@ Citizen.CreateThread(function()
 									end
 
 									FreezeEntityPosition(ped,true)
-									Citizen.Wait(1000)
+									Wait(1000)
 									FreezeEntityPosition(ped,false)
 									DoScreenFadeIn(1000)
 								end
@@ -571,7 +571,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -611,7 +611,7 @@ function cRP.homeGarage(homeName)
 	homeCoords[homeName] = {}
 	homeCoords[homeName]["1"] = {}
 
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			local ped = PlayerPedId()
 			local coords = GetEntityCoords(ped)
@@ -634,14 +634,14 @@ function cRP.homeGarage(homeName)
 				end
 			end
 
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHOTEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if homes["open"] == "" then
@@ -664,13 +664,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADENTER
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if homes["open"] == "" then
@@ -696,7 +696,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -130,7 +130,7 @@ local vehRescue = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICETOGGLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	for k,v in pairs(initLocates) do
 		exports["target"]:AddCircleZone("TowDriver:"..k,vector3(v[1],v[2],v[3]),1.0,{
 			name = "TowDriver:"..k,
@@ -173,7 +173,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if inService and not spawnVehicle then
 			local ped = PlayerPedId()
@@ -189,7 +189,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(5000)
+		Wait(5000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ AddEventHandler("towdriver:invokeTow",function()
 					if vehicle ~= vehTowed then
 						RequestAnimDict("mini@repair")
 						while not HasAnimDictLoaded("mini@repair") do
-							Citizen.Wait(1)
+							Wait(1)
 						end
 
 						vehTower = vehTowed
@@ -242,7 +242,7 @@ AddEventHandler("towdriver:invokeTow",function()
 						LocalPlayer["state"]["Commands"] = true
 						TaskPlayAnim(ped,"mini@repair","fixing_a_player",3.0,3.0,-1,50,0,0,0,0)
 
-						Citizen.Wait(4500)
+						Wait(4500)
 
 						inTowed = vehTowed
 						LocalPlayer["state"]["Cancel"] = false

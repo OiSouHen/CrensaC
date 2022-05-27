@@ -543,7 +543,7 @@ AddEventHandler("inventory:sendItem",function(Slot,Amount)
 					if vRP.tryGetInventoryItem(user_id,Item,Amount,true,Slot) then
 						vRPC.createObjects(source,"mp_safehouselost@","package_dropoff","prop_paper_bag_small",16,28422,0.0,-0.05,0.05,180.0,0.0,0.0)
 
-						Citizen.Wait(3000)
+						Wait(3000)
 
 						vRP.giveInventoryItem(nuser_id,Item,Amount,true)
 						TriggerClientEvent("inventory:Update",source,"updateMochila")
@@ -968,7 +968,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"anim@mp_player_intcelebrationmale@wank","wank"},true)
 
-				Citizen.Wait(1750)
+				Wait(1750)
 
 				Active[user_id] = nil
 				vRPC.stopAnim(source,false)
@@ -1024,7 +1024,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					else
 						TriggerClientEvent("Notify",source,"amarelo","Não pode utilizar de vida cheia ou nocauteado.",5000)
@@ -1053,7 +1053,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1079,7 +1079,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					else
 						TriggerClientEvent("Notify",source,"azul","Não pode utilizar de vida cheia ou nocauteado.",5000)
@@ -1109,7 +1109,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							end
 						end
 
-						Citizen.Wait(100)
+						Wait(100)
 					until Active[user_id] == nil
 				end
 			return end
@@ -1141,7 +1141,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1165,7 +1165,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1189,7 +1189,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1213,7 +1213,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1246,7 +1246,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1273,7 +1273,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1292,7 +1292,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,false)
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1318,7 +1318,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					else
 						TriggerClientEvent("Notify",source,"amarelo","Não pode utilizar de vida cheia ou nocauteado.",5000)
@@ -1348,7 +1348,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1371,7 +1371,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.createObjects(source,"amb@world_human_binoculars@male@enter","enter","prop_binoc_01",50,28422)
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1410,7 +1410,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.createObjects(source,"amb@world_human_paparazzi@male@base","base","prop_pap_camera_01",49,28422)
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1443,7 +1443,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							end
 						end
 
-						Citizen.Wait(100)
+						Wait(100)
 					until Active[user_id] == nil
 				end
 			return end
@@ -1470,7 +1470,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							end
 						end
 
-						Citizen.Wait(100)
+						Wait(100)
 					until Active[user_id] == nil
 				end
 			return end
@@ -1536,7 +1536,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					end
 				end
@@ -1573,7 +1573,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 
 						local activePlayers = vRPC.activePlayers(source)
@@ -1613,7 +1613,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1633,7 +1633,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1923,7 +1923,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1948,7 +1948,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1973,7 +1973,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -1998,7 +1998,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2023,7 +2023,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2060,7 +2060,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2083,7 +2083,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2106,7 +2106,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2130,7 +2130,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2155,7 +2155,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2180,7 +2180,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2203,7 +2203,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2226,7 +2226,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2283,7 +2283,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2314,7 +2314,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2341,7 +2341,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2364,7 +2364,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2606,7 +2606,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2629,7 +2629,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2652,7 +2652,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2675,7 +2675,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2698,7 +2698,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2722,7 +2722,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2746,7 +2746,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2770,7 +2770,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2794,7 +2794,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2818,7 +2818,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2842,7 +2842,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			return end
 
@@ -2956,7 +2956,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								vRPC.playAnim(otherPlayer,false,{"mp_arrest_paired","crook_p2_back_left"},false)
 								vRPC.playAnim(source,false,{"mp_arrest_paired","cop_p2_back_left"},false)
 
-								Citizen.Wait(3500)
+								Wait(3500)
 
 								vRPC.stopAnim(source,false)
 								vPLAYER.toggleHandcuff(otherPlayer)
@@ -3506,7 +3506,7 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 						verifyObjects[user_id] = nil
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			end
 		else
@@ -3573,7 +3573,7 @@ AddEventHandler("inventory:lootSystem",function(Entity,Service)
 					Loots[user_id] = nil
 				end
 
-				Citizen.Wait(100)
+				Wait(100)
 			until Active[user_id] == nil
 		end
 	end
@@ -3653,7 +3653,7 @@ AddEventHandler("inventory:applyPlate",function(Entity)
 				end
 			end
 
-			Citizen.Wait(100)
+			Wait(100)
 		until Active[user_id] == nil
 	end
 end)
@@ -3722,7 +3722,7 @@ AddEventHandler("inventory:checkStockade",function(Entity)
 						vRP.generateItem(user_id,"dollars",math.random(225,275),true)
 					end
 
-					Citizen.Wait(100)
+					Wait(100)
 				until Active[user_id] == nil
 			else
 				local coords = vRPC.getEntityCoords(source)
@@ -3803,7 +3803,7 @@ function cRP.stealTrunk(Entity)
 							end
 						end
 
-						Citizen.Wait(100)
+						Wait(100)
 					until Active[user_id] == nil
 				else
 					local activePlayers = vRPC.activePlayers(source)
@@ -3904,7 +3904,7 @@ AddEventHandler("inventory:Animals",function(Entity)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					end
 				else
@@ -4068,7 +4068,7 @@ AddEventHandler("inventory:makeProducts",function(Entity,Table)
 					end
 				end
 
-				Citizen.Wait(100)
+				Wait(100)
 			until Active[user_id] == nil
 		end
 	end
@@ -4112,7 +4112,7 @@ AddEventHandler("inventory:Desmanchar",function(Entity)
 				end
 			end
 
-			Citizen.Wait(100)
+			Wait(100)
 		until Active[user_id] == nil
 	end
 end)
@@ -4197,7 +4197,7 @@ AddEventHandler("inventory:removeTyres",function(Entity,Tyre)
 								end
 							end
 
-							Citizen.Wait(100)
+							Wait(100)
 						until Active[user_id] == nil
 					end
 

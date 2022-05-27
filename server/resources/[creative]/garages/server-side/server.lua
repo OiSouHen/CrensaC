@@ -29,7 +29,7 @@ function cRP.serverVehicle(model,x,y,z,heading,vehPlate,nitroFuel,vehDoors,vehBo
 
 	while not DoesEntityExist(myVeh) and spawnVehicle <= 1000 do
 		spawnVehicle = spawnVehicle + 1
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	if DoesEntityExist(myVeh) then
@@ -622,7 +622,7 @@ AddEventHandler("garages:keyVehicle",function(source,vehNet)
 
 	if not vRPC.inVehicle(source) then
 		vRPC.playAnim(source,true,{"anim@mp_player_intmenu@key_fob@","fob_click"},false)
-		Citizen.Wait(400)
+		Wait(400)
 		vRPC.stopAnim(source)
 	end
 end)
@@ -746,7 +746,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ASYNCFUNCTION
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local configFile = LoadResourceFile("logsystem","garageConfig.json")
 	local configTable = json.decode(configFile)
 

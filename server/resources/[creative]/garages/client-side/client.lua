@@ -599,7 +599,7 @@ function cRP.startAnimHotwired()
 
 	RequestAnimDict(animDict)
 	while not HasAnimDictLoaded(animDict) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	TaskPlayAnim(PlayerPedId(),animDict,anim,3.0,3.0,-1,49,5.0,0,0,0)
@@ -610,7 +610,7 @@ end
 function cRP.stopAnimHotwired(vehicle)
 	RequestAnimDict(animDict)
 	while not HasAnimDictLoaded(animDict) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	vehHotwired = false
@@ -635,7 +635,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LOOPHOTWIRED
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -655,7 +655,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -704,7 +704,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADOPEN
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -736,6 +736,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)

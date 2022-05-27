@@ -147,7 +147,7 @@ local atmList = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTARGET
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	for k,v in pairs(atmList) do
 		exports["target"]:AddCircleZone("Eletronics:"..k,vector3(v[1],v[2],v[3]),0.5,{
 			name = "Eletronics:"..k,
@@ -199,14 +199,14 @@ AddEventHandler("eletronics:openSystem",function(shopId)
 				end
 			end
 
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCANCEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 
@@ -223,6 +223,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)

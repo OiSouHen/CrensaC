@@ -30,7 +30,7 @@ end
 function tvRP.applySkin(mHash)
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if HasModelLoaded(mHash) then

@@ -32,7 +32,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSHOWMEDISPLAY
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 500
 		local ped = PlayerPedId()
@@ -59,13 +59,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TRHEADSHOWMETIMER
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		for k,v in pairs(showMe) do
 			if v[2] > 0 then
@@ -82,6 +82,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)

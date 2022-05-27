@@ -33,7 +33,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLOCKBUTTONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Buttons"] then
@@ -44,7 +44,7 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -574,11 +574,11 @@ function cRP.putWeaponHands(weaponName,weaponAmmo,attachs)
 
 			TaskPlayAnim(ped,"rcmjosh4","josh_leadout_cop2",3.0,2.0,-1,48,10,0,0,0)
 
-			Citizen.Wait(200)
+			Wait(200)
 
 			GiveWeaponToPed(ped,weaponName,weaponAmmo,false,true)
 
-			Citizen.Wait(300)
+			Wait(300)
 
 			ClearPedTasks(ped)
 		else
@@ -622,7 +622,7 @@ function cRP.storeWeaponHands()
 
 			TaskPlayAnim(ped,"weapons@pistol@","aim_2_holster",3.0,2.0,-1,48,10,0,0,0)
 
-			Citizen.Wait(450)
+			Wait(450)
 
 			ClearPedTasks(ped)
 		end
@@ -721,7 +721,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSTOREWEAPON
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 
 	while true do
@@ -744,7 +744,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -769,7 +769,7 @@ AddEventHandler("inventory:Firecracker",function()
 	if not HasNamedPtfxAssetLoaded("scr_indep_fireworks") then
 		RequestNamedPtfxAsset("scr_indep_fireworks")
 		while not HasNamedPtfxAssetLoaded("scr_indep_fireworks") do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end
 
@@ -784,7 +784,7 @@ AddEventHandler("inventory:Firecracker",function()
 		while not DoesEntityExist(uObject) and spawnObjects <= 1000 do
 			uObject = NetworkGetEntityFromNetworkId(objNet)
 			spawnObjects = spawnObjects + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		spawnObjects = 0
@@ -792,7 +792,7 @@ AddEventHandler("inventory:Firecracker",function()
 		while not objectControl and spawnObjects <= 1000 do
 			objectControl = NetworkRequestControlOfEntity(uObject)
 			spawnObjects = spawnObjects + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		PlaceObjectOnGroundProperly(uObject)
@@ -800,14 +800,14 @@ AddEventHandler("inventory:Firecracker",function()
 
 		SetEntityAsNoLongerNeeded(uObject)
 
-		Citizen.Wait(10000)
+		Wait(10000)
 
 		repeat
 			UseParticleFxAssetNextCall("scr_indep_fireworks")
 			local explode = StartNetworkedParticleFxNonLoopedAtCoord("scr_indep_firework_trailburst",coords["x"],coords["y"],coords["z"],0.0,0.0,0.0,2.5,false,false,false,false)
 			explosives = explosives - 1
 
-			Citizen.Wait(2000)
+			Wait(2000)
 		until explosives <= 0
 
 		TriggerServerEvent("tryDeleteObject",objNet)
@@ -825,7 +825,7 @@ end
 function loadAnimDict(dict)
 	RequestAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -875,7 +875,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADDROPBLIPS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -889,7 +889,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -944,7 +944,7 @@ end
 -- WHEELTREADS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local wheelChair = false
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		if IsPedInAnyVehicle(ped) then
@@ -963,7 +963,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1104,13 +1104,13 @@ local scanCoords = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INITSCANNER
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local amountCoords = 0
 	repeat
 		amountCoords = amountCoords + 1
 		local rand = math.random(#scanCoords)
 		scanTable[amountCoords] = scanCoords[rand]
-		Citizen.Wait(1)
+		Wait(1)
 	until amountCoords == 25
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1124,7 +1124,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSCANNER
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if userScanner then
@@ -1164,19 +1164,19 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSCANNERSOUND
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if userScanner and (soundScanner == 1000 or soundScanner == 250) then
 			PlaySoundFrontend(-1,"MP_IDLE_TIMER","HUD_FRONTEND_DEFAULT_SOUNDSET")
 		end
 
-		Citizen.Wait(soundScanner)
+		Wait(soundScanner)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1249,7 +1249,7 @@ local boxList = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBOXES
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	for k,v in pairs(boxList) do
 		exports["target"]:AddCircleZone("Boxes:"..k,vector3(v[1],v[2],v[3]),1.0,{
 			name = "Boxes:"..k,

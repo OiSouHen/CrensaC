@@ -60,7 +60,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADROPEANIM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if ropeCarry then
@@ -73,13 +73,13 @@ Citizen.CreateThread(function()
 			DisableControlAction(1,23,true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- RECEIVESALARY
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local salaryCounts = 0
 	local salaryTimers = GetGameTimer()
 
@@ -95,13 +95,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(10000)
+		Wait(10000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SEATSHUFFLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -116,13 +116,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- AWAYSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local awayTimers = GetGameTimer()
 	local awaySystem = {
 		["coords"] = vector3(0.0,0.0,0.0),
@@ -157,7 +157,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ AddEventHandler("setEnergetic",function(timers,number)
 	SetRunSprintMultiplierForPlayer(PlayerId(),number)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if energetic > 0 then
 			energetic = energetic - 1
@@ -182,7 +182,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ AddEventHandler("setEcstasy",function()
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if ecstasy > 0 then
 			ecstasy = ecstasy - 1
@@ -214,7 +214,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ AddEventHandler("setMeth",function()
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if methanfetamine > 0 then
 			methanfetamine = methanfetamine - 1
@@ -244,7 +244,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ AddEventHandler("setCocaine",function()
 	end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if cocaine > 0 then
 			cocaine = cocaine - 1
@@ -274,7 +274,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -301,13 +301,13 @@ AddEventHandler("setDrunkTime",function(timers)
 	LocalPlayer["state"]["Drunk"] = true
 	RequestAnimSet("move_m@drunk@verydrunk")
 	while not HasAnimSetLoaded("move_m@drunk@verydrunk") do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	SetPedMovementClipset(PlayerPedId(),"move_m@drunk@verydrunk",0.25)
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if drunkTime > 0 then
 			drunkTime = drunkTime - 1
@@ -318,7 +318,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHANDCUFF
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Handcuff"] then
@@ -472,13 +472,13 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHANDCUFF
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -486,7 +486,7 @@ Citizen.CreateThread(function()
 			if not IsEntityPlayingAnim(ped,"mp_arresting","idle",3) then
 				RequestAnimDict("mp_arresting")
 				while not HasAnimDictLoaded("mp_arresting") do
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 				TaskPlayAnim(ped,"mp_arresting","idle",3.0,3.0,-1,49,0,0,0,0)
@@ -494,7 +494,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -548,7 +548,7 @@ local sprayTimers = GetGameTimer()
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSHOT
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -577,7 +577,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -738,7 +738,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADINTRUNK
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 
@@ -773,7 +773,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -894,7 +894,7 @@ local safeSquare = PolyZone:Create({
 -----------------------------------------------------------------------------------------------------------------------------------------
 local safeTimer = 0
 local safeZone = false
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
@@ -922,7 +922,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -971,7 +971,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBIKES
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 
@@ -998,13 +998,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBIKETEA
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if bikesTea then
 			if GetGameTimer() >= bikesTeaTimer then
@@ -1019,7 +1019,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1081,7 +1081,7 @@ local cowCoords = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCOWS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	for k,v in pairs(cowCoords) do
 		exports["target"]:AddCircleZone("Cows:"..k,vector3(v[1],v[2],v[3]),0.75,{
 			name = "Cows:"..k,

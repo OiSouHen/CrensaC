@@ -29,10 +29,10 @@ function cRP.teleportWay()
 
 		RequestCollisionAtCoord(x,y,z)
 		while not HasCollisionLoadedAroundEntity(ped) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
-		Citizen.Wait(20)
+		Wait(20)
 
 		ground,z = GetGroundZFor_3dCoord(x,y,height)
 		if ground then
@@ -49,7 +49,7 @@ function cRP.teleportWay()
 
 	RequestCollisionAtCoord(x,y,z)
 	while not HasCollisionLoadedAroundEntity(ped) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	SetEntityCoordsNoOffset(ped,x,y,z,1,0,0)
@@ -84,18 +84,18 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BUTTONCOORDS
 -----------------------------------------------------------------------------------------------------------------------------------------
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	while true do
 -- 		if IsControlJustPressed(1,38) then
 -- 			vSERVER.buttonTxt()
 -- 		end
--- 		Citizen.Wait(1)
+-- 		Wait(1)
 -- 	end
 -- end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BUTTONMAKERACE
 -----------------------------------------------------------------------------------------------------------------------------------------
--- Citizen.CreateThread(function()
+-- CreateThread(function()
 -- 	while true do
 -- 		if IsControlJustPressed(1,38) then
 -- 			local ped = PlayerPedId()
@@ -107,6 +107,6 @@ end)
 -- 			vSERVER.raceCoords(vehCoords,leftCoords,rightCoords)
 -- 		end
 
--- 		Citizen.Wait(1)
+-- 		Wait(1)
 -- 	end
 -- end)

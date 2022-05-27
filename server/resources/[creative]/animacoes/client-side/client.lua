@@ -896,7 +896,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBINOCULOS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if (binoculos or cameras) then
@@ -905,7 +905,7 @@ Citizen.CreateThread(function()
 			local ped = PlayerPedId()
 			local scaleform = RequestScaleformMovie("BINOCULARS")
 			while not HasScaleformMovieLoaded(scaleform) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			local cam = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA",true)
@@ -915,7 +915,7 @@ Citizen.CreateThread(function()
 			RenderScriptCams(true,false,0,1,0)
 
 			while (binoculos or cameras) and true do
-				Citizen.Wait(1)
+				Wait(1)
 
 				local zoomvalue = (1.0 / (fov_max - fov_min)) * (fov - fov_min)
 				CheckInputRotation(cam,zoomvalue)
@@ -940,7 +940,7 @@ Citizen.CreateThread(function()
 			SetSeethrough(false)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1014,7 +1014,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTRATAMENTO
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local treatmentTimers = GetGameTimer()
 
 	while true do
@@ -1037,6 +1037,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)

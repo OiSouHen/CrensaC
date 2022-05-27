@@ -67,6 +67,10 @@ body {
 	letter-spacing: 0.8px;
 }
 
+.description yellow {
+	color: #ffd97b;
+}
+
 .normalbutton {
 	color: #ccc;
 	display: block;

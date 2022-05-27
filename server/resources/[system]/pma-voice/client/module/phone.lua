@@ -1,7 +1,7 @@
 local callChannel = 0
 
 local function createPhoneThread()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local changed = false
 
 		while callChannel ~= 0 do

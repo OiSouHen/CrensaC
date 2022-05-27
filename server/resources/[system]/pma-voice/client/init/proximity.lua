@@ -94,7 +94,7 @@ local lastRadioStatus = false
 local lastTalkingStatus = false
 local voiceState = "proximity"
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		while not MumbleIsConnected() do
 			Wait(100)

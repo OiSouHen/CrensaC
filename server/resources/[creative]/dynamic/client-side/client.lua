@@ -42,10 +42,12 @@ end)
 -- CLICKED
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("clicked",function(data)
-	if data["server"] == "true" then
-		TriggerServerEvent(data["trigger"],data["param"])
-	else
-		TriggerEvent(data["trigger"],data["param"])
+	if data["trigger"] and data["trigger"] ~= "" then
+		if data["server"] == "true" then
+			TriggerServerEvent(data["trigger"],data["param"])
+		else
+			TriggerEvent(data["trigger"],data["param"])
+		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -68,9 +70,11 @@ end)
 -- GLOBALFUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("globalFunctions",function(source,args,rawCommand)
-	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not menuOpen and MumbleIsConnected() then
-		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 101 then
+	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not menuOpen and MumbleIsConnected() and LocalPlayer["state"]["Route"] < 900000 then
+		local Ped = PlayerPedId()
+		local Coords = GetEntityCoords(Ped)
+
+		if GetEntityHealth(Ped) > 101 then
 			exports["dynamic"]:AddButton("Chapéu","Colocar/Retirar o chapéu.","player:outfitFunctions","Hat","clothes",true)
 			exports["dynamic"]:AddButton("Máscara","Colocar/Retirar a máscara.","player:outfitFunctions","Mask","clothes",true)
 			exports["dynamic"]:AddButton("Óculos","Colocar/Retirar o óculos.","player:outfitFunctions","Glasses","clothes",true)
@@ -148,11 +152,11 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("emergencyFunctions",function(source,args,rawCommand)
 	if LocalPlayer["state"]["Police"] or LocalPlayer["state"]["Paramedic"] then
-		if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not menuOpen and MumbleIsConnected() then
+		if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not menuOpen and MumbleIsConnected() and LocalPlayer["state"]["Route"] < 900000 then
 
-			local ped = PlayerPedId()
-			if GetEntityHealth(ped) > 101 then
-				if not IsPedInAnyVehicle(ped) then
+			local Ped = PlayerPedId()
+			if GetEntityHealth(Ped) > 101 then
+				if not IsPedInAnyVehicle(Ped) then
 					exports["dynamic"]:AddButton("Carregar","Carregar a pessoa mais próxima.","player:carryPlayer","","player",true)
 					exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","player",true)
 					exports["dynamic"]:AddButton("Remover do Veículo","Remover do veículo mais próximo.","player:cvFunctions","rv","player",true)
@@ -203,9 +207,9 @@ AddEventHandler("dynamic:animalSpawn",function(model)
 		if not spawnAnimal then
 			spawnAnimal = true
 
-			local ped = PlayerPedId()
-			local heading = GetEntityHeading(ped)
-			local coords = GetOffsetFromEntityInWorldCoords(ped,0.0,1.0,0.0)
+			local Ped = PlayerPedId()
+			local heading = GetEntityHeading(Ped)
+			local coords = GetOffsetFromEntityInWorldCoords(Ped,0.0,1.0,0.0)
 			local myObject,objNet = vRPS.CreatePed(model,coords["x"],coords["y"],coords["z"],heading,28)
 			if myObject then
 				local spawnAnimal = 0
@@ -213,7 +217,7 @@ AddEventHandler("dynamic:animalSpawn",function(model)
 				while not DoesEntityExist(animalHash) and spawnAnimal <= 1000 do
 					animalHash = NetworkGetEntityFromNetworkId(objNet)
 					spawnAnimal = spawnAnimal + 1
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 				spawnAnimal = 0
@@ -221,7 +225,7 @@ AddEventHandler("dynamic:animalSpawn",function(model)
 				while not pedControl and spawnAnimal <= 1000 do
 					pedControl = NetworkRequestControlOfEntity(animalHash)
 					spawnAnimal = spawnAnimal + 1
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 				SetPedCanRagdoll(animalHash,false)
@@ -253,11 +257,11 @@ end)
 RegisterNetEvent("dynamic:animalFunctions")
 AddEventHandler("dynamic:animalFunctions",function(functions)
 	if animalHash ~= nil then
-		local ped = PlayerPedId()
+		local Ped = PlayerPedId()
 
 		if functions == "seguir" then
 			if not animalFollow then
-				TaskFollowToOffsetOfEntity(animalHash,ped,1.0,1.0,0.0,5.0,-1,2.5,1)
+				TaskFollowToOffsetOfEntity(animalHash,Ped,1.0,1.0,0.0,5.0,-1,2.5,1)
 				SetPedKeepTask(animalHash,true)
 				animalFollow = true
 			else
@@ -266,15 +270,15 @@ AddEventHandler("dynamic:animalFunctions",function(functions)
 				animalFollow = false
 			end
 		elseif functions == "colocar" then
-			if IsPedInAnyVehicle(ped) and not IsPedOnAnyBike(ped) then
-				local vehicle = GetVehiclePedIsUsing(ped)
+			if IsPedInAnyVehicle(Ped) and not IsPedOnAnyBike(Ped) then
+				local vehicle = GetVehiclePedIsUsing(Ped)
 				if IsVehicleSeatFree(vehicle,0) then
 					TaskEnterVehicle(animalHash,vehicle,-1,0,2.0,16,0)
 				end
 			end
 		elseif functions == "remover" then
-			if IsPedInAnyVehicle(ped) and not IsPedOnAnyBike(ped) then
-				TaskLeaveVehicle(animalHash,GetVehiclePedIsUsing(ped),256)
+			if IsPedInAnyVehicle(Ped) and not IsPedOnAnyBike(Ped) then
+				TaskLeaveVehicle(animalHash,GetVehiclePedIsUsing(Ped),256)
 				TriggerEvent("dynamic:animalFunctions","seguir")
 			end
 		elseif functions == "deletar" then

@@ -29,7 +29,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("postit:initPostit")
 AddEventHandler("postit:initPostit",function()
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		while true do
 			local ped = PlayerPedId()
 			local cam = GetGameplayCamCoord()
@@ -43,14 +43,14 @@ AddEventHandler("postit:initPostit",function()
 				break
 			end
 
-			Citizen.Wait(1)
+			Wait(1)
 		end
 	end)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADPOSTITS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -79,7 +79,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

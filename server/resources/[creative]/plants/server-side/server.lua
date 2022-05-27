@@ -61,7 +61,7 @@ AddEventHandler("plants:Coletar",function(Number)
 				TriggerClientEvent("player:Commands",source,true)
 				vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 
-				Citizen.Wait(10000)
+				Wait(10000)
 
 				vRP.generateItem(user_id,plantTypes[Type][2],3,true)
 				TriggerClientEvent("player:Commands",source,false)
@@ -95,7 +95,7 @@ AddEventHandler("plants:Estaquia",function(Number)
 			TriggerClientEvent("player:Commands",source,true)
 			vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 
-			Citizen.Wait(10000)
+			Wait(10000)
 
 			vRP.generateItem(user_id,provPlants["type"],2,true)
 			TriggerClientEvent("player:Commands",source,false)
@@ -157,7 +157,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ASYNCFUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local coordsFile = LoadResourceFile("logsystem","plants.json")
 	Plants = json.decode(coordsFile)
 end)

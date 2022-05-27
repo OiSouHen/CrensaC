@@ -11,7 +11,7 @@ vSERVER = Tunnel.getInterface("doors")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBUTTON
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -46,7 +46,7 @@ Citizen.CreateThread(function()
 							v["lock"] = not v["lock"]
 							vRP.playAnim(true,{"anim@heists@keycard@","exit"},false)
 							vSERVER.doorsStatistics(k,v["lock"])
-							Citizen.Wait(350)
+							Wait(350)
 							vRP.stopAnim()
 						end
 					end
@@ -54,7 +54,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -174,7 +174,7 @@ local spawnModels = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -220,7 +220,7 @@ Citizen.CreateThread(function()
 									if lastPosition == selectPosition then
 										selectPosition = math.random(#stopVehicle[locateSelect])
 									end
-									Citizen.Wait(1)
+									Wait(1)
 								until lastPosition ~= selectPosition
 
 								currentPassenger = nil
@@ -250,12 +250,12 @@ Citizen.CreateThread(function()
 
 							if DoesEntityExist(currentPassenger) then
 								vSERVER.paymentService()
-								Citizen.Wait(1000)
+								Wait(1000)
 								TaskLeaveVehicle(currentPassenger,vehicle,262144)
 								TaskWanderStandard(currentPassenger,10.0,10)
-								Citizen.Wait(1000)
+								Wait(1000)
 								SetVehicleDoorShut(vehicle,3,0)
-								Citizen.Wait(1000)
+								Wait(1000)
 							end
 
 							FreezeEntityPosition(vehicle,false)
@@ -268,12 +268,12 @@ Citizen.CreateThread(function()
 								if lastPosition == selectPosition then
 									selectPosition = math.random(#stopVehicle[locateSelect])
 								end
-								Citizen.Wait(1)
+								Wait(1)
 							until lastPosition ~= selectPosition
 
 							blipPassenger()
 
-							Citizen.Wait(5000)
+							Wait(5000)
 
 							if lastPassenger ~= nil then
 								TriggerServerEvent("tryDeletePed",lastPassenger)
@@ -287,7 +287,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -307,7 +307,7 @@ function generatePassenger(vehicle)
 		while not DoesEntityExist(currentPassenger) and spawnPassenger <= 1000 do
 			currentPassenger = NetworkGetEntityFromNetworkId(objNet)
 			spawnPassenger = spawnPassenger + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		spawnPassenger = 0
@@ -315,7 +315,7 @@ function generatePassenger(vehicle)
 		while not pedControl and spawnPassenger <= 1000 do
 			pedControl = NetworkRequestControlOfEntity(currentPassenger)
 			spawnPassenger = spawnPassenger + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		TaskEnterVehicle(currentPassenger,vehicle,-1,2,1.0,1,0)
@@ -323,7 +323,7 @@ function generatePassenger(vehicle)
 		SetEntityAsNoLongerNeeded(currentPassenger)
 
 		while not IsPedSittingInVehicle(currentPassenger,vehicle) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		lastPosition = selectPosition
@@ -331,7 +331,7 @@ function generatePassenger(vehicle)
 			if lastPosition == selectPosition then
 				selectPosition = math.random(#stopVehicle[locateSelect])
 			end
-			Citizen.Wait(1)
+			Wait(1)
 		until lastPosition ~= selectPosition
 
 		currentStatus = true

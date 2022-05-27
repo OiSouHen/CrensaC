@@ -93,7 +93,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("playerDisconnect",function(user_id)
 	if inVehicle[user_id] then
-		Citizen.Wait(1000)
+		Wait(1000)
 		TriggerEvent("garages:deleteVehicle",inVehicle[user_id][1],inVehicle[user_id][2])
 		inVehicle[user_id] = nil
 	end

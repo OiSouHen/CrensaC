@@ -113,7 +113,7 @@ local locateShops = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHOVERFY
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local innerTable = {}
 	for k,v in pairs(locateShops) do
 		table.insert(innerTable,{ v[1],v[2],v[3],2,"E","Loja de Roupas","Pressione para abrir" })
@@ -124,7 +124,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetNuiFocus(false,false)
 
 	while true do
@@ -150,7 +150,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -575,7 +575,7 @@ AddEventHandler("skinshop:setMask",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"missfbi4","takeoff_mask"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -597,7 +597,7 @@ AddEventHandler("skinshop:setHat",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"mp_masks@standard_car@ds@","put_on_mask"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -619,7 +619,7 @@ AddEventHandler("skinshop:setGlasses",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingspecs","take_off"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -641,7 +641,7 @@ AddEventHandler("skinshop:setArms",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -663,7 +663,7 @@ AddEventHandler("skinshop:setShoes",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -685,7 +685,7 @@ AddEventHandler("skinshop:setPants",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -711,7 +711,7 @@ AddEventHandler("skinshop:setShirt",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -734,7 +734,7 @@ AddEventHandler("skinshop:setJacket",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 
@@ -757,7 +757,7 @@ AddEventHandler("skinshop:setVest",function()
 	if not animation then
 		animation = true
 		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Citizen.Wait(1000)
+		Wait(1000)
 
 		local ped = PlayerPedId()
 

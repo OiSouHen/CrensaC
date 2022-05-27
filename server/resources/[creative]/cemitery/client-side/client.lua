@@ -98,7 +98,7 @@ AddEventHandler("cemitery:initBody",function()
 
 		RequestModel(mHash)
 		while not HasModelLoaded(mHash) do
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		if HasModelLoaded(mHash) then
@@ -113,7 +113,7 @@ AddEventHandler("cemitery:initBody",function()
 
 			RequestAnimDict("dead")
 			while not HasAnimDictLoaded("dead") do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			TaskPlayAnim(spawnPed,"dead","dead_a",8.0,0.0,-1,1,0,0,0,0)

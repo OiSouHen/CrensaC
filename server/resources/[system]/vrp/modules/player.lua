@@ -403,7 +403,7 @@ function tvRP.CreateObject(model,x,y,z)
 
 	while not DoesEntityExist(Object) and spawnObjects <= 1000 do
 		spawnObjects = spawnObjects + 1
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if DoesEntityExist(Object) then
@@ -422,7 +422,7 @@ function tvRP.CreatePed(model,x,y,z,heading,typ)
 
 	while not DoesEntityExist(Ped) and spawnPeds <= 1000 do
 		spawnPeds = spawnPeds + 1
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	if DoesEntityExist(Ped) then

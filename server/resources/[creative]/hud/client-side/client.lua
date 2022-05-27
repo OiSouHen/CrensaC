@@ -95,12 +95,12 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCIRCLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	DisplayRadar(false)
 
 	RequestStreamedTextureDict("circlemap",false)
 	while not HasStreamedTextureDictLoaded("circlemap") do
-		Citizen.Wait(100)
+		Wait(100)
 	end
 
 	AddReplaceTexture("platform:/textures/graphics","radarmasksm","circlemap","radarmasksm")
@@ -112,14 +112,14 @@ Citizen.CreateThread(function()
 
 	SetBigmapActive(true,false)
 
-	Citizen.Wait(5000)
+	Wait(5000)
 
 	SetBigmapActive(false,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADGLOBAL
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if LocalPlayer["state"]["Active"] then
 			if divingMask ~= nil then
@@ -139,13 +139,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(5000)
+		Wait(5000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADFOODS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if LocalPlayer["state"]["Active"] then
 			local ped = PlayerPedId()
@@ -159,13 +159,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(30000)
+		Wait(30000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTIMERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if FreezeTime then
 			SetWeatherTypeNow("CLEAR")
@@ -179,7 +179,7 @@ Citizen.CreateThread(function()
 			NetworkOverrideClockTime(GlobalState["Hours"],GlobalState["Minutes"],00)
 		end
 
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -192,7 +192,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHUD
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Active"] then
@@ -217,7 +217,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -414,7 +414,7 @@ AddEventHandler("hud:Weapon",function(Status,Hash)
 				lastMin = Min
 			end
 
-			Citizen.Wait(100)
+			Wait(100)
 		end
 	else
 		SendNUIMessage({ weapons = false })
@@ -472,7 +472,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBELT
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Active"] then
@@ -496,7 +496,7 @@ Citizen.CreateThread(function()
 							SetEntityVelocity(ped,beltVelocity["x"],beltVelocity["y"],beltVelocity["z"])
 							SetEntityHealth(ped,health - 50)
 
-							Citizen.Wait(1)
+							Wait(1)
 
 							SetPedToRagdoll(ped,5000,5000,0,0,0,0)
 						end
@@ -517,7 +517,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -555,7 +555,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHEALTHREDUCE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local foodTimers = GetGameTimer()
 
 	while true do
@@ -585,13 +585,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSHAKESTRESS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Active"] then
@@ -613,7 +613,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -668,7 +668,7 @@ AddEventHandler("hud:Diving",function()
 			while not DoesEntityExist(divingTank) and spawnObjects <= 1000 do
 				divingTank = NetworkGetEntityFromNetworkId(objNet)
 				spawnObjects = spawnObjects + 1
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			spawnObjects = 0
@@ -676,7 +676,7 @@ AddEventHandler("hud:Diving",function()
 			while not objectControl and spawnObjects <= 1000 do
 				objectControl = NetworkRequestControlOfEntity(divingTank)
 				spawnObjects = spawnObjects + 1
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			AttachEntityToEntity(divingTank,ped,GetPedBoneIndex(ped,24818),-0.28,-0.24,0.0,180.0,90.0,0.0,1,1,0,0,2,1)
@@ -691,7 +691,7 @@ AddEventHandler("hud:Diving",function()
 			while not DoesEntityExist(divingMask) and spawnObjects <= 1000 do
 				divingMask = NetworkGetEntityFromNetworkId(objNet)
 				spawnObjects = spawnObjects + 1
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			spawnObjects = 0
@@ -699,7 +699,7 @@ AddEventHandler("hud:Diving",function()
 			while not objectControl and spawnObjects <= 1000 do
 				objectControl = NetworkRequestControlOfEntity(divingMask)
 				spawnObjects = spawnObjects + 1
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			AttachEntityToEntity(divingMask,ped,GetPedBoneIndex(ped,12844),0.0,0.0,0.0,180.0,90.0,0.0,1,1,0,0,2,1)
@@ -755,7 +755,7 @@ function nitroEnable()
 										end
 									end
 
-									Citizen.Wait(1)
+									Wait(1)
 								end
 							else
 								SetPurgeSprays(Vehicle,true)
@@ -845,10 +845,10 @@ end
 -- STOPLIGHTTRAIL
 -----------------------------------------------------------------------------------------------------------------------------------------
 function StopLightTrail(Particle)
-	Citizen.CreateThread(function()
+	CreateThread(function()
 		local endTime = GetGameTimer() + 500
 		while GetGameTimer() < endTime do 
-			Citizen.Wait(0)
+			Wait(0)
 			local now = GetGameTimer()
 			local Scale = (endTime - now) / 500
 			SetParticleFxLoopedScale(Particle,Scale)

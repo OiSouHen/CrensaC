@@ -17,7 +17,7 @@ local Starting = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTARGET
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local initList = {
 		{ -1191.55,-900.61,14.97,"BurgerShot",1.0,1.5,"Trabalhar" },
 		{ 1588.67,6455.92,25.69,"PopsDiner",1.0,1.0,"Trabalhar" },
@@ -375,7 +375,7 @@ AddEventHandler("deliver:Starting",function(Init)
 					end
 				end
 
-				Citizen.Wait(timeDistance)
+				Wait(timeDistance)
 			end
 		end
 	end

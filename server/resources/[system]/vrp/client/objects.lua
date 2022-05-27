@@ -125,7 +125,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADOBJECTS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
@@ -138,7 +138,7 @@ Citizen.CreateThread(function()
 
 					RequestModel(mHash)
 					while not HasModelLoaded(mHash) do
-						Citizen.Wait(1)
+						Wait(1)
 					end
 
 					if HasModelLoaded(mHash) then
@@ -163,7 +163,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -210,7 +210,7 @@ function tvRP.objectCoords(model)
 
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	local coords = GetEntityCoords(ped)
@@ -252,7 +252,7 @@ function tvRP.objectCoords(model)
 			SetEntityHeading(newObject,headObject - 2.5)
 		end
 
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	local headObject = GetEntityHeading(newObject)

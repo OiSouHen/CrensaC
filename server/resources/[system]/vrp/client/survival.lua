@@ -94,14 +94,14 @@ AddEventHandler("vRP:playerActive",function(user_id,name)
 		EnableDispatchService(i,false)
 	end
 
-	Citizen.Wait(10000)
+	Wait(10000)
 
 	SetEntityInvincible(ped,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADINVINCIBLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if LocalPlayer["state"]["Active"] then
 			if GetGameTimer() >= invTimer and invincibles then
@@ -110,13 +110,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 
@@ -185,7 +185,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HEALTHRECHARGE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		SetPlayerHealthRechargeMultiplier(PlayerId(),0)
 		SetPlayerHealthRechargeLimit(PlayerId(),0)
@@ -208,7 +208,7 @@ Citizen.CreateThread(function()
 			SetPedMaxHealth(PlayerPedId(),200)
 		end
 
-		Citizen.Wait(100)
+		Wait(100)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ function tvRP.respawnPlayer()
 	DoScreenFadeOut(0)
 	SetEntityCoordsNoOffset(PlayerPedId(),-1041.25,-2744.99,21.35,false,false,false,true)
 	SendNUIMessage({ death = false })
-	Citizen.Wait(1000)
+	Wait(1000)
 	DoScreenFadeIn(1000)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTIMEDEATH
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local deathTimers = GetGameTimer()
 
 	while true do
@@ -280,13 +280,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBUTTONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if deathStatus then
@@ -306,6 +306,6 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)

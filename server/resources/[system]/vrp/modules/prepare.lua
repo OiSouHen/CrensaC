@@ -131,7 +131,7 @@ vRP.prepare("summerz/cleanPremium","UPDATE summerz_accounts SET premium = '0', p
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCLEANERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	vRP.execute("summerz/playerdata")
 	vRP.execute("summerz/entitydata")
 	-- vRP.execute("summerz/cleanBanks")

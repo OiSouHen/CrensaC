@@ -328,7 +328,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSERVER
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	SetGameType("Creative Roleplay")
 	SetMapName("www.creative-rp.com")
 	SetRoutingBucketEntityLockdownMode(0,"relaxed")

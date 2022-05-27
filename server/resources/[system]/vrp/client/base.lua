@@ -28,13 +28,13 @@ function tvRP.blipsAdmin()
 
 	while blipsAdmin do
 		ocgHtNdhlF = vRPS.userPlayers()
-		Citizen.Wait(10000)
+		Wait(10000)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLIPS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if blipsAdmin then
@@ -57,7 +57,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -153,10 +153,10 @@ function tvRP.playAnim(animUpper,animSequency,animLoop)
 			playFlags = playFlags + 1
 		end
 
-		Citizen.CreateThread(function()
+		CreateThread(function()
 			RequestAnimDict(animSequency[1])
 			while not HasAnimDictLoaded(animSequency[1]) do
-				Citizen.Wait(1)
+				Wait(1)
 			end
 
 			if HasAnimDictLoaded(animSequency[1]) then
@@ -176,7 +176,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADANIM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		local ped = PlayerPedId()
@@ -187,13 +187,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLOCK
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if animActived then
@@ -209,7 +209,7 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ function passportEnable()
 			end
 		end
 
-		Citizen.Wait(0)
+		Wait(0)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -314,7 +314,7 @@ local blackWeapons = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADWEAPONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		for k,v in pairs(blackWeapons) do
@@ -323,6 +323,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)

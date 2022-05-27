@@ -25,7 +25,7 @@ local locateLocs = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	RegisterCommand("+entityTarget",playerTargetEnable)
 	RegisterCommand("-entityTarget",playerTargetDisable)
 	RegisterKeyMapping("+entityTarget","Interação auricular.","keyboard","LMENU")
@@ -1428,7 +1428,7 @@ function playerTargetEnable()
 									sucessTarget = false
 								end
 
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							SendNUIMessage({ response = "leftTarget" })
@@ -1463,7 +1463,7 @@ function playerTargetEnable()
 									sucessTarget = false
 								end
 
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							SendNUIMessage({ response = "leftTarget" })
@@ -1499,7 +1499,7 @@ function playerTargetEnable()
 												sucessTarget = false
 											end
 
-											Citizen.Wait(1)
+											Wait(1)
 										end
 
 										SendNUIMessage({ response = "leftTarget" })
@@ -1536,7 +1536,7 @@ function playerTargetEnable()
 									sucessTarget = false
 								end
 
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							SendNUIMessage({ response = "leftTarget" })
@@ -1545,7 +1545,7 @@ function playerTargetEnable()
 				end
 			end
 
-			Citizen.Wait(250)
+			Wait(250)
 		end
 	end
 end

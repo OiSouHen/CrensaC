@@ -77,14 +77,14 @@ AddEventHandler("checkin:initCheck",function(Hospital)
 				end
 
 				DoScreenFadeOut(0)
-				Citizen.Wait(1000)
+				Wait(1000)
 
 				treatmentUser = true
 				SetEntityHeading(ped,v[4])
 				SetEntityCoords(ped,v[1],v[2],v[3],1,0,0,0)
 				vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
 
-				Citizen.Wait(1000)
+				Wait(1000)
 				DoScreenFadeIn(1000)
 			end
 
@@ -158,7 +158,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTREATMENT
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if treatmentUser then
 			if GetGameTimer() >= treatmentTimer then
@@ -177,6 +177,6 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)

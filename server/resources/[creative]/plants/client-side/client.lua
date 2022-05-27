@@ -7,7 +7,7 @@ local Objects = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADOBJECTS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
@@ -56,7 +56,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ function createModels(Number,model,x,y,z)
 
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	Objects[Number] = CreateObject(mHash,x,y,z,false,false,false)

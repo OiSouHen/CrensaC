@@ -35,12 +35,12 @@ function Keyboard(Data)
 	if Progress then return end
 
 	Progress = true
-	Citizen.Wait(100)
+	Wait(100)
 	SetNuiFocus(true,true)
 	SendNUIMessage({ action = "OPEN_MENU", data = Data })
 
 	while Progress do
-		Citizen.Wait(0)
+		Wait(0)
 	end
 
 	if Status ~= "undefined" then

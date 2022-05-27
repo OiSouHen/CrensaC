@@ -69,7 +69,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSEARCHPED
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		if drugsSelling then
 			local ped = PlayerPedId()
@@ -105,13 +105,13 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(1000)
+		Wait(1000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSEARCHPED
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if selectPeds then
@@ -179,12 +179,12 @@ Citizen.CreateThread(function()
 
 							RequestModel(objHash)
 							while not HasModelLoaded(objHash) do
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							RequestAnimDict(pedAnim)
 							while not HasAnimDictLoaded(pedAnim) do
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							if HasModelLoaded(objHash) and HasAnimDictLoaded(pedAnim) then
@@ -194,7 +194,7 @@ Citizen.CreateThread(function()
 								TaskPlayAnim(selectPeds,pedAnim,"package_dropoff",8.0,1.0,-1,16,0,0,0,0)
 								LocalPlayer["state"]["Cancel"] = true
 
-								Citizen.Wait(3000)
+								Wait(3000)
 
 								timeCalling = GetGameTimer() + math.random(15000,45000)
 								LocalPlayer["state"]["Cancel"] = false
@@ -227,7 +227,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

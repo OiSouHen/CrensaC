@@ -73,7 +73,7 @@ RegisterCommand("andar",function(source,args,rawCommand)
 			if walkMode[mode] then
 				RequestAnimSet(walkMode[mode])
 				while not HasAnimSetLoaded(walkMode[mode]) do
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 				SetPedMovementClipset(ped,walkMode[mode],0.25)
@@ -88,7 +88,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCANCEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Cancel"] and LocalPlayer["state"]["Active"] then
@@ -104,13 +104,13 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADMUMBLECONNECT
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if not MumbleIsConnected() then
@@ -120,13 +120,13 @@ Citizen.CreateThread(function()
 			DisableControlAction(1,47,true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADCELLPHONE
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if (LocalPlayer["state"]["Phone"] or animActived) and LocalPlayer["state"]["Active"] then
@@ -144,7 +144,7 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ end)
 function tvRP.loadAnimSet(dict)
 	RequestAnimDict(dict)
 	while not HasAnimDictLoaded(dict) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ function tvRP.createObjects(newDict,newAnim,newProp,newFlag,newHands,newHeight,n
 		while not DoesEntityExist(uObject) and spawnObjects <= 1000 do
 			uObject = NetworkGetEntityFromNetworkId(objNet)
 			spawnObjects = spawnObjects + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		spawnObjects = 0
@@ -223,7 +223,7 @@ function tvRP.createObjects(newDict,newAnim,newProp,newFlag,newHands,newHeight,n
 		while not objectControl and spawnObjects <= 1000 do
 			objectControl = NetworkRequestControlOfEntity(uObject)
 			spawnObjects = spawnObjects + 1
-			Citizen.Wait(1)
+			Wait(1)
 		end
 
 		if newHeight then
@@ -238,7 +238,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADANIM
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if animActived and LocalPlayer["state"]["Active"] then
@@ -249,7 +249,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -276,7 +276,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- POINT
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 100
 		if uPoint and LocalPlayer["state"]["Active"] then
@@ -313,7 +313,7 @@ Citizen.CreateThread(function()
 			Citizen.InvokeNative(0xB0A6CFD2C69C1088,ped,"isFirstPerson",Citizen.InvokeNative(0xEE778F8C7E1142E2,Citizen.InvokeNative(0x19CAFA3C87F7C2FF)) == 4)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -393,7 +393,7 @@ RegisterCommand("cRenginecrouch",function(source,args,rawCommand)
 			elseif not LocalPlayer["state"]["Drunk"] then
 				RequestAnimSet("move_ped_crouched")
 				while not HasAnimSetLoaded("move_ped_crouched") do
-					Citizen.Wait(1)
+					Wait(1)
 				end
 
 				if crouch then
@@ -403,7 +403,7 @@ RegisterCommand("cRenginecrouch",function(source,args,rawCommand)
 					if walkSelect ~= nil then
 						RequestAnimSet(walkSelect)
 						while not HasAnimSetLoaded(walkSelect) do
-							Citizen.Wait(1)
+							Wait(1)
 						end
 
 						SetPedMovementClipset(ped,walkSelect,0.25)

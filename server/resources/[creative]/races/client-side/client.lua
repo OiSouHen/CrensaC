@@ -24,7 +24,7 @@ local displayRanking = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADRACES
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if not inativeRaces then
@@ -141,7 +141,7 @@ Citizen.CreateThread(function()
 			end
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ function makeObjects()
 
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
-		Citizen.Wait(1)
+		Wait(1)
 	end
 
 	local _,LeftZ = GetGroundZFor_3dCoord(Races[Selected]["coords"][Checkpoints][2][1],Races[Selected]["coords"][Checkpoints][2][2],Races[Selected]["coords"][Checkpoints][2][3])
@@ -231,7 +231,7 @@ function leaveRace()
 	displayRanking = false
 
 	if ExplodeRace then
-		Citizen.Wait(3000)
+		Wait(3000)
 
 		local vehicle = GetPlayersLastVehicle()
 		local coords = GetEntityCoords(vehicle)
