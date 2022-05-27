@@ -476,19 +476,6 @@ local craftList = {
 			}
 		}
 	},
-	["craftHeroine"] = {
-		["list"] = {
-			["heroine"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["amphetamine"] = 1,
-					["syringe"] = 1,
-					["codeine"] = 1
-				}
-			}
-		}
-	},
 	["Desserts"] = {
 		["perm"] = "Desserts",
 		["list"] = {
