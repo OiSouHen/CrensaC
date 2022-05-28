@@ -53,7 +53,7 @@ AddEventHandler("onClientResourceStart",function(resourceName)
 	Wait(1000)
 
 	local ped = PlayerPedId()
-	SetEntityCoords(ped,-856.45,-112.15,28.19,0,0,1)
+	SetEntityCoords(ped,-856.45,-112.15,28.19,false,false,false,false)
 	LocalPlayer["state"]["Invisible"] = true
 	SetEntityVisible(ped,false,false)
 	FreezeEntityPosition(ped,true)
@@ -82,13 +82,13 @@ AddEventHandler("onClientResourceStart",function(resourceName)
 					Wait(1)
 				end
 
-				TaskPlayAnim(Peds[k],pedCoords[k][5],pedCoords[k][6],8.0,0.0,-1,49,0,0,0,0)
+				TaskPlayAnim(Peds[k],pedCoords[k][5],pedCoords[k][6],8.0,8.0,-1,49,0,0,0,0)
 
 				Clothes(Peds[k],v["clothes"])
 				Barber(Peds[k],v["barber"])
 
-				for a,b in pairs(v["tattoos"]) do
-					SetPedDecoration(Peds[k],GetHashKey(b[1]),GetHashKey(a))
+				for k,v in pairs(v["tattoos"]) do
+					SetPedDecoration(Peds[k],GetHashKey(v[1]),GetHashKey(k))
 				end
 			end
 		end
