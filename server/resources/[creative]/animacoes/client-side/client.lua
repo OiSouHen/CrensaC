@@ -39,6 +39,23 @@ local beds = {
 -- ANIMAÇÕES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local animacoes = {
+	["esquentar"] = { dict = "amb@world_human_stand_fire@male@base", anim = "base", andar = false, loop = true },
+	["churrasco2"] = { dict = "amb@prop_human_bbq@male@idle_a", anim = "idle_c", andar = false, loop = true },
+	["spray"] = { dict = "switch@franklin@lamar_tagging_wall", anim = "lamar_tagging_exit_loop_lamar", prop = "prop_cs_spray_can", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.0, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+	["spray2"] = { dict = "switch@franklin@lamar_tagging_wall", anim = "lamar_tagging_wall_loop_lamar", prop = "prop_cs_spray_can", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.0, pos3 = 0.0, pos4 = 0.0, pos5 = 130.0 },
+	["tablet2"] = { dict = "amb@code_human_in_bus_passenger_idles@female@tablet@idle_a", anim = "idle_a", prop = "prop_cs_tablet", flag = 49, mao = 28422, altura = -0.05, pos1 = 0.0, pos2 = 0.0, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+	["encostar12"] = { dict = "amb@world_human_leaning@male@wall@back@legs_crossed@base", anim = "base", andar = false, loop = true },
+	["agitar"] = { dict = "random@street_race", anim = "_streetracer_accepted", andar = false, loop = false },
+	["agitar2"] = { dict = "random@street_race", anim = "grid_girl_a", andar = false, loop = false },
+	["agitar3"] = { dict = "random@street_race", anim = "grid_girl_b", andar = false, loop = false },
+	["parado12"] = { dict = "amb@world_human_drug_dealer_hard@male@idle_b", anim = "idle_d", andar = false, loop = true },
+	["sitchair9"] = { dict = "anim@heists@prison_heistunfinished_biztarget_idle", anim = "target_idle", andar = false, loop = true },
+	["caixa"] = { dict = "anim@heists@box_carry@", anim = "idle", prop = "hei_prop_heist_box", flag = 50, mao = 60309, altura = 0.025, pos1 = 0.08, pos2 = 0.255, pos3 = -50.0, pos4 = 290.0, pos5 = 0.0 },
+	["mapa"] = { dict = "amb@world_human_tourist_map@male@base", anim = "base", prop = "prop_tourist_map_01", flag = 49, mao = 28422 },
+	["prancheta"] = { dict = "missfam4", anim = "base", prop = "p_amb_clipboard_01", flag = 49, mao = 36029, altura = 0.16, pos1 = 0.08, pos2 = 0.1, pos3 = -130.0, pos4 = -50.0, pos5 = 0.0 },
+	["cigar"] = { prop = "prop_cigar_02", flag = 49, mao = 47419, altura = 0.01, pos1 = 0.01, pos2 = 0.005, pos3 = 50.0, pos4 = 0.0, pos5 = -80.0 },
+	["buque"] = { dict = "impexp_int-0", anim = "mp_m_waremech_01_dual-0", prop = "prop_snow_flower_02", flag = 49, mao = 24817, altura = -0.29, pos1 = 0.40, pos2 = -0.02, pos3 = -90.0, pos4 = -90.0, pos5 = 0.0 },
+	["jornal"] = { dict = "missfam4", anim = "base", prop = "prop_cliff_paper", flag = 49, mao = 36029, altura = 0.13, pos1 = 0.05, pos2 = 0.20, pos3 = -20.0, pos4 = -70.0, pos5 = 0.0 },
 	["encostar3"] = { dict = "misscarstealfinalecar_5_ig_1", anim = "waitloop_lamar", andar = false, loop = true },
 	["encostar4"] = { dict = "anim@amb@casino@out_of_money@ped_female@02b@base", anim = "base", andar = false, loop = true },
 	["encostar5"] = { dict = "anim@amb@casino@hangout@ped_male@stand@03b@base", anim = "base", andar = true, loop = true },
@@ -74,7 +91,6 @@ local animacoes = {
 	["casalf2"] = { dict = "timetable@trevor@ig_1", anim = "ig_1_thedesertissobeautiful_patricia", andar = false, loop = true },
 	["dormir4"] = { dict = "mp_sleep", anim = "sleep_loop", andar = false, loop = true },
 	["dormir5"] = { dict = "missarmenian2", anim = "drunk_loop", andar = false, loop = true },
-	["sentar8"] = { dict = "timetable@tracy@ig_14@", anim = "ig_14_base_tracy", andar = false, loop = true },
 	["deitar6"] = { dict = "switch@trevor@annoys_sunbathers", anim = "trev_annoys_sunbathers_loop_girl", andar = false, loop = true },
 	["deitar7"] = { dict = "switch@trevor@annoys_sunbathers", anim = "trev_annoys_sunbathers_loop_guy", andar = false, loop = true },
 	["palmas5"] = { dict = "anim@mp_player_intupperslow_clap", anim = "idle_a", andar = false, loop = true },
@@ -92,6 +108,7 @@ local animacoes = {
 	["bolsa2"] = { prop = "prop_ld_case_01_s", flag = 50, mao = 57005, altura = 0.16, pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
 	["bolsa3"] = { prop = "prop_security_case_01", flag = 50, mao = 57005, altura = 0.16, pos1 = 0, pos2 = -0.01, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
 	["bolsa4"] = { prop = "w_am_case", flag = 50, mao = 57005, altura = 0.08, pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
+	["bolsa5"] = { prop = "xm_prop_x17_bag_med_01a", flag = 50, mao = 57005, altura = 0.425, pos1 = 0, pos2 = 0.025, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
 	["caixa2"] = { prop = "prop_tool_box_04", flag = 50, mao = 57005, altura = 0.45, pos1 = 0, pos2 = 0.05, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
 	["lixo"] = { prop = "prop_cs_rub_binbag_01", flag = 50, mao = 57005, altura = 0.11, pos1 = 0, pos2 = 0.0, pos3 = 0, pos4 = 260.0, pos5 = 60.0 },
 	["prebeber"] = { dict = "amb@code_human_wander_drinking@beer@male@base", anim = "static", prop = "p_amb_coffeecup_01", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = -0.05, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
@@ -112,7 +129,7 @@ local animacoes = {
 			local distance = #(coords - vector3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
-				SetEntityCoords(ped,v[1],v[2],v[3] - 1,1,0,0,0)
+				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)
 				break
 			end
 		end
@@ -124,7 +141,7 @@ local animacoes = {
 			local distance = #(coords - vector3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
-				SetEntityCoords(ped,v[1],v[2],v[3] - 1,1,0,0,0)
+				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)
 				break
 			end
 		end
@@ -136,7 +153,7 @@ local animacoes = {
 			local distance = #(coords - vector3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
-				SetEntityCoords(ped,v[1],v[2],v[3] - 1,1,0,0,0)
+				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)
 				break
 			end
 		end
@@ -164,7 +181,6 @@ local animacoes = {
 	["cafe"] = { dict = "amb@world_human_aa_coffee@base", anim = "base", prop = "p_amb_coffeecup_01", flag = 50, mao = 28422 },
 	["cafe2"] = { dict = "amb@world_human_aa_coffee@idle_a", anim = "idle_a", prop = "p_amb_coffeecup_01", flag = 49, mao = 28422 },
 	["cafe3"] = { dict = "amb@world_human_drinking@coffee@male@idle_a", anim = "idle_c", prop = "p_amb_coffeecup_01", flag = 49, mao = 28422 },
-	["caixa"] = { dict = "anim@heists@box_carry@", anim = "idle", prop = "hei_prop_heist_box", flag = 50, mao = 28422 },
 	["chuva"] = { dict = "amb@world_human_drinking@coffee@male@base", anim = "base", prop = "p_amb_brolly_01", flag = 50, mao = 28422 },
 	["chuva2"] = { dict = "amb@world_human_drinking@coffee@male@base", anim = "base", prop = "p_amb_brolly_01_s", flag = 50, mao = 28422 },
 	["comer"] = { dict = "amb@code_human_wander_eating_donut@male@idle_a", anim = "idle_c", prop = "prop_cs_burger_01", flag = 49, mao = 28422 },
@@ -201,8 +217,6 @@ local animacoes = {
 	["musica4"] = { dict = "amb@world_human_musician@guitar@male@base", anim = "base", prop = "prop_acc_guitar_01", flag = 49, mao = 60309 },
 	["musica5"] = { dict = "switch@trevor@guitar_beatdown", anim = "001370_02_trvs_8_guitar_beatdown_idle_busker", prop = "prop_acc_guitar_01", flag = 49, mao = 24818, altura = -0.05, pos1 = 0.31, pos2 = 0.1, pos3 = 0.0, pos4 = 20.0, pos5 = 150.0 },
 	["camera"] = { dict = "missfinale_c2mcs_1", anim = "fin_c2_mcs_1_camman", prop = "prop_v_cam_01", flag = 49, mao = 28422 },
-	["prancheta"] = { dict = "amb@world_human_clipboard@male@base", anim = "base", prop = "p_amb_clipboard_01", flag = 50, mao = 60309 },
-	["mapa"] = { dict = "amb@world_human_clipboard@male@base", anim = "base", prop = "prop_tourist_map_01", flag = 50, mao = 60309 },
 	["anotar"] = { dict = "amb@medic@standing@timeofdeath@base", anim = "base", prop = "prop_notepad_01", flag = 49, mao = 60309 },
 	["peace"] = { dict = "mp_player_int_upperpeace_sign", anim = "mp_player_int_peace_sign", andar = true, loop = true },
 	["deitar"] = { dict = "anim@gangops@morgue@table@", anim = "body_search", andar = false, loop = true },
@@ -589,6 +603,51 @@ local animacoes = {
 	["dancar375"] = { dict = "anim@amb@casino@mini@dance@dance_solo@female@var_b@", anim = "high_right_up", andar = false, loop = true },
 	["dancar376"] = { dict = "anim@amb@casino@mini@dance@dance_solo@female@var_b@", anim = "low_center", andar = false, loop = true },
 	["dancar377"] = { dict = "anim@amb@casino@mini@dance@dance_solo@female@var_b@", anim = "low_center_down", andar = false, loop = true },
+	["dancar378"] = { dict = "anim@amb@nightclub@mini@dance@dance_solo@female@var_b@" , anim = "low_left_up" , andar = false , loop = true },    
+	["dancar379"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_f@" , anim = "ped_a_dance_idle" , andar = false , loop = true },    
+	["dancar380"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_f@" , anim = "ped_b_dance_idle" , andar = false , loop = true },    
+	["dancar381"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_h@" , anim = "ped_a_dance_idle" , andar = false , loop = true },    
+	["dancar382"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_h@" , anim = "ped_b_dance_idle" , andar = false , loop = true },    
+	["dancar383"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_j@" , anim = "ped_a_dance_idle" , andar = false , loop = true },    
+	["dancar384"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_m@" , anim = "ped_a_dance_idle" , andar = false , loop = true },    
+	["dancar385"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_a_f02" , andar = false , loop = true },    
+	["dancar386"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "mi_idle_b_f02" , andar = false , loop = true },    
+	["dancar387"] = { dict = "anim@mp_player_intcelebrationfemale@crowd_invitation" , anim = "crowd_invitation" , andar = false , loop = true },    
+	["dancar388"] = { dict = "anim@mp_player_intcelebrationfemale@driver" , anim = "driver" , andar = false , loop = true },    
+	["dancar389"] = { dict = "anim@mp_player_intcelebrationfemale@shooting" , anim = "shooting" , andar = false , loop = true },    
+	["dancar390"] = { dict = "anim@mp_player_intcelebrationmale@shooting" , anim = "shooting" , andar = false , loop = true },    
+	["dancar391"] = { dict = "anim@mp_player_intcelebrationmale@suck_it" , anim = "suck_it" , andar = false , loop = true },    
+	["dancar392"] = { dict = "anim@mp_player_intuppercrowd_invitation" , anim = "idle_a" , andar = false , loop = true },    
+	["dancar393"] = { dict = "anim@mp_player_intuppershooting" , anim = "idle_a" , andar = false , loop = true },    
+	["dancar394"] = { dict = "anim@mp_player_intuppersuck_it" , anim = "idle_a" , andar = false , loop = true },
+	["dancar395"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_a_m01" , andar = false , loop = true },
+	["dancar396"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_a_m02" , andar = false , loop = true },
+	["dancar397"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_b_f01" , andar = false , loop = true },
+	["dancar398"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_b_f02" , andar = false , loop = true },
+	["dancar399"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_b_f03" , andar = false , loop = true },
+	["dancar400"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_b_m01" , andar = false , loop = true },
+	["dancar401"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_b_m02" , andar = false , loop = true },
+	["dancar402"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_c_f01" , andar = false , loop = true },
+	["dancar403"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_c_f02" , andar = false , loop = true },
+	["dancar404"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_c_f03" , andar = false , loop = true },
+	["dancar405"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_c_m01" , andar = false , loop = true },
+	["dancar406"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_d_f02" , andar = false , loop = true },
+	["dancar407"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_d_m02" , andar = false , loop = true },
+	["dancar408"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_e_f02" , andar = false , loop = true },
+	["dancar409"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_idle_f_f02" , andar = false , loop = true },
+	["dancar410"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_loop_f01" , andar = false , loop = true },
+	["dancar411"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_loop_f02" , andar = false , loop = true },
+	["dancar412"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_loop_f03" , andar = false , loop = true },
+	["dancar413"] = { dict = "anim@amb@nightclub_island@dancers@club@" , anim = "hi_loop_m01" , andar = false , loop = true },
+	["dancar414"] = { dict = "anim@amb@nightclub_island@dancers@crowddance_facedj@", anim = "mi_dance_facedj_17_v2_male^4", andar = false, loop = true },
+	["dancar415"] = { dict = "anim@mp_player_intuppersalsa_roll", anim = "idle_a", andar = false, loop = true },
+	["dancar416"] = { dict = "anim@amb@nightclub@mini@dance@dance_solo@techno_monkey@", anim = "high_center", andar = false, loop = true },
+	["dancar417"] = { dict = "anim@amb@nightclub@mini@dance@dance_solo@techno_monkey@", anim = "high_center_down", andar = false, loop = true },
+	["dancar418"] = { dict = "anim@amb@nightclub@mini@dance@dance_solo@techno_monkey@", anim = "med_center_down", andar = false, loop = true },
+	["dancar419"] = { dict = "anim@amb@nightclub@mini@dance@dance_solo@beach_boxing@", anim = "med_right_down", andar = false, loop = true },
+	["dancar420"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_d@", anim = "ped_a_dance_idle", andar = false, loop = true },
+	["dancar421"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_b@", anim = "ped_a_dance_idle", andar = false, loop = true },
+	["dancar422"] = { dict = "anim@amb@nightclub@mini@dance@dance_paired@dance_a@", anim = "ped_a_dance_idle", andar = false, loop = true },
 
 	["argue"] = { dict = "misscarsteal4@actor", anim = "actor_berating_loop", andar = true, loop = true },
 	["bird"] = { dict = "random@peyote@bird", anim = "wakeup", andar = true, loop = true },
@@ -604,7 +663,6 @@ local animacoes = {
 	["peace2"] = { dict = "anim@mp_player_intupperpeace", anim = "idle_a", andar = true, loop = true },
 	["prone"] = { dict = "missfbi3_sniping", anim = "prone_dave", andar = false, loop = true },
 	["inspect"] = { dict = "random@train_tracks", anim = "idle_e", andar = false, loop = false },
-	["sentar7"] = { dict = "anim@amb@business@bgen@bgen_no_work@", anim = "sit_phone_phoneputdown_idle_nowork", andar = false, loop = true },
 	["sitchair"] = { dict = "timetable@ron@ig_5_p3", anim = "ig_5_p3_base", andar = false, loop = true },
 	["sitchair2"] = { dict = "timetable@reunited@ig_10", anim = "base_amanda", andar = false, loop = true },
 	["sitchair3"] = { dict = "timetable@ron@ig_3_couch", anim = "base", andar = false, loop = true },
@@ -619,12 +677,13 @@ local animacoes = {
 	["sexo4"] = { dict = "oddjobs@towing", anim = "m_blow_job_loop", andar = false, loop = true, cars = true },
 	["sexo5"] = { dict = "oddjobs@towing", anim = "f_blow_job_loop", andar = false, loop = true, cars = true },
 	["sexo6"] = { dict = "mini@prostitutes@sexlow_veh", anim = "low_car_sex_loop_female", andar = false, loop = true, cars = true },
-	["sentar"] = { anim = "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" },
-	["sentar2"] = { dict = "amb@world_human_picnic@male@base", anim = "base", andar = false, loop = true },
-	["sentar3"] = { dict = "anim@heists@fleeca_bank@ig_7_jetski_owner", anim = "owner_idle", andar = false, loop = true },
-	["sentar4"] = { dict = "amb@world_human_stupor@male@base", anim = "base", andar = false, loop = true },
-	["sentar5"] = { dict = "amb@world_human_picnic@female@base", anim = "base", andar = false, loop = true },
-	["sentar6"] = { dict = "anim@amb@nightclub@lazlow@lo_alone@", anim = "lowalone_base_laz", andar = false, loop = true },
+	["sentar"] = { dict = "amb@world_human_picnic@male@base", anim = "base", andar = false, loop = true },
+	["sentar2"] = { dict = "anim@heists@fleeca_bank@ig_7_jetski_owner", anim = "owner_idle", andar = false, loop = true },
+	["sentar3"] = { dict = "amb@world_human_stupor@male@base", anim = "base", andar = false, loop = true },
+	["sentar4"] = { dict = "amb@world_human_picnic@female@base", anim = "base", andar = false, loop = true },
+	["sentar5"] = { dict = "anim@amb@nightclub@lazlow@lo_alone@", anim = "lowalone_base_laz", andar = false, loop = true },
+	["sentar6"] = { dict = "anim@amb@business@bgen@bgen_no_work@", anim = "sit_phone_phoneputdown_idle_nowork", andar = false, loop = true },
+	["sentar7"] = { dict = "timetable@tracy@ig_14@", anim = "ig_14_base_tracy", andar = false, loop = true },
 	["beijar"] = { dict = "mp_ped_interaction", anim = "kisses_guy_a", andar = false, loop = false },
 	["striper"] = { dict = "mini@strip_club@idles@stripper", anim = "stripper_idle_02", andar = false, loop = true },
 	["escutar"] = { dict = "mini@safe_cracking", anim = "idle_base", andar = false, loop = true },
@@ -678,7 +737,6 @@ local animacoes = {
 	["soprador3"] = { dict = "amb@code_human_wander_gardener_leaf_blower@idle_a", anim = "idle_b", prop = "prop_leaf_blower_01", flag = 49, mao = 28422 },
 	["tragar"] = { anim = "WORLD_HUMAN_DRUG_DEALER" },
 	["trotar"] = { dict = "amb@world_human_jog_standing@male@fitidle_a", anim = "idle_a", andar = false, loop = true },
-	["esquentar"] = { anim = "WORLD_HUMAN_STAND_FIRE" },
 	["tablet"] = { dict = "amb@code_human_in_bus_passenger_idles@female@tablet@base", anim = "base", prop = "prop_cs_tablet", flag = 50, mao = 28422 },
 	["selfie"] = { dict = "cellphone@self", anim = "selfie_in_from_text", prop = "prop_npc_phone_02", flag = 50, mao = 28422 },
 	["selfie2"] = { dict = "cellphone@", anim = "cellphone_text_read_base_cover_low", prop = "prop_npc_phone_02", flag = 50, mao = 28422 },
@@ -690,22 +748,22 @@ local animacoes = {
 	["xiu"] = { dict = "anim@mp_player_intincarshushbodhi@ds@", anim = "idle_a_fp", andar = true, loop = true },
 	["tapa"] = { dict = "melee@unarmed@streamed_variations", anim = "plyr_takedown_front_slap", andar = false, loop = false },
 	["hotwired"] = { dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@", anim = "machinic_loop_mechandplayer", andar = true, loop = true, cars = true },
-	["pano2"] = { dict = "timetable@floyd@clean_kitchen@base", anim = "base", prop = "prop_rag_01", flag = 49, mao = 28422, extra = function()
-		local vehicle = vRP.nearVehicle(10)
-		if vehicle then
+	["pano2"] = { dict = "timetable@floyd@clean_kitchen@base", anim = "base", prop = "prop_sponge_01", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = -0.01, pos3 = 90.0, pos4 = 0.0, pos5 = 0.0, extra = function()
+		local Vehicle = vRP.nearVehicle(10)
+		if Vehicle then
 			TriggerEvent("Progress",10000)
 			SetTimeout(10000,function()
-				TriggerServerEvent("tryClearVehicle",VehToNet(vehicle))
+				TriggerServerEvent("tryClearVehicle",VehToNet(Vehicle))
 				vRP.removeObjects("one")
 			end)
 		end
 	end },
-	["pano"] = { dict = "timetable@maid@cleaning_window@base", anim = "base", prop = "prop_rag_01", flag = 49, mao = 28422, extra = function()
-		local vehicle = vRP.nearVehicle(10)
-		if vehicle then
+	["pano"] = { dict = "amb@world_human_maid_clean@", anim = "base", prop = "prop_sponge_01", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = -0.01, pos3 = 90.0, pos4 = 0.0, pos5 = 0.0, extra = function()
+		local Vehicle = vRP.nearVehicle(10)
+		if Vehicle then
 			TriggerEvent("Progress",10000)
 			SetTimeout(10000,function()
-				TriggerServerEvent("tryClearVehicle",VehToNet(vehicle))
+				TriggerServerEvent("tryClearVehicle",VehToNet(Vehicle))
 				vRP.removeObjects("one")
 			end)
 		end
