@@ -40,105 +40,105 @@ local isPurchaseSuccessful = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 local bennysLocations = {
 	["mechanic01"] = {
-		pos = vector3(450.4,-975.81,25.7),
+		pos = vec3(450.4,-975.81,25.7),
 		heading = 90.00
 	},
 	["mechanic02"] = {
-		pos = vector3(435.28,-975.86,25.7),
+		pos = vec3(435.28,-975.86,25.7),
 		heading = 90.00
 	},
 	["mechanic03"] = {
-		pos = vector3(333.34,-574.76,28.80),
+		pos = vec3(333.34,-574.76,28.80),
 		heading = 340.00
 	},
 	["mechanic04"] = {
-		pos = vector3(-339.15,-136.66,39.01),
+		pos = vec3(-339.15,-136.66,39.01),
 		heading = 87.88
 	},
 	["mechanic05"] = {
-		pos = vector3(-1155.12,-2005.7,13.18),
+		pos = vec3(-1155.12,-2005.7,13.18),
 		heading = 334.49
 	},
 	["mechanic06"] = {
-		pos = vector3(1174.98,2640.4,37.74),
+		pos = vec3(1174.98,2640.4,37.74),
 		heading = 1.0
 	},
 	["mechanic07"] = {
-		pos = vector3(1182.14,2639.94,37.74),
+		pos = vec3(1182.14,2639.94,37.74),
 		heading = 1.0
 	},
 	["mechanic08"] = {
-		pos = vector3(110.63,6626.54,31.78),
+		pos = vec3(110.63,6626.54,31.78),
 		heading = 224.94
 	},
 	["mechanic09"] = {
-		pos = vector3(105.26,6621.59,31.78),
+		pos = vec3(105.26,6621.59,31.78),
 		heading = 223.94
 	},
 	["mechanic10"] = {
-		pos = vector3(731.7,-1088.84,21.84),
+		pos = vec3(731.7,-1088.84,21.84),
 		heading = 87.88
 	},
 	["mechanic11"] = {
-		pos = vector3(-1178.37,-2845.97,13.93),
+		pos = vec3(-1178.37,-2845.97,13.93),
 		heading = 331.66
 	},
 	["mechanic12"] = {
-		pos = vector3(-222.63,-1330.03,30.57),
+		pos = vec3(-222.63,-1330.03,30.57),
 		heading = 272.13
 	},
 	["mechanic13"] = {
-		pos = vector3(-32.76,-1065.91,27.77),
+		pos = vec3(-32.76,-1065.91,27.77),
 		heading = 339.5
 	},
 	["mechanic14"] = {
-		pos = vector3(135.97,-3030.56,6.71),
+		pos = vec3(135.97,-3030.56,6.71),
 		heading = 178.59,
 		permission = "Mechanic"
 	},
 	["mechanic15"] = {
-		pos = vector3(144.91,-3030.35,6.71),
+		pos = vec3(144.91,-3030.35,6.71),
 		heading = 0.0,
 		permission = "Mechanic"
 	},
 	["mechanic16"] = {
-		pos = vector3(-1423.62,-450.23,35.28),
+		pos = vec3(-1423.62,-450.23,35.28),
 		heading = 32.00
 	},
 	["mechanic17"] = {
-		pos = vector3(-1417.29,-446.25,35.28),
+		pos = vec3(-1417.29,-446.25,35.28),
 		heading = 32.00
 	},
 	["mechanic18"] = {
-		pos = vector3(936.6,-970.85,38.91),
+		pos = vec3(936.6,-970.85,38.91),
 		heading = 273.00
 	},
 	["thelost01"] = {
-		pos = vector3(959.41,-113.15,73.73),
+		pos = vec3(959.41,-113.15,73.73),
 		permission = "TheLost",
 		heading = 223.00,
 		bikes = true
 	},
 	["thelost02"] = {
-		pos = vector3(964.82,-108.0,73.73),
+		pos = vec3(964.82,-108.0,73.73),
 		permission = "TheLost",
 		heading = 223.00,
 		bikes = true
 	},
 	["thelost03"] = {
-		pos = vector3(2518.66,4113.51,38.13),
+		pos = vec3(2518.66,4113.51,38.13),
 		permission = "TheLost",
 		heading = 61.00,
 		bikes = true
 	},
 	["thelost04"] = {
-		pos = vector3(2520.06,4116.33,38.13),
+		pos = vec3(2520.06,4116.33,38.13),
 		permission = "TheLost",
 		heading = 61.00,
 		bikes = true
 	},
 	["thelost05"] = {
-		pos = vector3(2521.38,4118.97,38.13),
+		pos = vec3(2521.38,4118.97,38.13),
 		permission = "TheLost",
 		heading = 61.00,
 		bikes = true

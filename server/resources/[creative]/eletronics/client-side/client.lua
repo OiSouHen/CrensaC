@@ -149,7 +149,7 @@ local atmList = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(atmList) do
-		exports["target"]:AddCircleZone("Eletronics:"..k,vector3(v[1],v[2],v[3]),0.5,{
+		exports["target"]:AddCircleZone("Eletronics:"..k,vec3(v[1],v[2],v[3]),0.5,{
 			name = "Eletronics:"..k,
 			heading = 3374176
 		},{

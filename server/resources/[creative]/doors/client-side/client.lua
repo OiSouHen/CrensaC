@@ -18,7 +18,7 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for k,v in pairs(GlobalState["Doors"]) do
-			local distance = #(coords - vector3(v["x"],v["y"],v["z"]))
+			local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
 			if distance <= v["distance"] then
 				local closestDoor = GetClosestObjectOfType(v["x"],v["y"],v["z"],v["distance"] + 0.0,v["hash"],false,false,false)
 				if closestDoor then

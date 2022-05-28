@@ -132,7 +132,7 @@ local vehRescue = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(initLocates) do
-		exports["target"]:AddCircleZone("TowDriver:"..k,vector3(v[1],v[2],v[3]),1.0,{
+		exports["target"]:AddCircleZone("TowDriver:"..k,vec3(v[1],v[2],v[3]),1.0,{
 			name = "TowDriver:"..k,
 			heading = 3374176
 		},{
@@ -178,7 +178,7 @@ CreateThread(function()
 		if inService and not spawnVehicle then
 			local ped = PlayerPedId()
 			local coords = GetEntityCoords(ped)
-			local distance = #(coords - vector3(vehRescue[serviceLocate][spawnCoords][1],vehRescue[serviceLocate][spawnCoords][2],vehRescue[serviceLocate][spawnCoords][3]))
+			local distance = #(coords - vec3(vehRescue[serviceLocate][spawnCoords][1],vehRescue[serviceLocate][spawnCoords][2],vehRescue[serviceLocate][spawnCoords][3]))
 
 			if distance <= 100 then
 				spawnVehicle = true

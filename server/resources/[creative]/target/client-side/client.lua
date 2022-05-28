@@ -190,7 +190,7 @@ CreateThread(function()
 	RegisterCommand("-entityTarget",playerTargetDisable)
 	RegisterKeyMapping("+entityTarget","Interação auricular.","keyboard","LMENU")
 
-	AddCircleZone("callTaxi",vector3(-1038.98,-2731.16,20.17),0.75,{
+	AddCircleZone("callTaxi",vec3(-1038.98,-2731.16,20.17),0.75,{
 		name = "callTaxi",
 		heading = 3374176
 	},{
@@ -204,7 +204,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary01",vector3(241.43,225.46,106.29),0.75,{
+	AddCircleZone("bankSalary01",vec3(241.43,225.46,106.29),0.75,{
 		name = "bankSalary01",
 		heading = 3374176
 	},{
@@ -222,7 +222,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary02",vector3(243.21,224.77,106.29),0.75,{
+	AddCircleZone("bankSalary02",vec3(243.21,224.77,106.29),0.75,{
 		name = "bankSalary02",
 		heading = 3374176
 	},{
@@ -240,7 +240,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary03",vector3(246.62,223.61,106.29),0.75,{
+	AddCircleZone("bankSalary03",vec3(246.62,223.61,106.29),0.75,{
 		name = "bankSalary03",
 		heading = 3374176
 	},{
@@ -258,7 +258,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary04",vector3(248.43,222.95,106.29),0.75,{
+	AddCircleZone("bankSalary04",vec3(248.43,222.95,106.29),0.75,{
 		name = "bankSalary04",
 		heading = 3374176
 	},{
@@ -276,7 +276,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary05",vector3(251.79,221.73,106.29),0.75,{
+	AddCircleZone("bankSalary05",vec3(251.79,221.73,106.29),0.75,{
 		name = "bankSalary05",
 		heading = 3374176
 	},{
@@ -294,7 +294,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary06",vector3(253.59,221.08,106.29),0.75,{
+	AddCircleZone("bankSalary06",vec3(253.59,221.08,106.29),0.75,{
 		name = "bankSalary06",
 		heading = 3374176
 	},{
@@ -312,7 +312,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary07",vector3(-113.01,6470.21,31.63),0.75,{
+	AddCircleZone("bankSalary07",vec3(-113.01,6470.21,31.63),0.75,{
 		name = "bankSalary07",
 		heading = 3374176
 	},{
@@ -330,7 +330,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary08",vector3(-111.99,6469.15,31.63),0.75,{
+	AddCircleZone("bankSalary08",vec3(-111.99,6469.15,31.63),0.75,{
 		name = "bankSalary08",
 		heading = 3374176
 	},{
@@ -348,7 +348,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("bankSalary09",vector3(-110.92,6468.1,31.63),0.75,{
+	AddCircleZone("bankSalary09",vec3(-110.92,6468.1,31.63),0.75,{
 		name = "bankSalary09",
 		heading = 3374176
 	},{
@@ -366,7 +366,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment01",vector3(-253.92,6331.07,32.42),0.75,{
+	AddCircleZone("treatment01",vec3(-253.92,6331.07,32.42),0.75,{
 		name = "treatment01",
 		heading = 3374176
 	},{
@@ -381,7 +381,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment02",vector3(1833.21,3676.09,34.27),0.75,{
+	AddCircleZone("treatment02",vec3(1833.21,3676.09,34.27),0.75,{
 		name = "treatment02",
 		heading = 3374176
 	},{
@@ -396,7 +396,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment03",vector3(307.03,-595.12,43.29),0.75,{
+	AddCircleZone("treatment03",vec3(307.03,-595.12,43.29),0.75,{
 		name = "treatment03",
 		heading = 3374176
 	},{
@@ -411,7 +411,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment04",vector3(350.92,-587.68,28.8),0.75,{
+	AddCircleZone("treatment04",vec3(350.92,-587.68,28.8),0.75,{
 		name = "treatment04",
 		heading = 3374176
 	},{
@@ -426,7 +426,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment05",vector3(1768.67,2570.59,45.73),0.75,{
+	AddCircleZone("treatment05",vec3(1768.67,2570.59,45.73),0.75,{
 		name = "treatment05",
 		heading = 3374176
 	},{
@@ -441,7 +441,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("treatment06",vector3(-469.26,6289.48,13.61),0.75,{
+	AddCircleZone("treatment06",vec3(-469.26,6289.48,13.61),0.75,{
 		name = "treatment06",
 		heading = 3374176
 	},{
@@ -718,7 +718,7 @@ CreateThread(function()
 		distance = 0.75
 	})
 
-	AddCircleZone("foodJuice01",vector3(-1190.78,-904.23,13.99),0.5,{
+	AddCircleZone("foodJuice01",vec3(-1190.78,-904.23,13.99),0.5,{
 		name = "foodJuice01",
 		heading = 3374176
 	},{
@@ -733,7 +733,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodJuice02",vector3(-1190.12,-905.16,13.99),0.5,{
+	AddCircleZone("foodJuice02",vec3(-1190.12,-905.16,13.99),0.5,{
 		name = "foodJuice02",
 		heading = 3374176
 	},{
@@ -748,7 +748,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodJuice03",vector3(1585.82,6459.13,26.02),0.5,{
+	AddCircleZone("foodJuice03",vec3(1585.82,6459.13,26.02),0.5,{
 		name = "foodJuice03",
 		heading = 3374176
 	},{
@@ -763,7 +763,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodJuice04",vector3(810.69,-764.42,26.77),0.5,{
+	AddCircleZone("foodJuice04",vec3(810.69,-764.42,26.77),0.5,{
 		name = "foodJuice04",
 		heading = 3374176
 	},{
@@ -778,7 +778,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger01",vector3(-1202.08,-897.21,13.99),0.5,{
+	AddCircleZone("foodBurger01",vec3(-1202.08,-897.21,13.99),0.5,{
 		name = "foodBurger01",
 		heading = 3374176
 	},{
@@ -793,7 +793,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger02",vector3(-1202.55,-896.55,13.99),0.5,{
+	AddCircleZone("foodBurger02",vec3(-1202.55,-896.55,13.99),0.5,{
 		name = "foodBurger02",
 		heading = 3374176
 	},{
@@ -808,7 +808,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger03",vector3(1587.93,6458.15,26.02),0.5,{
+	AddCircleZone("foodBurger03",vec3(1587.93,6458.15,26.02),0.5,{
 		name = "foodBurger03",
 		heading = 3374176
 	},{
@@ -823,7 +823,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger04",vector3(1587.33,6458.44,26.02),0.5,{
+	AddCircleZone("foodBurger04",vec3(1587.33,6458.44,26.02),0.5,{
 		name = "foodBurger04",
 		heading = 3374176
 	},{
@@ -838,7 +838,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger05",vector3(807.67,-762.31,26.77),0.5,{
+	AddCircleZone("foodBurger05",vec3(807.67,-762.31,26.77),0.5,{
 		name = "foodBurger05",
 		heading = 3374176
 	},{
@@ -853,7 +853,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBurger06",vector3(807.68,-760.2,26.77),0.5,{
+	AddCircleZone("foodBurger06",vec3(807.68,-760.2,26.77),0.5,{
 		name = "foodBurger06",
 		heading = 3374176
 	},{
@@ -868,7 +868,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBox01",vector3(-1197.91,-892.21,13.99),0.5,{
+	AddCircleZone("foodBox01",vec3(-1197.91,-892.21,13.99),0.5,{
 		name = "foodBox01",
 		heading = 3374176
 	},{
@@ -883,7 +883,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBox02",vector3(1592.02,6456.23,26.02),0.5,{
+	AddCircleZone("foodBox02",vec3(1592.02,6456.23,26.02),0.5,{
 		name = "foodBox02",
 		heading = 3374176
 	},{
@@ -898,7 +898,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodBox03",vector3(812.26,-754.98,26.77),0.5,{
+	AddCircleZone("foodBox03",vec3(812.26,-754.98,26.77),0.5,{
 		name = "foodBox03",
 		heading = 3374176
 	},{
@@ -913,7 +913,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry01",vector3(-626.67,-238.58,38.05),0.75,{
+	AddCircleZone("jewelry01",vec3(-626.67,-238.58,38.05),0.75,{
 		name = "jewelry01",
 		heading = 3374176
 	},{
@@ -928,7 +928,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry02",vector3(-625.66,-237.86,38.05),0.75,{
+	AddCircleZone("jewelry02",vec3(-625.66,-237.86,38.05),0.75,{
 		name = "jewelry02",
 		heading = 3374176
 	},{
@@ -943,7 +943,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry03",vector3(-626.84,-235.35,38.05),0.75,{
+	AddCircleZone("jewelry03",vec3(-626.84,-235.35,38.05),0.75,{
 		name = "jewelry03",
 		heading = 3374176
 	},{
@@ -958,7 +958,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry04",vector3(-625.83,-234.6,38.05),0.75,{
+	AddCircleZone("jewelry04",vec3(-625.83,-234.6,38.05),0.75,{
 		name = "jewelry04",
 		heading = 3374176
 	},{
@@ -973,7 +973,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry05",vector3(-626.9,-233.15,38.05),0.75,{
+	AddCircleZone("jewelry05",vec3(-626.9,-233.15,38.05),0.75,{
 		name = "jewelry05",
 		heading = 3374176
 	},{
@@ -988,7 +988,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry06",vector3(-627.94,-233.92,38.05),0.75,{
+	AddCircleZone("jewelry06",vec3(-627.94,-233.92,38.05),0.75,{
 		name = "jewelry06",
 		heading = 3374176
 	},{
@@ -1003,7 +1003,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry07",vector3(-620.22,-234.44,38.05),0.75,{
+	AddCircleZone("jewelry07",vec3(-620.22,-234.44,38.05),0.75,{
 		name = "jewelry07",
 		heading = 3374176
 	},{
@@ -1018,7 +1018,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry08",vector3(-619.16,-233.7,38.05),0.75,{
+	AddCircleZone("jewelry08",vec3(-619.16,-233.7,38.05),0.75,{
 		name = "jewelry08",
 		heading = 3374176
 	},{
@@ -1033,7 +1033,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry09",vector3(-617.56,-230.57,38.05),0.75,{
+	AddCircleZone("jewelry09",vec3(-617.56,-230.57,38.05),0.75,{
 		name = "jewelry09",
 		heading = 3374176
 	},{
@@ -1048,7 +1048,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry10",vector3(-618.29,-229.49,38.05),0.75,{
+	AddCircleZone("jewelry10",vec3(-618.29,-229.49,38.05),0.75,{
 		name = "jewelry10",
 		heading = 3374176
 	},{
@@ -1063,7 +1063,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry11",vector3(-619.68,-227.63,38.05),0.75,{
+	AddCircleZone("jewelry11",vec3(-619.68,-227.63,38.05),0.75,{
 		name = "jewelry11",
 		heading = 3374176
 	},{
@@ -1078,7 +1078,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry12",vector3(-620.43,-226.56,38.05),0.75,{
+	AddCircleZone("jewelry12",vec3(-620.43,-226.56,38.05),0.75,{
 		name = "jewelry12",
 		heading = 3374176
 	},{
@@ -1093,7 +1093,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry13",vector3(-623.92,-227.06,38.05),0.75,{
+	AddCircleZone("jewelry13",vec3(-623.92,-227.06,38.05),0.75,{
 		name = "jewelry13",
 		heading = 3374176
 	},{
@@ -1108,7 +1108,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry14",vector3(-624.97,-227.84,38.05),0.75,{
+	AddCircleZone("jewelry14",vec3(-624.97,-227.84,38.05),0.75,{
 		name = "jewelry14",
 		heading = 3374176
 	},{
@@ -1123,7 +1123,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry15",vector3(-624.42,-231.08,38.05),0.75,{
+	AddCircleZone("jewelry15",vec3(-624.42,-231.08,38.05),0.75,{
 		name = "jewelry15",
 		heading = 3374176
 	},{
@@ -1138,7 +1138,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry16",vector3(-623.98,-228.18,38.05),0.75,{
+	AddCircleZone("jewelry16",vec3(-623.98,-228.18,38.05),0.75,{
 		name = "jewelry16",
 		heading = 3374176
 	},{
@@ -1153,7 +1153,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry17",vector3(-621.08,-228.58,38.05),0.75,{
+	AddCircleZone("jewelry17",vec3(-621.08,-228.58,38.05),0.75,{
 		name = "jewelry17",
 		heading = 3374176
 	},{
@@ -1168,7 +1168,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry18",vector3(-619.72,-230.43,38.05),0.75,{
+	AddCircleZone("jewelry18",vec3(-619.72,-230.43,38.05),0.75,{
 		name = "jewelry18",
 		heading = 3374176
 	},{
@@ -1183,7 +1183,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry19",vector3(-620.14,-233.31,38.05),0.75,{
+	AddCircleZone("jewelry19",vec3(-620.14,-233.31,38.05),0.75,{
 		name = "jewelry19",
 		heading = 3374176
 	},{
@@ -1198,7 +1198,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelry20",vector3(-623.05,-232.95,38.05),0.75,{
+	AddCircleZone("jewelry20",vec3(-623.05,-232.95,38.05),0.75,{
 		name = "jewelry20",
 		heading = 3374176
 	},{
@@ -1213,7 +1213,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("jewelryHacker",vector3(-631.38,-230.24,38.05),0.75,{
+	AddCircleZone("jewelryHacker",vec3(-631.38,-230.24,38.05),0.75,{
 		name = "jewelryHacker",
 		heading = 3374176
 	},{
@@ -1227,7 +1227,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("divingStore",vector3(1521.08,3780.19,34.46),0.5,{
+	AddCircleZone("divingStore",vec3(1521.08,3780.19,34.46),0.5,{
 		name = "divingStore",
 		heading = 3374176
 	},{
@@ -1245,7 +1245,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles01",vector3(-38.9,-1100.22,27.26),0.75,{
+	AddCircleZone("tabletVehicles01",vec3(-38.9,-1100.22,27.26),0.75,{
 		name = "tabletVehicles01",
 		heading = 3374176
 	},{
@@ -1259,7 +1259,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles02",vector3(-40.37,-1094.57,27.26),0.75,{
+	AddCircleZone("tabletVehicles02",vec3(-40.37,-1094.57,27.26),0.75,{
 		name = "tabletVehicles02",
 		heading = 3374176
 	},{
@@ -1273,7 +1273,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles03",vector3(-46.87,-1095.5,27.26),0.75,{
+	AddCircleZone("tabletVehicles03",vec3(-46.87,-1095.5,27.26),0.75,{
 		name = "tabletVehicles03",
 		heading = 3374176
 	},{
@@ -1287,7 +1287,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles04",vector3(-51.59,-1094.98,27.26),0.75,{
+	AddCircleZone("tabletVehicles04",vec3(-51.59,-1094.98,27.26),0.75,{
 		name = "tabletVehicles04",
 		heading = 3374176
 	},{
@@ -1301,7 +1301,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles05",vector3(-51.15,-1087.13,27.26),0.75,{
+	AddCircleZone("tabletVehicles05",vec3(-51.15,-1087.13,27.26),0.75,{
 		name = "tabletVehicles05",
 		heading = 3374176
 	},{
@@ -1315,7 +1315,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("tabletVehicles06",vector3(1230.03,2733.74,38.03),0.75,{
+	AddCircleZone("tabletVehicles06",vec3(1230.03,2733.74,38.03),0.75,{
 		name = "tabletVehicles06",
 		heading = 3374176
 	},{
@@ -1329,7 +1329,7 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("cemiteryMan",vector3(-1745.57,-205.19,57.37),0.75,{
+	AddCircleZone("cemiteryMan",vec3(-1745.57,-205.19,57.37),0.75,{
 		name = "cemiteryMan",
 		heading = 3374176
 	},{
@@ -1558,7 +1558,7 @@ function playerTargetEnable()
 							else
 								local locateMenu = false
 								for k,v in pairs(locateLocs) do
-									local distance = #(coords - vector3(v[1],v[2],v[3]))
+									local distance = #(coords - vec3(v[1],v[2],v[3]))
 									if distance <= 10 then
 										locateMenu = v[4]
 									end

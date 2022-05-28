@@ -126,7 +126,7 @@ local animacoes = {
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
 		for k,v in pairs(poleDances) do
-			local distance = #(coords - vector3(v[1],v[2],v[3]))
+			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
 				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)
@@ -138,7 +138,7 @@ local animacoes = {
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
 		for k,v in pairs(poleDances) do
-			local distance = #(coords - vector3(v[1],v[2],v[3]))
+			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
 				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)
@@ -150,7 +150,7 @@ local animacoes = {
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
 		for k,v in pairs(poleDances) do
-			local distance = #(coords - vector3(v[1],v[2],v[3]))
+			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
 				SetEntityCoords(ped,v[1],v[2],v[3] - 1,false,false,false,false)

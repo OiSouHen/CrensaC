@@ -134,7 +134,7 @@ CreateThread(function()
 			local coords = GetEntityCoords(ped)
 
 			for k,v in pairs(locateShops) do
-				local distance = #(coords - vector3(v[1],v[2],v[3]))
+				local distance = #(coords - vec3(v[1],v[2],v[3]))
 				if distance <= 2 then
 					timeDistance = 1
 

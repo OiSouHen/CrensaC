@@ -459,7 +459,7 @@ CreateThread(function()
 				if theftCoords[homes["theft"]] then
 					for k,v in pairs(theftCoords[homes["theft"]]) do
 						if not homes["theftCoords"][k] then
-							local distance = #(coords - vector3(homes["current"][1] + v[1],homes["current"][2] + v[2],1500.0))
+							local distance = #(coords - vec3(homes["current"][1] + v[1],homes["current"][2] + v[2],1500.0))
 
 							if distance <= 1.25 then
 								timeDistance = 1
@@ -513,7 +513,7 @@ CreateThread(function()
 						SetEntityCoords(ped,v[1],v[2],v[3],1,0,0,0)
 					end
 
-					local distance = #(coords - vector3(v[1],v[2],v[3]))
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
 					if distance <= 1.25 then
 						timeDistance = 1
 						DrawText3D(v[1],v[2],v[3],"~g~E~w~   "..v[5])
@@ -650,7 +650,7 @@ CreateThread(function()
 				local coords = GetEntityCoords(ped)
 
 				for k,v in pairs(homes["hotel"]) do
-					local distance = #(coords - vector3(v[1],v[2],v[3]))
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
 
 					if distance <= 1.5 then
 						timeDistance = 1
@@ -681,7 +681,7 @@ CreateThread(function()
 
 				if homes["list"][gridZone] then
 					for k,v in pairs(homes["list"][gridZone]) do
-						local distance = #(coords - vector3(v[1],v[2],v[3]))
+						local distance = #(coords - vec3(v[1],v[2],v[3]))
 
 						if distance <= 1.25 then
 							timeDistance = 1

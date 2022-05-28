@@ -47,7 +47,7 @@ CreateThread(function()
 					end
 
 					local coords = GetEntityCoords(ped)
-					local distance = #(coords - vector3(Races[Selected]["coords"][Checkpoints][1][1],Races[Selected]["coords"][Checkpoints][1][2],Races[Selected]["coords"][Checkpoints][1][3]))
+					local distance = #(coords - vec3(Races[Selected]["coords"][Checkpoints][1][1],Races[Selected]["coords"][Checkpoints][1][2],Races[Selected]["coords"][Checkpoints][1][3]))
 					if distance <= 5 then
 						if Checkpoints >= #Races[Selected]["coords"] then
 							PlaySoundFrontend(-1,"CHECKPOINT_UNDER_THE_BRIDGE","HUD_MINI_GAME_SOUNDSET",false)
@@ -76,7 +76,7 @@ CreateThread(function()
 				else
 					local coords = GetEntityCoords(ped)
 					for k,v in pairs(Races) do
-						local distance = #(coords - vector3(v["init"][1],v["init"][2],v["init"][3]))
+						local distance = #(coords - vec3(v["init"][1],v["init"][2],v["init"][3]))
 						if distance <= 25 then
 							local vehicle = GetVehiclePedIsUsing(ped)
 							if GetPedInVehicleSeat(vehicle,-1) == ped then

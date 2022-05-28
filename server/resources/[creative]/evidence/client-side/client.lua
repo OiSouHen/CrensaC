@@ -39,7 +39,7 @@ CreateThread(function()
 
 			if GlobalState["Evidences"][gridZone] then
 				for k,v in pairs(GlobalState["Evidences"][gridZone]) do
-					local distance = #(coords - vector3(v[1]["x"],v[1]["y"],v[1]["z"]))
+					local distance = #(coords - vec3(v[1]["x"],v[1]["y"],v[1]["z"]))
 					if distance <= 5 then
 						timeDistance = 1
 						DrawMarker(28,v[1]["x"],v[1]["y"],v[1]["z"] + 0.05,0.0,0.0,0.0,180.0,0.0,0.0,0.045,0.045,0.045,v[3][1],v[3][2],v[3][3],200,0,0,0,0)
@@ -64,5 +64,5 @@ function cRP.getPostions()
 	local gridZone = getGridzone(coords["x"],coords["y"])
 	local _,cdz = GetGroundZFor_3dCoord(coords["x"],coords["y"],coords["z"])
 
-	return vector3(coords["x"],coords["y"],cdz),gridZone
+	return vec3(coords["x"],coords["y"],cdz),gridZone
 end

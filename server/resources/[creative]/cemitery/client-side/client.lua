@@ -118,7 +118,7 @@ AddEventHandler("cemitery:initBody",function()
 
 			TaskPlayAnim(spawnPed,"dead","dead_a",8.0,0.0,-1,1,0,0,0,0)
 
-			exports["target"]:AddCircleZone("Cemitery:"..Selected,vector3(cCoords[Selected][1],cCoords[Selected][2],cCoords[Selected][3]),0.75,{
+			exports["target"]:AddCircleZone("Cemitery:"..Selected,vec3(cCoords[Selected][1],cCoords[Selected][2],cCoords[Selected][3]),0.75,{
 				name = "Cemitery:"..Selected,
 				heading = 3374176
 			},{

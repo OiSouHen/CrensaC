@@ -108,10 +108,10 @@ end
 
 -- Debug drawing functions
 function _drawWall(p1, p2, minZ, maxZ, r, g, b, a)
-  local bottomLeft = vector3(p1.x, p1.y, minZ)
-  local topLeft = vector3(p1.x, p1.y, maxZ)
-  local bottomRight = vector3(p2.x, p2.y, minZ)
-  local topRight = vector3(p2.x, p2.y, maxZ)
+  local bottomLeft = vec3(p1.x, p1.y, minZ)
+  local topLeft = vec3(p1.x, p1.y, maxZ)
+  local bottomRight = vec3(p2.x, p2.y, minZ)
+  local topRight = vec3(p2.x, p2.y, maxZ)
   
   DrawPoly(bottomLeft,topLeft,bottomRight,r,g,b,a)
   DrawPoly(topLeft,topRight,bottomRight,r,g,b,a)

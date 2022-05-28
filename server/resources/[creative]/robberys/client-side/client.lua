@@ -29,7 +29,7 @@ CreateThread(function()
 
 			if not robberyActive then
 				for k,v in pairs(robberys) do
-					local distance = #(coords - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+					local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 
 					if distance <= 1 then
 						timeDistance = 1
@@ -49,7 +49,7 @@ CreateThread(function()
 					end
 				end
 			else
-				local distance = #(coords - vector3(robberys[robberyId]["coords"][1],robberys[robberyId]["coords"][2],robberys[robberyId]["coords"][3]))
+				local distance = #(coords - vec3(robberys[robberyId]["coords"][1],robberys[robberyId]["coords"][2],robberys[robberyId]["coords"][3]))
 				if distance > robberys[robberyId]["distance"] or GetEntityHealth(ped) <= 101 then
 					SendNUIMessage({ show = false })
 					robberyActive = false

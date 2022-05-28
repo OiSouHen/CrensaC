@@ -30,17 +30,17 @@ local function _calculateScaleAndOffset(options)
   if #offset == 3 then
     offset = {offset[1], offset[1], offset[2], offset[2], offset[3], offset[3]}
   end
-  local minOffset = vector3(offset[3], offset[2], offset[6])
-  local maxOffset = vector3(offset[4], offset[1], offset[5])
-  local minScale = vector3(scale[3], scale[2], scale[6])
-  local maxScale = vector3(scale[4], scale[1], scale[5])
+  local minOffset = vec3(offset[3], offset[2], offset[6])
+  local maxOffset = vec3(offset[4], offset[1], offset[5])
+  local minScale = vec3(scale[3], scale[2], scale[6])
+  local maxScale = vec3(scale[4], scale[1], scale[5])
   return minOffset, maxOffset, minScale, maxScale
 end
 
 local function _calculatePoints(center, length, width, minScale, maxScale, minOffset, maxOffset)
   local halfLength, halfWidth = length / 2, width / 2
-  local min = vector3(-halfWidth, -halfLength, 0.0)
-  local max = vector3(halfWidth, halfLength, 0.0)
+  local min = vec3(-halfWidth, -halfLength, 0.0)
+  local max = vec3(halfWidth, halfLength, 0.0)
 
   min = min * minScale - minOffset
   max = max * maxScale + maxOffset

@@ -55,7 +55,7 @@ CreateThread(function()
 		if not IsPedInAnyVehicle(ped) then
 			local coords = GetEntityCoords(ped)
 			for k,v in pairs(GlobalState["Notepad"]) do
-				local distance = #(coords - vector3(v["x"],v["y"],v["z"]))
+				local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
 				if distance <= 5 then
 					timeDistance = 1
 					DrawText3Ds(v["x"],v["y"],v["z"] - 0.8,"~g~G~w~   LER     ~y~H~w~   DESTRUIR")

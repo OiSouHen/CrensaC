@@ -72,7 +72,7 @@ CreateThread(function()
 	SetNuiFocus(false,false)
 
 	for k,v in pairs(chestCoords) do
-		exports["target"]:AddCircleZone("Chest:"..k,vector3(v[2],v[3],v[4]),0.5,{
+		exports["target"]:AddCircleZone("Chest:"..k,vec3(v[2],v[3],v[4]),0.5,{
 			name = "Chest:"..k,
 			heading = 3374176,
 			useZ = true

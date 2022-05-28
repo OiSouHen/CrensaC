@@ -969,7 +969,7 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for k,v in pairs(pedList) do
-			local distance = #(coords - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+			local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 			if distance <= v["distance"] then
 				if localPeds[k] == nil then
 					local mHash = GetHashKey(v["model"][2])

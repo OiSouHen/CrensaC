@@ -25,7 +25,7 @@ CreateThread(function()
 	}
 
 	for k,v in pairs(initList) do
-		exports["target"]:AddCircleZone("deliver:"..v[4],vector3(v[1],v[2],v[3]),v[5],{
+		exports["target"]:AddCircleZone("deliver:"..v[4],vec3(v[1],v[2],v[3]),v[5],{
 			name = "deliver:"..v[4],
 			heading = 3374176
 		},{
@@ -361,7 +361,7 @@ AddEventHandler("deliver:Starting",function(Init)
 				local ped = PlayerPedId()
 				if not IsPedInAnyVehicle(ped) then
 					local Coords = GetEntityCoords(ped)
-					local Vector = vector3(Cds[Locate][Selected][1],Cds[Locate][Selected][2],Cds[Locate][Selected][3])
+					local Vector = vec3(Cds[Locate][Selected][1],Cds[Locate][Selected][2],Cds[Locate][Selected][3])
 					local distance = #(Coords - Vector)
 
 					if distance <= 15.0 then
@@ -387,7 +387,7 @@ function cRP.Deliver()
 	if Starting then
 		local ped = PlayerPedId()
 		local Coords = GetEntityCoords(ped)
-		local Vector = vector3(Cds[Locate][Selected][1],Cds[Locate][Selected][2],Cds[Locate][Selected][3])
+		local Vector = vec3(Cds[Locate][Selected][1],Cds[Locate][Selected][2],Cds[Locate][Selected][3])
 		local distance = #(Coords - Vector)
 
 		if distance <= 1.0 then

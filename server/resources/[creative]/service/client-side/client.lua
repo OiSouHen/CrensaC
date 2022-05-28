@@ -18,7 +18,7 @@ local serviceList = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(serviceList) do
-		exports["target"]:AddCircleZone("service:"..v[4],vector3(v[1],v[2],v[3]),0.25,{
+		exports["target"]:AddCircleZone("service:"..v[4],vec3(v[1],v[2],v[3]),0.25,{
 			name = "service:"..v[4],
 			heading = 3374176
 		},{

@@ -164,7 +164,7 @@ CreateThread(function()
 					local coordsVeh = GetEntityCoords(vehicle)
 					local vehFuel = GetVehicleFuelLevel(vehicle)
 					local vehPlate = GetVehicleNumberPlateText(vehicle)
-					local distance = #(coords - vector3(coordsVeh["x"],coordsVeh["y"],coordsVeh["z"]))
+					local distance = #(coords - vec3(coordsVeh["x"],coordsVeh["y"],coordsVeh["z"]))
 					if distance <= 3.5 then
 						timeDistance = 1
 
@@ -225,7 +225,7 @@ CreateThread(function()
 				local coords = GetEntityCoords(ped)
 
 				for k,v in pairs(fuelLocs) do
-					local distance = #(coords - vector3(v[1],v[2],v[3]))
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
 					if distance <= v[4] then
 						timeDistance = 1
 						local vehicle = GetPlayersLastVehicle()
@@ -233,7 +233,7 @@ CreateThread(function()
 							local coordsVeh = GetEntityCoords(vehicle)
 							local vehFuel = GetVehicleFuelLevel(vehicle)
 							local vehPlate = GetVehicleNumberPlateText(vehicle)
-							local distance = #(coords - vector3(coordsVeh["x"],coordsVeh["y"],coordsVeh["z"]))
+							local distance = #(coords - vec3(coordsVeh["x"],coordsVeh["y"],coordsVeh["z"]))
 
 							if distance <= 3.5 then
 								if not isFuel then

@@ -202,37 +202,37 @@ local initVehicles = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Vehicles = {
 	{
-		["coords"] = vector3(-42.39,-1101.32,26.98),
+		["coords"] = vec3(-42.39,-1101.32,26.98),
 		["heading"] = 19.85,
 		["model"] = "rangerover",
 		["distance"] = 50
 	},{
-		["coords"] = vector3(-54.61,-1096.86,26.98),
+		["coords"] = vec3(-54.61,-1096.86,26.98),
 		["heading"] = 31.19,
 		["model"] = "skyliner342",
 		["distance"] = 50
 	},{
-		["coords"] = vector3(-47.57,-1092.05,26.98),
+		["coords"] = vec3(-47.57,-1092.05,26.98),
 		["heading"] = 283.47,
 		["model"] = "audir8",
 		["distance"] = 50
 	},{
-		["coords"] = vector3(-37.02,-1093.42,26.98),
+		["coords"] = vec3(-37.02,-1093.42,26.98),
 		["heading"] = 206.93,
 		["model"] = "bentleybacalar",
 		["distance"] = 50
 	},{
-		["coords"] = vector3(-49.78,-1083.86,26.98),
+		["coords"] = vec3(-49.78,-1083.86,26.98),
 		["heading"] = 65.2,
 		["model"] = "corvettec7",
 		["distance"] = 50
 	},{
-		["coords"] = vector3(1220.52,2732.96,37.29),
+		["coords"] = vec3(1220.52,2732.96,37.29),
 		["heading"] = 226.78,
 		["model"] = "astonmartindbs",
 		["distance"] = 30
 	},{
-		["coords"] = vector3(1225.09,2733.0,37.29),
+		["coords"] = vec3(1225.09,2733.0,37.29),
 		["heading"] = 226.78,
 		["model"] = "panameramansory",
 		["distance"] = 30

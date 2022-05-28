@@ -182,7 +182,7 @@ CreateThread(function()
 			local coords = GetEntityCoords(ped)
 
 			for k,v in pairs(initService) do
-				local distance = #(coords - vector3(v[1],v[2],v[3]))
+				local distance = #(coords - vec3(v[1],v[2],v[3]))
 				if distance <= 2 then
 					timeDistance = 1
 
@@ -237,7 +237,7 @@ CreateThread(function()
 			if serviceStatus then
 				local coords = GetEntityCoords(ped)
 				local vehicle = GetVehiclePedIsUsing(ped)
-				local distance = #(coords - vector3(stopVehicle[locateSelect][selectPosition][1],stopVehicle[locateSelect][selectPosition][2],stopVehicle[locateSelect][selectPosition][3]))
+				local distance = #(coords - vec3(stopVehicle[locateSelect][selectPosition][1],stopVehicle[locateSelect][selectPosition][2],stopVehicle[locateSelect][selectPosition][3]))
 				if distance <= 100 then
 					timeDistance = 1
 

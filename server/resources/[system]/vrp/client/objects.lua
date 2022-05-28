@@ -22,7 +22,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 function targetLabel(x,y,z,Number,item,mode)
 	if mode == "1" then
-		exports["target"]:AddCircleZone("Objects:"..Number,vector3(x,y,z),1.0,{
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),1.0,{
 			name = "Objects:"..Number,
 			heading = 3374176
 		},{
@@ -42,7 +42,7 @@ function targetLabel(x,y,z,Number,item,mode)
 			}
 		})
 	elseif mode == "2" then
-		exports["target"]:AddCircleZone("Objects:"..Number,vector3(x,y,z),0.75,{
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),0.75,{
 			name = "Objects:"..Number,
 			heading = 3374176
 		},{
@@ -68,7 +68,7 @@ function targetLabel(x,y,z,Number,item,mode)
 			}
 		})
 	elseif mode == "3" then
-		exports["target"]:AddCircleZone("Objects:"..Number,vector3(x,y,z),1.0,{
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),1.0,{
 			name = "Objects:"..Number,
 			heading = 3374176
 		},{
@@ -83,7 +83,7 @@ function targetLabel(x,y,z,Number,item,mode)
 			}
 		})
 	elseif mode == "4" then
-		exports["target"]:AddCircleZone("Objects:"..Number,vector3(x,y,z),1.0,{
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),1.0,{
 			name = "Objects:"..Number,
 			heading = 3374176
 		},{
@@ -102,7 +102,7 @@ function targetLabel(x,y,z,Number,item,mode)
 			}
 		})
 	elseif mode == "5" then
-		exports["target"]:AddCircleZone("Objects:"..Number,vector3(x,y,z),1.0,{
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),1.0,{
 			name = "Objects:"..Number,
 			heading = 3374176
 		},{
@@ -131,7 +131,7 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for k,v in pairs(Objects) do
-			local distance = #(coords - vector3(v["x"],v["y"],v["z"]))
+			local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
 			if distance <= v["distance"] then
 				if initObjects[k] == nil then
 					local mHash = GetHashKey(v["object"])
@@ -194,10 +194,10 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 function GetCoordsFromCam(distance,coords)
 	local rotation = GetGameplayCamRot()
-	local adjustedRotation = vector3((math.pi / 180) * rotation["x"],(math.pi / 180) * rotation["y"],(math.pi / 180) * rotation["z"])
-	local direction = vector3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.sin(adjustedRotation[1]))
+	local adjustedRotation = vec3((math.pi / 180) * rotation["x"],(math.pi / 180) * rotation["y"],(math.pi / 180) * rotation["z"])
+	local direction = vec3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.sin(adjustedRotation[1]))
 
-	return vector3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
+	return vec3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTCOORDS

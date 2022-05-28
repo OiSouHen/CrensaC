@@ -19,10 +19,10 @@ local displayText = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 function GetCoordsFromCam(distance,coords)
 	local rotation = GetGameplayCamRot()
-	local adjustedRotation = vector3((math.pi / 180) * rotation["x"],(math.pi / 180) * rotation["y"],(math.pi / 180) * rotation["z"])
-	local direction = vector3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.sin(adjustedRotation[1]))
+	local adjustedRotation = vec3((math.pi / 180) * rotation["x"],(math.pi / 180) * rotation["y"],(math.pi / 180) * rotation["z"])
+	local direction = vec3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.sin(adjustedRotation[1]))
 
-	return vector3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
+	return vec3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance, coords[3] + direction[3] * distance)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- POSTIT:INITPOSTIT
@@ -57,7 +57,7 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for k,v in pairs(GlobalState["Postit"]) do
-			local distance = #(coords - vector3(v[1],v[2],v[3]))
+			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= v[5] then
 				local _,x,y = GetScreenCoordFromWorldCoord(v[1],v[2],v[3])
 				if displayText[k] == nil then

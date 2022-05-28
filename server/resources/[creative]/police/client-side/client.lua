@@ -211,7 +211,7 @@ CreateThread(function()
 		if inPrison then
 			local ped = PlayerPedId()
 			local coords = GetEntityCoords(ped)
-			local distance = #(coords - vector3(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3]))
+			local distance = #(coords - vec3(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3]))
 
 			if distance <= 150 then
 				timeDistance = 1
@@ -274,7 +274,7 @@ CreateThread(function()
 		if inPrison then
 			local ped = PlayerPedId()
 			local coords = GetEntityCoords(ped)
-			local distance = #(coords - vector3(coordsLeaver[1],coordsLeaver[2],coordsLeaver[3]))
+			local distance = #(coords - vec3(coordsLeaver[1],coordsLeaver[2],coordsLeaver[3]))
 
 			if distance <= 1.5 then
 				timeDistance = 1

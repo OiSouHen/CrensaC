@@ -51,7 +51,7 @@ end
 function parseCircle(zone)
   local printout = printoutHeader(zone.name)
   printout = printout .. "CircleZone:Create("
-  printout = printout .. "vector3(" .. tostring(round(zone.center.x, 2)) .. ", " .. tostring(round(zone.center.y, 2))  .. ", " .. tostring(round(zone.center.z, 2)) .."), "
+  printout = printout .. "vec3(" .. tostring(round(zone.center.x, 2)) .. ", " .. tostring(round(zone.center.y, 2))  .. ", " .. tostring(round(zone.center.z, 2)) .."), "
   printout = printout .. tostring(zone.radius) .. ", "
   printout = printout .. "{\n  name=\"" .. zone.name .. "\",\n  useZ=" .. tostring(zone.useZ) .. ",\n  --debugPoly=true\n})\n\n"
   return printout
@@ -60,7 +60,7 @@ end
 function parseBox(zone)
   local printout = printoutHeader(zone.name)
   printout = printout .. "BoxZone:Create("
-  printout = printout .. "vector3(" .. tostring(round(zone.center.x, 2)) .. ", " .. tostring(round(zone.center.y, 2))  .. ", " .. tostring(round(zone.center.z, 2)) .."), "
+  printout = printout .. "vec3(" .. tostring(round(zone.center.x, 2)) .. ", " .. tostring(round(zone.center.y, 2))  .. ", " .. tostring(round(zone.center.z, 2)) .."), "
   printout = printout .. tostring(zone.length) .. ", "
   printout = printout .. tostring(zone.width) .. ", "
   

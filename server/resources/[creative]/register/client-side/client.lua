@@ -101,7 +101,7 @@ local registers = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(registers) do
-		exports["target"]:AddCircleZone("Register:"..k,vector3(v[1],v[2],v[3]),1.0,{
+		exports["target"]:AddCircleZone("Register:"..k,vec3(v[1],v[2],v[3]),1.0,{
 			name = "Register:"..k,
 			heading = 3374176
 		},{

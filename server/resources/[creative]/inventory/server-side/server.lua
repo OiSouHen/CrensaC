@@ -1352,7 +1352,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "evidence01" or nameItem == "evidence02" or nameItem == "evidence03" or nameItem == "evidence04" then
 				local ped = GetPlayerPed(source)
 				local coords = GetEntityCoords(ped)
-				local distance = #(coords - vector3(312.45,-562.14,43.29))
+				local distance = #(coords - vec3(312.45,-562.14,43.29))
 
 				if distance <= 1.0 then
 					local userSerial = vRP.userSerial(splitName[2])

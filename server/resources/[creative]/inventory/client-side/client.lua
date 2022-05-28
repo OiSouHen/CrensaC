@@ -882,7 +882,7 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for _,v in pairs(Drops) do
-			local distance = #(coords - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+			local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 			if distance <= 50 then
 				timeDistance = 1
 				DrawMarker(21,v["coords"][1],v["coords"][2],v["coords"][3] + 0.25,0.0,0.0,0.0,0.0,180.0,0.0,0.25,0.35,0.25,46,110,76,100,0,0,0,1)
@@ -902,7 +902,7 @@ RegisterNUICallback("requestInventory",function(data,cb)
 	local _,cdz = GetGroundZFor_3dCoord(coords["x"],coords["y"],coords["z"])
 
 	for k,v in pairs(Drops) do
-		local distance = #(vector3(coords["x"],coords["y"],cdz) - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+		local distance = #(vec3(coords["x"],coords["y"],cdz) - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 		if distance <= 0.9 then
 			local Number = #Items + 1
 
@@ -1133,7 +1133,7 @@ CreateThread(function()
 				local coords = GetEntityCoords(ped)
 
 				for k,v in pairs(scanTable) do
-					local distance = #(coords - vector3(v[1],v[2],v[3]))
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
 					if distance <= 7.25 then
 						soundScanner = 1000
 
@@ -1251,7 +1251,7 @@ local boxList = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(boxList) do
-		exports["target"]:AddCircleZone("Boxes:"..k,vector3(v[1],v[2],v[3]),1.0,{
+		exports["target"]:AddCircleZone("Boxes:"..k,vec3(v[1],v[2],v[3]),1.0,{
 			name = "Boxes:"..k,
 			heading = 3374176,
 			useZ = true

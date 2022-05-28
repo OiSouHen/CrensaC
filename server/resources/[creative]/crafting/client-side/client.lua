@@ -89,7 +89,7 @@ CreateThread(function()
 	SetNuiFocus(false,false)
 
 	for k,v in pairs(craftList) do
-		exports["target"]:AddCircleZone("Crafting:"..k,vector3(v[1],v[2],v[3]),1.0,{
+		exports["target"]:AddCircleZone("Crafting:"..k,vec3(v[1],v[2],v[3]),1.0,{
 			name = "Crafting:"..k,
 			heading = 3374176
 		},{

@@ -105,7 +105,7 @@ function nearestPlayers(x,y,z)
 		if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
 			local uPed = GetPlayerPed(uPlayer)
 			local uCoords = GetEntityCoords(uPed)
-			local distance = #(uCoords - vector3(x,y,z))
+			local distance = #(uCoords - vec3(x,y,z))
 			if distance <= 2 then
 				userList[uPlayer] = distance
 			end

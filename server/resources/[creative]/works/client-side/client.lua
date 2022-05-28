@@ -32,7 +32,7 @@ CreateThread(function()
 			local coords = GetEntityCoords(ped)
 
 			for k,v in pairs(works) do
-				local distance = #(coords - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+				local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 				if distance <= 2 then
 					timeDistance = 1
 
@@ -114,7 +114,7 @@ CreateThread(function()
 				local coords = GetEntityCoords(ped)
 
 				if works[inService]["collectCoords"] ~= nil then
-					local distance = #(coords - vector3(works[inService]["collectCoords"][inCollect][1],works[inService]["collectCoords"][inCollect][2],works[inService]["collectCoords"][inCollect][3]))
+					local distance = #(coords - vec3(works[inService]["collectCoords"][inCollect][1],works[inService]["collectCoords"][inCollect][2],works[inService]["collectCoords"][inCollect][3]))
 					if distance <= works[inService]["collectShowDistance"] then
 						timeDistance = 1
 
@@ -193,7 +193,7 @@ CreateThread(function()
 				end
 
 				if works[inService]["deliveryCoords"] ~= nil then
-					local distance = #(coords - vector3(works[inService]["deliveryCoords"][inDelivery][1],works[inService]["deliveryCoords"][inDelivery][2],works[inService]["deliveryCoords"][inDelivery][3]))
+					local distance = #(coords - vec3(works[inService]["deliveryCoords"][inDelivery][1],works[inService]["deliveryCoords"][inDelivery][2],works[inService]["deliveryCoords"][inDelivery][3]))
 					if distance <= 30 then
 						timeDistance = 1
 

@@ -13,10 +13,10 @@ CreateThread(function()
 		local coords = GetEntityCoords(ped)
 
 		for k,v in pairs(Plants) do
-			local distance = #(coords - vector3(v["coords"][1],v["coords"][2],v["coords"][3]))
+			local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
 			if distance <= 50 then
 				if Objects[k] == nil and v["route"] == Route then
-					exports["target"]:AddCircleZone("Plants:"..k,vector3(v["coords"][1],v["coords"][2],v["coords"][3] + 0.5),0.5,{
+					exports["target"]:AddCircleZone("Plants:"..k,vec3(v["coords"][1],v["coords"][2],v["coords"][3] + 0.5),0.5,{
 						name = "Plants:"..k,
 						heading = 3374176
 					},{

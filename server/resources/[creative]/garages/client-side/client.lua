@@ -711,7 +711,7 @@ CreateThread(function()
 		if not IsPedInAnyVehicle(ped) then
 			local coords = GetEntityCoords(ped)
 			for k,v in pairs(garageLocates) do
-				local distance = #(coords - vector3(v["x"],v["y"],v["z"]))
+				local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
 				if distance <= 15 then
 					timeDistance = 1
 					DrawMarker(23,v["x"],v["y"],v["z"] - 0.95,0.0,0.0,0.0,0.0,0.0,0.0,1.75,1.75,0.0,46,110,76,100,0,0,0,0)

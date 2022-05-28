@@ -8,14 +8,14 @@ local function handleInput(radius, center, useZ)
   end
   if IsDisabledControlJustPressed(0, 81) then
     if IsControlPressed(0, 19) then -- alt held down
-      return radius, vector3(center.x, center.y, center.z - delta), useZ
+      return radius, vec3(center.x, center.y, center.z - delta), useZ
     end
     return math.max(0.0, radius - delta), center, useZ
   end
   DisableControlAction(0, 99, true)
   if IsDisabledControlJustPressed(0, 99) then
     if IsControlPressed(0, 19) then -- alt held down
-      return radius, vector3(center.x, center.y, center.z + delta), useZ
+      return radius, vec3(center.x, center.y, center.z + delta), useZ
     end
     return radius + delta, center, useZ
   end

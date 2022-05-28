@@ -1447,7 +1447,7 @@ function nearestHomes(source)
 	local coords = GetEntityCoords(ped)
 
 	for k,v in pairs(homes) do
-		local distance = #(coords - vector3(v[1],v[2],v[3]))
+		local distance = #(coords - vec3(v[1],v[2],v[3]))
 		if distance <= 1.5 then
 			return k
 		end
@@ -2372,7 +2372,7 @@ exports("homesTheft",function(source)
 	local coords = GetEntityCoords(ped)
 
 	for homeName,v in pairs(homes) do
-		local distance = #(coords - vector3(v[1],v[2],v[3]))
+		local distance = #(coords - vec3(v[1],v[2],v[3]))
 		if distance <= 1.5 then
 			if theftTimers[homeName] then
 				if os.time() >= theftTimers[homeName] then
