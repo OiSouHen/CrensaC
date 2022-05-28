@@ -44,7 +44,7 @@ function CircleZone:new(center, radius, options)
     isCircleZone = true,
   }
   if zone.useZ then
-    assert(type(zone.center) == "vec3", "Center must be vec3 if useZ is true {center=" .. center .. "}")
+    assert(type(zone.center) == "vec3", "Center must be vect3 if useZ is true {center=" .. center .. "}")
   end
   setmetatable(zone, self)
   self.__index = self

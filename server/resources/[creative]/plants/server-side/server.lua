@@ -13,8 +13,8 @@ local Plants = {}
 -- PLANTTYPES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local plantTypes = {
-	["weedseed"] = { "Maconha","weedleaf" },
-	["cokeseed"] = { "Cocaína","cokeleaf" },
+	["weedclone"] = { "Maconha","weedleaf" },
+	["cokeleaf"] = { "Cocaína","cokeleaf" },
 	["mushseed"] = { "Cogumelo","mushroom" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,6 @@ exports("initPlants",function(seedType,coords,route,prop,user_id)
 		["coords"] = { mathLegth(coords["x"]),mathLegth(coords["y"]),mathLegth(coords["z"]) },
 		["time"] = os.time() + 12000,
 		["type"] = seedType,
-		["fertilizer"] = 0,
 		["route"] = route,
 		["prop"] = prop,
 		["user_id"] = user_id
@@ -112,25 +111,6 @@ AddEventHandler("plants:Estaquia",function(Number)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:FERTILIZAR
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("plants:Fertilizar")
-AddEventHandler("plants:Fertilizar",function(Number)
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id and Plants[Number] then
-		if Plants[Number]["fertilizer"] < 3 and (Plants[Number]["time"] - os.time()) >= 600 then
-			if vRP.tryGetInventoryItem(user_id,"fertilizer",1,true) then
-				TriggerClientEvent("Notify",source,"verde","Fertilização completa.",5000)
-				Plants[Number]["fertilizer"] = Plants[Number]["fertilizer"] + 1
-				Plants[Number]["time"] = Plants[Number]["time"] - 600
-			else
-				TriggerClientEvent("Notify",source,"amarelo","Necessário possuir <b>1x Fertilizante</b>.",5000)
-			end
-		end
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- PLANTS:INFORMACOES
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("plants:Informacoes")
@@ -144,7 +124,7 @@ AddEventHandler("plants:Informacoes",function(Number)
 			percPlants = timePlants
 		end
 
-		TriggerClientEvent("Notify",source,"azul","<b>Tipo:</b> "..plantTypes[Plants[Number]["type"]][1].."<br><b>Progresso:</b> "..percPlants.."%<br><b>Fertilização:</b> "..Plants[Number]["fertilizer"],10000)
+		TriggerClientEvent("Notify",source,"azul","<b>Tipo:</b> "..plantTypes[Plants[Number]["type"]][1].."<br><b>Progresso:</b> "..percPlants,10000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

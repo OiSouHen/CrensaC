@@ -1796,16 +1796,16 @@ local chairs = {
 RegisterNetEvent("target:animSentar")
 AddEventHandler("target:animSentar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
-		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 101 then
-			local objCoords = GetEntityCoords(Selected[1])
+		local Ped = PlayerPedId()
+		if GetEntityHealth(Ped) > 100 then
+			local Coords = GetEntityCoords(Selected[1])
 
 			FreezeEntityPosition(Selected[1],true)
-			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + chairs[Selected[2]],1,0,0,0)
+			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + chairs[Selected[2]],1,0,0,0)
 			if chairs[Selected[2]] == 0.7 then
-				SetEntityHeading(ped,GetEntityHeading(Selected[1]))
+				SetEntityHeading(Ped,GetEntityHeading(Selected[1]))
 			else
-				SetEntityHeading(ped,GetEntityHeading(Selected[1]) - 180.0)
+				SetEntityHeading(Ped,GetEntityHeading(Selected[1]) - 180.0)
 			end
 
 			vRP.playAnim(false,{ task = "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" },false)
@@ -1828,8 +1828,8 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("selectTarget",function(data)
 	Sucess = false
-	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
+	LocalPlayer["state"]["Target"] = false
 	SendNUIMessage({ response = "closeTarget" })
 
 	if data["tunnel"] == "client" then
@@ -1837,13 +1837,17 @@ RegisterNUICallback("selectTarget",function(data)
 	elseif data["tunnel"] == "server" then
 		TriggerServerEvent(data["event"],Selected)
 	elseif data["tunnel"] == "shop" then
-		TriggerEvent(data["event"],Selected[1])
+		TriggerEvent(data["event"],Selected)
+	elseif data["tunnel"] == "shopserver" then
+		TriggerServerEvent(data["event"],Selected)
 	elseif data["tunnel"] == "boxes" then
-		TriggerServerEvent(data["event"],Selected[1],data["service"])
+		TriggerServerEvent(data["event"],Selected,data["service"])
 	elseif data["tunnel"] == "paramedic" then
 		TriggerServerEvent(data["event"],Selected[1])
 	elseif data["tunnel"] == "police" then
 		TriggerServerEvent(data["event"],Selected,data["service"])
+	elseif data["tunnel"] == "products" then
+		TriggerServerEvent(data["event"],data["service"])
 	elseif data["tunnel"] == "objects" then
 		TriggerServerEvent(data["event"],Selected[3])
 	else
@@ -1855,8 +1859,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("closeTarget",function()
 	Sucess = false
-	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
+	LocalPlayer["state"]["Target"] = false
 	SendNUIMessage({ response = "closeTarget" })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1865,89 +1869,75 @@ end)
 RegisterNetEvent("target:resetDebug")
 AddEventHandler("target:resetDebug",function()
 	Sucess = false
-	LocalPlayer["state"]["Target"] = false
 	SetNuiFocus(false,false)
+	LocalPlayer["state"]["Target"] = false
 	SendNUIMessage({ response = "closeTarget" })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ROTATIONTODIRECTION
+-- GETCOORDSFROMCAM
 -----------------------------------------------------------------------------------------------------------------------------------------
-function RotationToDirection(rotation)
-	local adjustedRotation = {
-		x = (math.pi / 180) * rotation["x"],
-		y = (math.pi / 180) * rotation["y"],
-		z = (math.pi / 180) * rotation["z"]
-	}
+function GetCoordsFromCam(Distance,Coords)
+	local rotation = GetGameplayCamRot()
+	local adjustedRotation = vec3((math.pi / 180) * rotation["x"],(math.pi / 180) * rotation["y"],(math.pi / 180) * rotation["z"])
+	local direction = vec3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),math.sin(adjustedRotation[1]))
 
-	local direction = {
-		x = -math.sin(adjustedRotation["z"]) * math.abs(math.cos(adjustedRotation["x"])),
-		y = math.cos(adjustedRotation["z"]) * math.abs(math.cos(adjustedRotation["x"])),
-		z = math.sin(adjustedRotation["x"])
-	}
-
-	return direction
+	return vec3(Coords[1] + direction[1] * Distance, Coords[2] + direction[2] * Distance, Coords[3] + direction[3] * Distance)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- RAYCASTGAMEPLAYCAMERA
 -----------------------------------------------------------------------------------------------------------------------------------------
-function RayCastGamePlayCamera(distance)
-	local cameraCoord = GetGameplayCamCoord()
-	local cameraRotation = GetGameplayCamRot()
-	local direction = RotationToDirection(cameraRotation)
+function RayCastGamePlayCamera()
+	local Ped = PlayerPedId()
+	local Cam = GetGameplayCamCoord()
+	local Cam2 = GetCoordsFromCam(10.0,Cam)
+	local Handle = StartExpensiveSynchronousShapeTestLosProbe(Cam,Cam2,-1,Ped,4)
+	local a,Hit,Coords,b,Entity = GetShapeTestResult(Handle)
 
-	local destination = {
-		x = cameraCoord["x"] + direction["x"] * distance,
-		y = cameraCoord["y"] + direction["y"] * distance,
-		z = cameraCoord["z"] + direction["z"] * distance
-	}
-
-	local a,b,c,d,e = GetShapeTestResult(StartShapeTestRay(cameraCoord["x"],cameraCoord["y"],cameraCoord["z"],destination["x"],destination["y"],destination["z"],-1,PlayerPedId(),0))
-
-	return b,c,e
+	return Hit,Coords,Entity
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ADDCIRCLEZONE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function AddCircleZone(name,center,radius,options,targetoptions)
-	Zones[name] = CircleZone:Create(center,radius,options)
-	Zones[name]["targetoptions"] = targetoptions
+function AddCircleZone(Name,Center,Radius,Options,Target)
+	Zones[Name] = CircleZone:Create(Center,Radius,Options)
+	Zones[Name]["targetoptions"] = Target
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REMCIRCLEZONE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function RemCircleZone(name)
-	if Zones[name] then
-		Zones[name] = nil
+function RemCircleZone(Name)
+	if Zones[Name] then
+		Zones[Name] = nil
 	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- ADDPOLYZONE
------------------------------------------------------------------------------------------------------------------------------------------
-function AddPolyzone(name,points,options,targetoptions)
-	Zones[name] = PolyZone:Create(points,options)
-	Zones[name]["targetoptions"] = targetoptions
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ADDTARGETMODEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-function AddTargetModel(models,parameteres)
-	for k,v in pairs(models) do
-		Models[v] = parameteres
+function AddTargetModel(Model,Options)
+	for _,v in pairs(Model) do
+		Models[v] = Options
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LABELTEXT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function LabelText(Name,Title)
+function LabelText(Name,Text)
 	if Zones[Name] then
-		Zones[Name]["targetoptions"]["options"][1]["label"] = Title
+		Zones[Name]["targetoptions"]["options"][1]["label"] = Text
 	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ADDBOXZONE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function AddBoxZone(Name,Center,Length,Width,Options,Target)
+    Zones[Name] = BoxZone:Create(Center,Length,Width,Options)
+    Zones[Name]["targetoptions"] = Target
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- EXPORTS
 -----------------------------------------------------------------------------------------------------------------------------------------
 exports("LabelText",LabelText)
-exports("AddPolyzone",AddPolyzone)
+exports("AddBoxZone",AddBoxZone)
 exports("RemCircleZone",RemCircleZone)
 exports("AddCircleZone",AddCircleZone)
 exports("AddTargetModel",AddTargetModel)
