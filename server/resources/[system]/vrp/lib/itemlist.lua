@@ -630,6 +630,15 @@ local itemlist = {
 		["weight"] = 7.25,
 		["economy"] = 725
 	},
+	["chair01"] = {
+		["index"] = "chair01",
+		["name"] = "Cadeira",
+		["repair"] = "repairkit01",
+		["type"] = "Usável",
+		["durability"] = 7,
+		["weight"] = 7.25,
+		["economy"] = 750
+	},
 	["techtrash"] = {
 		["index"] = "techtrash",
 		["name"] = "Lixo Eletrônico",
@@ -682,14 +691,14 @@ local itemlist = {
 	["fidentity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["weight"] = 0.10,
 		["economy"] = 10000
 	},
 	["identity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["weight"] = 0.10,
 		["economy"] = 5000
 	},
@@ -1012,6 +1021,62 @@ local itemlist = {
 		["weight"] = 0.05,
 		["economy"] = 0
 	},
+	["rottweiler"] = {
+		["index"] = "rottweiler",
+		["name"] = "Coleira de Rottweiler",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["husky"] = {
+		["index"] = "husky",
+		["name"] = "Coleira de Husky",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["shepherd"] = {
+		["index"] = "shepherd",
+		["name"] = "Coleira de Shepherd",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["retriever"] = {
+		["index"] = "retriever",
+		["name"] = "Coleira de Retriever",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["poodle"] = {
+		["index"] = "poodle",
+		["name"] = "Coleira de Poodle",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["pug"] = {
+		["index"] = "pug",
+		["name"] = "Coleira de Pug",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["westy"] = {
+		["index"] = "westy",
+		["name"] = "Coleira de Westy",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
+	["cat"] = {
+		["index"] = "cat",
+		["name"] = "Coleira de Gato",
+		["type"] = "Animal",
+		["weight"] = 1.25,
+		["economy"] = 25000
+	},
 	["card01"] = {
 		["index"] = "card01",
 		["name"] = "Cartão Comum",
@@ -1309,6 +1374,14 @@ local itemlist = {
 		["weight"] = 0.00,
 		["economy"] = 150000
 	},
+	["newlocate"] = {
+		["index"] = "newlocate",
+		["name"] = "Nacionalidade",
+		["type"] = "Usável",
+		["desc"] = "Inverte nacionalidade de Sul/Norte.",
+		["weight"] = 0.00,
+		["economy"] = 200000
+	},
 	["premiumplate"] = {
 		["index"] = "platepremium",
 		["name"] = "Placa Premium",
@@ -1338,6 +1411,86 @@ local itemlist = {
 		["name"] = "Troca de Nome",
 		["type"] = "Usável",
 		["desc"] = "Troca o nome do personagem.",
+		["weight"] = 0.00,
+		["economy"] = 100000
+	},
+	["contract1"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 1.",
+		["weight"] = 0.00,
+		["economy"] = 125000
+	},
+	["contract2"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 2.",
+		["weight"] = 0.00,
+		["economy"] = 300000
+	},
+	["contract3"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 3.",
+		["weight"] = 0.00,
+		["economy"] = 75000
+	},
+	["contract4"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 4.",
+		["weight"] = 0.00,
+		["economy"] = 175000
+	},
+	["contract5"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 5.",
+		["weight"] = 0.00,
+		["economy"] = 125000
+	},
+	["contract6"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 6.",
+		["weight"] = 0.00,
+		["economy"] = 250000
+	},
+	["contract7"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 7.",
+		["weight"] = 0.00,
+		["economy"] = 75000
+	},
+	["contract8"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 8.",
+		["weight"] = 0.00,
+		["economy"] = 250000
+	},
+	["contract9"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do interior 9.",
+		["weight"] = 0.00,
+		["economy"] = 175000
+	},
+	["contract10"] = {
+		["index"] = "contract",
+		["name"] = "Contrato de Propriedade",
+		["type"] = "Usável",
+		["desc"] = "Assinatura de contrato do container.",
 		["weight"] = 0.00,
 		["economy"] = 100000
 	},
@@ -1778,6 +1931,16 @@ local itemlist = {
 		["weight"] = 1.25,
 		["economy"] = 575
 	},
+	["lockpick2"] = {
+		["index"] = "lockpick2",
+		["name"] = "Lockpick de Cobre",
+		["desc"] = "Utilizada para roubar propriedades.",
+		["repair"] = "repairkit01",
+		["type"] = "Usável",
+		["durability"] = 3,
+		["weight"] = 1.25,
+		["economy"] = 575
+	},
 	["toolbox"] = {
 		["index"] = "toolbox",
 		["name"] = "Ferramentas Básicas",
@@ -1889,6 +2052,13 @@ local itemlist = {
 		["type"] = "Comum",
 		["weight"] = 0.075,
 		["economy"] = 30
+	},
+	["newspaper"] = {
+		["index"] = "newspaper",
+		["name"] = "Jornal",
+		["type"] = "Comum",
+		["weight"] = 0.25,
+		["economy"] = 60
 	},
 	["ritmoneury"] = {
 		["index"] = "ritmoneury",
