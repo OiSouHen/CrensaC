@@ -6,6 +6,60 @@ local localPeds = {}
 -- PEDLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local pedList = {
+	{ -- PackSend
+		distance = 25,
+		coords = { 1175.0,2708.21,38.08,172.92 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- PackSend
+		distance = 25,
+		coords = { -2961.15,482.92,15.69,85.04 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- PackSend
+		distance = 25,
+		coords = { -1211.96,-331.97,37.78,22.68 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- PackSend
+		distance = 25,
+		coords = { -351.37,-51.25,49.03,340.16 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- PackSend
+		distance = 25,
+		coords = { 313.76,-280.45,54.16,340.16 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- PackSend
+		distance = 25,
+		coords = { 149.44,-1042.06,29.37,340.16 },
+		model = "a_m_y_business_02",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
+	{ -- Empacotador
+		distance = 100,
+		coords = { -610.87,-1089.48,25.86,269.3 },
+		model = "ig_cletus",
+		anim = { "amb@lo_res_idles@","world_human_lean_male_foot_up_lo_res_base" }
+	},
+	{ -- Empacotador
+		distance = 100,
+		coords = { -1181.8,-888.09,19.97,121.89 },
+		model = "ig_cletus",
+		anim = { "amb@lo_res_idles@","world_human_lean_male_foot_up_lo_res_base" }
+	},
+	{ -- Empacotador
+		distance = 100,
+		coords = { 825.87,-828.52,26.34,178.59 },
+		model = "ig_cletus",
+		anim = { "amb@lo_res_idles@","world_human_lean_male_foot_up_lo_res_base" }
+	},
 	{ -- Caminhoneiro
 		distance = 100,
 		coords = { 1239.87,-3257.2,7.09,274.97 },
