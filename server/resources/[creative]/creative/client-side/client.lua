@@ -407,8 +407,8 @@ CreateThread(function()
 			SetScenarioPedDensityMultiplierThisFrame(0.0,0.0)
 			SetPedDensityMultiplierThisFrame(0.0)
 		else
-			SetVehicleDensityMultiplierThisFrame(0.75)
-			SetRandomVehicleDensityMultiplierThisFrame(0.75)
+			SetVehicleDensityMultiplierThisFrame(0.50)
+			SetRandomVehicleDensityMultiplierThisFrame(0.50)
 			SetParkedVehicleDensityMultiplierThisFrame(1.0)
 			SetAmbientVehicleRangeMultiplierThisFrame(1.0)
 			SetScenarioPedDensityMultiplierThisFrame(1.0,1.0)
@@ -425,7 +425,7 @@ CreateThread(function()
 			ClearPlayerWantedLevel(PlayerId())
 		end
 
-		Wait(1)
+		Wait(0)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -537,7 +537,7 @@ CreateThread(function()
 						timeDistance = 1
 
 						if IsControlJustPressed(1,38) then
-							SetEntityCoords(ped,v[4],v[5],v[6],1,0,0,0)
+							SetEntityCoords(ped,v[4],v[5],v[6],false,false,false,false)
 
 							if k == 19 or k == 20 then
 								local Finishing = false
