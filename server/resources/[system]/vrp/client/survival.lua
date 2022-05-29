@@ -6,9 +6,6 @@ local ropeCarry = false
 local deathStatus = false
 local emergencyButton = false
 LocalPlayer["state"]["Active"] = false
-
-local invincibles = true
-local invTimer = GetGameTimer() + 60000
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- EMEGENCYTEXTS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -99,21 +96,6 @@ AddEventHandler("vRP:playerActive",function(user_id,name)
 	SetEntityInvincible(ped,false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- THREADINVINCIBLE
------------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
-	while true do
-		if LocalPlayer["state"]["Active"] then
-			if GetGameTimer() >= invTimer and invincibles then
-				SetEntityInvincible(PlayerPedId(),false)
-				invincibles = false
-			end
-		end
-
-		Wait(1000)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- THREADSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
@@ -122,54 +104,40 @@ CreateThread(function()
 
 		if LocalPlayer["state"]["Active"] then
 			local ped = PlayerPedId()
-			if GetEntityHealth(ped) <= 101 then
+			if GetEntityHealth(ped) <= 100 then
 				if not deathStatus then
-					timeDeath = 300
 					deathStatus = true
 					emergencyButton = false
 
-					SendNUIMessage({ death = true })
-
-					TriggerEvent("inventory:preventWeapon",false)
-
 					local coords = GetEntityCoords(ped)
-					NetworkResurrectLocalPlayer(coords,true,true,false)
+					NetworkResurrectLocalPlayer(coords,0.0)
 
-					SetEntityHealth(ped,101)
+					SetEntityHealth(ped,100)
 					SetEntityInvincible(ped,true)
 
-					TriggerEvent("hud:RemoveHood")
-					TriggerEvent("hud:RemoveScuba")
-					TriggerEvent("inventory:Close")
-					TriggerEvent("radio:outServers")
-					TriggerServerEvent("inventory:Cancel")
-					TriggerEvent("inventory:clearWeapons")
-					exports["smartphone"]:closeSmartphone()
-					TriggerServerEvent("paramedic:bloodDeath")
-					TriggerServerEvent("pma-voice:toggleMute",true)
+					if LocalPlayer["state"]["Route"] < 900000 then
+						timeDeath = 300
 
-					if LocalPlayer["state"]["Police"] then
-						local _,cdZ = GetGroundZFor_3dCoord(coords["x"],coords["y"],coords["z"])
-						TriggerServerEvent("inventory:Badges",coords["x"],coords["y"],cdZ)
+						TriggerEvent("hud:RemoveHood")
+						TriggerEvent("hud:RemoveScuba")
+						TriggerEvent("radio:outServers")
+						TriggerEvent("smartphone:Close")
+						TriggerServerEvent("inventory:Cancel")
+						TriggerEvent("inventory:CleanWeapons")
+						TriggerServerEvent("paramedic:bloodDeath")
+						TriggerServerEvent("pma-voice:toggleMute",true)
+					else
+						timeDeath = 5
 					end
+
+					SendNUIMessage({ deathtext = "Você está inconsciente, aguarde <color>"..timeDeath.."</color> segundos" })
+					TriggerEvent("inventory:preventWeapon",false)
+					tvRP.playAnim(false,{"dead","dead_a"},true)
+					SendNUIMessage({ death = true })
+					TriggerEvent("inventory:Close")
 				else
 					timeDistance = 1
-					SetEntityHealth(ped,101)
-
-					if timeDeath <= 0 then
-						if emergencyButton then
-							SendNUIMessage({ deathtext = "Digite <color>/GG</color> para desistir imediatamente" })
-						else
-							if IsControlJustPressed(1,304) then
-								TriggerEvent("smartphone:callParamedic",emergencyTexts[math.random(#emergencyTexts)][1])
-								emergencyButton = true
-							end
-
-							SendNUIMessage({ deathtext = "Digite <color>/GG</color> para desistir imediatamente<br>Pressione <color2>H</color2> para notificar os paramédicos" })
-						end
-					else
-						SendNUIMessage({ deathtext = "Você está inconsciente, aguarde <color>"..timeDeath.."</color> segundos" })
-					end
+					SetEntityHealth(ped,100)
 
 					if not IsEntityPlayingAnim(ped,"dead","dead_a",3) and not IsPedInAnyVehicle(ped) and not ropeCarry then
 						tvRP.playAnim(false,{"dead","dead_a"},true)
@@ -179,6 +147,34 @@ CreateThread(function()
 						local vehicle = GetVehiclePedIsUsing(ped)
 						if GetPedInVehicleSeat(vehicle,-1) == ped then
 							SetVehicleEngineOn(vehicle,false,true,true)
+						end
+					end
+
+					if LocalPlayer["state"]["Route"] < 900000 then
+						if timeDeath <= 0 then
+							if emergencyButton then
+								SendNUIMessage({ deathtext = "Digite <color>/GG</color> para desistir imediatamente" })
+							else
+								if IsControlJustPressed(1,304) then
+									TriggerEvent("smartphone:callParamedic",emergencyTexts[math.random(#emergencyTexts)][1])
+									emergencyButton = true
+								end
+
+								SendNUIMessage({ deathtext = "Digite <color>/GG</color> para desistir imediatamente<br>Pressione <color2>H</color2> para notificar os paramédicos" })
+							end
+						else
+							SendNUIMessage({ deathtext = "Você está inconsciente, aguarde <color>"..timeDeath.."</color> segundos" })
+						end
+					else
+						if timeDeath <= 0 then
+							SendNUIMessage({ deathtext = "Pressione <color>E</color> para renascer dentro da arena" })
+
+							if IsControlJustPressed(1,38) then
+								TriggerEvent("arena:ResetStreek")
+								TriggerEvent("arena:Respawn")
+							end
+						else
+							SendNUIMessage({ deathtext = "Você está inconsciente, aguarde <color>"..timeDeath.."</color> segundos" })
 						end
 					end
 				end
@@ -233,10 +229,9 @@ function tvRP.respawnPlayer()
 	SetEntityHealth(PlayerPedId(),200)
 	SetEntityInvincible(PlayerPedId(),false)
 
-	TriggerEvent("resetHandcuff")
-	TriggerEvent("resetBleeding")
-	TriggerEvent("resetDiagnostic")
-	TriggerEvent("inventory:clearWeapons")
+	TriggerEvent("paramedic:Reset")
+	TriggerEvent("inventory:CleanWeapons")
+	LocalPlayer["state"]["Handcuff"] = false
 	TriggerServerEvent("pma-voice:toggleMute",false)
 
 	DoScreenFadeOut(0)
@@ -248,9 +243,13 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REVIVEPLAYER
 -----------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.revivePlayer(health)
-	SetEntityHealth(PlayerPedId(),health)
+function tvRP.revivePlayer(Health,Arena)
+	SetEntityHealth(PlayerPedId(),Health)
 	SetEntityInvincible(PlayerPedId(),false)
+
+	if Arena then
+		SetPedArmour(PlayerPedId(),100)
+	end
 
 	if deathStatus then
 		timeDeath = 300
@@ -258,9 +257,12 @@ function tvRP.revivePlayer(health)
 
 		ClearPedTasks(PlayerPedId())
 
-		TriggerEvent("resetBleeding")
 		SendNUIMessage({ death = false })
-		TriggerServerEvent("pma-voice:toggleMute",false)
+
+		if LocalPlayer["state"]["Route"] < 900000 then
+			TriggerEvent("paramedic:Reset")
+			TriggerServerEvent("pma-voice:toggleMute",false)
+		end
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------

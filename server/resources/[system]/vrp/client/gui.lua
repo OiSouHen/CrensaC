@@ -324,7 +324,7 @@ RegisterCommand("cRcancelf6",function(source,args,rawCommand)
 		cdBtns = GetGameTimer() + 1000
 
 		local ped = PlayerPedId()
-		if not IsPauseMenuActive() and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 101 and not LocalPlayer["state"]["Phone"] and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
+		if not IsPauseMenuActive() and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 100 and not LocalPlayer["state"]["Phone"] and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
 			TriggerServerEvent("inventory:Cancel")
 		end
 	end
@@ -334,7 +334,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("cRhandsup",function(source,args,rawCommand)
 	local ped = PlayerPedId()
-	if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedInAnyVehicle(ped) and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 101 and not LocalPlayer["state"]["Cancel"] and LocalPlayer["state"]["Active"] and MumbleIsConnected() and not IsPedReloading(ped) then
+	if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedInAnyVehicle(ped) and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 100 and not LocalPlayer["state"]["Cancel"] and LocalPlayer["state"]["Active"] and MumbleIsConnected() and not IsPedReloading(ped) then
 		if IsEntityPlayingAnim(ped,"random@mugging3","handsup_standing_base",3) then
 			StopAnimTask(ped,"random@mugging3","handsup_standing_base",2.0)
 			tvRP.stopActived()
@@ -348,7 +348,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("cRpoint",function(source,args,rawCommand)
 	local ped = PlayerPedId()
-	if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not LocalPlayer["state"]["Cancel"] and not LocalPlayer["state"]["Phone"] and not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 101 and LocalPlayer["state"]["Active"] and MumbleIsConnected() and not IsPedReloading(ped) then
+	if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not LocalPlayer["state"]["Cancel"] and not LocalPlayer["state"]["Phone"] and not IsPedInAnyVehicle(ped) and GetEntityHealth(ped) > 100 and LocalPlayer["state"]["Active"] and MumbleIsConnected() and not IsPedReloading(ped) then
 		tvRP.loadAnimSet("anim@mp_point")
 
 		if not uPoint then
@@ -376,7 +376,7 @@ RegisterCommand("cRenginecrouch",function(source,args,rawCommand)
 		cdBtns = GetGameTimer() + 1000
 
 		local ped = PlayerPedId()
-		if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 101 and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
+		if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 100 and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
 			if IsPedInAnyVehicle(ped) then
 				local vehicle = GetVehiclePedIsUsing(ped)
 				if GetPedInVehicleSeat(vehicle,-1) == ped then
@@ -424,7 +424,7 @@ RegisterCommand("cRbind",function(source,args,rawCommand)
 		cdBtns = GetGameTimer() + 1000
 
 		local ped = PlayerPedId()
-		if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 101 and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
+		if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 100 and not LocalPlayer["state"]["Cancel"] and not IsPedReloading(ped) then
 			if parseInt(args[1]) >= 1 and parseInt(args[1]) <= 5 then
 				TriggerServerEvent("inventory:useItem",args[1],1)
 			elseif args[1] == "6" then
@@ -503,7 +503,7 @@ RegisterCommand("lockVehicles",function(source,args,rawCommand)
 		cdBtns = GetGameTimer() + 1000
 
 		local ped = PlayerPedId()
-		if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedSwimming(ped) and GetEntityHealth(ped) > 101 and not IsPedReloading(ped) then
+		if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedSwimming(ped) and GetEntityHealth(ped) > 100 and not IsPedReloading(ped) then
 			local vehicle,vehNet,vehPlate = tvRP.vehList(5)
 			if vehicle then
 				TriggerServerEvent("garages:lockVehicle",vehNet,vehPlate)

@@ -915,7 +915,7 @@ AddEventHandler("emotes",function(nome)
 		local ped = PlayerPedId()
 
 		if animacoes[nome] and not IsPedArmed(ped,6) and not IsPedSwimming(ped) then
-			if GetEntityHealth(ped) > 101 and vSERVER.checkInventory() then
+			if GetEntityHealth(ped) > 100 and vSERVER.checkInventory() then
 				vRP.removeObjects("one")
 
 				if not IsPedInAnyVehicle(ped) and not animacoes[nome]["cars"] then

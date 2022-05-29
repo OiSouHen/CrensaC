@@ -28,12 +28,6 @@ local bedsIn = {
 		{ 313.93,-579.04,44.2,158.75 },
 		{ 309.35,-577.38,44.2,158.75 }
 	},
-	["Sandy"] = {
-		{ 1830.03,3679.52,35.18,28.35 },
-		{ 1827.08,3677.79,35.18,28.35 },
-		{ 1828.05,3683.17,35.18,212.6 },
-		{ 1824.95,3681.45,35.18,212.6 }
-	},
 	["Paleto"] = {
 		{ -252.15,6323.11,33.35,133.23 },
 		{ -246.98,6317.95,33.35,133.23 },
@@ -52,7 +46,7 @@ local bedsIn = {
 		{ 1761.87,2591.56,46.66,272.13 }
 	},
 	["Clandestine"] = {
-		{ -471.86,6287.42,14.63,235.28 }
+		{ -471.86,6287.42,14.70,235.28 }
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -60,35 +54,36 @@ local bedsIn = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("checkin:initCheck")
 AddEventHandler("checkin:initCheck",function(Hospital)
-	local ped = PlayerPedId()
+	if LocalPlayer["state"]["Route"] < 900000 then
+		local ped = PlayerPedId()
 
-	for _,v in pairs(bedsIn[Hospital]) do
-		local checkPos = nearestPlayer(v[1],v[2],v[3])
-		if not checkPos then
-			if vSERVER.paymentCheckin() then
-				TriggerEvent("inventory:preventWeapon",true)
-				LocalPlayer["state"]["Commands"] = true
-				LocalPlayer["state"]["Cancel"] = true
-				TriggerEvent("resetDiagnostic")
-				TriggerEvent("resetBleeding")
+		for _,v in pairs(bedsIn[Hospital]) do
+			local checkPos = nearestPlayer(v[1],v[2],v[3])
+			if not checkPos then
+				if vSERVER.paymentCheckin() then
+					TriggerEvent("inventory:preventWeapon",true)
+					LocalPlayer["state"]["Commands"] = true
+					LocalPlayer["state"]["Cancel"] = true
+					TriggerEvent("paramedic:Reset")
 
-				if GetEntityHealth(ped) <= 101 then
-					vRP.revivePlayer(102)
+					if GetEntityHealth(ped) <= 100 then
+						vRP.revivePlayer(101)
+					end
+
+					DoScreenFadeOut(0)
+					Wait(1000)
+
+					treatmentUser = true
+					SetEntityHeading(ped,v[4])
+					SetEntityCoords(ped,v[1],v[2],v[3],1,0,0,0)
+					vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
+
+					Wait(1000)
+					DoScreenFadeIn(1000)
 				end
 
-				DoScreenFadeOut(0)
-				Wait(1000)
-
-				treatmentUser = true
-				SetEntityHeading(ped,v[4])
-				SetEntityCoords(ped,v[1],v[2],v[3],1,0,0,0)
-				vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
-
-				Wait(1000)
-				DoScreenFadeIn(1000)
+				break
 			end
-
-			break
 		end
 	end
 end)
@@ -150,8 +145,6 @@ RegisterNetEvent("checkin:startTreatment")
 AddEventHandler("checkin:startTreatment",function()
 	if not treatmentUser then
 		LocalPlayer["state"]["Commands"] = true
-		TriggerEvent("resetDiagnostic")
-		TriggerEvent("resetBleeding")
 		treatmentUser = true
 	end
 end)

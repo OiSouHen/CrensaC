@@ -63,7 +63,7 @@ RegisterServerEvent("police:prisonClothes")
 AddEventHandler("police:prisonClothes",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Police") then
 			local mHash = vRP.modelPlayer(entity[1])
 			if mHash == "mp_m_freemode_01" or mHash == "mp_f_freemode_01" then

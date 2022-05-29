@@ -74,7 +74,7 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 		local Ped = PlayerPedId()
 		local Coords = GetEntityCoords(Ped)
 
-		if GetEntityHealth(Ped) > 101 then
+		if GetEntityHealth(Ped) > 100 then
 			exports["dynamic"]:AddButton("Chapéu","Colocar/Retirar o chapéu.","player:outfitFunctions","Hat","clothes",true)
 			exports["dynamic"]:AddButton("Máscara","Colocar/Retirar a máscara.","player:outfitFunctions","Mask","clothes",true)
 			exports["dynamic"]:AddButton("Óculos","Colocar/Retirar o óculos.","player:outfitFunctions","Glasses","clothes",true)
@@ -84,13 +84,13 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 			exports["dynamic"]:AddButton("Calças","Colocar/Retirar as calças.","player:outfitFunctions","Pants","clothes",true)
 			exports["dynamic"]:AddButton("Sapatos","Colocar/Retirar os sapatos.","player:outfitFunctions","Shoes","clothes",true)
 			exports["dynamic"]:AddButton("Colete","Colocar/Retirar o colete.","player:outfitFunctions","Vest","clothes",true)
+			exports["dynamic"]:AddButton("Acessórios","Colocar/Retirar o acessório.","player:outfitFunctions","Accessory","clothes",true)
+			exports["dynamic"]:AddButton("Todas","Retira todas as peças de roupa.","player:outfitFunctions","remover","clothes",true)
 
-			exports["dynamic"]:AddButton("Aplicar","Vestir as roupas salvas.","player:outfitFunctions","aplicar","outfit",true)
-			exports["dynamic"]:AddButton("Salvar","Guardar as roupas do corpo.","player:outfitFunctions","salvar","outfit",true)
-			exports["dynamic"]:AddButton("Remover","Remover as roupas salvas.","player:outfitFunctions","remover","outfit",true)
-
-			exports["dynamic"]:AddButton("Aplicar","Vestir as roupas salvas.","player:outfitFunctions","preaplicar","premiumfit",true)
-			exports["dynamic"]:AddButton("Salvar","Guardar as roupas do corpo.","player:outfitFunctions","presalvar","premiumfit",true)
+			exports["dynamic"]:AddButton("Aplicar Comum","Vestir as roupas comuns.","player:outfitFunctions","aplicar","outfit",true)
+			exports["dynamic"]:AddButton("Salvar Comum","Salvar as roupas comuns.","player:outfitFunctions","salvar","outfit",true)
+			exports["dynamic"]:AddButton("Aplicar Premium","Vestir as roupas premium.","player:outfitFunctions","preaplicar","outfit",true)
+			exports["dynamic"]:AddButton("Salvar Premium","Salvar as roupas premium.","player:outfitFunctions","presalvar","outfit",true)
 
 			if animalHash ~= nil then
 				exports["dynamic"]:AddButton("Seguir","Seguir o proprietário.","dynamic:animalFunctions","seguir","animal",false)
@@ -99,9 +99,9 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 			end
 
 			exports["dynamic"]:AddButton("Desmanche","Listagem dos veículos.","inventory:Dismantle","","others",true)
-			exports["dynamic"]:AddButton("Ferimentos","Verificar ferimentos no corpo.","paramedic:myInjuries","","others",false)
+			exports["dynamic"]:AddButton("Ferimentos","Verificar ferimentos no corpo.","paramedic:Injuries","","others",false)
 
-			if not IsPedInAnyVehicle(ped) then
+			if not IsPedInAnyVehicle(Ped) then
 				exports["dynamic"]:AddButton("Rebocar","Colocar veículo na prancha do reboque.","towdriver:invokeTow","","others",false)
 				exports["dynamic"]:AddButton("Desbugar","Recarregar o personagem.","barbershop:debug","","others",true)
 
@@ -134,7 +134,6 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 
 			exports["dynamic"]:SubMenu("Roupas","Colocar/Retirar roupas.","clothes")
 			exports["dynamic"]:SubMenu("Vestuário","Mudança de roupas rápidas.","outfit")
-			exports["dynamic"]:SubMenu("Vestuário Premium","Mudança de roupas premium.","premiumfit")
 			exports["dynamic"]:SubMenu("Propriedades","Todas as funções das propriedades.","propertys")
 
 			if animalHash ~= nil then
@@ -155,7 +154,7 @@ RegisterCommand("emergencyFunctions",function(source,args,rawCommand)
 		if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not menuOpen and MumbleIsConnected() and LocalPlayer["state"]["Route"] < 900000 then
 
 			local Ped = PlayerPedId()
-			if GetEntityHealth(Ped) > 101 then
+			if GetEntityHealth(Ped) > 100 then
 				if not IsPedInAnyVehicle(Ped) then
 					exports["dynamic"]:AddButton("Carregar","Carregar a pessoa mais próxima.","player:carryPlayer","","player",true)
 					exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","player",true)

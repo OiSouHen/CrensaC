@@ -118,7 +118,7 @@ CreateThread(function()
 			if DoesEntityExist(selectPeds) then
 				local ped = PlayerPedId()
 
-				if GetEntityHealth(ped) <= 101 or IsPedInAnyVehicle(ped) then
+				if GetEntityHealth(ped) <= 100 or IsPedInAnyVehicle(ped) then
 					TaskWanderStandard(selectPeds,10,10)
 					drugsSelling = false
 					selectPeds = false

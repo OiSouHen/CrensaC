@@ -1724,7 +1724,7 @@ RegisterNetEvent("target:animDeitar")
 AddEventHandler("target:animDeitar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
 		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 101 then
+		if GetEntityHealth(ped) > 100 then
 			local objCoords = GetEntityCoords(Selected[1])
 
 			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + beds[Selected[2]][1],1,0,0,0)

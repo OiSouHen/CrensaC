@@ -235,7 +235,7 @@ CreateThread(function()
 				end
 			end
 
-			if GetEntityHealth(ped) <= 101 then
+			if GetEntityHealth(ped) <= 100 then
 				if not inDeath then
 					timeDeath = GetGameTimer() + 60000
 					inDeath = true

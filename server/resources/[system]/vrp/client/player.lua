@@ -11,7 +11,7 @@ end
 function tvRP.updateHealth(number)
 	local ped = PlayerPedId()
 	local health = GetEntityHealth(ped)
-	if health > 101 then
+	if health > 100 then
 		SetEntityHealth(ped,health + number)
 	end
 end

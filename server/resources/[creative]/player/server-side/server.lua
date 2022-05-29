@@ -69,11 +69,11 @@ end)
 RegisterCommand("e",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
-		if user_id and vRP.getHealth(source) > 101 then
+		if user_id and vRP.getHealth(source) > 100 then
 			if args[2] == "friend" then
 				local otherPlayer = vRPC.nearestPlayer(source)
 				if otherPlayer then
-					if vRP.getHealth(otherPlayer) > 101 and not vCLIENT.getHandcuff(otherPlayer) then
+					if vRP.getHealth(otherPlayer) > 100 and not vCLIENT.getHandcuff(otherPlayer) then
 						local identity = vRP.userIdentity(user_id)
 						if vRP.request(otherPlayer,"Pedido de <b>"..identity["name"].."</b> da animação <b>"..args[1].."</b>?") then
 							TriggerClientEvent("emotes",otherPlayer,args[1])
@@ -93,7 +93,7 @@ end)
 RegisterCommand("e2",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
-		if user_id and vRP.getHealth(source) > 101 then
+		if user_id and vRP.getHealth(source) > 100 then
 			local otherPlayer = vRPC.nearestPlayer(source)
 			if otherPlayer then
 				if vRP.hasGroup(user_id,"Paramedic") then
@@ -146,7 +146,7 @@ end
 RegisterCommand("911",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
-		if user_id and args[1] and vRP.getHealth(source) > 101 then
+		if user_id and args[1] and vRP.getHealth(source) > 100 then
 			if vRP.hasGroup(user_id,"Police") then
 				local department = "Police"
 				if vRP.hasPermission(user_id,"State") then
@@ -178,7 +178,7 @@ end)
 RegisterCommand("112",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
-		if user_id and args[1] and vRP.getHealth(source) > 101 then
+		if user_id and args[1] and vRP.getHealth(source) > 100 then
 			if vRP.hasGroup(user_id,"Paramedic") then
 				local identity = vRP.userIdentity(user_id)
 				local paramedicResult = vRP.numPermission("Paramedic")

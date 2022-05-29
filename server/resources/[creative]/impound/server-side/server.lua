@@ -45,7 +45,7 @@ RegisterServerEvent("police:impound")
 AddEventHandler("police:impound",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Police") then
 			local ped = GetPlayerPed(source)
 			local coords = GetEntityCoords(ped)
@@ -73,7 +73,7 @@ RegisterServerEvent("police:runPlate")
 AddEventHandler("police:runPlate",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Police") then
 			runPlate(source,entity[1])
 		end
@@ -115,7 +115,7 @@ RegisterServerEvent("police:runArrest")
 AddEventHandler("police:runArrest",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Police") then
 			if vRP.request(source,"Apreender o veículo?") then
 				local userPlate = vRP.userPlate(entity[1])

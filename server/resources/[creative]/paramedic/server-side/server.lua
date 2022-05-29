@@ -22,7 +22,7 @@ RegisterServerEvent("paramedic:Repose")
 AddEventHandler("paramedic:Repose",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 and vRP.getHealth(entity) > 101 then
+	if user_id and vRP.getHealth(source) > 100 and vRP.getHealth(entity) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
 			local timer = vRP.prompt(source,"Minutos:","")
 			if timer == "" or parseInt(timer) <= 0 then
@@ -48,7 +48,7 @@ RegisterServerEvent("paramedic:Treatment")
 AddEventHandler("paramedic:Treatment",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 and vRP.getHealth(entity) > 101 then
+	if user_id and vRP.getHealth(source) > 100 and vRP.getHealth(entity) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
 			local nuser_id = vRP.getUserId(entity)
 			local identity = vRP.userIdentity(nuser_id)
@@ -75,7 +75,7 @@ RegisterServerEvent("paramedic:Bed")
 AddEventHandler("paramedic:Bed",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
 			TriggerClientEvent("target:pacienteDeitar",entity)
 		end
@@ -119,7 +119,7 @@ RegisterServerEvent("paramedic:Bleeding")
 AddEventHandler("paramedic:Bleeding",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 and vRP.getHealth(entity) > 101 then
+	if user_id and vRP.getHealth(source) > 100 and vRP.getHealth(entity) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
 			if vRP.tryGetInventoryItem(user_id,"gauze",1) then
 				TriggerClientEvent("resetBleeding",entity)
@@ -135,13 +135,13 @@ RegisterServerEvent("paramedic:Diagnostic")
 AddEventHandler("paramedic:Diagnostic",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
 			local userResult = ""
 			local nuser_id = vRP.getUserId(entity)
 			local identity = vRP.userIdentity(nuser_id)
 			if identity then
-				local userDiagnostic,userBleeding = vCLIENT.getDiagnostic(entity)
+				local userDiagnostic,userBleeding = vCLIENT.Diagnostic(entity)
 
 				if userBleeding == 3 then
 					userResult = "<b>Sangramento:</b> Baixo<br>"

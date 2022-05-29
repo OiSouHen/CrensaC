@@ -50,7 +50,7 @@ CreateThread(function()
 				end
 			else
 				local distance = #(coords - vec3(robberys[robberyId]["coords"][1],robberys[robberyId]["coords"][2],robberys[robberyId]["coords"][3]))
-				if distance > robberys[robberyId]["distance"] or GetEntityHealth(ped) <= 101 then
+				if distance > robberys[robberyId]["distance"] or GetEntityHealth(ped) <= 100 then
 					SendNUIMessage({ show = false })
 					robberyActive = false
 				end

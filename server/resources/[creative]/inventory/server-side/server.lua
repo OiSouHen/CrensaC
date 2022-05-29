@@ -999,7 +999,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "bandage" then
 				if (Healths[user_id] == nil or os.time() > Healths[user_id]) then
-					if vRP.getHealth(source) > 101 and vRP.getHealth(source) < 200 then
+					if vRP.getHealth(source) > 100 and vRP.getHealth(source) < 200 then
 						Active[user_id] = os.time() + 10
 						TriggerClientEvent("Progress",source,10000)
 						TriggerClientEvent("inventory:Close",source)
@@ -1055,7 +1055,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "analgesic" or nameItem == "oxy" then
 				if (Healths[user_id] == nil or os.time() > Healths[user_id]) then
-					if vRP.getHealth(source) > 101 and vRP.getHealth(source) < 200 then
+					if vRP.getHealth(source) > 100 and vRP.getHealth(source) < 200 then
 						Active[user_id] = os.time() + 3
 						TriggerClientEvent("Progress",source,3000)
 						TriggerClientEvent("inventory:Close",source)
@@ -1270,7 +1270,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "medkit" then
 				if (Healths[user_id] == nil or os.time() > Healths[user_id]) then
-					if vRP.getHealth(source) > 101 and vRP.getHealth(source) < 200 then
+					if vRP.getHealth(source) > 100 and vRP.getHealth(source) < 200 then
 						Active[user_id] = os.time() + 20
 						TriggerClientEvent("Progress",source,20000)
 						TriggerClientEvent("inventory:Close",source)

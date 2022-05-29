@@ -61,9 +61,8 @@ RegisterCommand("god",function(source,args,rawCommand)
 				vRP.upgradeThirst(user_id,100)
 				vRP.upgradeHunger(user_id,100)
 				vRP.downgradeStress(user_id,100)
-				TriggerClientEvent("resetHandcuff",source)
-				TriggerClientEvent("resetBleeding",source)
-				TriggerClientEvent("resetDiagnostic",source)
+				LocalPlayer["state"]["Handcuff"] = false
+				TriggerClientEvent("paramedic:Reset",source)
 			end
 		end
 	end

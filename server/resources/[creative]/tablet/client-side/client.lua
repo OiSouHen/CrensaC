@@ -18,7 +18,7 @@ end)
 RegisterNetEvent("tablet:enterTablet")
 AddEventHandler("tablet:enterTablet",function()
 	local ped = PlayerPedId()
-	if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 101 and MumbleIsConnected() then
+	if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 100 and MumbleIsConnected() then
 		SetNuiFocus(true,true)
 		SetCursorLocation(0.5,0.5)
 		SendNUIMessage({ action = "openSystem" })

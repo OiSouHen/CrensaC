@@ -193,7 +193,7 @@ end)
 -- OPENBACKPACK
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("openBackpack",function(source,args,rawCommand)
-	if GetEntityHealth(PlayerPedId()) > 101 and not LocalPlayer["state"]["Buttons"] and MumbleIsConnected() then
+	if GetEntityHealth(PlayerPedId()) > 100 and not LocalPlayer["state"]["Buttons"] and MumbleIsConnected() then
 		if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPlayerFreeAiming(PlayerId()) then
 			Backpack = true
 			SetNuiFocus(true,true)

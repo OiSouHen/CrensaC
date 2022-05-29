@@ -19,7 +19,7 @@ end)
 RegisterCommand("enterVehmenus",function(source,args,rawCommand)
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not vehMenu and MumbleIsConnected() and LocalPlayer["state"]["Route"] < 900000 then
 		local ped = PlayerPedId()
-		if not IsEntityInWater(ped) and GetEntityHealth(ped) > 101 then
+		if not IsEntityInWater(ped) and GetEntityHealth(ped) > 100 then
 			local Vehicle = vRP.vehList(7)
 			if Vehicle then
 				SendNUIMessage({ show = true })

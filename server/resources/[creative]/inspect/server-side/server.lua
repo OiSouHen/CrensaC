@@ -23,7 +23,7 @@ RegisterServerEvent("police:runInspect")
 AddEventHandler("police:runInspect",function(entity)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
+	if user_id and vRP.getHealth(source) > 100 then
 		TriggerClientEvent("player:playerCarry",entity[1],source,"handcuff")
 		TriggerClientEvent("player:Commands",entity[1],true)
 		TriggerClientEvent("inventory:Close",entity[1])

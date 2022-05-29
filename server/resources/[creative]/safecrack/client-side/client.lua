@@ -177,7 +177,7 @@ function crackingAnim(animType)
 	local ped = PlayerPedId()
 	local health = GetEntityHealth(ped)
 
-	if GetEntityHealth(ped) > 101 then
+	if GetEntityHealth(ped) > 100 then
 		loadAnim("mini@safe_cracking")
 
 		if animType == 1 then

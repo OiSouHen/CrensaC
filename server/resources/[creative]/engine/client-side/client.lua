@@ -186,7 +186,7 @@ CreateThread(function()
 									TaskPlayAnim(ped,"timetable@gardener@filling_can","gar_ig_5_filling_can",3.0,3.0,-1,50,0,0,0,0)
 								end
 
-								if vehFuel >= 100.0 or GetAmmoInPedWeapon(ped,883325847) - 0.02 * 100 <= 1 or GetEntityHealth(ped) <= 101 then
+								if vehFuel >= 100.0 or GetAmmoInPedWeapon(ped,883325847) - 0.02 * 100 <= 1 or GetEntityHealth(ped) <= 100 then
 									TriggerServerEvent("engine:tryFuel",vehPlate,vehFuel)
 									StopAnimTask(ped,"timetable@gardener@filling_can","gar_ig_5_filling_can",2.0)
 									RemoveAnimDict("timetable@gardener@filling_can")
@@ -255,7 +255,7 @@ CreateThread(function()
 										TaskPlayAnim(ped,"timetable@gardener@filling_can","gar_ig_5_filling_can",3.0,3.0,-1,50,0,0,0,0)
 									end
 
-									if vehFuel >= 100.0 or GetEntityHealth(ped) <= 101 then
+									if vehFuel >= 100.0 or GetEntityHealth(ped) <= 100 then
 										if vSERVER.paymentFuel(isPrice,vehPlate,vehFuel) then
 											TriggerServerEvent("engine:tryFuel",vehPlate,vehFuel)
 											vehFuels[vehPlate] = vehFuel
