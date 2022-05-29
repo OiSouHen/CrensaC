@@ -235,7 +235,7 @@ function tvRP.respawnPlayer()
 	TriggerServerEvent("pma-voice:toggleMute",false)
 
 	DoScreenFadeOut(0)
-	SetEntityCoordsNoOffset(PlayerPedId(),-1041.25,-2744.99,21.35,false,false,false,true)
+	SetEntityCoords(PlayerPedId(),332.8,-569.41,43.29,false,false,false,false)
 	SendNUIMessage({ death = false })
 	Wait(1000)
 	DoScreenFadeIn(1000)
