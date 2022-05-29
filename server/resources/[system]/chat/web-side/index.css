@@ -10,7 +10,7 @@
 	letter-spacing: 1px;
 	padding: 4px 7px 3px;
 	background-color: #ab9117;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	text-shadow: none;
 }
 
 .color-2 {
@@ -21,18 +21,18 @@
 	letter-spacing: 1px;
 	padding: 4px 5px 3px 7px;
 	background-color: #387191;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	text-shadow: none;
 }
 
 .color-3 {
-	color: #a0ceb6;
+	color: #4a380c;
 	font-size: 11px;
 	margin-right: 5px;
 	border-radius: 3px;
 	letter-spacing: 1px;
 	padding: 4px 7px 3px;
-	background-color: #2e6e4c;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	background-color: #fec026;
+	text-shadow: none;
 }
 
 .color-4 {
@@ -43,7 +43,7 @@
 	letter-spacing: 1px;
 	padding: 4px 7px 3px;
 	background-color: #982a46;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	text-shadow: none;
 }
 
 .color-5 {
@@ -54,7 +54,7 @@
 	letter-spacing: 1px;
 	padding: 4px 7px 3px;
 	background-color: #422865;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	text-shadow: none;
 }
 
 .color-6 {
@@ -65,15 +65,17 @@
 	letter-spacing: 1px;
 	padding: 4px 7px 3px;
 	background-color: #7f151a;
-	text-shadow: 1px 1px rgba(0,0,0,.5);
+	text-shadow: none;
 }
 
 .color-7 {
-	color: #ab9117;
+	font-size: 16px;
+	color: #ff0000;
 }
 
 .color-8 {
-	color: #e4b433;
+	font-size: 16px;
+	color: #333;
 }
 
 .color-9 {
@@ -138,7 +140,7 @@ em {
 
 .prefix {
 	top: 7.5px;
-	color: #dac534;
+	color: #fec026;
 	position: absolute;
 	letter-spacing: 2.5px;
 }
@@ -177,8 +179,20 @@ textarea:focus, input:focus {
 	list-style-type: none;
 	box-sizing: border-box;
 	padding: 20px 20px 10px;
-	border-left: 5px solid #ad9d2c;
+	position: relative;
 	background-color: rgba(15,15,15,.75);
+}
+
+.suggestions::before {
+	top: 10%;
+	left: -2px;
+	width: 4px;
+	height: 80%;
+	content: "";
+	bottom: 10%;
+	position: absolute;
+	border-radius: 3px;
+	background: #fec026;
 }
 
 .help {
