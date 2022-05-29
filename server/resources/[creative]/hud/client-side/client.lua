@@ -452,9 +452,9 @@ end)
 RegisterNetEvent("hud:Voip")
 AddEventHandler("hud:Voip",function(number)
 	local Number = tonumber(number)
-	local voiceTarget = { "Baixo","Médio","Alto","Muito Alto" }
+	local Target = { "Baixo","Médio","Alto","Muito Alto","Megafone" }
 
-	SendNUIMessage({ voice = voiceTarget[Number] })
+	SendNUIMessage({ voice = Target[Number] })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- FOWARDPED
@@ -492,7 +492,7 @@ CreateThread(function()
 							local fowardVeh = fowardPed(ped)
 							local coords = GetEntityCoords(ped)
 							local health = GetEntityHealth(ped)
-							SetEntityCoords(ped,coords["x"] + fowardVeh["x"],coords["y"] + fowardVeh["y"],coords["z"] - 0.47,true,true,true,true)
+							SetEntityCoords(ped,coords["x"] + fowardVeh["x"],coords["y"] + fowardVeh["y"],coords["z"] - 0.47,false,false,false,false)
 							SetEntityVelocity(ped,beltVelocity["x"],beltVelocity["y"],beltVelocity["z"])
 							SetEntityHealth(ped,health - 50)
 
