@@ -121,7 +121,7 @@ vRP.prepare("fidentity/newIdentity","INSERT INTO summerz_fidentity(name,name2,lo
 -----------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare("smartphone/cleanCalls","DELETE FROM smartphone_calls WHERE created_at < (UNIX_TIMESTAMP() - 86400 * 3)")
 vRP.prepare("smartphone/cleanTorMessages","DELETE FROM smartphone_tor_messages WHERE created_at < (UNIX_TIMESTAMP() - 86400 * 3)")
--- vRP.prepare("smartphone/cleanMessages","DELETE FROM smartphone_zipzap_messages WHERE created_at < (UNIX_TIMESTAMP() - 86400 * 7)")
+vRP.prepare("smartphone/cleanMessages","DELETE FROM smartphone_whatsapp_messages WHERE created_at < (UNIX_TIMESTAMP() - 86400 * 7)")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CLEARTABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -138,6 +138,6 @@ CreateThread(function()
 	-- vRP.execute("summerz/cleanBanks")
 	vRP.execute("summerz/cleanPremium")
 	vRP.execute("smartphone/cleanCalls")
-	-- vRP.execute("smartphone/cleanMessages")
+	vRP.execute("smartphone/cleanMessages")
 	vRP.execute("smartphone/cleanTorMessages")
 end)

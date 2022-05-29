@@ -33,7 +33,7 @@ local function tunnel_resolve(itable,key)
 		if SERVER then
 			dest = args[1]
 			args = { table.unpack(args,2,table.maxn(args)) }
-			if dest >= 0 and not no_wait then
+			if parseInt(dest) >= 0 and not no_wait then
 				r = async()
 			end
 		elseif not no_wait then

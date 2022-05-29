@@ -1,11 +1,6 @@
 -------
 
-#### Creative v5
-> Connections: oxmysql, oxdrive.
-
-> DLC: The Contract.
-
-> Artifacts/Build: 5436.
+#### Creative [v5]
 
 -------
 
