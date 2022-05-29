@@ -18,27 +18,23 @@ local binoculos = false
 local tratamento = false
 local fov = (fov_max + fov_min) * 0.5
 -----------------------------------------------------------------------------------------------------------------------------------------
--- POLEDANCES
+-- POLEDANCE
 -----------------------------------------------------------------------------------------------------------------------------------------
-local poleDances = {
+local Poledance = {
 	{ 108.98,-1289.45,29.25,252.29 },
 	{ 102.40,-1290.06,29.25,320.32 },
 	{ 104.95,-1294.35,29.25,323.15 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
--- BEDS
------------------------------------------------------------------------------------------------------------------------------------------
-local beds = {
-	{ 1631638868,0.0,0.0 },
-	{ 2117668672,0.0,0.0 },
-	{ -1498379115,1.0,90.0 },
-	{ -1519439119,1.0,0.0 },
-	{ -289946279,1.0,0.0 }
-}
------------------------------------------------------------------------------------------------------------------------------------------
 -- ANIMAÇÕES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local animacoes = {
+	["garcom"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "vw_prop_vw_tray_01a", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.015, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+    ["garcom2"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "prop_food_tray_01", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.01, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+    ["garcom3"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "prop_food_tray_02", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.01, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+    ["garcom4"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "prop_food_tray_03", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.01, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+    ["garcom5"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "h4_prop_h4_champ_tray_01b", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.01, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
+    ["garcom6"] = { dict = "anim@move_f@waitress", anim = "idle", prop = "h4_prop_h4_champ_tray_01c", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.01, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
 	["esquentar"] = { dict = "amb@world_human_stand_fire@male@base", anim = "base", andar = false, loop = true },
 	["churrasco2"] = { dict = "amb@prop_human_bbq@male@idle_a", anim = "idle_c", andar = false, loop = true },
 	["spray"] = { dict = "switch@franklin@lamar_tagging_wall", anim = "lamar_tagging_exit_loop_lamar", prop = "prop_cs_spray_can", flag = 49, mao = 28422, altura = 0.0, pos1 = 0.0, pos2 = 0.0, pos3 = 0.0, pos4 = 0.0, pos5 = 0.0 },
@@ -125,7 +121,7 @@ local animacoes = {
 	["poledance"] = { dict = "mini@strip_club@pole_dance@pole_dance1", anim = "pd_dance_01", andar = false, loop = true, extra = function()
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
-		for k,v in pairs(poleDances) do
+		for k,v in pairs(Poledance) do
 			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
@@ -137,7 +133,7 @@ local animacoes = {
 	["poledance2"] = { dict = "mini@strip_club@pole_dance@pole_dance2", anim = "pd_dance_02", andar = false, loop = true, extra = function()
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
-		for k,v in pairs(poleDances) do
+		for k,v in pairs(Poledance) do
 			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
@@ -149,7 +145,7 @@ local animacoes = {
 	["poledance3"] = { dict = "mini@strip_club@pole_dance@pole_dance3", anim = "pd_dance_03", andar = false, loop = true, extra = function()
 		local ped = PlayerPedId()
 		local coords = GetEntityCoords(ped)
-		for k,v in pairs(poleDances) do
+		for k,v in pairs(Poledance) do
 			local distance = #(coords - vec3(v[1],v[2],v[3]))
 			if distance <= 1 then
 				SetEntityHeading(ped,v[4])
