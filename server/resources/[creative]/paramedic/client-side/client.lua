@@ -58,6 +58,7 @@ CreateThread(function()
 
 				if not IsPedInAnyVehicle(Ped) then
 					SetPedToRagdoll(Ped,Nocaute,Nocaute,0,0,0,0)
+					TriggerServerEvent("inventory:Cancel")
 				end
 
 				DoScreenFadeOut(1000)
