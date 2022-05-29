@@ -146,6 +146,17 @@ function vRP.userPlate(vehPlate)
 	return rows[1] or false
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- USERBLOOD
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vRP.userBlood(bloodTypes)
+	local rows = vRP.query("characters/getBlood",{ blood = bloodTypes })
+	if rows[1] then
+		return rows[1]["id"]
+	end
+
+	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- USERPHONE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function vRP.userPhone(phoneNumber)
@@ -207,6 +218,38 @@ end
 function vRP.userSerial(number)
 	local rows = vRP.query("characters/getSerial",{ serial = number })
 	return rows[1] or false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GENERATEBLOODTYPES
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vRP.generateBloodTypes(format)
+	local zbyte = string.byte("0")
+	local number = ""
+
+	for i = 1,#format do
+		local char = string.sub(format,i,i)
+    	if char == "D" then
+    		number = number..string.char(zbyte + math.random(1,4))
+		else
+			number = number..char
+		end
+	end
+
+	return number
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GENERATEBLOOD
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vRP.generateBlood()
+	local user_id = nil
+	local blood = ""
+
+	repeat
+		blood = vRP.generateBloodTypes("D")
+		user_id = vRP.userBlood(blood)
+	until not user_id
+
+	return blood
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GENERATESERIAL

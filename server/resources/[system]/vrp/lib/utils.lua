@@ -1,16 +1,36 @@
 SERVER = IsDuplicityVersion()
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- DISCATEGORY
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ClassCategory(Number)
+	local Category = "B"
+
+	if Number >= 100 and Number <= 200 then
+		Category = "B+"
+	elseif Number >= 201 and Number <= 350 then
+		Category = "A"
+	elseif Number >= 351 and Number <= 500 then
+		Category = "A+"
+	elseif Number >= 501 and Number <= 1000 then
+		Category = "S"
+	elseif Number >= 1001 then
+		Category = "S+"
+	end
+
+	return Category
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- BLOODTYPES
 -----------------------------------------------------------------------------------------------------------------------------------------
-function bloodTypes(types)
-	local typeBloods = {
-		[1] = "A +",
-		[2] = "B +",
-		[3] = "A -",
-		[4] = "B -"
+function bloodTypes(Number)
+	local Types = {
+		[1] = "A+",
+		[2] = "B+",
+		[3] = "A-",
+		[4] = "B-"
 	}
 
-	return typeBloods[types]
+	return Types[Number]
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TABLE.MAXN
@@ -88,13 +108,17 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PARSEINT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function parseInt(v)
-	local Number = tonumber(v)
-	if Number == nil then
-		return 0
-	else
-		return math.floor(Number)
+function parseInt(Value)
+	local Result = 0
+	local Number = tonumber(Value)
+
+	if Number ~= nil then
+		if Number > 0 then
+			Result = math.floor(Number)
+		end
 	end
+
+	return Result
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SANITIZESTRING
@@ -158,42 +182,128 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- COMPLETETIMERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function completeTimers(seconds)
-	local days = math.floor(seconds / 86400)
-	seconds = seconds - days * 86400
-	local hours = math.floor(seconds / 3600)
-	seconds = seconds - hours * 3600
-	local minutes = math.floor(seconds / 60)
-	seconds = seconds - minutes * 60
+function completeTimers(Seconds)
+	local Days = math.floor(Seconds / 86400)
+	Seconds = Seconds - Days * 86400
+	local Hours = math.floor(Seconds / 3600)
+	Seconds = Seconds - Hours * 3600
+	local Minutes = math.floor(Seconds / 60)
+	Seconds = Seconds - Minutes * 60
 
-	if days > 0 then
-		return string.format("<b>%d Dias</b>, <b>%d Horas</b>, <b>%d Minutos</b> e <b>%d Segundos</b>",days,hours,minutes,seconds)
-	elseif hours > 0 then
-		return string.format("<b>%d Horas</b>, <b>%d Minutos</b> e <b>%d Segundos</b>",hours,minutes,seconds)
-	elseif minutes > 0 then
-		return string.format("<b>%d Minutos</b> e <b>%d Segundos</b>",minutes,seconds)
-	elseif seconds > 0 then
-		return string.format("<b>%d Segundos</b>",seconds)
+	if Days > 0 then
+		return string.format("<b>%d Dias</b>, <b>%d Horas</b>, <b>%d Minutos</b>",Days,Hours,Minutes)
+	elseif Hours > 0 then
+		return string.format("<b>%d Horas</b>, <b>%d Minutos</b> e <b>%d Segundos</b>",Hours,Minutes,Seconds)
+	elseif Minutes > 0 then
+		return string.format("<b>%d Minutos</b> e <b>%d Segundos</b>",Minutes,Seconds)
+	elseif Seconds > 0 then
+		return string.format("<b>%d Segundos</b>",Seconds)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- MINIMALTIMERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function minimalTimers(seconds)
-	local days = math.floor(seconds / 86400)
-	seconds = seconds - days * 86400
-	local hours = math.floor(seconds / 3600)
-	seconds = seconds - hours * 3600
-	local minutes = math.floor(seconds / 60)
-	seconds = seconds - minutes * 60
+function minimalTimers(Seconds)
+	local Days = math.floor(Seconds / 86400)
+	Seconds = Seconds - Days * 86400
+	local Hours = math.floor(Seconds / 3600)
+	Seconds = Seconds - Hours * 3600
+	local Minutes = math.floor(Seconds / 60)
+	Seconds = Seconds - Minutes * 60
 
-	if days > 0 then
-		return string.format("%d Dias, %d Horas",days,hours)
-	elseif hours > 0 then
-		return string.format("%d Horas, %d Minutos",hours,minutes)
-	elseif minutes > 0 then
-		return string.format("%d Minutos",minutes)
-	elseif seconds > 0 then
-		return string.format("%d Segundos",seconds)
+	if Days > 0 then
+		return string.format("%d Dias, %d Horas",Days,Hours)
+	elseif Hours > 0 then
+		return string.format("%d Horas, %d Minutos",Hours,Minutes)
+	elseif Minutes > 0 then
+		return string.format("%d Minutos",Minutes)
+	elseif Seconds > 0 then
+		return string.format("%d Segundos",Seconds)
 	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BONES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Bones = {
+	[11816] = "Pelvis",
+	[58271] = "Coxa Esquerda",
+	[63931] = "Panturrilha Esquerda",
+	[14201] = "Pe Esquerdo",
+	[2108] = "Dedo do Pe Esquerdo",
+	[65245] = "Pe Esquerdo",
+	[57717] = "Pe Esquerdo",
+	[46078] = "Joelho Esquerdo",
+	[51826] = "Coxa Direita",
+	[36864] = "Panturrilha Direita",
+	[52301] = "Pe Direito",
+	[20781] = "Dedo do Pe Direito",
+	[35502] = "Pe Direito",
+	[24806] = "Pe Direito",
+	[16335] = "Joelho Direito",
+	[23639] = "Coxa Direita",
+	[6442] = "Coxa Direita",
+	[57597] = "Espinha Cervical",
+	[23553] = "Espinha Toraxica",
+	[24816] = "Espinha Lombar",
+	[24817] = "Espinha Sacral",
+	[24818] = "Espinha Cocciana",
+	[64729] = "Escapula Esquerda",
+	[45509] = "Braco Esquerdo",
+	[61163] = "Antebraco Esquerdo",
+	[18905] = "Mao Esquerda",
+	[18905] = "Mao Esquerda",
+	[26610] = "Dedo Esquerdo",
+	[4089] = "Dedo Esquerdo",
+	[4090] = "Dedo Esquerdo",
+	[26611] = "Dedo Esquerdo",
+	[4169] = "Dedo Esquerdo",
+	[4170] = "Dedo Esquerdo",
+	[26612] = "Dedo Esquerdo",
+	[4185] = "Dedo Esquerdo",
+	[4186] = "Dedo Esquerdo",
+	[26613] = "Dedo Esquerdo",
+	[4137] = "Dedo Esquerdo",
+	[4138] = "Dedo Esquerdo",
+	[26614] = "Dedo Esquerdo",
+	[4153] = "Dedo Esquerdo",
+	[4154] = "Dedo Esquerdo",
+	[60309] = "Mao Esquerda",
+	[36029] = "Mao Esquerda",
+	[61007] = "Antebraco Esquerdo",
+	[5232] = "Antebraco Esquerdo",
+	[22711] = "Cotovelo Esquerdo",
+	[10706] = "Escapula Direita",
+	[40269] = "Braco Direito",
+	[28252] = "Antebraco Direito",
+	[57005] = "Mao Direita",
+	[58866] = "Dedo Direito",
+	[64016] = "Dedo Direito",
+	[64017] = "Dedo Direito",
+	[58867] = "Dedo Direito",
+	[64096] = "Dedo Direito",
+	[64097] = "Dedo Direito",
+	[58868] = "Dedo Direito",
+	[64112] = "Dedo Direito",
+	[64113] = "Dedo Direito",
+	[58869] = "Dedo Direito",
+	[64064] = "Dedo Direito",
+	[64065] = "Dedo Direito",
+	[58870] = "Dedo Direito",
+	[64080] = "Dedo Direito",
+	[64081] = "Dedo Direito",
+	[28422] = "Mao Direita",
+	[6286] = "Mao Direita",
+	[43810] = "Antebraço Direito",
+	[37119] = "Antebraço Direito",
+	[2992] = "Cotovelo Direito",
+	[39317] = "Pescoco",
+	[31086] = "Cabeca",
+	[12844] = "Cabeca",
+	[65068] = "Rosto"
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BONE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function Bone(Number)
+	return Bones[Number]
 end

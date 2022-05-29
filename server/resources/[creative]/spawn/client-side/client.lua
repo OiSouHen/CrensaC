@@ -142,44 +142,30 @@ end)
 -- JUSTSPAWN
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("spawn:justSpawn")
-AddEventHandler("spawn:justSpawn",function(status,spawnType)
+AddEventHandler("spawn:justSpawn",function(Spawned)
 	DoScreenFadeOut(0)
 
-	Locate = {}
-	local ped = PlayerPedId()
+	local Ped = PlayerPedId()
 	RenderScriptCams(false,false,0,true,true)
 	SetCamActive(Camera,false)
 	DestroyCam(Camera,true)
 	Camera = nil
 
-	if spawnType then
+	if Spawned then
 		LocalPlayer["state"]["Invisible"] = true
-		SetEntityVisible(ped,false,false)
+		SetEntityVisible(Ped,false,false)
 
-		local numberLine = 0
-		for k,v in pairs(status) do
-			numberLine = numberLine + 1
-
-			if k == "Modern" then
-				Locate[numberLine] = { x = v[1], y = v[2], z = v[3], name = "Eclipse Towers", hash = numberLine }
-			else
-				local nameCoords = GetStreetNameAtCoord(v[1],v[2],v[3])
-				local streetName = GetStreetNameFromHashKey(nameCoords)
-
-				Locate[numberLine] = { x = v[1], y = v[2], z = v[3], name = streetName, hash = numberLine }
-			end
-		end
-
+		Locate = {}
+		local Number = 0
 		for k,v in pairs(otherLocates) do
-			numberLine = numberLine + 1
-			Locate[numberLine] = { x = v[1], y = v[2], z = v[3], name = v[4], hash = numberLine }
+			Number = Number + 1
+			Locate[Number] = { x = v[1], y = v[2], z = v[3], name = v[4], hash = Number }
 		end
 
 		Wait(2000)
 
-		local ped = PlayerPedId()
-		local coords = GetEntityCoords(ped)
-		Camera = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA",coords["x"],coords["y"],coords["z"] + 200.0,270.00,0.0,0.0,80.0,0,0)
+		local Coords = GetEntityCoords(Ped)
+		Camera = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA",Coords["x"],Coords["y"],Coords["z"] + 200.0,270.00,0.0,0.0,80.0,0,0)
 		SetCamActive(Camera,true)
 		RenderScriptCams(true,false,1,true,true)
 
@@ -188,7 +174,7 @@ AddEventHandler("spawn:justSpawn",function(status,spawnType)
 		DoScreenFadeIn(1000)
 	else
 		LocalPlayer["state"]["Invisible"] = false
-		SetEntityVisible(ped,true,false)
+		SetEntityVisible(Ped,true,false)
 		TriggerEvent("hud:Active",true)
 		SetNuiFocus(false,false)
 		Destroy = false
@@ -242,7 +228,7 @@ RegisterNUICallback("spawnChosen",function(data)
 
 		DoScreenFadeIn(1000)
 
-		SetEntityCoords(ped,Locate[data["hash"]]["x"],Locate[data["hash"]]["y"],Locate[data["hash"]]["z"],1,0,0,0)
+		SetEntityCoords(ped,Locate[data["hash"]]["x"],Locate[data["hash"]]["y"],Locate[data["hash"]]["z"],false,false,false,false)
 		local coords = GetEntityCoords(ped)
 
 		SetCamCoord(Camera,coords["x"],coords["y"],coords["z"] + 200.0)
@@ -273,52 +259,148 @@ end)
 -- CLOTHES
 -----------------------------------------------------------------------------------------------------------------------------------------
 function Clothes(ped,data)
-	if data["backpack"] == nil then
-		data["backpack"] = {}
-		data["backpack"]["item"] = 0
-		data["backpack"]["texture"] = 0
-	end
+    if data["backpack"] == nil then
+        data["backpack"] = {}
+        data["backpack"]["item"] = 0
+        data["backpack"]["texture"] = 0
+    end
+	
+    if data["pants"] == nil then
+        data["pants"] = {}
+        data["pants"]["item"] = 0
+        data["pants"]["texture"] = 0
+    end
+	
+    if data["arms"] == nil then
+        data["arms"] = {}
+        data["arms"]["arms"] = 0
+        data["arms"]["arms"] = 0
+    end
+	
+    if data["tshirt"] == nil then
+        data["tshirt"] = {}
+        data["tshirt"]["item"] = 0
+        data["tshirt"]["texture"] = 0
+    end
+	
+    if data["vest"] == nil then
+        data["vest"] = {}
+        data["vest"]["item"] = 0
+        data["vest"]["texture"] = 0
+    end
+	
+    if data["torso"] == nil then
+        data["torso"] = {}
+        data["torso"]["item"] = 0
+        data["torso"]["texture"] = 0
+    end
+	
+    if data["shoes"] == nil then
+        data["shoes"] = {}
+        data["shoes"]["item"] = 0
+        data["shoes"]["texture"] = 0
+    end
+	
+    if data["torso"] == nil then
+        data["torso"] = {}
+        data["torso"]["item"] = 0
+        data["torso"]["texture"] = 0
+    end
+	
+    if data["mask"] == nil then
+        data["mask"] = {}
+        data["mask"]["item"] = 0
+        data["mask"]["texture"] = 0
+    end
+	
+    if data["decals"] == nil then
+        data["decals"] = {}
+        data["decals"]["item"] = 0
+        data["decals"]["texture"] = 0
+    end
+	
+    if data["accessory"] == nil then
+        data["accessory"] = {}
+        data["accessory"]["item"] = 0
+        data["accessory"]["texture"] = 0
+    end
+	
+    if data["accessory"] == nil then
+        data["accessory"] = {}
+        data["accessory"]["item"] = 0
+        data["accessory"]["texture"] = 0
+    end
+	
+    if data["hat"] == nil then
+        data["hat"] = {}
+        data["hat"]["item"] = 0
+        data["hat"]["texture"] = 0
+    end
+	
+    if data["glass"] == nil then
+        data["glass"] = {}
+        data["glass"]["item"] = 0
+        data["glass"]["texture"] = 0
+    end
+	
+    if data["ear"] == nil then
+        data["ear"] = {}
+        data["ear"]["item"] = 0
+        data["ear"]["texture"] = 0
+    end
+	
+    if data["watch"] == nil then
+        data["watch"] = {}
+        data["watch"]["item"] = 0
+        data["watch"]["texture"] = 0
+    end
+	
+    if data["bracelet"] == nil then
+        data["bracelet"] = {}
+        data["bracelet"]["item"] = 0
+        data["bracelet"]["texture"] = 0
+    end
 
-	SetPedComponentVariation(ped,4,data["pants"]["item"] or 0,data["pants"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,3,data["arms"]["item"] or 0,data["arms"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,5,data["backpack"]["item"] or 0,data["backpack"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,8,data["tshirt"]["item"] or 0,data["tshirt"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,9,data["vest"]["item"] or 0,data["vest"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,11,data["torso"]["item"] or 0,data["torso"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,6,data["shoes"]["item"] or 0,data["shoes"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,1,data["mask"]["item"] or 0,data["mask"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,10,data["decals"]["item"] or 0,data["decals"]["texture"] or 0,1)
-	SetPedComponentVariation(ped,7,data["accessory"]["item"] or 0,data["accessory"]["texture"] or 0,1)
+    SetPedComponentVariation(ped,4,data["pants"]["item"],data["pants"]["texture"],1)
+    SetPedComponentVariation(ped,3,data["arms"]["item"],data["arms"]["texture"],1)
+    SetPedComponentVariation(ped,5,data["backpack"]["item"],data["backpack"]["texture"],1)
+    SetPedComponentVariation(ped,8,data["tshirt"]["item"],data["tshirt"]["texture"],1)
+    SetPedComponentVariation(ped,9,data["vest"]["item"],data["vest"]["texture"],1)
+    SetPedComponentVariation(ped,11,data["torso"]["item"],data["torso"]["texture"],1)
+    SetPedComponentVariation(ped,6,data["shoes"]["item"],data["shoes"]["texture"],1)
+    SetPedComponentVariation(ped,1,data["mask"]["item"],data["mask"]["texture"],1)
+    SetPedComponentVariation(ped,10,data["decals"]["item"],data["decals"]["texture"],1)
+    SetPedComponentVariation(ped,7,data["accessory"]["item"],data["accessory"]["texture"],1)
 
-	if data["hat"]["item"] ~= -1 and data["hat"]["item"] ~= 0 then
-		SetPedPropIndex(ped,0,data["hat"]["item"],data["hat"]["texture"],1)
-	else
-		ClearPedProp(ped,0)
-	end
+    if data["hat"]["item"] ~= -1 and data["hat"]["item"] ~= 0 then
+        SetPedPropIndex(ped,0,data["hat"]["item"],data["hat"]["texture"],1)
+    else
+        ClearPedProp(ped,0)
+    end
 
-	if data["glass"]["item"] ~= -1 and data["glass"]["item"] ~= 0 then
-		SetPedPropIndex(ped,1,data["glass"]["item"],data["glass"]["texture"],1)
-	else
-		ClearPedProp(ped,1)
-	end
+    if data["glass"]["item"] ~= -1 and data["glass"]["item"] ~= 0 then
+        SetPedPropIndex(ped,1,data["glass"]["item"],data["glass"]["texture"],1)
+    else
+        ClearPedProp(ped,1)
+    end
 
-	if data["ear"]["item"] ~= -1 and data["ear"]["item"] ~= 0 then
-		SetPedPropIndex(ped,2,data["ear"]["item"],data["ear"]["texture"],1)
-	else
-		ClearPedProp(ped,2)
-	end
+    if data["ear"]["item"] ~= -1 and data["ear"]["item"] ~= 0 then
+        SetPedPropIndex(ped,2,data["ear"]["item"],data["ear"]["texture"],1)
+    else
+        ClearPedProp(ped,2)
+    end
 
-	if data["watch"]["item"] ~= -1 and data["watch"]["item"] ~= 0 then
-		SetPedPropIndex(ped,6,data["watch"]["item"],data["watch"]["texture"],1)
-	else
-		ClearPedProp(ped,6)
-	end
+    if data["watch"]["item"] ~= -1 and data["watch"]["item"] ~= 0 then
+        SetPedPropIndex(ped,6,data["watch"]["item"],data["watch"]["texture"],1)
+    else
+        ClearPedProp(ped,6)
+    end
 
-	if data["bracelet"]["item"] ~= -1 and data["bracelet"]["item"] ~= 0 then
-		SetPedPropIndex(ped,7,data["bracelet"]["item"],data["bracelet"]["texture"],1)
-	else
-		ClearPedProp(ped,7)
-	end
+    if data["bracelet"]["item"] ~= -1 and data["bracelet"]["item"] ~= 0 then
+        SetPedPropIndex(ped,7,data["bracelet"]["item"],data["bracelet"]["texture"],1)
+    else
+        ClearPedProp(ped,7)
+    end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BARBER

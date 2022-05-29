@@ -71,14 +71,6 @@ CreateThread(function()
 				bodyDelta = bodyLast - bodyCurrent
 				bodyScaled = bodyDelta * 0.6 * classDamage[vehClass + 1]
 
-				if engineCurrent > 101.0 and bodyCurrent > 101.0 then
-					SetVehicleUndriveable(vehicle,false)
-				end
-
-				if engineCurrent <= 101.0 or bodyCurrent <= 101.0 then
-					SetVehicleUndriveable(vehicle,true)
-				end
-
 				if vehicle ~= lastVehicle then
 					sameVehicle = false
 				end
@@ -101,10 +93,6 @@ CreateThread(function()
 
 						if engineNew < 210.0 then
 							engineNew = engineNew - (0.1 * 1.5)
-						end
-
-						if engineNew < 100.0 then
-							engineNew = 100.0
 						end
 
 						if bodyNew < 0 then
@@ -138,7 +126,9 @@ CreateThread(function()
 				lastVehicle = vehicle
 			end
 		else
-			sameVehicle = false
+			if sameVehicle then
+				sameVehicle = false
+			end
 		end
 
 		Wait(timeDistance)
