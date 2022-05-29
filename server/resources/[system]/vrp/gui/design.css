@@ -15,6 +15,47 @@ html,body {
 	background-color: white;
 }
 
+.wprompt {
+	color: #fff;
+	width: 600px;
+	height: 150px;
+	display: flex;
+	border-radius: 3px;
+	position: absolute;
+	padding: 10px 15px;
+	font-family: "Roboto";
+	flex-direction: column;
+	background-color: rgba(15,15,15,.75);
+}
+
+.wprompt h1 {
+	font-size: 13px;
+	font-weight: 300;
+	padding: 7px 0 12px 5px;
+}
+
+.wprompt textarea {
+	flex: 1;
+	color: #ccc;
+	width: 100%;
+	resize: none;
+	padding: 10px;
+	font-size: 15px;
+	box-sizing: border-box;
+	outline: none !important;
+	background-color: rgba(15,15,15,.50);
+	border: 1px solid rgba(255,255,255,0.2);
+}
+
+.wprompt textarea:focus {
+	outline: none !important;
+}
+
+.wprompt .help {
+	font-size: 12px;
+	padding: 12px 0 7px 5px;
+}
+
 .requestManager {
 	width: 450px;
 	bottom: 50px;
@@ -123,4 +164,45 @@ html,body {
 
 #deathText color2 {
 	color: #bd962e;
+}
+
+#identityDiv {
+	top: 175px;
+	right: 50px;
+	color: #ccc;
+	float: right;
+	display: none;
+	max-width: 345px;
+	border-radius: 3px;
+	position: absolute;
+	padding: 10px 20px 20px;
+	text-shadow: 1px 1px #000;
+	background: rgba(15,15,15,.75);
+	border-left: 5px solid #2e6e4c;
+}
+
+.identityLeft {
+	color: #666;
+	float: left;
+	width: 175px;
+	font-size: 11px;
+	margin-top: 10px;
+	line-height: 15px;
+}
+
+.identityRight {
+	color: #777;
+	float: left;
+	width: 150px;
+	font-size: 11px;
+	margin-top: 10px;
+	line-height: 15px;
+	margin-left: 15px;
+}
+
+.identityLeft r, .identityRight r {
+	color: #fff;
+	font-size: 13px;
+	letter-spacing: 1px;
+	font-family: "Saira";
 }
