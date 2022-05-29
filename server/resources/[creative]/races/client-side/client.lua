@@ -79,7 +79,7 @@ CreateThread(function()
 						local distance = #(coords - vec3(v["init"][1],v["init"][2],v["init"][3]))
 						if distance <= 25 then
 							local vehicle = GetVehiclePedIsUsing(ped)
-							if GetPedInVehicleSeat(vehicle,-1) == ped then
+							if GetPedInVehicleSeat(vehicle,-1) == ped and not IsPedOnAnyBike(ped) then
 								DrawMarker(23,v["init"][1],v["init"][2],v["init"][3] - 0.36,0.0,0.0,0.0,0.0,0.0,0.0,10.0,10.0,0.0,46,110,76,100,0,0,0,0)
 								timeDistance = 1
 
@@ -95,7 +95,7 @@ CreateThread(function()
 									end
 
 									if IsControlJustPressed(1,38) then
-										local raceStatus,raceExplosive = vSERVER.checkPermission()
+										local raceStatus,raceExplosive = vSERVER.checkPermission(k)
 										if raceStatus then
 											if displayRanking then
 												SendNUIMessage({ ranking = false })
@@ -181,17 +181,19 @@ function makeObjects()
 		Wait(1)
 	end
 
-	local _,LeftZ = GetGroundZFor_3dCoord(Races[Selected]["coords"][Checkpoints][2][1],Races[Selected]["coords"][Checkpoints][2][2],Races[Selected]["coords"][Checkpoints][2][3])
-	local _,RightZ = GetGroundZFor_3dCoord(Races[Selected]["coords"][Checkpoints][3][1],Races[Selected]["coords"][Checkpoints][3][2],Races[Selected]["coords"][Checkpoints][3][3])
-
-	raceTyres[1] = CreateObject(mHash,Races[Selected]["coords"][Checkpoints][2][1],Races[Selected]["coords"][Checkpoints][2][2],LeftZ,false,false,false)
-	raceTyres[2] = CreateObject(mHash,Races[Selected]["coords"][Checkpoints][3][1],Races[Selected]["coords"][Checkpoints][3][2],RightZ,false,false,false)
+	raceTyres[1] = CreateObjectNoOffset(mHash,Races[Selected]["coords"][Checkpoints][2][1],Races[Selected]["coords"][Checkpoints][2][2],Races[Selected]["coords"][Checkpoints][2][3],false,false,false)
+	raceTyres[2] = CreateObjectNoOffset(mHash,Races[Selected]["coords"][Checkpoints][3][1],Races[Selected]["coords"][Checkpoints][3][2],Races[Selected]["coords"][Checkpoints][3][3],false,false,false)
 
 	PlaceObjectOnGroundProperly(raceTyres[1])
 	PlaceObjectOnGroundProperly(raceTyres[2])
 
+	SetEntityCollision(raceTyres[1],false,false)
+	SetEntityCollision(raceTyres[2],false,false)
+
 	SetEntityLodDist(raceTyres[1],0xFFFF)
 	SetEntityLodDist(raceTyres[2],0xFFFF)
+
+	SetModelAsNoLongerNeeded(mHash)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CLEANBLIPS
@@ -228,18 +230,17 @@ function leaveRace()
 	racePoints = 0
 	Checkpoints = 1
 	CheckBlip = nil
+	ExplodeTimers = 0
+	vSERVER.exitRace()
 	displayRanking = false
 
 	if ExplodeRace then
 		Wait(3000)
 
 		local vehicle = GetPlayersLastVehicle()
-		local coords = GetEntityCoords(vehicle)
-		AddExplosion(coords,2,1.0,true,true,true)
-		vSERVER.exitRace()
+		NetworkExplodeVehicle(vehicle,true,true,false)
 	end
 
-	ExplodeTimers = 0
 	ExplodeRace = false
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -262,3 +263,88 @@ AddEventHandler("races:Table",function(table)
 		SetBlipColour(blip,59)
 	end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIKESMODEL
+-----------------------------------------------------------------------------------------------------------------------------------------
+local oldSpeed = 0
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIKESMODEL
+-----------------------------------------------------------------------------------------------------------------------------------------
+local bikesModel = {
+	[1131912276] = true,
+	[448402357] = true,
+	[-836512833] = true,
+	[-186537451] = true,
+	[1127861609] = true,
+	[-1233807380] = true,
+	[-400295096] = true
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADSYSTEM
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	while true do
+		local timeDistance = 999
+		if not Progress then
+			local Ped = PlayerPedId()
+			if IsPedInAnyVehicle(Ped) then
+				timeDistance = 1
+
+				DisableControlAction(0,345,true)
+
+				local Vehicle = GetVehiclePedIsUsing(Ped)
+				if GetPedInVehicleSeat(Vehicle,-1) == Ped then
+					if GetVehicleDirtLevel(Vehicle) ~= 0.0 then
+						SetVehicleDirtLevel(Vehicle,0.0)
+					end
+
+					local Speed = GetEntitySpeed(Vehicle) * 3.6
+					if Speed ~= oldSpeed then
+						if (oldSpeed - Speed) >= 125 then
+							vehicleTyreBurst(Vehicle)
+						end
+
+						oldSpeed = Speed
+					end
+				end
+			else
+				if oldSpeed ~= 0 then
+					oldSpeed = 0
+				end
+			end
+		end
+
+		Wait(timeDistance)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VEHICLETYREBURST
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vehicleTyreBurst(Vehicle)
+	local vehModel = GetEntityModel(Vehicle)
+	if bikesModel[vehModel] == nil and GetVehicleClass(Vehicle) ~= 8 then
+		local Tyre = math.random(4)
+		if Tyre == 1 then
+			if GetTyreHealth(Vehicle,0) == 1000.0 then
+				SetVehicleTyreBurst(Vehicle,0,true,1000.0)
+			end
+		elseif Tyre == 2 then
+			if GetTyreHealth(Vehicle,1) == 1000.0 then
+				SetVehicleTyreBurst(Vehicle,1,true,1000.0)
+			end
+		elseif Tyre == 3 then
+			if GetTyreHealth(Vehicle,4) == 1000.0 then
+				SetVehicleTyreBurst(Vehicle,4,true,1000.0)
+			end
+		elseif Tyre == 4 then
+			if GetTyreHealth(Vehicle,5) == 1000.0 then
+				SetVehicleTyreBurst(Vehicle,5,true,1000.0)
+			end
+		end
+
+		if math.random(100) < 25 then
+			Wait(500)
+			vehicleTyreBurst(Vehicle)
+		end
+	end
+end
