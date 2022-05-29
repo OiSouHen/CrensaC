@@ -1246,17 +1246,19 @@ end)
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		if not IsPedInAnyVehicle(ped) then
-			local coords = GetEntityCoords(ped)
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) then
+				local coords = GetEntityCoords(ped)
 
-			for k,v in pairs(coordsSystem) do
-				local distance = #(coords - vec3(v[1],v[2],v[3]))
-				if distance <= 2 then
-					timeDistance = 1
+				for k,v in pairs(coordsSystem) do
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
+					if distance <= 2 then
+						timeDistance = 1
 
-					if IsControlJustPressed(1,38) and vSERVER.checkShares() and MumbleIsConnected() then
-						openTattooShop()
+						if IsControlJustPressed(1,38) and vSERVER.checkShares() and MumbleIsConnected() then
+							openTattooShop()
+						end
 					end
 				end
 			end
@@ -1310,7 +1312,7 @@ end)
 RegisterNUICallback("handsup",function()
 	local ped = PlayerPedId()
 	if IsEntityPlayingAnim(ped,"random@mugging3","handsup_standing_base",3) then
-		StopAnimTask(ped,"random@mugging3","handsup_standing_base",2.0)
+		StopAnimTask(ped,"random@mugging3","handsup_standing_base",8.0)
 		vRP.stopActived()
 	else
 		vRP.playAnim(true,{"random@mugging3","handsup_standing_base"},true)
