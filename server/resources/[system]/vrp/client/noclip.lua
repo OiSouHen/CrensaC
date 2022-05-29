@@ -59,7 +59,7 @@ CreateThread(function()
 				z = z - 0.5
 			end
 
-			SetEntityCoordsNoOffset(ped,x,y,z,1,0,0)
+			SetEntityCoordsNoOffset(ped,x,y,z,false,false,false)
 		end
 
 		Wait(timeDistance)
