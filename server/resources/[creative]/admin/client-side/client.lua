@@ -9,6 +9,10 @@ cRP = {}
 Tunnel.bindInterface("admin",cRP)
 vSERVER = Tunnel.getInterface("admin")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- INVISIBLABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+LocalPlayer["state"]["Spectate"] = false
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- TELEPORTWAY
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.teleportWay()
@@ -18,14 +22,14 @@ function cRP.teleportWay()
     end
 
 	local waypointBlip = GetFirstBlipInfoId(8)
-	local x,y,z = table.unpack(Citizen.InvokeNative(0xFA7C7F0AADF25D09,waypointBlip,Citizen.ResultAsVector()))
+	local x,y,z = table.unpack(GetBlipInfoIdCoord(waypointBlip,Citizen.ResultAsVector()))
 
 	local ground
 	local groundFound = false
 	local groundCheckHeights = { 0.0,50.0,100.0,150.0,200.0,250.0,300.0,350.0,400.0,450.0,500.0,550.0,600.0,650.0,700.0,750.0,800.0,850.0,900.0,950.0,1000.0,1050.0,1100.0 }
 
 	for i,height in ipairs(groundCheckHeights) do
-		SetEntityCoordsNoOffset(ped,x,y,height,1,0,0)
+		SetEntityCoordsNoOffset(ped,x,y,height,false,false,false)
 
 		RequestCollisionAtCoord(x,y,z)
 		while not HasCollisionLoadedAroundEntity(ped) do
@@ -52,7 +56,7 @@ function cRP.teleportWay()
 		Wait(1)
 	end
 
-	SetEntityCoordsNoOffset(ped,x,y,z,1,0,0)
+	SetEntityCoordsNoOffset(ped,x,y,z,false,false,false)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TELEPORTWAY
@@ -62,7 +66,7 @@ function cRP.teleportLimbo()
 	local coords = GetEntityCoords(ped)
 	local _,xCoords = GetNthClosestVehicleNode(coords["x"],coords["y"],coords["z"],1,0,0,0)
 
-	SetEntityCoordsNoOffset(ped,xCoords["x"],xCoords["y"],xCoords["z"] + 1,1,0,0)
+	SetEntityCoordsNoOffset(ped,xCoords["x"],xCoords["y"],xCoords["z"] + 1,false,false,false)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VEHICLETUNING
@@ -110,3 +114,26 @@ end)
 -- 		Wait(1)
 -- 	end
 -- end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ADMIN:INITSPECTATE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("admin:initSpectate")
+AddEventHandler("admin:initSpectate",function(Source)
+	if not NetworkIsInSpectatorMode() then
+		local Pid = GetPlayerFromServerId(Source)
+		local Ped = GetPlayerPed(Pid)
+
+		NetworkSetInSpectatorMode(true,Ped)
+		LocalPlayer["state"]["Spectate"] = true
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ADMIN:RESETSPECTATE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("admin:resetSpectate")
+AddEventHandler("admin:resetSpectate",function()
+	if NetworkIsInSpectatorMode() then
+		NetworkSetInSpectatorMode(false)
+		LocalPlayer["state"]["Spectate"] = false
+	end
+end)
