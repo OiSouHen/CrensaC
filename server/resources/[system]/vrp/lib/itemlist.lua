@@ -2,431 +2,101 @@
 -- ITEMLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local itemlist = {
-	["diagram"] = {
-		["index"] = "Diagram",
-		["name"] = "Diagrama",
-		["type"] = "Comum",
-		["weight"] = 0.25
-	},
-	["propertys"] = {
-		["index"] = "propertys",
-		["name"] = "Cartão de Segurança",
-		["type"] = "Comum",
-		["weight"] = 0.25
-	},
-	["megaphone"] = {
-		["index"] = "megaphone",
-		["name"] = "Megafone",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["block"] = true,
-		["weight"] = 2.75
-	},
-	["sprays01"] = {
-		["index"] = "sprays",
-		["name"] = "Spray",
-		["type"] = "Usável",
-		["weight"] = 0.75
-	},
-	["enginea"] = {
-		["index"] = "enginea",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["engineb"] = {
-		["index"] = "engineb",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["enginec"] = {
-		["index"] = "enginec",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["engined"] = {
-		["index"] = "engined",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["enginee"] = {
-		["index"] = "enginee",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissiona"] = {
-		["index"] = "transmissiona",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissionb"] = {
-		["index"] = "transmissionb",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissionc"] = {
-		["index"] = "transmissionc",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissiond"] = {
-		["index"] = "transmissiond",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissione"] = {
-		["index"] = "transmissione",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["brakea"] = {
-		["index"] = "brakea",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 5.25
-	},
-	["brakeb"] = {
-		["index"] = "brakeb",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 5.25
-	},
-	["brakec"] = {
-		["index"] = "brakec",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 5.25
-	},
-	["braked"] = {
-		["index"] = "braked",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 5.25
-	},
-	["brakee"] = {
-		["index"] = "brakee",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 5.25
-	},
-	["suspensiona"] = {
-		["index"] = "suspensiona",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["suspensionb"] = {
-		["index"] = "suspensionb",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["suspensionc"] = {
-		["index"] = "suspensionc",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["suspensiond"] = {
-		["index"] = "suspensiond",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["suspensione"] = {
-		["index"] = "suspensione",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["dismantle"] = {
-		["index"] = "dismantle",
-		["name"] = "Contrato",
-		["desc"] = "Ativando o mesmo você assume a responsabilidade com o <b>Lester</b> de desmanchar um veículo.",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 125,
-		["max"] = 1
-	},
-	["subscriber"] = {
-		["index"] = "subscriber",
-		["name"] = "Inscrição Twitch",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 18000
-	},
-	["repairkit01"] = {
-		["index"] = "repairkit01",
-		["name"] = "Kit de Reparos - Comum",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 525
-	},
-	["repairkit02"] = {
-		["index"] = "repairkit02",
-		["name"] = "Kit de Reparos - Raro",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 3225
-	},
-	["repairkit03"] = {
-		["index"] = "repairkit03",
-		["name"] = "Kit de Reparos - Épico",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 7225
-	},
-	["repairkit04"] = {
-		["index"] = "repairkit04",
-		["name"] = "Kit de Reparos - Lendário",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 15225
-	},
-	["backpolice"] = {
-		["index"] = "backpolice",
-		["name"] = "Mochila da Polícia",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backwar"] = {
-		["index"] = "backwar",
-		["name"] = "Mochila de Guerra",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backtwitch"] = {
-		["index"] = "backtwitch",
-		["name"] = "Mochila da Twitch",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["block"] = true,
-		["economy"] = 0
-	},
-	["backpascoa"] = {
-		["index"] = "backpascoa",
-		["name"] = "Mochila Páscoa 2022",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backschool"] = {
-		["index"] = "backschool",
-		["name"] = "Mochila de Escola",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backcyclist"] = {
-		["index"] = "backcyclist",
-		["name"] = "Mochila de Ciclista",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backcamping"] = {
-		["index"] = "backcamping",
-		["name"] = "Mochila de Acampamento",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backalohomorawhite"] = {
-		["index"] = "backalohomorawhite",
-		["name"] = "Mochila Alohomora Branca",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backalohomorablack"] = {
-		["index"] = "backalohomorablack",
-		["name"] = "Mochila Alohomora Preta",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backalohomorared"] = {
-		["index"] = "backalohomorared",
-		["name"] = "Mochila Alohomora Vermelha",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backrudolphpurple"] = {
-		["index"] = "backrudolphpurple",
-		["name"] = "Mochila Rudolph Roxo",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backrudolphred"] = {
-		["index"] = "backrudolphred",
-		["name"] = "Mochila Rudolph Vermelho",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["gangbox"] = {
-		["index"] = "gangbox",
-		["name"] = "Encomenda",
-		["type"] = "Comum",
-		["weight"] = 30.00,
-		["economy"] = 0
-	},
-	["paper"] = {
-		["index"] = "paper",
-		["name"] = "Papel",
-		["type"] = "Comum",
-		["weight"] = 0.01,
-		["economy"] = 120
-	},
-	["rentalveh"] = {
-		["index"] = "rentalveh",
-		["name"] = "Aluguel de Veículo",
-		["desc"] = "Leve até a concessionária para usa-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["mushroomteaplus"] = {
-		["index"] = "mushroomtea",
-		["name"] = "Chá de Cogumelo",
-		["desc"] = "Aumenta a mochila em 10Kg.",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 325
-	},
-	["instaverify"] = {
-		["index"] = "instaverify",
-		["name"] = "Verificado",
-		["desc"] = "Ativa o verificado no instagram.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 25000
-	},
-	["medicpass"] = {
-		["index"] = "medicbag",
-		["name"] = "Vale - Médico",
-		["desc"] = "Leve até um médico para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["luckywheelpass"] = {
-		["index"] = "luckywheelpass",
-		["name"] = "Vale - Roda da Fortuna",
-		["desc"] = "Leve até o cassino para usa-lo.",
-		["type"] = "Comum",
-		["weight"] = 0.0,
-		["economy"] = 5000
-	},
-	["mechanicpass"] = {
-		["index"] = "mechanicpass",
-		["name"] = "Vale - Mecânico",
-		["desc"] = "Leve até um mecânico para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["dessertspass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - Uwu Café",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["popsdinerpass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - Pop's Diner",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["pizzathispass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - Pizza This",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["burgershotpass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - BurgerShot",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.0,
-		["economy"] = 0
-	},
-	["c4"] = {
-		["index"] = "c4",
-		["name"] = "C4",
-		["type"] = "Usável",
-		["weight"] = 1.0,
-		["max"] = 1,
-		["economy"] = 625
-	},
-	["geode"] = {
-		["index"] = "geode",
-		["name"] = "Geodo",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["pickaxe"] = {
-		["index"] = "pickaxe",
-		["name"] = "Picareta",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 525
-	},
-	["suitcase"] = {
-		["index"] = "suitcase",
-		["name"] = "Maleta",
-		["type"] = "Usável",
-		["weight"] = 1.0,
-		["economy"] = 275
-	},
 	["badge01"] = {
 		["index"] = "badge01",
 		["name"] = "Distintivo",
-		["desc"] = "<green>San Andreas Police Department</green>",
+		["desc"] = "Divisão: <green>Speed Enforcement</green>",
 		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.0,
-		["economy"] = 10
+		["weight"] = 0.0
 	},
 	["badge02"] = {
 		["index"] = "badge02",
 		["name"] = "Distintivo",
+		["desc"] = "Divisão: <green>Internal Affairs</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge03"] = {
+		["index"] = "badge03",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Special Weapons and Tactics</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge04"] = {
+		["index"] = "badge04",
+		["name"] = "Distintivo",
 		["desc"] = "<green>Emergency Medical Services</green>",
 		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.0,
-		["economy"] = 10
+		["weight"] = 0.0
+	},
+	["badge05"] = {
+		["index"] = "badge05",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Department of Corrections</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge06"] = {
+		["index"] = "badge06",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Field Training Operations</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge07"] = {
+		["index"] = "badge07",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Los Santos Police Department</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge08"] = {
+		["index"] = "badge08",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Patrol Operations</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge09"] = {
+		["index"] = "badge09",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Detectives Bureau</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
+	},
+	["badge10"] = {
+		["index"] = "badge10",
+		["name"] = "Distintivo",
+		["desc"] = "<green>Honorary Council</green>",
+		["type"] = "Usável",
+		["weight"] = 0.0
 	},
 	["mushroomtea"] = {
 		["index"] = "mushroomtea",
 		["name"] = "Chá de Cogumelo",
 		["desc"] = "Tempo pedalando reduzido para <green>10 minutos</green> por <green>60 minutos</green>, lembrando que o efeito passa desconectando da cidade.",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 325
+		["weight"] = 0.75
+	},
+	["miner"] = {
+		["index"] = "miner",
+		["name"] = "Mineradora",
+		["type"] = "Usável",
+		["weight"] = 25.0
+	},
+	["cryptocoins"] = {
+		["index"] = "cryptocoins",
+		["name"] = "Criptomoeda",
+		["desc"] = "Cotação atual da moeda: <green>$0,23148</green>",
+		["type"] = "Comum",
+		["weight"] = 0.0
+	},
+	["seaweed"] = {
+		["index"] = "seaweed",
+		["name"] = "Alga Marinha",
+		["type"] = "Comum",
+		["weight"] = 0.10
 	},
 	["nigirizushi"] = {
 		["index"] = "nigirizushi",
@@ -434,8 +104,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 75
+		["max"] = 3
 	},
 	["sushi"] = {
 		["index"] = "sushi",
@@ -443,8 +112,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 75
+		["max"] = 3
 	},
 	["cupcake"] = {
 		["index"] = "cupcake",
@@ -452,8 +120,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 75
+		["max"] = 3
 	},
 	["milkshake"] = {
 		["index"] = "milkshake",
@@ -461,8 +128,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.55,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["cappuccino"] = {
 		["index"] = "cappuccino",
@@ -470,8 +136,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.55,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 155
+		["max"] = 3
 	},
 	["applelove"] = {
 		["index"] = "applelove",
@@ -479,1028 +144,795 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.55,
 		["scape"] = true,
-		["max"] = 2,
-		["economy"] = 75
+		["max"] = 2
 	},
 	["credential"] = {
 		["index"] = "credential",
 		["name"] = "Credencial",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 1025
+		["weight"] = 0.75
 	},
-	["racetrophy"] = {
-		["index"] = "racetrophy",
-		["name"] = "Troféu",
+	["bucket"] = {
+		["index"] = "bucket",
+		["name"] = "Balde",
 		["type"] = "Comum",
-		["weight"] = 5.25,
-		["economy"] = 2250
+		["weight"] = 0.50
 	},
 	["scanner"] = {
 		["index"] = "scanner",
 		["name"] = "Scanner",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 5.00,
-		["economy"] = 6750
+		["weight"] = 5.00
 	},
 	["nitro"] = {
 		["index"] = "nitro",
 		["name"] = "Nitro",
 		["type"] = "Usável",
-		["weight"] = 7.25,
-		["economy"] = 425
+		["weight"] = 10.00
 	},
 	["postit"] = {
 		["index"] = "postit",
 		["name"] = "Post-It",
 		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 20
+		["weight"] = 0.05
 	},
 	["attachsFlashlight"] = {
 		["index"] = "attachsFlashlight",
 		["name"] = "Lanterna Tatica",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 1750
+		["weight"] = 0.75
 	},
 	["attachsCrosshair"] = {
 		["index"] = "attachsCrosshair",
 		["name"] = "Mira Holográfica",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 1750
+		["weight"] = 0.75
 	},
 	["attachsSilencer"] = {
 		["index"] = "attachsSilencer",
 		["name"] = "Silenciador",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 1750
-	},
-	["attachsMagazine"] = {
-		["index"] = "attachsMagazine",
-		["name"] = "Pente Estendido",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 1750
+		["weight"] = 0.75
 	},
 	["attachsGrip"] = {
 		["index"] = "attachsGrip",
 		["name"] = "Empunhadura",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 1750
+		["weight"] = 0.75
 	},
 	["cheese"] = {
 		["index"] = "cheese",
 		["name"] = "Queijo",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 10
+		["weight"] = 0.75
+	},
+	["wheat"] = {
+		["index"] = "wheat",
+		["name"] = "Trigo",
+		["type"] = "Comum",
+		["weight"] = 0.10
 	},
 	["silk"] = {
 		["index"] = "silk",
 		["name"] = "Seda",
 		["type"] = "Comum",
-		["weight"] = 0.05,
-		["economy"] = 5
+		["weight"] = 0.18
 	},
-	["tablecoke"] = {
-		["index"] = "tablecoke",
+	["coketable"] = {
+		["index"] = "coketable",
 		["name"] = "Mesa de Criação",
 		["desc"] = "Utilizada para criação de Cocaína.",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 15.00,
-		["economy"] = 1750
+		["weight"] = 15.00
 	},
-	["tablemeth"] = {
-		["index"] = "tablemeth",
+	["methtable"] = {
+		["index"] = "methtable",
 		["name"] = "Mesa de Criação",
 		["desc"] = "Utilizada para criação de Metanfetamina.",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 15.00,
-		["economy"] = 1750
+		["weight"] = 15.00
 	},
-	["tableweed"] = {
-		["index"] = "tableweed",
+	["weedtable"] = {
+		["index"] = "weedtable",
 		["name"] = "Mesa de Criação",
 		["desc"] = "Utilizada para criação de Baseados.",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 15.00,
-		["economy"] = 1750
+		["weight"] = 15.00
 	},
 	["campfire"] = {
 		["index"] = "campfire",
 		["name"] = "Fogueira",
 		["type"] = "Usável",
-		["weight"] = 10.00,
-		["economy"] = 675
+		["weight"] = 10.00
 	},
 	["barrier"] = {
 		["index"] = "barrier",
 		["name"] = "Barreira",
 		["type"] = "Usável",
-		["weight"] = 1.00,
-		["economy"] = 250
+		["weight"] = 4.25
 	},
 	["medicbag"] = {
 		["index"] = "medicbag",
 		["name"] = "Bolsa Médica",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 2.25,
-		["economy"] = 425
-	},
-	["medicbed"] = {
-		["index"] = "medicbed",
-		["name"] = "Maca Médica",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 7.25,
-		["economy"] = 725
+		["weight"] = 2.25
 	},
 	["chair01"] = {
 		["index"] = "chair01",
 		["name"] = "Cadeira",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 7.25,
-		["economy"] = 750
+		["weight"] = 7.25
 	},
 	["techtrash"] = {
 		["index"] = "techtrash",
 		["name"] = "Lixo Eletrônico",
 		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 125
+		["weight"] = 0.65
 	},
 	["tarp"] = {
 		["index"] = "tarp",
 		["name"] = "Lona",
 		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 50
+		["weight"] = 0.45
 	},
 	["sheetmetal"] = {
 		["index"] = "sheetmetal",
 		["name"] = "Chapa de Metal",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 50
+		["weight"] = 0.75
 	},
 	["roadsigns"] = {
 		["index"] = "roadsigns",
 		["name"] = "Placas de Trânsito",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 50
+		["weight"] = 0.10
 	},
 	["leather"] = {
 		["index"] = "leather",
 		["name"] = "Couro",
 		["type"] = "Comum",
-		["weight"] = 0.05,
-		["economy"] = 20
+		["weight"] = 0.05
 	},
 	["explosives"] = {
 		["index"] = "explosives",
 		["name"] = "Explosivos",
 		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 75
+		["weight"] = 0.15
 	},
 	["animalfat"] = {
 		["index"] = "animalfat",
 		["name"] = "Gordura Animal",
 		["type"] = "Comum",
-		["weight"] = 0.02,
-		["economy"] = 10
+		["weight"] = 0.02
 	},
 	["fidentity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
 		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 10000
+		["weight"] = 0.10
 	},
 	["identity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
 		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 5000
+		["weight"] = 0.10
 	},
 	["blocksignal"] = {
 		["index"] = "blocksignal",
 		["name"] = "Bloqueador de Sinal",
 		["type"] = "Usável",
-		["weight"] = 0.55,
-		["economy"] = 325
+		["weight"] = 0.55
 	},
 	["pistolbody"] = {
 		["index"] = "pistolbody",
 		["name"] = "Corpo de Pistola",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 425
+		["weight"] = 0.25
 	},
 	["smgbody"] = {
 		["index"] = "smgbody",
 		["name"] = "Corpo de Sub-Metralhadora",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 525
+		["weight"] = 0.25
 	},
 	["riflebody"] = {
 		["index"] = "riflebody",
 		["name"] = "Corpo de Rifle",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 625
+		["weight"] = 0.25
 	},
 	["cotton"] = {
 		["index"] = "cotton",
 		["name"] = "Algodão",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 45
+		["weight"] = 0.25
 	},
 	["plaster"] = {
 		["index"] = "plaster",
 		["name"] = "Esparadrapo",
 		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 35
+		["weight"] = 0.35
 	},
 	["sulfuric"] = {
 		["index"] = "sulfuric",
 		["name"] = "Ácido Sulfúrico",
 		["type"] = "Usável",
-		["weight"] = 0.45,
-		["economy"] = 30
+		["weight"] = 0.45
 	},
 	["saline"] = {
 		["index"] = "saline",
 		["name"] = "Soro Fisiológico",
 		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 25
+		["weight"] = 0.45
 	},
 	["defibrillator"] = {
 		["index"] = "defibrillator",
 		["name"] = "Desfibrilador",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 3,
-		["weight"] = 3.25,
-		["economy"] = 325
+		["weight"] = 3.25
 	},
 	["alcohol"] = {
 		["index"] = "alcohol",
 		["name"] = "Álcool",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 40
+		["weight"] = 0.75
 	},
 	["notebook"] = {
 		["index"] = "notebook",
 		["name"] = "Notebook",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 3,
-		["weight"] = 7.25,
-		["economy"] = 4250
+		["weight"] = 7.25
 	},
 	["syringe"] = {
-		["index"] = "syringe",
+		["index"] = "adrenaline",
 		["name"] = "Seringa",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 2
+		["weight"] = 0.10
 	},
 	["syringe01"] = {
-		["index"] = "syringe2",
+		["index"] = "syringe",
 		["name"] = "Seringa A+",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 10
+		["weight"] = 0.10
 	},
 	["syringe02"] = {
-		["index"] = "syringe2",
+		["index"] = "syringe",
 		["name"] = "Seringa B+",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 10
+		["weight"] = 0.10
 	},
 	["syringe03"] = {
-		["index"] = "syringe2",
+		["index"] = "syringe",
 		["name"] = "Seringa A-",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 10
+		["weight"] = 0.10
 	},
 	["syringe04"] = {
-		["index"] = "syringe2",
+		["index"] = "syringe",
 		["name"] = "Seringa B-",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 10
+		["weight"] = 0.10
 	},
-	["burgershot1"] = {
-		["index"] = "burgershot1",
+	["foodburger"] = {
+		["index"] = "foodburger",
+		["name"] = "Caixa de Hamburger",
+		["type"] = "Comum",
+		["weight"] = 0.15,
+		["max"] = 1
+	},
+	["foodjuice"] = {
+		["index"] = "foodjuice",
 		["name"] = "Copo de Suco",
 		["type"] = "Comum",
 		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
+		["max"] = 1
 	},
-	["burgershot2"] = {
-		["index"] = "burgershot2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["burgershot3"] = {
-		["index"] = "burgershot3",
+	["foodbox"] = {
+		["index"] = "foodbox",
 		["name"] = "Combo",
 		["type"] = "Comum",
 		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["burgershot4"] = {
-		["index"] = "burgershot3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["pizzathis1"] = {
-		["index"] = "pizzathis1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["pizzathis2"] = {
-		["index"] = "pizzathis2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["pizzathis3"] = {
-		["index"] = "pizzathis3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["pizzathis4"] = {
-		["index"] = "pizzathis3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["popsdiner1"] = {
-		["index"] = "popsdiner1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["popsdiner2"] = {
-		["index"] = "popsdiner2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["popsdiner3"] = {
-		["index"] = "popsdiner3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["popsdiner4"] = {
-		["index"] = "popsdiner3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["uwucoffee1"] = {
-		["index"] = "uwucoffee1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["uwucoffee2"] = {
-		["index"] = "uwucoffee2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["uwucoffee3"] = {
-		["index"] = "uwucoffee3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["uwucoffee4"] = {
-		["index"] = "uwucoffee3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["beanmachine1"] = {
-		["index"] = "beanmachine1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["beanmachine2"] = {
-		["index"] = "beanmachine2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["beanmachine3"] = {
-		["index"] = "beanmachine3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["beanmachine4"] = {
-		["index"] = "beanmachine3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.00,
-		["max"] = 2,
-		["economy"] = 270
+		["max"] = 2
 	},
 	["wheelchair"] = {
 		["index"] = "wheelchair",
 		["name"] = "Cadeira de Rodas",
 		["type"] = "Usável",
-		["weight"] = 7.50,
-		["block"] = true,
-		["economy"] = 2750
+		["weight"] = 7.50
 	},
 	["vehkey"] = {
 		["index"] = "vehkey",
 		["name"] = "Chave Cópia",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 0
+		["weight"] = 0.75
 	},
 	["evidence01"] = {
 		["index"] = "evidence01",
 		["name"] = "Evidência",
 		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 0
+		["weight"] = 0.05
 	},
 	["evidence02"] = {
 		["index"] = "evidence02",
 		["name"] = "Evidência",
 		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 0
+		["weight"] = 0.05
 	},
 	["evidence03"] = {
 		["index"] = "evidence03",
 		["name"] = "Evidência",
 		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 0
+		["weight"] = 0.05
 	},
 	["evidence04"] = {
 		["index"] = "evidence04",
 		["name"] = "Evidência",
 		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 0
+		["weight"] = 0.05
 	},
 	["rottweiler"] = {
 		["index"] = "rottweiler",
 		["name"] = "Coleira de Rottweiler",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["husky"] = {
 		["index"] = "husky",
 		["name"] = "Coleira de Husky",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["shepherd"] = {
 		["index"] = "shepherd",
 		["name"] = "Coleira de Shepherd",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["retriever"] = {
 		["index"] = "retriever",
 		["name"] = "Coleira de Retriever",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["poodle"] = {
 		["index"] = "poodle",
 		["name"] = "Coleira de Poodle",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["pug"] = {
 		["index"] = "pug",
 		["name"] = "Coleira de Pug",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["westy"] = {
 		["index"] = "westy",
 		["name"] = "Coleira de Westy",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["cat"] = {
 		["index"] = "cat",
 		["name"] = "Coleira de Gato",
 		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
+		["weight"] = 1.25
 	},
 	["card01"] = {
 		["index"] = "card01",
 		["name"] = "Cartão Comum",
-		["desc"] = "Roubar Lojas de Departamento.",
-		["repair"] = "repairkit01",
+		["desc"] = "Roubar Lojas de departamentStoreo.",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.10,
-		["economy"] = 325
+		["weight"] = 0.10
 	},
 	["card02"] = {
 		["index"] = "card02",
 		["name"] = "Cartão In-Comum",
 		["desc"] = "Roubar Lojas de Armas.",
-		["repair"] = "repairkit01",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.10,
-		["economy"] = 325
+		["weight"] = 0.10
 	},
 	["card03"] = {
 		["index"] = "card03",
-		["name"] = "Cartão Épico",
+		["name"] = "Cartão Normal",
 		["desc"] = "Roubar Bancos Fleeca.",
-		["repair"] = "repairkit01",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.10,
-		["economy"] = 375
+		["weight"] = 0.10
 	},
 	["card04"] = {
 		["index"] = "card04",
 		["name"] = "Cartão Raro",
 		["desc"] = "Roubar Barbearias.",
-		["repair"] = "repairkit01",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.10,
-		["economy"] = 275
+		["weight"] = 0.10
 	},
 	["card05"] = {
 		["index"] = "card05",
 		["name"] = "Cartão Lendário",
 		["desc"] = "Roubar Bancos.",
-		["repair"] = "repairkit01",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.10,
-		["economy"] = 425
+		["weight"] = 0.10
 	},
 	["gemstone"] = {
 		["index"] = "gemstone",
 		["name"] = "Gemstone",
 		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 2000
+		["weight"] = 0.10
+	},
+	["key"] = {
+		["index"] = "key",
+		["name"] = "Chaves",
+		["type"] = "Comum",
+		["durability"] = 3,
+		["weight"] = 0.25
 	},
 	["radio"] = {
 		["index"] = "radio",
 		["name"] = "Rádio",
 		["type"] = "Usável",
-		["repair"] = "repairkit01",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["vest"] = {
 		["index"] = "vest",
 		["name"] = "Colete",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 3,
 		["weight"] = 2.25,
-		["max"] = 1,
-		["economy"] = 750
+		["max"] = 1
 	},
 	["bandage"] = {
 		["index"] = "bandage",
 		["name"] = "Bandagem",
 		["type"] = "Usável",
 		["weight"] = 0.10,
-		["max"] = 3,
-		["economy"] = 225
+		["max"] = 3
 	},
 	["medkit"] = {
 		["index"] = "medkit",
 		["name"] = "Kit Médico",
 		["type"] = "Usável",
 		["weight"] = 0.45,
-		["max"] = 1,
-		["economy"] = 575
+		["max"] = 1
+	},
+	["adrenaline"] = {
+		["index"] = "adrenaline",
+		["name"] = "Adrenalina",
+		["type"] = "Usável",
+		["weight"] = 0.35
 	},
 	["pouch"] = {
 		["index"] = "pouch",
 		["name"] = "Malote",
 		["type"] = "Comum",
-		["weight"] = 1.75,
-		["economy"] = 80
+		["weight"] = 0.75
 	},
 	["woodlog"] = {
 		["index"] = "woodlog",
 		["name"] = "Tora de Madeira",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 40
+		["weight"] = 0.75
 	},
 	["fishingrod"] = {
 		["index"] = "fishingrod",
 		["name"] = "Vara de Pescar",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 7,
-		["weight"] = 2.75,
-		["economy"] = 725
+		["weight"] = 2.75
 	},
 	["switchblade"] = {
 		["index"] = "switchblade",
 		["name"] = "Canivete",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["desc"] = "Utilizada para remoção de carne.",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 525
+		["weight"] = 0.75
 	},
 	["octopus"] = {
 		["index"] = "octopus",
 		["name"] = "Polvo",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 14
+		["weight"] = 0.75
 	},
 	["shrimp"] = {
 		["index"] = "shrimp",
 		["name"] = "Camarão",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 14
+		["weight"] = 0.50
 	},
 	["carp"] = {
 		["index"] = "carp",
 		["name"] = "Carpa",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 12
+		["weight"] = 0.50
 	},
 	["codfish"] = {
 		["index"] = "codfish",
 		["name"] = "Bacalhau",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 16
+		["weight"] = 0.50
 	},
 	["catfish"] = {
 		["index"] = "catfish",
 		["name"] = "Bagre",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 16
+		["weight"] = 0.50
 	},
 	["goldenfish"] = {
 		["index"] = "goldenfish",
 		["name"] = "Dourado",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 18
+		["weight"] = 0.25
 	},
 	["horsefish"] = {
 		["index"] = "horsefish",
 		["name"] = "Cavala",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 12
+		["weight"] = 0.50
 	},
 	["tilapia"] = {
 		["index"] = "tilapia",
 		["name"] = "Tilápia",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 14
+		["weight"] = 0.25
 	},
 	["pacu"] = {
 		["index"] = "pacu",
 		["name"] = "Pacu",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 18
+		["weight"] = 0.50
 	},
 	["pirarucu"] = {
 		["index"] = "pirarucu",
 		["name"] = "Pirarucu",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 18
+		["weight"] = 0.25
 	},
 	["tambaqui"] = {
 		["index"] = "tambaqui",
 		["name"] = "Tambaqui",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 18
+		["weight"] = 0.75
 	},
 	["bait"] = {
 		["index"] = "bait",
 		["name"] = "Isca",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 4
+		["weight"] = 0.25
 	},
 	["animalpelt"] = {
 		["index"] = "animalpelt",
 		["name"] = "Pele Animal",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 25
-	},
-	["weedclone"] = {
-		["index"] = "weedclone",
-		["name"] = "Clonagem de Maconha",
-		["type"] = "Usável",
-		["weight"] = 0.15
-	},
-	["weedleaf"] = {
-		["index"] = "weedleaf",
-		["name"] = "Folha de Maconha",
-		["type"] = "Comum",
-		["weight"] = 0.30
+		["weight"] = 0.10
 	},
 	["joint"] = {
 		["index"] = "joint",
 		["name"] = "Baseado",
 		["type"] = "Usável",
-		["weight"] = 0.45
+		["weight"] = 0.50
+	},
+	["weedleaf"] = {
+		["index"] = "weedleaf",
+		["name"] = "Folha de Maconha",
+		["type"] = "Comum",
+		["weight"] = 0.50
+	},
+	["fertilizer"] = {
+		["index"] = "fertilizer",
+		["name"] = "Fertilizante",
+		["type"] = "Comum",
+		["weight"] = 5.0
+	},
+	["weedseed"] = {
+		["index"] = "weedseed",
+		["name"] = "Semente de Maconha",
+		["type"] = "Usável",
+		["weight"] = 0.10
+	},
+	["lean"] = {
+		["index"] = "lean",
+		["name"] = "Lean",
+		["type"] = "Usável",
+		["weight"] = 0.50
 	},
 	["codeine"] = {
 		["index"] = "codeine",
 		["name"] = "Codeína",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 35
+		["weight"] = 0.10
+	},
+	["ecstasy"] = {
+		["index"] = "ecstasy",
+		["name"] = "Ecstasy",
+		["type"] = "Usável",
+		["weight"] = 0.50
 	},
 	["amphetamine"] = {
 		["index"] = "amphetamine",
 		["name"] = "Anfetamina",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 45
+		["weight"] = 0.10
 	},
 	["cocaine"] = {
 		["index"] = "cocaine",
 		["name"] = "Cocaína",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 35
+		["weight"] = 0.50
+	},
+	["cokeseed"] = {
+		["index"] = "cokeseed",
+		["name"] = "Semente de Cocaína",
+		["type"] = "Usável",
+		["weight"] = 0.10
 	},
 	["cokeleaf"] = {
 		["index"] = "cokeleaf",
 		["name"] = "Folha de Coca",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 5
+		["weight"] = 0.10
+	},
+	["mushseed"] = {
+		["index"] = "mushseed",
+		["name"] = "Semente de Cogumelo",
+		["type"] = "Usável",
+		["weight"] = 0.10
 	},
 	["meth"] = {
 		["index"] = "meth",
 		["name"] = "Metanfetamina",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 35
+		["weight"] = 0.50
 	},
 	["acetone"] = {
 		["index"] = "acetone",
 		["name"] = "Acetona",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 40
+		["weight"] = 0.10
 	},
-	["drugtoy"] = {
-		["index"] = "drugtoy",
-		["name"] = "Brinquedo",
+	["heroine"] = {
+		["index"] = "heroine",
+		["name"] = "Heroína",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 100
-	},
-	["rolepass"] = {
-		["index"] = "rolepass",
-		["name"] = "Rolepass",
-		["type"] = "Usável",
-		["weight"] = 0.00,
-		["economy"] = 200000
+		["weight"] = 0.50
 	},
 	["premium"] = {
 		["index"] = "premium",
 		["name"] = "Premium",
 		["type"] = "Usável",
-		["weight"] = 0.00,
-		["economy"] = 150000
+		["weight"] = 0.00
 	},
 	["newlocate"] = {
 		["index"] = "newlocate",
 		["name"] = "Nacionalidade",
 		["type"] = "Usável",
 		["desc"] = "Inverte nacionalidade de Sul/Norte.",
-		["weight"] = 0.00,
-		["economy"] = 200000
+		["weight"] = 0.00
+	},
+	["newgarage"] = {
+		["index"] = "newgarage",
+		["name"] = "+1 Garagem",
+		["type"] = "Usável",
+		["desc"] = "Limite de garagem em +1.",
+		["weight"] = 0.00
 	},
 	["premiumplate"] = {
 		["index"] = "platepremium",
 		["name"] = "Placa Premium",
 		["type"] = "Usável",
 		["desc"] = "Personaliza a placa do veículo.",
-		["weight"] = 0.00,
-		["economy"] = 100000
+		["weight"] = 0.00
 	},
 	["newchars"] = {
 		["index"] = "newchars",
 		["name"] = "+1 Personagem",
 		["type"] = "Usável",
 		["desc"] = "Limite de personagem em +1.",
-		["weight"] = 0.00,
-		["economy"] = 150000
+		["weight"] = 0.00
 	},
 	["chip"] = {
 		["index"] = "chip",
 		["name"] = "Chip Telefônico",
 		["type"] = "Usável",
 		["desc"] = "Troca o número telefônico.",
-		["weight"] = 0.00,
-		["economy"] = 120000
+		["weight"] = 0.00
 	},
 	["namechange"] = {
 		["index"] = "namechange",
 		["name"] = "Troca de Nome",
 		["type"] = "Usável",
 		["desc"] = "Troca o nome do personagem.",
-		["weight"] = 0.00,
-		["economy"] = 100000
+		["weight"] = 0.00
 	},
 	["contract1"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 1.",
-		["weight"] = 0.00,
-		["economy"] = 125000
+		["weight"] = 0.00
 	},
 	["contract2"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 2.",
-		["weight"] = 0.00,
-		["economy"] = 300000
+		["weight"] = 0.00
 	},
 	["contract3"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 3.",
-		["weight"] = 0.00,
-		["economy"] = 75000
+		["weight"] = 0.00
 	},
 	["contract4"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 4.",
-		["weight"] = 0.00,
-		["economy"] = 175000
+		["weight"] = 0.00
 	},
 	["contract5"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 5.",
-		["weight"] = 0.00,
-		["economy"] = 125000
+		["weight"] = 0.00
 	},
 	["contract6"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 6.",
-		["weight"] = 0.00,
-		["economy"] = 250000
+		["weight"] = 0.00
 	},
 	["contract7"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 7.",
-		["weight"] = 0.00,
-		["economy"] = 75000
+		["weight"] = 0.00
 	},
 	["contract8"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 8.",
-		["weight"] = 0.00,
-		["economy"] = 250000
+		["weight"] = 0.00
 	},
 	["contract9"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do interior 9.",
-		["weight"] = 0.00,
-		["economy"] = 175000
+		["weight"] = 0.00
 	},
 	["contract10"] = {
 		["index"] = "contract",
 		["name"] = "Contrato de Propriedade",
 		["type"] = "Usável",
 		["desc"] = "Assinatura de contrato do container.",
-		["weight"] = 0.00,
-		["economy"] = 100000
+		["weight"] = 0.00
 	},
 	["energetic"] = {
 		["index"] = "energetic",
 		["name"] = "Energético",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 5,
-		["economy"] = 15
+		["max"] = 5
 	},
 	["milkbottle"] = {
 		["index"] = "milkbottle",
@@ -1508,17 +940,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.15,
 		["scape"] = true,
-		["max"] = 5,
-		["economy"] = 35
-	},
-	["guarananatural"] = {
-		["index"] = "guarananatural",
-		["name"] = "Guaraná Natural",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 100
+		["max"] = 5
 	},
 	["water"] = {
 		["index"] = "water",
@@ -1526,165 +948,116 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.15,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 30
+		["max"] = 3
 	},
 	["emptybottle"] = {
 		["index"] = "emptybottle",
 		["name"] = "Garrafa Vazia",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["weight"] = 0.10,
 		["scape"] = true,
-		["max"] = 5,
-		["economy"] = 30
+		["max"] = 5
 	},
 	["coffee"] = {
 		["index"] = "coffee",
 		["name"] = "Copo de Café",
 		["type"] = "Usável",
 		["weight"] = 0.15,
-		["max"] = 3,
-		["economy"] = 20
-	},
-	["coffeemilk"] = {
-		["index"] = "coffeemilk",
-		["name"] = "Café com Leite",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["max"] = 3,
-		["economy"] = 95
+		["max"] = 3
 	},
 	["cola"] = {
 		["index"] = "cola",
 		["name"] = "Cola",
 		["type"] = "Usável",
 		["weight"] = 0.15,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["tacos"] = {
 		["index"] = "tacos",
 		["name"] = "Tacos",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 3,
-		["economy"] = 22
+		["max"] = 3
 	},
 	["fries"] = {
 		["index"] = "fries",
 		["name"] = "Fritas",
 		["type"] = "Usável",
 		["weight"] = 0.15,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["soda"] = {
 		["index"] = "soda",
 		["name"] = "Sprunk",
 		["type"] = "Usável",
 		["weight"] = 0.15,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["apple"] = {
 		["index"] = "apple",
 		["name"] = "Maça",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["orange"] = {
 		["index"] = "orange",
 		["name"] = "Laranja",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["strawberry"] = {
 		["index"] = "strawberry",
 		["name"] = "Morango",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 10
+		["weight"] = 0.15
 	},
 	["coffee2"] = {
 		["index"] = "coffee2",
 		["name"] = "Grão de Café",
 		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 10
+		["weight"] = 0.10
 	},
 	["grape"] = {
 		["index"] = "grape",
 		["name"] = "Uva",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 10
+		["weight"] = 0.15
 	},
 	["tange"] = {
 		["index"] = "tange",
 		["name"] = "Tangerina",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["banana"] = {
 		["index"] = "banana",
 		["name"] = "Banana",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["guarana"] = {
-		["index"] = "guarana",
-		["name"] = "Guaraná",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["acerola"] = {
-		["index"] = "acerola",
-		["name"] = "Acerola",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["passion"] = {
 		["index"] = "passion",
 		["name"] = "Maracujá",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["tomato"] = {
 		["index"] = "tomato",
 		["name"] = "Tomate",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 10
+		["weight"] = 0.15
 	},
 	["mushroom"] = {
 		["index"] = "mushroom",
 		["name"] = "Cogumelo",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 10
+		["weight"] = 0.15
 	},
 	["sugar"] = {
 		["index"] = "sugar",
 		["name"] = "Açucar",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 6
-	},
-	["cookies"] = {
-		["index"] = "cookies",
-		["name"] = "Cookies",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 55
+		["weight"] = 0.10
 	},
 	["orangejuice"] = {
 		["index"] = "orangejuice",
@@ -1692,8 +1065,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.75,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["tangejuice"] = {
 		["index"] = "tangejuice",
@@ -1701,8 +1073,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["grapejuice"] = {
 		["index"] = "grapejuice",
@@ -1710,8 +1081,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["strawberryjuice"] = {
 		["index"] = "strawberryjuice",
@@ -1719,8 +1089,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["bananajuice"] = {
 		["index"] = "bananajuice",
@@ -1728,17 +1097,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
-	},
-	["acerolajuice"] = {
-		["index"] = "acerolajuice",
-		["name"] = "Suco de Acerola",
-		["type"] = "Usável",
-		["weight"] = 0.45,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["passionjuice"] = {
 		["index"] = "passionjuice",
@@ -1746,50 +1105,43 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.45,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
+		["max"] = 3
 	},
 	["bread"] = {
 		["index"] = "bread",
 		["name"] = "Pão",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 5
+		["weight"] = 0.25
 	},
 	["ketchup"] = {
 		["index"] = "ketchup",
 		["name"] = "Ketchup",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["cannedsoup"] = {
 		["index"] = "cannedsoup",
 		["name"] = "Sopa em Lata",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 55
+		["weight"] = 0.25
 	},
 	["canofbeans"] = {
 		["index"] = "canofbeans",
 		["name"] = "Lata de Feijão",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 55
+		["weight"] = 0.25
 	},
 	["meat"] = {
 		["index"] = "meat",
 		["name"] = "Carne Animal",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 16
+		["weight"] = 0.75
 	},
 	["fishfillet"] = {
 		["index"] = "fishfillet",
 		["name"] = "Filé de Peixe",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 10
+		["weight"] = 0.75
 	},
 	["marshmallow"] = {
 		["index"] = "marshmallow",
@@ -1797,8 +1149,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.15,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 35
+		["max"] = 3
 	},
 	["cookedfishfillet"] = {
 		["index"] = "cookedfishfillet",
@@ -1806,8 +1157,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.35,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 35
+		["max"] = 3
 	},
 	["cookedmeat"] = {
 		["index"] = "cookedmeat",
@@ -1815,16 +1165,14 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.35,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 35
+		["max"] = 3
 	},
 	["hamburger"] = {
 		["index"] = "hamburger",
 		["name"] = "Hambúrguer",
 		["type"] = "Usável",
 		["weight"] = 0.35,
-		["max"] = 3,
-		["economy"] = 25
+		["max"] = 3
 	},
 	["hamburger2"] = {
 		["index"] = "hamburger2",
@@ -1832,122 +1180,72 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.55,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
+		["max"] = 3
 	},
-	["onionrings"] = {
-		["index"] = "onionrings",
-		["name"] = "Anéis de Cebola",
-		["type"] = "Usável",
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 95
-	},
-	["chickenfries"] = {
-		["index"] = "chickenfries",
-		["name"] = "Frango Frito",
-		["type"] = "Usável",
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 125
-	},
-	["pizzamozzarella"] = {
-		["index"] = "pizzamozzarella",
+	["pizza"] = {
+		["index"] = "pizza",
 		["name"] = "Pizza de Muçarela",
 		["type"] = "Usável",
 		["weight"] = 0.35,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
+		["max"] = 3
 	},
-	["pizzamushroom"] = {
-		["index"] = "pizzamushroom",
+	["pizza2"] = {
+		["index"] = "pizza2",
 		["name"] = "Pizza de Cogumelo",
 		["type"] = "Usável",
 		["weight"] = 0.35,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
-	},
-	["pizzabanana"] = {
-		["index"] = "pizzabanana",
-		["name"] = "Pizza de Banana",
-		["type"] = "Usável",
-		["weight"] = 0.35,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
-	},
-	["pizzachocolate"] = {
-		["index"] = "pizzachocolate",
-		["name"] = "Pizza de Chocolate",
-		["type"] = "Usável",
-		["weight"] = 0.35,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
-	},
-	["calzone"] = {
-		["index"] = "calzone",
-		["name"] = "Calzone",
-		["type"] = "Usável",
-		["weight"] = 0.35,
-		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 150
+		["max"] = 3
 	},
 	["hotdog"] = {
 		["index"] = "hotdog",
 		["name"] = "Cachorro-Quente",
 		["type"] = "Usável",
 		["weight"] = 0.35,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["donut"] = {
 		["index"] = "donut",
 		["name"] = "Rosquinha",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["plate"] = {
 		["index"] = "plate",
 		["name"] = "Placa",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 525
+		["weight"] = 0.50
 	},
 	["lockpick"] = {
 		["index"] = "lockpick",
 		["name"] = "Lockpick de Alumínio",
 		["desc"] = "Utilizada para roubar veículos.",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 575
+		["weight"] = 1.25
 	},
 	["lockpick2"] = {
 		["index"] = "lockpick2",
 		["name"] = "Lockpick de Cobre",
 		["desc"] = "Utilizada para roubar propriedades.",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 575
+		["weight"] = 1.25
+	},
+	["brokenpick"] = {
+		["index"] = "brokenpick",
+		["name"] = "Lockpick Quebrado",
+		["type"] = "Comum",
+		["weight"] = 1.25
 	},
 	["toolbox"] = {
 		["index"] = "toolbox",
 		["name"] = "Ferramentas Básicas",
 		["type"] = "Usável",
 		["weight"] = 1.75,
-		["max"] = 2,
-		["economy"] = 625
+		["max"] = 2
 	},
 	["advtoolbox"] = {
 		["index"] = "toolbox",
@@ -1955,194 +1253,168 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 2.25,
 		["charges"] = 3,
-		["max"] = 1,
-		["economy"] = 1525
+		["max"] = 1
 	},
 	["notepad"] = {
 		["index"] = "notepad",
 		["name"] = "Bloco de Notas",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+		["weight"] = 0.25
 	},
 	["tyres"] = {
 		["index"] = "tyres",
 		["name"] = "Pneu",
 		["type"] = "Usável",
 		["weight"] = 1.50,
-		["max"] = 4,
-		["economy"] = 225
+		["max"] = 4
 	},
 	["cellphone"] = {
 		["index"] = "cellphone",
 		["name"] = "Celular",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["durability"] = 14,
-		["weight"] = 0.75,
-		["economy"] = 575
+		["weight"] = 0.75
 	},
 	["divingsuit"] = {
 		["index"] = "divingsuit",
 		["name"] = "Roupa de Mergulho",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 14,
-		["weight"] = 4.75,
-		["economy"] = 975
+		["weight"] = 4.75
 	},
 	["handcuff"] = {
 		["index"] = "handcuff",
 		["name"] = "Algemas",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 5750
+		["durability"] = 3,
+		["weight"] = 0.75
 	},
 	["rope"] = {
 		["index"] = "rope",
 		["name"] = "Cordas",
-		["repair"] = "repairkit01",
 		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 1.50,
-		["economy"] = 875
+		["durability"] = 3,
+		["weight"] = 1.50
 	},
 	["hood"] = {
 		["index"] = "hood",
 		["name"] = "Capuz",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 1.50,
-		["economy"] = 5750
+		["durability"] = 3,
+		["weight"] = 1.50
+	},
+	["nails"] = {
+		["index"] = "nails",
+		["name"] = "Pregos",
+		["type"] = "Comum",
+		["weight"] = 0.075
 	},
 	["plastic"] = {
 		["index"] = "plastic",
 		["name"] = "Plástico",
 		["type"] = "Comum",
-		["weight"] = 0.075,
-		["economy"] = 20
+		["weight"] = 0.075
 	},
 	["glass"] = {
 		["index"] = "glass",
 		["name"] = "Vidro",
 		["type"] = "Comum",
-		["weight"] = 0.075,
-		["economy"] = 20
+		["weight"] = 0.075
 	},
 	["rubber"] = {
 		["index"] = "rubber",
 		["name"] = "Borracha",
 		["type"] = "Comum",
-		["weight"] = 0.050,
-		["economy"] = 20
+		["weight"] = 0.050
 	},
 	["aluminum"] = {
 		["index"] = "aluminum",
 		["name"] = "Alumínio",
 		["type"] = "Comum",
-		["weight"] = 0.075,
-		["economy"] = 30
+		["weight"] = 0.075
 	},
 	["copper"] = {
 		["index"] = "copper",
 		["name"] = "Cobre",
 		["type"] = "Comum",
-		["weight"] = 0.075,
-		["economy"] = 30
+		["weight"] = 0.075
 	},
 	["newspaper"] = {
 		["index"] = "newspaper",
 		["name"] = "Jornal",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 60
+		["weight"] = 0.375
 	},
 	["ritmoneury"] = {
 		["index"] = "ritmoneury",
 		["name"] = "Ritmoneury",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 2,
-		["economy"] = 475
+		["max"] = 2
 	},
 	["sinkalmy"] = {
 		["index"] = "sinkalmy",
 		["name"] = "Sinkalmy",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 2,
-		["economy"] = 375
+		["max"] = 2
 	},
 	["cigarette"] = {
 		["index"] = "cigarette",
 		["name"] = "Cigarro",
 		["type"] = "Usável",
 		["weight"] = 0.05,
-		["max"] = 5,
-		["economy"] = 10
+		["max"] = 5
 	},
 	["lighter"] = {
 		["index"] = "lighter",
 		["name"] = "Isqueiro",
-		["repair"] = "repairkit01",
 		["durability"] = 7,
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 175
+		["weight"] = 0.25
 	},
 	["vape"] = {
 		["index"] = "vape",
 		["name"] = "Vape",
-		["repair"] = "repairkit02",
 		["type"] = "Usável",
 		["durability"] = 14,
-		["weight"] = 0.75,
-		["economy"] = 4750
+		["weight"] = 0.75
 	},
 	["dollars"] = {
 		["index"] = "dollars",
 		["name"] = "Dólares",
 		["type"] = "Comum",
-		["weight"] = 0.0,
-		["economy"] = 1
+		["weight"] = 0.0001
 	},
 	["battery"] = {
 		["index"] = "battery",
 		["name"] = "Pilhas",
 		["type"] = "Comum",
-		["weight"] = 0.20,
-		["economy"] = 90
+		["weight"] = 0.20
 	},
 	["elastic"] = {
 		["index"] = "elastic",
 		["name"] = "Elástico",
 		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 60
+		["weight"] = 0.10
 	},
 	["plasticbottle"] = {
 		["index"] = "plasticbottle",
 		["name"] = "Garrafa Plástica",
 		["type"] = "Comum",
-		["weight"] = 0.20,
-		["economy"] = 60
+		["weight"] = 0.20
 	},
 	["glassbottle"] = {
 		["index"] = "glassbottle",
 		["name"] = "Garrafa de Vidro",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 60
+		["weight"] = 0.50
 	},
 	["metalcan"] = {
 		["index"] = "metalcan",
 		["name"] = "Lata de Metal",
 		["type"] = "Comum",
-		["weight"] = 0.20,
-		["economy"] = 90
+		["weight"] = 0.20
 	},
 	["chocolate"] = {
 		["index"] = "chocolate",
@@ -2150,97 +1422,82 @@ local itemlist = {
 		["type"] = "Usável",
 		["weight"] = 0.10,
 		["scape"] = true,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["sandwich"] = {
 		["index"] = "sandwich",
 		["name"] = "Sanduiche",
 		["type"] = "Usável",
 		["weight"] = 0.25,
-		["max"] = 3,
-		["economy"] = 15
+		["max"] = 3
 	},
 	["rose"] = {
 		["index"] = "rose",
 		["name"] = "Rosa",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 25
+		["weight"] = 0.15
 	},
 	["teddy"] = {
 		["index"] = "teddy",
 		["name"] = "Teddy",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 75
+		["weight"] = 0.75
 	},
 	["absolut"] = {
 		["index"] = "absolut",
 		["name"] = "Absolut",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
+		["weight"] = 0.25
 	},
 	["chandon"] = {
 		["index"] = "chandon",
 		["name"] = "Chandon",
 		["type"] = "Usável",
-		["weight"] = 0.35,
-		["economy"] = 15
+		["weight"] = 0.35
 	},
 	["dewars"] = {
 		["index"] = "dewars",
 		["name"] = "Dewars",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
+		["weight"] = 0.25
 	},
 	["hennessy"] = {
 		["index"] = "hennessy",
 		["name"] = "Hennessy",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
+		["weight"] = 0.25
 	},
 	["goldbar"] = {
 		["index"] = "goldbar",
 		["name"] = "Barra de Ouro",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 525
+		["weight"] = 0.25
 	},
 	["binoculars"] = {
 		["index"] = "binoculars",
 		["name"] = "Binóculos",
 		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 275
+		["weight"] = 0.75
 	},
 	["camera"] = {
 		["index"] = "camera",
 		["name"] = "Câmera",
 		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 275
+		["weight"] = 2.25
 	},
 	["WEAPON_HATCHET"] = {
 		["index"] = "hatchet",
 		["name"] = "Machado",
 		["type"] = "Armamento",
-		["repair"] = "repairkit01",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_BAT"] = {
 		["index"] = "bat",
 		["name"] = "Bastão de Beisebol",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_KATANA"] = {
 		["index"] = "katana",
@@ -2263,509 +1520,355 @@ local itemlist = {
 	["WEAPON_BATTLEAXE"] = {
 		["index"] = "battleaxe",
 		["name"] = "Machado de Batalha",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_CROWBAR"] = {
 		["index"] = "crowbar",
 		["name"] = "Pé de Cabra",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 725
+		["weight"] = 0.75
 	},
 	["WEAPON_GOLFCLUB"] = {
 		["index"] = "golfclub",
 		["name"] = "Taco de Golf",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_HAMMER"] = {
 		["index"] = "hammer",
 		["name"] = "Martelo",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_MACHETE"] = {
 		["index"] = "machete",
 		["name"] = "Facão",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_POOLCUE"] = {
 		["index"] = "poolcue",
 		["name"] = "Taco de Sinuca",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_STONE_HATCHET"] = {
 		["index"] = "stonehatchet",
 		["name"] = "Machado de Pedra",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_WRENCH"] = {
 		["index"] = "wrench",
 		["name"] = "Chave Inglesa",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 725
+		["weight"] = 0.75
 	},
 	["WEAPON_KNUCKLE"] = {
 		["index"] = "knuckle",
 		["name"] = "Soco Inglês",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 975
+		["weight"] = 0.75
 	},
 	["WEAPON_FLASHLIGHT"] = {
 		["index"] = "flashlight",
 		["name"] = "Lanterna",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 675
+		["weight"] = 0.75
 	},
 	["WEAPON_NIGHTSTICK"] = {
 		["index"] = "nightstick",
 		["name"] = "Cassetete",
-		["repair"] = "repairkit01",
 		["type"] = "Armamento",
 		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 125
+		["weight"] = 0.75
 	},
 	["WEAPON_PISTOL"] = {
 		["index"] = "m1911",
 		["name"] = "M1911",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 5750
+		["weight"] = 1.25
 	},
 	["WEAPON_PISTOL_MK2"] = {
 		["index"] = "fiveseven",
 		["name"] = "FN Five Seven",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.50,
-		["economy"] = 6225
+		["weight"] = 1.50
 	},
 	["WEAPON_COMPACTRIFLE"] = {
 		["index"] = "akcompact",
 		["name"] = "AK Compact",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 14,
-		["weight"] = 2.25,
-		["economy"] = 13250
+		["weight"] = 2.25
 	},
 	["WEAPON_APPISTOL"] = {
 		["index"] = "kochvp9",
 		["name"] = "Koch Vp9",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 6250
+		["weight"] = 1.25
 	},
 	["WEAPON_HEAVYPISTOL"] = {
 		["index"] = "atifx45",
 		["name"] = "Ati FX45",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.50,
-		["economy"] = 725
+		["weight"] = 1.50
 	},
 	["WEAPON_MACHINEPISTOL"] = {
 		["index"] = "tec9",
 		["name"] = "Tec-9",
 		["type"] = "Armamento",
-		["repair"] = "repairkit03",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.75,
-		["economy"] = 8250
+		["weight"] = 1.75
 	},
 	["WEAPON_MICROSMG"] = {
 		["index"] = "uzi",
 		["name"] = "Uzi",
 		["type"] = "Armamento",
-		["repair"] = "repairkit03",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 13250
-	},
-	["WEAPON_NAILGUN"] = {
-		["index"] = "nailgun",
-		["name"] = "Arma de Prego",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_NAIL_AMMO",
-		["durability"] = 7,
-		["vehicle"] = false,
-		["weight"] = 1.75,
-		["economy"] = 3250
+		["weight"] = 1.25
 	},
 	["WEAPON_MINISMG"] = {
 		["index"] = "skorpionv61",
 		["name"] = "Skorpion V61",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.75,
-		["economy"] = 13250
+		["weight"] = 1.75
 	},
 	["WEAPON_SNSPISTOL"] = {
 		["index"] = "amt380",
 		["name"] = "AMT 380",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.00,
-		["economy"] = 4750
+		["weight"] = 1.00
 	},
 	["WEAPON_SNSPISTOL_MK2"] = {
 		["index"] = "hkp7m10",
 		["name"] = "HK P7M10",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 5250
+		["weight"] = 1.25
 	},
 	["WEAPON_VINTAGEPISTOL"] = {
 		["index"] = "m1922",
 		["name"] = "M1922",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 4750
+		["weight"] = 1.25
 	},
 	["WEAPON_PISTOL50"] = {
 		["index"] = "desert",
 		["name"] = "Desert Eagle",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.50,
-		["economy"] = 8250
+		["weight"] = 1.50
 	},
 	["WEAPON_REVOLVER"] = {
 		["index"] = "magnum",
 		["name"] = "Magnum 44",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.50,
-		["economy"] = 8250
+		["weight"] = 1.50
 	},
 	["WEAPON_COMBATPISTOL"] = {
 		["index"] = "glock",
 		["name"] = "Glock",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PISTOL_AMMO",
 		["durability"] = 14,
 		["vehicle"] = true,
-		["weight"] = 1.25,
-		["economy"] = 625
+		["weight"] = 1.25
 	},
 	["WEAPON_CARBINERIFLE"] = {
 		["index"] = "m4a1",
 		["name"] = "M4A1",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 775
+		["weight"] = 7.75
 	},
 	["WEAPON_CARBINERIFLE_MK2"] = {
 		["index"] = "m4a4",
 		["name"] = "M4A4",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 8.50,
-		["economy"] = 925
+		["weight"] = 8.50
 	},
 	["WEAPON_ADVANCEDRIFLE"] = {
 		["index"] = "tar21",
 		["name"] = "Tar-21",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
+		["weight"] = 7.75
 	},
 	["WEAPON_BULLPUPRIFLE"] = {
 		["index"] = "qbz95",
 		["name"] = "QBZ-95",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
+		["weight"] = 7.75
 	},
 	["WEAPON_BULLPUPRIFLE_MK2"] = {
 		["index"] = "l85",
 		["name"] = "L85",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
+		["weight"] = 7.75
 	},
 	["WEAPON_SPECIALCARBINE"] = {
 		["index"] = "g36c",
 		["name"] = "G36C",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 8.25,
-		["economy"] = 25000
+		["weight"] = 8.25
 	},
 	["WEAPON_SPECIALCARBINE_MK2"] = {
 		["index"] = "sigsauer556",
 		["name"] = "Sig Sauer 556",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 8.25,
-		["economy"] = 25000
+		["weight"] = 8.25
 	},
 	["WEAPON_PUMPSHOTGUN"] = {
 		["index"] = "mossberg590",
 		["name"] = "Mossberg 590",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SHOTGUN_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.25,
-		["economy"] = 775
+		["weight"] = 7.25
 	},
 	["WEAPON_PUMPSHOTGUN_MK2"] = {
 		["index"] = "mossberg590a1",
 		["name"] = "Mossberg 590A1",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SHOTGUN_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.25,
-		["economy"] = 15250
+		["weight"] = 7.25
 	},
 	["WEAPON_MUSKET"] = {
 		["index"] = "winchester",
 		["name"] = "Winchester 1892",
-		["repair"] = "repairkit02",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_MUSKET_AMMO",
 		["durability"] = 21,
-		["weight"] = 6.25,
-		["economy"] = 3250
+		["weight"] = 6.25
+	},
+	["WEAPON_SNIPERRIFLE"] = {
+		["index"] = "sauer101",
+		["name"] = "Sauer 101",
+		["type"] = "Armamento",
+		["ammo"] = "WEAPON_MUSKET_AMMO",
+		["durability"] = 21,
+		["weight"] = 8.25
 	},
 	["WEAPON_SAWNOFFSHOTGUN"] = {
 		["index"] = "mossberg500",
 		["name"] = "Mossberg 500",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SHOTGUN_AMMO",
 		["durability"] = 21,
-		["weight"] = 5.75,
-		["economy"] = 13250
+		["weight"] = 5.75
 	},
 	["WEAPON_SMG"] = {
 		["index"] = "mp5",
 		["name"] = "MP5",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 21,
-		["weight"] = 5.25,
-		["economy"] = 775
+		["weight"] = 5.25
 	},
 	["WEAPON_SMG_MK2"] = {
 		["index"] = "evo3",
 		["name"] = "Evo-3",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 21,
-		["vehicle"] = true,
-		["weight"] = 5.25,
-		["economy"] = 15250
+		["weight"] = 5.25
 	},
 	["WEAPON_ASSAULTRIFLE"] = {
 		["index"] = "ak103",
 		["name"] = "AK-103",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
+		["weight"] = 7.75
 	},
 	["WEAPON_ASSAULTRIFLE_MK2"] = {
 		["index"] = "ak74",
 		["name"] = "AK-74",
-		["repair"] = "repairkit04",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_RIFLE_AMMO",
 		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
+		["weight"] = 7.75
 	},
 	["WEAPON_ASSAULTSMG"] = {
 		["index"] = "steyraug",
 		["name"] = "Steyr AUG",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
+		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 21,
-		["weight"] = 5.75,
-		["economy"] = 15250
+		["weight"] = 5.75
 	},
 	["WEAPON_GUSENBERG"] = {
 		["index"] = "thompson",
 		["name"] = "Thompson",
-		["repair"] = "repairkit03",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_SMG_AMMO",
 		["durability"] = 21,
-		["weight"] = 6.25,
-		["economy"] = 15250
+		["weight"] = 6.25
 	},
 	["WEAPON_PETROLCAN"] = {
 		["index"] = "gallon",
 		["name"] = "Galão",
 		["type"] = "Armamento",
 		["ammo"] = "WEAPON_PETROLCAN_AMMO",
-		["weight"] = 1.25,
-		["economy"] = 50
-	},
-	["GADGET_PARACHUTE"] = {
-		["index"] = "parachute",
-		["name"] = "Paraquedas",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 475
-	},
-	["WEAPON_STUNGUN"] = {
-		["index"] = "stungun",
-		["name"] = "Tazer",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["durability"] = 21,
-		["weight"] = 0.75,
-		["economy"] = 525
-	},
-	["WEAPON_NAIL_AMMO"] = {
-		["index"] = "nails",
-		["name"] = "Pregos",
-		["type"] = "Munição",
-		["weight"] = 0.02,
-		["economy"] = 2
-	},
-	["WEAPON_PISTOL_AMMO"] = {
-		["index"] = "pistolammo",
-		["name"] = "Munição de Pistola",
-		["type"] = "Munição",
-		["weight"] = 0.02,
-		["economy"] = 30
-	},
-	["WEAPON_SMG_AMMO"] = {
-		["index"] = "smgammo",
-		["name"] = "Munição de Sub",
-		["type"] = "Munição",
-		["weight"] = 0.03,
-		["economy"] = 35
-	},
-	["WEAPON_RIFLE_AMMO"] = {
-		["index"] = "rifleammo",
-		["name"] = "Munição de Rifle",
-		["type"] = "Munição",
-		["weight"] = 0.04,
-		["economy"] = 35
-	},
-	["WEAPON_SHOTGUN_AMMO"] = {
-		["index"] = "shotgunammo",
-		["name"] = "Munição de Escopeta",
-		["type"] = "Munição",
-		["weight"] = 0.05,
-		["economy"] = 30
-	},
-	["WEAPON_MUSKET_AMMO"] = {
-		["index"] = "musketammo",
-		["name"] = "Munição de Mosquete",
-		["type"] = "Munição",
-		["weight"] = 0.05,
-		["economy"] = 7
-	},
-	["WEAPON_PETROLCAN_AMMO"] = {
-		["index"] = "fuel",
-		["name"] = "Combustível",
-		["type"] = "Munição",
-		["weight"] = 0.001,
-		["economy"] = 0
+		["weight"] = 1.25
 	},
 	["WEAPON_BRICK"] = {
 		["index"] = "brick",
@@ -2809,393 +1912,400 @@ local itemlist = {
 		["economy"] = 225,
 		["max"] = 3
 	},
+	["GADGET_PARACHUTE"] = {
+		["index"] = "parachute",
+		["name"] = "Paraquedas",
+		["type"] = "Usável",
+		["weight"] = 2.25
+	},
+	["WEAPON_STUNGUN"] = {
+		["index"] = "stungun",
+		["name"] = "Tazer",
+		["type"] = "Armamento",
+		["durability"] = 21,
+		["weight"] = 0.75
+	},
+	["WEAPON_PISTOL_AMMO"] = {
+		["index"] = "pistolammo",
+		["name"] = "Munição de Pistola",
+		["type"] = "Munição",
+		["weight"] = 0.02
+	},
+	["WEAPON_SMG_AMMO"] = {
+		["index"] = "smgammo",
+		["name"] = "Munição de Sub",
+		["type"] = "Munição",
+		["weight"] = 0.03
+	},
+	["WEAPON_RIFLE_AMMO"] = {
+		["index"] = "rifleammo",
+		["name"] = "Munição de Rifle",
+		["type"] = "Munição",
+		["weight"] = 0.04
+	},
+	["WEAPON_SHOTGUN_AMMO"] = {
+		["index"] = "shotgunammo",
+		["name"] = "Munição de Escopeta",
+		["type"] = "Munição",
+		["weight"] = 0.05
+	},
+	["WEAPON_MUSKET_AMMO"] = {
+		["index"] = "musketammo",
+		["name"] = "Munição de Mosquete",
+		["type"] = "Munição",
+		["weight"] = 0.05
+	},
+	["WEAPON_PETROLCAN_AMMO"] = {
+		["index"] = "fuel",
+		["name"] = "Combustível",
+		["type"] = "Munição",
+		["weight"] = 0.001
+	},
 	["pager"] = {
 		["index"] = "pager",
 		["name"] = "Pager",
 		["type"] = "Usável",
-		["weight"] = 1.25,
-		["economy"] = 125
+		["weight"] = 1.25
 	},
 	["firecracker"] = {
 		["index"] = "firecracker",
 		["name"] = "Fogos de Artificio",
 		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 100
+		["weight"] = 2.25
 	},
 	["analgesic"] = {
 		["index"] = "analgesic",
 		["name"] = "Analgésico",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["max"] = 5,
-		["economy"] = 125
+		["weight"] = 0.10,
+		["max"] = 4
 	},
 	["oxy"] = {
 		["index"] = "analgesic",
 		["name"] = "Oxy",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["max"] = 5,
-		["economy"] = 35
+		["weight"] = 0.10,
+		["max"] = 4
 	},
 	["gauze"] = {
 		["index"] = "gauze",
-		["name"] = "Ataduras",
+		["name"] = "Gaze",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["max"] = 5,
-		["economy"] = 100
+		["weight"] = 0.07,
+		["max"] = 4
 	},
 	["gsrkit"] = {
 		["index"] = "gsrkit",
 		["name"] = "Kit Residual",
 		["type"] = "Usável",
-		["weight"] = 0.45,
-		["economy"] = 20
+		["weight"] = 0.75
 	},
 	["gdtkit"] = {
 		["index"] = "gdtkit",
 		["name"] = "Kit Químico",
 		["type"] = "Usável",
-		["weight"] = 0.45,
-		["economy"] = 20
+		["weight"] = 0.75
 	},
 	["emerald"] = {
 		["index"] = "emerald",
 		["name"] = "Esmeralda",
 		["type"] = "Comum",
-		["weight"] = 0.85,
-		["economy"] = 85
+		["weight"] = 0.85
 	},
 	["diamond"] = {
 		["index"] = "diamond",
 		["name"] = "Diamante",
 		["type"] = "Comum",
-		["weight"] = 0.80,
-		["economy"] = 75
+		["weight"] = 0.80
 	},
 	["ruby"] = {
 		["index"] = "ruby",
 		["name"] = "Rubi",
 		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 55
+		["weight"] = 0.75
 	},
 	["sapphire"] = {
 		["index"] = "sapphire",
 		["name"] = "Safira",
 		["type"] = "Comum",
-		["weight"] = 0.70,
-		["economy"] = 45
+		["weight"] = 0.70
 	},
 	["amethyst"] = {
 		["index"] = "amethyst",
 		["name"] = "Ametista",
 		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 40
+		["weight"] = 0.65
 	},
 	["amber"] = {
 		["index"] = "amber",
 		["name"] = "Âmbar",
 		["type"] = "Comum",
-		["weight"] = 0.60,
-		["economy"] = 35
+		["weight"] = 0.60
 	},
 	["turquoise"] = {
 		["index"] = "turquoise",
 		["name"] = "Turquesa",
 		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 30
+		["weight"] = 0.55
 	},
 	["keyboard"] = {
 		["index"] = "keyboard",
 		["name"] = "Teclado",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["mouse"] = {
 		["index"] = "mouse",
 		["name"] = "Mouse",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["silverring"] = {
 		["index"] = "silverring",
 		["name"] = "Anel de Prata",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["goldring"] = {
 		["index"] = "goldring",
 		["name"] = "Anel de Ouro",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 100
+		["weight"] = 0.25
 	},
 	["silvercoin"] = {
 		["index"] = "silvercoin",
 		["name"] = "Moeda de Prata",
-		["type"] = "Usável",
-		["weight"] = 0.01,
-		["economy"] = 20
+		["type"] = "Comum",
+		["weight"] = 0.01
 	},
 	["goldcoin"] = {
 		["index"] = "goldcoin",
 		["name"] = "Moeda de Ouro",
-		["type"] = "Usável",
-		["weight"] = 0.01,
-		["economy"] = 40
+		["type"] = "Comum",
+		["weight"] = 0.01
 	},
 	["watch"] = {
 		["index"] = "watch",
 		["name"] = "Relógio",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["playstation"] = {
 		["index"] = "playstation",
 		["name"] = "Playstation",
 		["type"] = "Comum",
-		["weight"] = 2.00,
-		["economy"] = 75
+		["weight"] = 2.00
 	},
 	["xbox"] = {
 		["index"] = "xbox",
 		["name"] = "Xbox",
 		["type"] = "Comum",
-		["weight"] = 1.75,
-		["economy"] = 75
+		["weight"] = 1.75
 	},
 	["legos"] = {
 		["index"] = "legos",
 		["name"] = "Legos",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["ominitrix"] = {
 		["index"] = "ominitrix",
 		["name"] = "Ominitrix",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["bracelet"] = {
 		["index"] = "bracelet",
 		["name"] = "Bracelete",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["dildo"] = {
 		["index"] = "dildo",
 		["name"] = "Vibrador",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["spray01"] = {
 		["index"] = "spray01",
 		["name"] = "Desodorante 24hrs",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["spray02"] = {
 		["index"] = "spray02",
 		["name"] = "Antisséptico",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["spray03"] = {
 		["index"] = "spray03",
 		["name"] = "Desodorante 48hrs",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["spray04"] = {
 		["index"] = "spray04",
 		["name"] = "Desodorante 72hrs",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
+	},
+	["brick"] = {
+		["index"] = "brick",
+		["name"] = "Tijolo",
+		["type"] = "Comum",
+		["weight"] = 0.50
 	},
 	["dices"] = {
 		["index"] = "dices",
 		["name"] = "Dados",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 45
+		["weight"] = 0.25
 	},
 	["dish"] = {
 		["index"] = "dish",
 		["name"] = "Prato",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["pan"] = {
 		["index"] = "pan",
 		["name"] = "Panela",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 100
+		["weight"] = 0.50
+	},
+	["sneakers"] = {
+		["index"] = "sneakers",
+		["name"] = "Tenis",
+		["type"] = "Comum",
+		["weight"] = 0.50
 	},
 	["fan"] = {
 		["index"] = "fan",
 		["name"] = "Ventilador",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["rimel"] = {
 		["index"] = "rimel",
 		["name"] = "Rímel",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["blender"] = {
 		["index"] = "blender",
 		["name"] = "Liquidificador",
 		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["switch"] = {
 		["index"] = "switch",
 		["name"] = "Interruptor",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 45
+		["weight"] = 0.25
 	},
 	["horseshoe"] = {
 		["index"] = "horseshoe",
 		["name"] = "Ferradura",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["brush"] = {
 		["index"] = "brush",
 		["name"] = "Escova",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["domino"] = {
 		["index"] = "domino",
 		["name"] = "Dominó",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 45
+		["weight"] = 0.25
 	},
 	["floppy"] = {
 		["index"] = "floppy",
 		["name"] = "Disquete",
 		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 45
+		["weight"] = 0.15
 	},
 	["cup"] = {
 		["index"] = "cup",
 		["name"] = "Cálice",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 100
+		["weight"] = 0.25
 	},
 	["deck"] = {
 		["index"] = "deck",
 		["name"] = "Baralho",
 		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 75
+		["weight"] = 0.15
 	},
 	["eraser"] = {
 		["index"] = "eraser",
 		["name"] = "Apagador",
 		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 75
+		["weight"] = 0.15
 	},
 	["pliers"] = {
 		["index"] = "pliers",
 		["name"] = "Alicate",
 		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 55
+		["weight"] = 0.25
 	},
 	["lampshade"] = {
 		["index"] = "lampshade",
 		["name"] = "Abajur",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["soap"] = {
 		["index"] = "soap",
 		["name"] = "Sabonete",
 		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 75
+		["weight"] = 0.25
 	},
 	["slipper"] = {
 		["index"] = "slipper",
 		["name"] = "Chinelo",
 		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 75
+		["weight"] = 0.50
 	},
 	["pendrive"] = {
 		["index"] = "pendrive",
 		["name"] = "Pendrive",
-		["repair"] = "repairkit01",
 		["type"] = "Comum",
 		["durability"] = 7,
-		["weight"] = 0.25,
-		["economy"] = 325
+		["weight"] = 0.25
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMBODY
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemBody(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemBody(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMINDEX
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemIndex(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemIndex(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["index"]
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["index"]
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMNAME
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemName(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemName(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["name"]
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["name"]
 	end
 
 	return "Deletado"
@@ -3203,34 +2313,31 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMTYPE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemType(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemType(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["type"]
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["type"]
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMAMMO
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemAmmo(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemAmmo(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["ammo"]
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["ammo"]
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemVehicle(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemVehicle(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["vehicle"] or false
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["vehicle"] or false
 	end
 
 	return false
@@ -3238,12 +2345,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMWEIGHT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemWeight(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemWeight(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["weight"] or 0.0
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["weight"] or 0.0
 	end
 
 	return 0.0
@@ -3251,12 +2357,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMMAXAMOUNT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemMaxAmount(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemMaxAmount(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["max"] or nil
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["max"] or nil
 	end
 
 	return nil
@@ -3264,12 +2369,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMSCAPE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemScape(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemScape(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["scape"] or nil
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["scape"] or nil
 	end
 
 	return nil
@@ -3277,12 +2381,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDESCRIPTION
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemDescription(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemDescription(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["desc"] or nil
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["desc"] or nil
 	end
 
 	return nil
@@ -3290,12 +2393,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDURABILITY
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemDurability(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemDurability(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["durability"] or false
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["durability"] or false
 	end
 
 	return false
@@ -3303,52 +2405,12 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMCHARGES
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemCharges(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
+function itemCharges(nameItem)
+	local splitName = splitString(nameItem,"-")
 
-	if itemlist[Item] then
-		return itemlist[Item]["charges"] or nil
+	if itemlist[splitName[1]] then
+		return itemlist[splitName[1]]["charges"] or nil
 	end
 
 	return nil
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- ITEMECONOMY
------------------------------------------------------------------------------------------------------------------------------------------
-function itemEconomy(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["economy"] or nil
-	end
-
-	return nil
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- ITEMBLOCK
------------------------------------------------------------------------------------------------------------------------------------------
-function itemBlock(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["block"] or nil
-	end
-
-	return nil
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- ITEMREPAIR
------------------------------------------------------------------------------------------------------------------------------------------
-function itemRepair(Item)
-	local Split = splitString(Item,"-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["repair"] or false
-	end
-
-	return false
 end
