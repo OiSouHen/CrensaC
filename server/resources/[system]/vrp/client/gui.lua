@@ -256,6 +256,13 @@ end)
 -- REMOVEOBJECTS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function tvRP.removeObjects(status)
+	local Ped = PlayerPedId()
+	if IsPedUsingScenario(Ped,"PROP_HUMAN_SEAT_CHAIR_UPRIGHT") then
+		TriggerEvent("target:UpChair")
+	elseif IsEntityPlayingAnim(Ped,"anim@gangops@morgue@table@","body_search",3) or LocalPlayer["state"]["Bed"] then
+		TriggerEvent("target:UpBed")
+	end
+
 	if status == "one" then
 		tvRP.stopAnim(true)
 	elseif status == "two" then
@@ -430,7 +437,7 @@ RegisterCommand("cRbind",function(source,args,rawCommand)
 			elseif args[1] == "6" then
 				if not IsPedInAnyVehicle(ped) and not IsPedArmed(ped,6) and not IsPedSwimming(ped) then
 					if IsEntityPlayingAnim(ped,"anim@heists@heist_corona@single_team","single_team_loop_boss",3) then
-						StopAnimTask(ped,"anim@heists@heist_corona@single_team","single_team_loop_boss",2.0)
+						StopAnimTask(ped,"anim@heists@heist_corona@single_team","single_team_loop_boss",8.0)
 						tvRP.stopActived()
 					else
 						tvRP.playAnim(true,{"anim@heists@heist_corona@single_team","single_team_loop_boss"},true)
@@ -504,8 +511,8 @@ RegisterCommand("lockVehicles",function(source,args,rawCommand)
 
 		local ped = PlayerPedId()
 		if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedSwimming(ped) and GetEntityHealth(ped) > 100 and not IsPedReloading(ped) then
-			local vehicle,vehNet,vehPlate = tvRP.vehList(5)
-			if vehicle then
+			local Vehicle,vehNet,vehPlate = tvRP.vehList(5)
+			if Vehicle then
 				TriggerServerEvent("garages:lockVehicle",vehNet,vehPlate)
 			end
 		end
