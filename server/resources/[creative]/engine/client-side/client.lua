@@ -261,7 +261,7 @@ AddEventHandler("engine:vehTuning",function()
 		local body = GetVehicleBodyHealth(vehicle)
 		local engine = GetVehicleEngineHealth(vehicle)
 		local fuel = GetVehicleFuelLevel(vehicle)
-		local vehPlate = GetVehicleNumberPlateText(vehicle)
+		local plate = GetVehicleNumberPlateText(vehicle)
 
 		if motor == -1 then
 			motor = "Desativado"
