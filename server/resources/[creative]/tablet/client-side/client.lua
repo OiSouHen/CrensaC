@@ -7,6 +7,10 @@ local Tunnel = module("vrp","lib/Tunnel")
 -----------------------------------------------------------------------------------------------------------------------------------------
 vSERVER = Tunnel.getInterface("tablet")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- VARIABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Open = "Santos"
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADFOCUS
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
@@ -16,12 +20,15 @@ end)
 -- ENTERTABLET
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("tablet:enterTablet")
-AddEventHandler("tablet:enterTablet",function()
-	local ped = PlayerPedId()
-	if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 100 and MumbleIsConnected() then
-		SetNuiFocus(true,true)
-		SetCursorLocation(0.5,0.5)
-		SendNUIMessage({ action = "openSystem" })
+AddEventHandler("tablet:enterTablet",function(Select)
+	if LocalPlayer["state"]["Route"] < 900000 then
+		local ped = PlayerPedId()
+		if not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and GetEntityHealth(ped) > 100 and MumbleIsConnected() then
+			Open = Select
+			SetNuiFocus(true,true)
+			SetCursorLocation(0.5,0.5)
+			SendNUIMessage({ action = "openSystem" })
+		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -161,10 +168,14 @@ function vehCreate(vehName,vehPlate)
 	end
 
 	if HasModelLoaded(mHash) then
-		vehDrive = CreateVehicle(mHash,-53.9,-1110.5,26.34,68.04,false,false)
+		if Open == "Santos" then
+			vehDrive = CreateVehicle(mHash,-53.28,-1110.93,26.47,68.04,false,false)
+		elseif Open == "Sandy" then
+			vehDrive = CreateVehicle(mHash,1209.74,2713.49,37.81,175.75,false,false)
+		end
 
 		SetEntityInvincible(vehDrive,true)
-		SetVehicleNumberPlateText(vehDrive,vehPlate)
+		SetModelAsNoLongerNeeded(mHash)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +196,7 @@ CreateThread(function()
 				vSERVER.removeDrive()
 				TriggerEvent("races:insertList",false)
 				LocalPlayer["state"]["Commands"] = false
-				SetEntityCoords(ped,benCoords[1],benCoords[2],benCoords[3],1,0,0,0)
+				SetEntityCoords(ped,benCoords[1],benCoords[2],benCoords[3],false,false,false,false)
 				DeleteEntity(vehDrive)
 			end
 		end
@@ -204,38 +215,28 @@ local Vehicles = {
 	{
 		["coords"] = vec3(-42.39,-1101.32,26.98),
 		["heading"] = 19.85,
-		["model"] = "rangerover",
-		["distance"] = 50
+		["model"] = "sunrise",
+		["distance"] = 100
 	},{
 		["coords"] = vec3(-54.61,-1096.86,26.98),
 		["heading"] = 31.19,
-		["model"] = "skyliner342",
-		["distance"] = 50
+		["model"] = "teslamodels",
+		["distance"] = 100
 	},{
 		["coords"] = vec3(-47.57,-1092.05,26.98),
 		["heading"] = 283.47,
-		["model"] = "audir8",
-		["distance"] = 50
+		["model"] = "corvettec7",
+		["distance"] = 100
 	},{
 		["coords"] = vec3(-37.02,-1093.42,26.98),
 		["heading"] = 206.93,
-		["model"] = "bentleybacalar",
-		["distance"] = 50
+		["model"] = "bugattiatlantic",
+		["distance"] = 100
 	},{
 		["coords"] = vec3(-49.78,-1083.86,26.98),
 		["heading"] = 65.2,
-		["model"] = "corvettec7",
-		["distance"] = 50
-	},{
-		["coords"] = vec3(1220.52,2732.96,37.29),
-		["heading"] = 226.78,
-		["model"] = "astonmartindbs",
-		["distance"] = 30
-	},{
-		["coords"] = vec3(1225.09,2733.0,37.29),
-		["heading"] = 226.78,
-		["model"] = "panameramansory",
-		["distance"] = 30
+		["model"] = "dodgechargerrt69",
+		["distance"] = 100
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -258,8 +259,10 @@ CreateThread(function()
 					end
 
 					if HasModelLoaded(mHash) then
+						local Color = math.random(112)
 						initVehicles[k] = CreateVehicle(mHash,v["coords"],v["heading"],false,false)
 						SetVehicleNumberPlateText(initVehicles[k],"PDMSPORT")
+						SetVehicleColours(initVehicles[k],Color,Color)
 						FreezeEntityPosition(initVehicles[k],true)
 						SetVehicleDoorsLocked(initVehicles[k],2)
 						SetModelAsNoLongerNeeded(mHash)
