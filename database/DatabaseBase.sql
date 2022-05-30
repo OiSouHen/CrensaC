@@ -7,7 +7,6 @@
 --
 -- Estrutura da tabela `summerz_accounts`
 --
-
 DROP TABLE IF EXISTS `summerz_accounts`;
 CREATE TABLE IF NOT EXISTS `summerz_accounts` (
   `whitelist` tinyint(1) NOT NULL DEFAULT '0',
@@ -21,12 +20,9 @@ CREATE TABLE IF NOT EXISTS `summerz_accounts` (
   KEY `steam` (`steam`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_bank`
 --
-
 DROP TABLE IF EXISTS `summerz_bank`;
 CREATE TABLE IF NOT EXISTS `summerz_bank` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -38,12 +34,9 @@ CREATE TABLE IF NOT EXISTS `summerz_bank` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_banneds`
 --
-
 DROP TABLE IF EXISTS `summerz_banneds`;
 CREATE TABLE IF NOT EXISTS `summerz_banneds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -53,12 +46,9 @@ CREATE TABLE IF NOT EXISTS `summerz_banneds` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_characters`
 --
-
 DROP TABLE IF EXISTS `summerz_characters`;
 CREATE TABLE IF NOT EXISTS `summerz_characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -79,12 +69,9 @@ CREATE TABLE IF NOT EXISTS `summerz_characters` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_chests`
 --
-
 DROP TABLE IF EXISTS `summerz_chests`;
 CREATE TABLE IF NOT EXISTS `summerz_chests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -99,7 +86,6 @@ CREATE TABLE IF NOT EXISTS `summerz_chests` (
 --
 -- Extraindo dados da tabela `summerz_chests`
 --
-
 INSERT INTO `summerz_chests` (`id`, `name`, `weight`, `perm`, `logs`) VALUES
 (1, 'State', 500, 'State', 1),
 (2, 'Corrections', 500, 'Corrections', 1),
@@ -128,12 +114,9 @@ INSERT INTO `summerz_chests` (`id`, `name`, `weight`, `perm`, `logs`) VALUES
 (25, 'trayPops', 10, 'trayPops', 0),
 (26, 'trayPizza', 10, 'trayPizza', 0);
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_entitydata`
 --
-
 DROP TABLE IF EXISTS `summerz_entitydata`;
 CREATE TABLE IF NOT EXISTS `summerz_entitydata` (
   `dkey` varchar(100) NOT NULL,
@@ -142,12 +125,9 @@ CREATE TABLE IF NOT EXISTS `summerz_entitydata` (
   KEY `dkey` (`dkey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_fidentity`
 --
-
 DROP TABLE IF EXISTS `summerz_fidentity`;
 CREATE TABLE IF NOT EXISTS `summerz_fidentity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -160,12 +140,9 @@ CREATE TABLE IF NOT EXISTS `summerz_fidentity` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_playerdata`
 --
-
 DROP TABLE IF EXISTS `summerz_playerdata`;
 CREATE TABLE IF NOT EXISTS `summerz_playerdata` (
   `user_id` int(11) NOT NULL,
@@ -176,12 +153,9 @@ CREATE TABLE IF NOT EXISTS `summerz_playerdata` (
   KEY `dkey` (`dkey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_prison`
 --
-
 DROP TABLE IF EXISTS `summerz_prison`;
 CREATE TABLE IF NOT EXISTS `summerz_prison` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -195,12 +169,9 @@ CREATE TABLE IF NOT EXISTS `summerz_prison` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_propertys`
 --
-
 DROP TABLE IF EXISTS `summerz_propertys`;
 CREATE TABLE IF NOT EXISTS `summerz_propertys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -217,12 +188,9 @@ CREATE TABLE IF NOT EXISTS `summerz_propertys` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `summerz_races`
 --
-
 DROP TABLE IF EXISTS `summerz_races`;
 CREATE TABLE IF NOT EXISTS `summerz_races` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -235,12 +203,8 @@ CREATE TABLE IF NOT EXISTS `summerz_races` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `summerz_vehicles`
 --
-
 DROP TABLE IF EXISTS `summerz_vehicles`;
 CREATE TABLE IF NOT EXISTS `summerz_vehicles` (
   `user_id` int(11) NOT NULL,
@@ -253,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `summerz_vehicles` (
   `engine` int(4) NOT NULL DEFAULT '1000',
   `body` int(4) NOT NULL DEFAULT '1000',
   `fuel` int(3) NOT NULL DEFAULT '100',
-  `nitro` int(3) NOT NULL DEFAULT '0',
+  `nitro` int(4) NOT NULL DEFAULT '0',
   `work` varchar(5) NOT NULL DEFAULT 'false',
   `doors` varchar(254) NOT NULL,
   `windows` varchar(254) NOT NULL,
@@ -263,7 +227,3 @@ CREATE TABLE IF NOT EXISTS `summerz_vehicles` (
   KEY `vehicle` (`vehicle`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

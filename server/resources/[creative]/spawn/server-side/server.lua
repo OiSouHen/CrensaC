@@ -39,6 +39,29 @@ function cRP.characterChosen(user_id)
 	vRP.characterChosen(source,user_id,nil)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- GETCHARACTERS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.getCharacters()
+	local source = source
+	local getCharacters = {}
+	local steam = vRP.getIdentities(source)
+	local consult = vRP.query("characters/getCharacters",{ steam = steam })
+
+	if consult[1] then
+		for k,v in pairs(consult) do
+			local userTablesSkin = vRP.userData(v["id"],"Datatable")
+			local userTablesBarber = vRP.userData(v["id"],"Barbershop")
+			local userTablesClotings = vRP.userData(v["id"],"Clothings")
+			local userTablesTatto = vRP.userData(v["id"],"Tatuagens")
+			
+			table.insert(getCharacters,{ skin = userTablesSkin["skin"], barber = userTablesBarber, clothes = userTablesClotings, tattoos = userTablesTatto })
+			TriggerClientEvent("Notify",source,"verde","ped",10000)
+		end
+	end
+
+	return getCharacters
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- NEWCHARACTER
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.newCharacter(name,name2,sex,locate)
