@@ -13,8 +13,8 @@ $(document).ready(function(){
 
 		if (event["data"]["tank"] !== undefined){
 			$("#lts").html(event["data"]["lts"] + " ¢");
-			$("#tank").html(event["data"]["tank"] + " %");
-			$("#price").html("$" + event["data"]["price"]);
+			$("#tank").html(parseInt(event["data"]["tank"]) + " %");
+			$("#price").html("$" + parseInt(event["data"]["price"]));
 		}
 	});
 });

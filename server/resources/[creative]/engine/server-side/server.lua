@@ -17,7 +17,7 @@ local vehFuels = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PAYMENTFUEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.paymentFuel(fuelPrice,vehPlate,vehFuel)
+function cRP.paymentFuel(fuelPrice,vehPlate,vFuel)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -26,7 +26,7 @@ function cRP.paymentFuel(fuelPrice,vehPlate,vehFuel)
 			local activePlayers = vRPC.activePlayers(source)
 			for _,v in ipairs(activePlayers) do
 				async(function()
-					TriggerClientEvent("engine:syncFuel",v,vehPlate,vehFuel)
+					TriggerClientEvent("engine:syncFuel",v,vehPlate,vFuel)
 				end)
 			end
 
@@ -51,8 +51,8 @@ end
 -- TRYFUEL
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("engine:tryFuel")
-AddEventHandler("engine:tryFuel",function(vehPlate,vehFuel)
-	vehFuels[vehPlate] = vehFuel
+AddEventHandler("engine:tryFuel",function(vehPlate,vFuel)
+	vehFuels[vehPlate] = vFuel
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GETFUEL
