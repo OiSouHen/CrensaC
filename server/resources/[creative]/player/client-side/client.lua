@@ -179,38 +179,6 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- SETECSTASY
------------------------------------------------------------------------------------------------------------------------------------------
-local ecstasy = 0
-RegisterNetEvent("setEcstasy")
-AddEventHandler("setEcstasy",function()
-	ecstasy = ecstasy + 10
-
-	if not GetScreenEffectIsActive("MinigameTransitionIn") then
-		StartScreenEffect("MinigameTransitionIn",0,true)
-	end
-end)
-
-CreateThread(function()
-	while true do
-		if ecstasy > 0 then
-			ecstasy = ecstasy - 1
-			ShakeGameplayCam("LARGE_EXPLOSION_SHAKE",0.05)
-
-			if ecstasy <= 0 or GetEntityHealth(PlayerPedId()) <= 101 then
-				ecstasy = 0
-
-				TriggerServerEvent("upgradeStress",100)
-				if GetScreenEffectIsActive("MinigameTransitionIn") then
-					StopScreenEffect("MinigameTransitionIn")
-				end
-			end
-		end
-
-		Wait(1000)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- SETMETH
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("setMeth")

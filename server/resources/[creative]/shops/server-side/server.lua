@@ -173,8 +173,7 @@ local shops = {
 			["gauze"] = 225,
 			["sinkalmy"] = 375,
 			["analgesic"] = 125,
-			["ritmoneury"] = 475,
-			["adrenaline"] = 975
+			["ritmoneury"] = 475
 		}
 	},
 	["pharmacyParamedic"] = {
@@ -269,7 +268,7 @@ local shops = {
 		["list"] = {
 			["switchblade"] = 525,
 			["WEAPON_MUSKET"] = 3250,
-			["WEAPON_SNIPERRIFLE"] = 7250,
+--			["WEAPON_SNIPERRIFLE"] = 7250,
 			["WEAPON_MUSKET_AMMO"] = 7
 		}
 	},
@@ -416,7 +415,6 @@ local shops = {
 			["mouse"] = 45,
 			["playstation"] = 50,
 			["xbox"] = 50,
-			["brick"] = 20,
 			["dish"] = 45,
 			["pan"] = 70,
 			["fan"] = 45,
@@ -439,7 +437,6 @@ local shops = {
 			["spray02"] = 45,
 			["spray03"] = 45,
 			["spray04"] = 45,
-			["sneakers"] = 60,
 			["slipper"] = 40,
 			["rimel"] = 45,
 			["brush"] = 45,

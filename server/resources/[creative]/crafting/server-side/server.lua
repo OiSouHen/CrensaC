@@ -16,7 +16,7 @@ local craftList = {
 	["salierisShop"] = {
 		["perm"] = "Salieris",
 		["list"] = {
-			["nails"] = {
+			["WEAPON_NAIL_AMMO"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -200,15 +200,6 @@ local craftList = {
 					["glass"] = 3
 				}
 			},
-			["brick"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["rubber"] = 2,
-					["plastic"] = 1,
-					["glass"] = 1
-				}
-			},
 			["pan"] = {
 				["amount"] = 1,
 				["destroy"] = false,
@@ -353,13 +344,6 @@ local craftList = {
 					["aluminum"] = 3,
 					["rubber"] = 2,
 					["plastic"] = 4
-				}
-			},
-			["sneakers"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["rubber"] = 6
 				}
 			},
 			["slipper"] = {
@@ -679,13 +663,6 @@ local craftList = {
 				["require"] = {
 					["wheat"] = 3
 				}
-			},
-			["dollars"] = {
-				["amount"] = 4750,
-				["destroy"] = false,
-				["require"] = {
-					["cryptocoins"] = 21600
-				}
 			}
 		}
 	},
@@ -734,7 +711,7 @@ local craftList = {
 	["theLostShop"] = {
 		["perm"] = "TheLost",
 		["list"] = {
-			["coketable"] = {
+			["tablecoke"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -747,7 +724,7 @@ local craftList = {
 					["explosives"] = 3
 				}
 			},
-			["methtable"] = {
+			["tablemeth"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -760,7 +737,7 @@ local craftList = {
 					["explosives"] = 3
 				}
 			},
-			["weedtable"] = {
+			["tableweed"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -783,7 +760,7 @@ local craftList = {
 					["plastic"] = 30,
 					["glass"] = 30,
 					["rubber"] = 30,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_MACHINEPISTOL"] = {
@@ -796,7 +773,7 @@ local craftList = {
 					["plastic"] = 35,
 					["glass"] = 35,
 					["rubber"] = 35,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_MICROSMG"] = {
@@ -809,7 +786,7 @@ local craftList = {
 					["plastic"] = 75,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_REVOLVER"] = {
@@ -822,7 +799,7 @@ local craftList = {
 					["plastic"] = 35,
 					["glass"] = 35,
 					["rubber"] = 25,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_PUMPSHOTGUN_MK2"] = {
@@ -835,7 +812,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 100,
 					["rubber"] = 100,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SAWNOFFSHOTGUN"] = {
@@ -848,7 +825,7 @@ local craftList = {
 					["plastic"] = 75,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_GUSENBERG"] = {
@@ -861,7 +838,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 100,
 					["rubber"] = 100,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			}
 		}
@@ -869,7 +846,7 @@ local craftList = {
 	["vinhedoShop"] = {
 		["perm"] = "Vinhedo",
 		["list"] = {
-			["coketable"] = {
+			["tablecoke"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -882,7 +859,7 @@ local craftList = {
 					["explosives"] = 3
 				}
 			},
-			["methtable"] = {
+			["tablemeth"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -895,7 +872,7 @@ local craftList = {
 					["explosives"] = 3
 				}
 			},
-			["weedtable"] = {
+			["tableweed"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
@@ -918,7 +895,7 @@ local craftList = {
 					["plastic"] = 30,
 					["glass"] = 30,
 					["rubber"] = 30,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_MACHINEPISTOL"] = {
@@ -931,7 +908,7 @@ local craftList = {
 					["plastic"] = 35,
 					["glass"] = 35,
 					["rubber"] = 35,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_MICROSMG"] = {
@@ -944,7 +921,7 @@ local craftList = {
 					["plastic"] = 75,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_REVOLVER"] = {
@@ -957,7 +934,7 @@ local craftList = {
 					["plastic"] = 35,
 					["glass"] = 35,
 					["rubber"] = 25,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_PUMPSHOTGUN_MK2"] = {
@@ -970,7 +947,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 100,
 					["rubber"] = 100,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SAWNOFFSHOTGUN"] = {
@@ -983,7 +960,7 @@ local craftList = {
 					["plastic"] = 75,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_GUSENBERG"] = {
@@ -996,7 +973,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 100,
 					["rubber"] = 100,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			}
 		}
@@ -1014,7 +991,7 @@ local craftList = {
 					["plastic"] = 30,
 					["glass"] = 30,
 					["rubber"] = 30,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SNSPISTOL"] = {
@@ -1027,7 +1004,7 @@ local craftList = {
 					["plastic"] = 15,
 					["glass"] = 15,
 					["rubber"] = 10,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_PISTOL50"] = {
@@ -1040,7 +1017,7 @@ local craftList = {
 					["plastic"] = 30,
 					["glass"] = 30,
 					["rubber"] = 25,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_MINISMG"] = {
@@ -1053,7 +1030,7 @@ local craftList = {
 					["plastic"] = 80,
 					["glass"] = 80,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_PISTOL_MK2"] = {
@@ -1066,7 +1043,7 @@ local craftList = {
 					["plastic"] = 25,
 					["glass"] = 25,
 					["rubber"] = 25,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SNSPISTOL_MK2"] = {
@@ -1079,7 +1056,7 @@ local craftList = {
 					["plastic"] = 25,
 					["glass"] = 25,
 					["rubber"] = 25,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_VINTAGEPISTOL"] = {
@@ -1092,7 +1069,7 @@ local craftList = {
 					["plastic"] = 15,
 					["glass"] = 15,
 					["rubber"] = 15,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_COMPACTRIFLE"] = {
@@ -1105,7 +1082,7 @@ local craftList = {
 					["plastic"] = 75,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_ADVANCEDRIFLE"] = {
@@ -1118,7 +1095,7 @@ local craftList = {
 					["plastic"] = 175,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_BULLPUPRIFLE"] = {
@@ -1131,7 +1108,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_BULLPUPRIFLE_MK2"] = {
@@ -1144,7 +1121,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SPECIALCARBINE"] = {
@@ -1157,7 +1134,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SPECIALCARBINE_MK2"] = {
@@ -1170,7 +1147,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_SMG_MK2"] = {
@@ -1183,7 +1160,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_ASSAULTRIFLE"] = {
@@ -1196,7 +1173,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_ASSAULTRIFLE_MK2"] = {
@@ -1209,7 +1186,7 @@ local craftList = {
 					["plastic"] = 125,
 					["glass"] = 125,
 					["rubber"] = 125,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			},
 			["WEAPON_ASSAULTSMG"] = {
@@ -1222,7 +1199,7 @@ local craftList = {
 					["plastic"] = 100,
 					["glass"] = 75,
 					["rubber"] = 75,
-					["nails"] = 1
+					["WEAPON_NAIL_AMMO"] = 1
 				}
 			}
 		}
@@ -1399,7 +1376,7 @@ function cRP.functionCrafting(shopItem,shopType,shopAmount,slot)
 			end
 
 			if (vRP.inventoryWeight(user_id) + (itemWeight(shopItem) * parseInt(shopAmount))) <= vRP.getWeight(user_id) then
-				if shopItem == "nails" then
+				if shopItem == "WEAPON_NAIL_AMMO" then
 					local Inventory = vRP.userInventory(user_id)
 					if Inventory then
 						for k,v in pairs(Inventory) do

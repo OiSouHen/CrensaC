@@ -63,19 +63,19 @@ local dismantleVehs = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 local tableSelect = {}
 local tableList = {
-	["coketable"] = {
+	["tablecoke"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
 		[1] = { ["timer"] = 10, ["need"] = "sulfuric", ["needAmount"] = 1 },
 		[2] = { ["timer"] = 10, ["need"] = "cokeleaf", ["needAmount"] = 1 },
 		[3] = { ["timer"] = 10, ["item"] = "cocaine", ["itemAmount"] = 3 }
 	},
-	["methtable"] = {
+	["tablemeth"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
 		[1] = { ["timer"] = 10, ["need"] = "saline", ["needAmount"] = 1 },
 		[2] = { ["timer"] = 10, ["need"] = "acetone", ["needAmount"] = 1 },
 		[3] = { ["timer"] = 10, ["item"] = "meth", ["itemAmount"] = 3 }
 	},
-	["weedtable"] = {
+	["tableweed"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
 		[1] = { ["timer"] = 10, ["need"] = "silk", ["needAmount"] = 1 },
 		[2] = { ["timer"] = 10, ["need"] = "weedleaf", ["needAmount"] = 1 },
@@ -141,11 +141,9 @@ local tableList = {
 		[25] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
 		[26] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
 		[27] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
-		[28] = { ["timer"] = 5, ["item"] = "brick", ["itemAmount"] = 1 },
-		[29] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
-		[30] = { ["timer"] = 5, ["item"] = "sneakers", ["itemAmount"] = 1 },
-		[31] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
-		[32] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
+		[28] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
+		[29] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
+		[30] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
 	},
 	["fishfillet"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
@@ -177,7 +175,7 @@ local stealItens = {
 	[7] = { ["item"] = "domino", ["min"] = 2, ["max"] = 3, ["rand"] = 225 },
 	[8] = { ["item"] = "brush", ["min"] = 1, ["max"] = 4, ["rand"] = 225 },
 	[9] = { ["item"] = "rimel", ["min"] = 2, ["max"] = 4, ["rand"] = 225 },
-	[10] = { ["item"] = "sneakers", ["min"] = 1, ["max"] = 2, ["rand"] = 225 },
+	[10] = { ["item"] = "WEAPON_SHOES", ["min"] = 1, ["max"] = 2, ["rand"] = 225 },
 	[11] = { ["item"] = "dices", ["min"] = 2, ["max"] = 4, ["rand"] = 225 },
 	[12] = { ["item"] = "spray04", ["min"] = 2, ["max"] = 3, ["rand"] = 225 },
 	[13] = { ["item"] = "spray03", ["min"] = 2, ["max"] = 3, ["rand"] = 225 },
@@ -233,11 +231,10 @@ local lootItens = {
 			[3] = { ["item"] = "codeine", ["min"] = 1, ["max"] = 3 },
 			[4] = { ["item"] = "amphetamine", ["min"] = 1, ["max"] = 3 },
 			[5] = { ["item"] = "acetone", ["min"] = 1, ["max"] = 3 },
-			[6] = { ["item"] = "adrenaline", ["min"] = 1, ["max"] = 1 },
-			[7] = { ["item"] = "cotton", ["min"] = 1, ["max"] = 3 },
-			[8] = { ["item"] = "plaster", ["min"] = 1, ["max"] = 3 },
-			[9] = { ["item"] = "saline", ["min"] = 1, ["max"] = 3 },
-			[10] = { ["item"] = "sulfuric", ["min"] = 1, ["max"] = 3 }
+			[6] = { ["item"] = "cotton", ["min"] = 1, ["max"] = 3 },
+			[7] = { ["item"] = "plaster", ["min"] = 1, ["max"] = 3 },
+			[8] = { ["item"] = "saline", ["min"] = 1, ["max"] = 3 },
+			[9] = { ["item"] = "sulfuric", ["min"] = 1, ["max"] = 3 }
 		}
 	},
 	["Weapons"] = {
@@ -1132,30 +1129,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							vRP.downgradeThirst(user_id,5)
 							vRP.downgradeStress(user_id,20)
 							vPLAYER.movementClip(source,"move_m@shadyped@a")
-						end
-					end
-
-					Wait(100)
-				until Active[user_id] == nil
-			return end
-
-			if nameItem == "ecstasy" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				vRPC.playAnim(source,true,{"mp_suicide","pill"},true)
-				TriggerClientEvent("inventory:Buttons",source,true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							vRP.chemicalTimer(user_id,10)
-							TriggerClientEvent("setEcstasy",source)
-							TriggerClientEvent("setEnergetic",source,10,1.30)
 						end
 					end
 
@@ -2390,7 +2363,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "coketable" then
+			if nameItem == "tablecoke" then
 				if not exports["homes"]:checkHotel(user_id) then
 					TriggerClientEvent("inventory:Close",source)
 					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_coke_table01a")
@@ -2402,7 +2375,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								Number = Number + 1
 							until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_coke_table01a", item = "coketable", distance = 50, mode = "1" }
+							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_coke_table01a", item = "tablecoke", distance = 50, mode = "1" }
 							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
 							TriggerClientEvent("inventory:Close",source)
 						end
@@ -2410,7 +2383,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "methtable" then
+			if nameItem == "tablemeth" then
 				if not exports["homes"]:checkHotel(user_id) then
 					TriggerClientEvent("inventory:Close",source)
 					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_meth_table01a")
@@ -2430,7 +2403,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "weedtable" then
+			if nameItem == "tableweed" then
 				if not exports["homes"]:checkHotel(user_id) then
 					TriggerClientEvent("inventory:Close",source)
 					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_weed_table_01a")
@@ -3336,7 +3309,7 @@ local stealpedsitens = {
 	{ item = "spray04", min = 1, max = 2 },
 	{ item = "dices", min = 1, max = 2 },
 	{ item = "dish", min = 1, max = 3 },
-	{ item = "sneakers", min = 1, max = 2 },
+	{ item = "WEAPON_SHOES", min = 1, max = 2 },
 	{ item = "rimel", min = 1, max = 3 },
 	{ item = "blender", min = 1, max = 1 },
 	{ item = "switch", min = 1, max = 3 },
@@ -3895,7 +3868,7 @@ local stealpedsList = {
 	{ item = "spray04", min = 1, max = 2 },
 	{ item = "dices", min = 1, max = 2 },
 	{ item = "dish", min = 1, max = 3 },
-	{ item = "sneakers", min = 1, max = 2 },
+	{ item = "WEAPON_SHOES", min = 1, max = 2 },
 	{ item = "rimel", min = 1, max = 3 },
 	{ item = "blender", min = 1, max = 1 },
 	{ item = "switch", min = 1, max = 3 },
@@ -3935,13 +3908,10 @@ end)
 -- DRUGSLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local drugsList = {
-	{ item = "lean", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
-	{ item = "ecstasy", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "cocaine", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "meth", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
 	{ item = "joint", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
-	{ item = "oxy", priceMin = 55, priceMax = 65, randMin = 1, randMax = 3 },
-	{ item = "heroine", priceMin = 100, priceMax = 125, randMin = 1, randMax = 1 }
+	{ item = "oxy", priceMin = 55, priceMax = 65, randMin = 1, randMax = 3 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- AMOUNTDRUGS
