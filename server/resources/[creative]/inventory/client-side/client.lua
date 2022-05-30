@@ -16,6 +16,7 @@ vSERVER = Tunnel.getInterface("inventory")
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Drops = {}
+local Types = ""
 local Weapon = ""
 local Backpack = false
 local weaponActive = false
@@ -24,16 +25,9 @@ local storeWeaponHands = false
 local timeReload = GetGameTimer()
 LocalPlayer["state"]["Buttons"] = false
 -----------------------------------------------------------------------------------------------------------------------------------------
--- INVENTORY:BUTTONS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("inventory:Buttons")
-AddEventHandler("inventory:Buttons",function(status)
-	LocalPlayer["state"]["Buttons"] = status
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLOCKBUTTONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
+Citizen.CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Buttons"] then
@@ -44,8 +38,15 @@ CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Wait(timeDistance)
+		Citizen.Wait(timeDistance)
 	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:BUTTONS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:Buttons")
+AddEventHandler("inventory:Buttons",function(status)
+	LocalPlayer["state"]["Buttons"] = status
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- throwableWeapons
@@ -148,6 +149,7 @@ AddEventHandler("inventory:clearWeapons",function()
 	if Weapon ~= "" then
 		Weapon = ""
 		weaponActive = false
+		TriggerEvent("hud:Weapon",false)
 		RemoveAllPedWeapons(PlayerPedId(),true)
 	end
 end)
@@ -157,10 +159,11 @@ end)
 RegisterNetEvent("inventory:verifyWeapon")
 AddEventHandler("inventory:verifyWeapon",function(splitName)
 	if Weapon == splitName then
-		local ped = PlayerPedId()
-		local weaponAmmo = GetAmmoInPedWeapon(ped,Weapon)
+		local Ped = PlayerPedId()
+		local weaponAmmo = GetAmmoInPedWeapon(Ped,Weapon)
 		if not vSERVER.verifyWeapon(Weapon,weaponAmmo) then
-			RemoveAllPedWeapons(ped,true)
+			TriggerEvent("hud:Weapon",false)
+			RemoveAllPedWeapons(Ped,true)
 			weaponActive = false
 			Weapon = ""
 		end
@@ -176,17 +179,19 @@ end)
 RegisterNetEvent("inventory:preventWeapon")
 AddEventHandler("inventory:preventWeapon",function(storeWeapons)
 	if Weapon ~= "" then
-		local ped = PlayerPedId()
-		local weaponAmmo = GetAmmoInPedWeapon(ped,Weapon)
+		local Ped = PlayerPedId()
+		local weaponAmmo = GetAmmoInPedWeapon(Ped,Weapon)
 
 		vSERVER.preventWeapon(Weapon,weaponAmmo)
 
-		weaponActive = false
-		Weapon = ""
-
 		if storeWeapons then
-			RemoveAllPedWeapons(ped,true)
+			RemoveAllPedWeapons(Ped,true)
 		end
+		
+		Types = ""
+		Weapon = ""
+		weaponActive = false
+		TriggerEvent("hud:Weapon",false)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -228,8 +233,12 @@ AddEventHandler("inventory:repairVehicle",function(vehIndex,vehPlate)
 					vehTyres[i] = Status
 				end
 
+				local Fuel = GetVehicleFuelLevel(Vehicle)
+
 				SetVehicleFixed(Vehicle)
 				SetVehicleDeformationFixed(Vehicle)
+
+				SetVehicleFuelLevel(Vehicle,Fuel)
 
 				for Tyre,Burst in pairs(vehTyres) do
 					if Burst then
@@ -249,27 +258,13 @@ AddEventHandler("inventory:repairTyre",function(Vehicle,Tyres,vehPlate)
 		local Vehicle = NetToEnt(Vehicle)
 		if DoesEntityExist(Vehicle) then
 			if GetVehicleNumberPlateText(Vehicle) == vehPlate then
-				local vehTyres = {}
-
 				for i = 0,7 do
-					local Status = false
-
-					if i ~= Tyres then
-						if GetTyreHealth(Vehicle,i) ~= 1000.0 then
-							Status = true
-						end
-					end
-
-					SetVehicleTyreFixed(Vehicle,i)
-
-					vehTyres[i] = Status
-				end
-
-				for Tyre,Burst in pairs(vehTyres) do
-					if Burst then
-						SetVehicleTyreBurst(Vehicle,Tyre,true,1000.0)
+					if GetTyreHealth(Vehicle,i) ~= 1000.0 then
+						SetVehicleTyreBurst(Vehicle,i,true,1000.0)
 					end
 				end
+
+				SetVehicleTyreFixed(Vehicle,Tyres)
 			end
 		end
 	end
@@ -298,8 +293,12 @@ AddEventHandler("inventory:repairAdmin",function(vehIndex,vehPlate)
 		local Vehicle = NetToEnt(vehIndex)
 		if DoesEntityExist(Vehicle) then
 			if GetVehicleNumberPlateText(Vehicle) == vehPlate then
+				local Fuel = GetVehicleFuelLevel(Vehicle)
+
 				SetVehicleFixed(Vehicle)
 				SetVehicleDeformationFixed(Vehicle)
+
+				SetVehicleFuelLevel(Vehicle,Fuel)
 			end
 		end
 	end
@@ -422,6 +421,17 @@ end
 function cRP.fishingAnim()
 	local ped = PlayerPedId()
 	if IsEntityPlayingAnim(ped,"amb@world_human_stand_fishing@idle_a","idle_c",3) then
+		return true
+	end
+
+	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ANIMALANIM
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.animalAnim()
+	local ped = PlayerPedId()
+	if IsEntityPlayingAnim(ped,"anim@gangops@facility@servers@bodysearch@","player_search",3) then
 		return true
 	end
 
@@ -561,28 +571,28 @@ function cRP.putWeaponHands(weaponName,weaponAmmo,attachs)
 		putWeaponHands = true
 		LocalPlayer["state"]["Cancel"] = true
 
-		local ped = PlayerPedId()
-		if HasPedGotWeapon(ped,GetHashKey("GADGET_PARACHUTE"),false) then
-			RemoveAllPedWeapons(ped,true)
+		local Ped = PlayerPedId()
+		if HasPedGotWeapon(Ped,GetHashKey("GADGET_PARACHUTE"),false) then
+			RemoveAllPedWeapons(Ped,true)
 			cRP.parachuteColors()
 		else
-			RemoveAllPedWeapons(ped,true)
+			RemoveAllPedWeapons(Ped,true)
 		end
 
-		if not IsPedInAnyVehicle(ped) then
+		if not IsPedInAnyVehicle(Ped) then
 			loadAnimDict("rcmjosh4")
 
-			TaskPlayAnim(ped,"rcmjosh4","josh_leadout_cop2",3.0,2.0,-1,48,10,0,0,0)
+			TaskPlayAnim(Ped,"rcmjosh4","josh_leadout_cop2",3.0,2.0,-1,48,10,0,0,0)
 
 			Wait(200)
 
-			GiveWeaponToPed(ped,weaponName,weaponAmmo,false,true)
+			GiveWeaponToPed(Ped,weaponName,weaponAmmo,false,true)
 
 			Wait(300)
 
-			ClearPedTasks(ped)
+			ClearPedTasks(Ped)
 		else
-			GiveWeaponToPed(ped,weaponName,weaponAmmo,true,true)
+			GiveWeaponToPed(Ped,weaponName,weaponAmmo,true,true)
 		end
 
 		if attachs ~= nil then
@@ -591,12 +601,16 @@ function cRP.putWeaponHands(weaponName,weaponAmmo,attachs)
 			end
 		end
 
-		LocalPlayer["state"]["Cancel"] = false
-		putWeaponHands = false
 		Weapon = weaponName
+		putWeaponHands = false
+		LocalPlayer["state"]["Cancel"] = false
+		
+		if itemAmmo(weaponName) then
+			TriggerEvent("hud:Weapon",true,weaponName)
+		end
 
 		if vSERVER.dropWeapons(Weapon) then
-			RemoveAllPedWeapons(ped,true)
+			RemoveAllPedWeapons(Ped,true)
 			weaponActive = false
 			Weapon = ""
 		end
@@ -612,23 +626,24 @@ end
 function cRP.storeWeaponHands()
 	if not storeWeaponHands then
 		storeWeaponHands = true
-		local ped = PlayerPedId()
+		local Ped = PlayerPedId()
 		local lastWeapon = Weapon
 		LocalPlayer["state"]["Cancel"] = true
-		local weaponAmmo = GetAmmoInPedWeapon(ped,Weapon)
+		local weaponAmmo = GetAmmoInPedWeapon(Ped,Weapon)
 
-		if not IsPedInAnyVehicle(ped) then
+		if not IsPedInAnyVehicle(Ped) then
 			loadAnimDict("weapons@pistol@")
 
-			TaskPlayAnim(ped,"weapons@pistol@","aim_2_holster",3.0,2.0,-1,48,10,0,0,0)
+			TaskPlayAnim(Ped,"weapons@pistol@","aim_2_holster",8.0,8.0,-1,48,0,0,0,0)
 
-			Wait(450)
+			Citizen.Wait(450)
 
-			ClearPedTasks(ped)
+			ClearPedTasks(Ped)
 		end
 
 		LocalPlayer["state"]["Cancel"] = false
-		RemoveAllPedWeapons(ped,true)
+		TriggerEvent("hud:Weapon",false)
+		RemoveAllPedWeapons(Ped,true)
 
 		storeWeaponHands = false
 		weaponActive = false
@@ -660,7 +675,6 @@ local weaponAmmos = {
 		"WEAPON_MINISMG",
 		"WEAPON_SMG",
 		"WEAPON_SMG_MK2",
-		"WEAPON_ASSAULTSMG",
 		"WEAPON_GUSENBERG",
 		"WEAPON_MACHINEPISTOL"
 	},
@@ -672,6 +686,7 @@ local weaponAmmos = {
 		"WEAPON_BULLPUPRIFLE_MK2",
 		"WEAPON_ADVANCEDRIFLE",
 		"WEAPON_ASSAULTRIFLE",
+		"WEAPON_ASSAULTSMG",
 		"WEAPON_ASSAULTRIFLE_MK2",
 		"WEAPON_SPECIALCARBINE",
 		"WEAPON_SPECIALCARBINE_MK2"
@@ -682,7 +697,6 @@ local weaponAmmos = {
 		"WEAPON_SAWNOFFSHOTGUN"
 	},
 	["WEAPON_MUSKET_AMMO"] = {
-		"WEAPON_SNIPERRIFLE",
 		"WEAPON_MUSKET"
 	},
 	["WEAPON_PETROLCAN_AMMO"] = {
@@ -738,6 +752,7 @@ CreateThread(function()
 
 			if weaponAmmo <= 0 or (Weapon == "WEAPON_PETROLCAN" and weaponAmmo <= 135 and IsPedShooting(ped)) or IsPedSwimming(ped) then
 				vSERVER.preventWeapon(Weapon,weaponAmmo)
+				TriggerEvent("hud:Weapon",false)
 				RemoveAllPedWeapons(ped,true)
 				weaponActive = false
 				Weapon = ""
