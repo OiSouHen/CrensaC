@@ -132,8 +132,7 @@ local benCoords = { 0.0,0.0,0.0 }
 -- REQUESTDRIVE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestDrive",function(data)
-	local driveIn,vehPlate = vSERVER.startDrive()
-	if driveIn then
+	if vSERVER.startDrive() then
 		SetNuiFocus(false,false)
 		SetCursorLocation(0.5,0.5)
 		SendNUIMessage({ action = "closeSystem" })
@@ -148,7 +147,7 @@ RegisterNUICallback("requestDrive",function(data)
 
 		Wait(1000)
 
-		vehCreate(data["name"],vehPlate)
+		vehCreate(data["name"])
 
 		Wait(1000)
 
