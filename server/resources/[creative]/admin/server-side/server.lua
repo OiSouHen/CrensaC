@@ -54,6 +54,7 @@ RegisterCommand("god",function(source,args,rawCommand)
 					vRP.upgradeHunger(nuser_id,100)
 					vRP.downgradeStress(nuser_id,100)
 					vRPC.revivePlayer(otherPlayer,200)
+					TriggerClientEvent("paramedic:Reset",source) -- TRY
 				end
 			else
 				vRP.setArmour(source,100)
@@ -208,10 +209,10 @@ end)
 RegisterCommand("group",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		--if vRP.hasGroup(user_id,"Admin") and parseInt(args[1]) > 0 and args[2] then
+		if vRP.hasGroup(user_id,"Admin") or user_id == 1 and parseInt(args[1]) > 0 and args[2] then
 			TriggerClientEvent("Notify",source,"verde","Adicionado <b>"..args[2].."</b> ao passaporte <b>"..args[1].."</b>.",5000)
 			vRP.setPermission(args[1],args[2])
-		--end
+		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
