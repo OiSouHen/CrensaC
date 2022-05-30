@@ -547,7 +547,7 @@ RegisterCommand("car",function(source,args,rawCommand)
 			local coords = GetEntityCoords(ped)
 			local heading = GetEntityHeading(ped)
 			local vehPlate = "VEH"..math.random(10000,99999)
-			local netExist,netVeh,mHash,myVeh = cRP.serverVehicle(args[1],coords["x"],coords["y"],coords["z"],heading,vehPlate,200,nil,1000)
+			local netExist,netVeh,mHash,myVeh = cRP.serverVehicle(args[1],coords["x"],coords["y"],coords["z"],heading,vehPlate,2000,nil,1000)
 
 			if not netExist then
 				return

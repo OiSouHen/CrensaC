@@ -251,7 +251,7 @@ $(document).ready(function(){
 
 				$(".imageMap").css("transform",'rotate(' + event["data"]["rotation"] + 'deg)');
 
-				$(".Nitro").css("height",parseInt(event["data"]["nitro"] / 2) + "%");
+				$(".Nitro").css("height",parseInt(event["data"]["nitro"] / 20) + "%");
 				$(".Fuel").css("height",parseInt(event["data"]["fuel"]) + "%");
 			} else {
 				if ($("#displayVehicle").css("display") === "block"){

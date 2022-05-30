@@ -1541,7 +1541,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 								if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 									local Nitro = GlobalState["Nitro"]
-									Nitro[vehPlate] = 200
+									Nitro[vehPlate] = 2000
 									GlobalState["Nitro"] = Nitro
 								end
 							end
