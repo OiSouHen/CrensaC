@@ -55,7 +55,6 @@ function cRP.getCharacters()
 			local userTablesTatto = vRP.userData(v["id"],"Tatuagens")
 			
 			table.insert(getCharacters,{ skin = userTablesSkin["skin"], barber = userTablesBarber, clothes = userTablesClotings, tattoos = userTablesTatto })
-			TriggerClientEvent("Notify",source,"verde","ped",10000)
 		end
 	end
 

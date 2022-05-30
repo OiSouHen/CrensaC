@@ -1195,6 +1195,12 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- ONRESOURCESTOP
+-----------------------------------------------------------------------------------------------------------------------------------------
+AddEventHandler("onResourceStop",function(resource)
+	TriggerServerEvent("vRP:Prints","pausou o resource "..resource)
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- BOXLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local boxList = {
@@ -1285,12 +1291,6 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ONRESOURCESTOP
------------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("onResourceStop",function(resource)
-	TriggerServerEvent("vRP:Print","pausou o resource "..resource)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- TYRELIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local tyreList = {
@@ -1377,5 +1377,247 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
+local DrugsPeds = {}
 local StealPeds = {}
+local DrugsTimer = GetGameTimer()
 local StealTimer = GetGameTimer()
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADSTEALNPCS
+-----------------------------------------------------------------------------------------------------------------------------------------
+Citizen.CreateThread(function()
+	while true do
+		local timeDistance = 999
+		local Ped = PlayerPedId()
+
+		if not IsPedInAnyVehicle(Ped) and IsPedArmed(Ped,7) then
+			local Handler,Selected = FindFirstPed()
+
+			repeat
+				if not IsEntityDead(Selected) and not StealPeds[Selected] and not IsPedDeadOrDying(Selected) and GetPedArmour(Selected) <= 0 and not IsPedAPlayer(Selected) and not IsPedInAnyVehicle(Selected) and GetPedType(Selected) ~= 28 then
+					local Coords = GetEntityCoords(Ped)
+					local pCoords = GetEntityCoords(Selected)
+					local Distance = #(Coords - pCoords)
+
+					if Distance <= 5 then
+						timeDistance = 100
+
+						local Pid = PlayerId()
+						if Distance <= 2 and (IsPedInMeleeCombat(Ped) or IsPlayerFreeAiming(Pid)) then
+							ClearPedTasks(Selected)
+							ClearPedSecondaryTask(Selected)
+							ClearPedTasksImmediately(Selected)
+
+							local SelectedTimers = 0
+							local SelectedControl = NetworkRequestControlOfEntity(Selected)
+							while not SelectedControl and SelectedTimers <= 1000 do
+								SelectedControl = NetworkRequestControlOfEntity(Selected)
+								SelectedTimers = SelectedTimers + 1
+							end
+
+							TaskSetBlockingOfNonTemporaryEvents(Selected,true)
+							SetBlockingOfNonTemporaryEvents(Selected,true)
+							SetEntityAsMissionEntity(Selected,true,true)
+							SetPedDropsWeaponsWhenDead(Selected,false)
+							TaskTurnPedToFaceEntity(Selected,Ped,3.0)
+							SetPedSuffersCriticalHits(Selected,false)
+							SetPedAsNoLongerNeeded(Selected)
+							StealPeds[Selected] = true
+
+							RequestAnimDict("random@mugging3")
+							while not HasAnimDictLoaded("random@mugging3") do
+								Citizen.Wait(1)
+							end
+
+							local SelectedRobbery = 500
+							LocalPlayer["state"]["Buttons"] = true
+							LocalPlayer["state"]["Commands"] = true
+							TaskPlayAnim(Selected,"random@mugging3","handsup_standing_base",8.0,8.0,-1,16,0,0,0,0)
+
+							while true do
+								local Coords = GetEntityCoords(Ped)
+								local pCoords = GetEntityCoords(Selected)
+								local Distance = #(Coords - pCoords)
+
+								if Distance <= 2 and (IsPedInMeleeCombat(Ped) or IsPlayerFreeAiming(Pid)) then
+									SelectedRobbery = SelectedRobbery - 1
+
+									if not IsEntityPlayingAnim(Selected,"random@mugging3","handsup_standing_base",3) then
+										TaskPlayAnim(Selected,"random@mugging3","handsup_standing_base",8.0,8.0,-1,16,0,0,0,0)
+									end
+
+									if SelectedRobbery <= 0 then
+										local Anim = "mp_safehouselost@"
+										local Hash = "prop_paper_bag_small"
+
+										RequestModel(Hash)
+										while not HasModelLoaded(Hash) do
+											Citizen.Wait(1)
+										end
+
+										RequestAnimDict(Anim)
+										while not HasAnimDictLoaded(Anim) do
+											Citizen.Wait(1)
+										end
+
+										local Object = CreateObject(Hash,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+										AttachEntityToEntity(Object,Selected,GetPedBoneIndex(Selected,28422),0.0,-0.05,0.05,180.0,0.0,0.0,false,false,false,false,2,true)
+										TaskPlayAnim(Selected,Anim,"package_dropoff",8.0,8.0,-1,16,0,0,0,0)
+
+										Citizen.Wait(3000)
+
+										if DoesEntityExist(Object) then
+											SetModelAsNoLongerNeeded(Hash)
+											DeleteEntity(Object)
+										end
+
+										ClearPedSecondaryTask(Selected)
+										TaskWanderStandard(Selected,10.0,10)
+										TriggerServerEvent("inventory:StealPeds")
+
+										LocalPlayer["state"]["Buttons"] = false
+										LocalPlayer["state"]["Commands"] = false
+
+										break
+									end
+								else
+									ClearPedSecondaryTask(Selected)
+									TaskWanderStandard(Selected,10.0,10)
+
+									LocalPlayer["state"]["Buttons"] = false
+									LocalPlayer["state"]["Commands"] = false
+
+									break
+								end
+
+								Citizen.Wait(1)
+							end
+						end
+					end
+				end
+
+				Success,Selected = FindNextPed(Handler)
+			until not Success EndFindPed(Handler)
+		end
+
+		Citizen.Wait(timeDistance)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADDRUGSPEDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+Citizen.CreateThread(function()
+	while true do
+		local timeDistance = 999
+		local Ped = PlayerPedId()
+
+		if not IsPedInAnyVehicle(Ped) then
+			local Handler,Selected = FindFirstPed()
+
+			repeat
+				if not IsEntityDead(Selected) and not DrugsPeds[Selected] and not IsPedDeadOrDying(Selected) and GetPedArmour(Selected) <= 0 and not IsPedAPlayer(Selected) and not IsPedInAnyVehicle(Selected) and GetPedType(Selected) ~= 28 then
+					local Coords = GetEntityCoords(Ped)
+					local pCoords = GetEntityCoords(Selected)
+					local Distance = #(Coords - pCoords)
+
+					if Distance <= 1 then
+						timeDistance = 1
+
+						if IsControlJustPressed(1,38) and GetGameTimer() >= DrugsTimer and vSERVER.AmountDrugs() then
+							DrugsTimer = GetGameTimer() + 5000
+
+							ClearPedTasks(Selected)
+							ClearPedSecondaryTask(Selected)
+							ClearPedTasksImmediately(Selected)
+
+							local SelectedTimers = 0
+							local SelectedRobbery = 500
+							LocalPlayer["state"]["Buttons"] = true
+							LocalPlayer["state"]["Commands"] = true
+							local SelectedControl = NetworkRequestControlOfEntity(Selected)
+							while not SelectedControl and SelectedTimers <= 1000 do
+								SelectedControl = NetworkRequestControlOfEntity(Selected)
+								SelectedTimers = SelectedTimers + 1
+							end
+
+							TaskSetBlockingOfNonTemporaryEvents(Selected,true)
+							SetBlockingOfNonTemporaryEvents(Selected,true)
+							SetEntityAsMissionEntity(Selected,true,true)
+							SetPedDropsWeaponsWhenDead(Selected,false)
+							TaskTurnPedToFaceEntity(Selected,Ped,3.0)
+							SetPedSuffersCriticalHits(Selected,false)
+							SetPedAsNoLongerNeeded(Selected)
+							DrugsPeds[Selected] = true
+
+							while true do
+								local Coords = GetEntityCoords(Ped)
+								local pCoords = GetEntityCoords(Selected)
+								local Distance = #(Coords - pCoords)
+
+								if Distance <= 2 then
+									SelectedRobbery = SelectedRobbery - 1
+
+									if SelectedRobbery <= 0 then
+										local Anim = "mp_safehouselost@"
+										local Hash = "prop_anim_cash_note"
+
+										RequestModel(Hash)
+										while not HasModelLoaded(Hash) do
+											Citizen.Wait(1)
+										end
+
+										RequestAnimDict(Anim)
+										while not HasAnimDictLoaded(Anim) do
+											Citizen.Wait(1)
+										end
+
+										local Object = CreateObject(Hash,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+										AttachEntityToEntity(Object,Selected,GetPedBoneIndex(Selected,28422),0.0,0.0,0.0,90.0,0.0,0.0,false,false,false,false,2,true)
+										vRP.createObjects(Anim,"package_dropoff","prop_paper_bag_small",16,28422,0.0,-0.05,0.05,180.0,0.0,0.0)
+										TaskPlayAnim(Selected,Anim,"package_dropoff",8.0,8.0,-1,16,0,0,0,0)
+
+										Citizen.Wait(3000)
+
+										if DoesEntityExist(Object) then
+											SetModelAsNoLongerNeeded(Hash)
+											DeleteEntity(Object)
+										end
+
+										vRP.removeObjects()
+										ClearPedSecondaryTask(Selected)
+										TaskWanderStandard(Selected,10.0,10)
+										TriggerServerEvent("inventory:DrugsPeds")
+
+										LocalPlayer["state"]["Buttons"] = false
+										LocalPlayer["state"]["Commands"] = false
+
+										break
+									end
+								else
+									ClearPedSecondaryTask(Selected)
+									TaskWanderStandard(Selected,10.0,10)
+
+									LocalPlayer["state"]["Buttons"] = false
+									LocalPlayer["state"]["Commands"] = false
+
+									break
+								end
+
+								Citizen.Wait(1)
+							end
+						end
+					end
+				end
+
+				Success,Selected = FindNextPed(Handler)
+			until not Success EndFindPed(Handler)
+		end
+
+		Citizen.Wait(timeDistance)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CHECKARMS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.CheckArms()
+	return exports["paramedic"]:Arms()
+end

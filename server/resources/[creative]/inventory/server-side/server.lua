@@ -35,6 +35,7 @@ local Animals = {}
 local Attachs = {}
 local Scanners = {}
 local Stockade = {}
+local userAmount = {}
 
 local openIdentity = {}
 local verifyObjects = {}
@@ -792,10 +793,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				local plateVehicle = "WCH"..math.random(10000,99999)
 				TriggerEvent("plateEveryone",plateVehicle)
 				vCLIENT.wheelChair(source,plateVehicle)
-			return end
-
-			if nameItem == "cellphone" then
-				TriggerClientEvent("drugs:initService",source)
 			return end
 
 			if nameItem == "defibrillator" then
@@ -3115,6 +3112,10 @@ AddEventHandler("playerDisconnect",function(user_id)
 		vRPC.removeObjects(Carry[user_id])
 		Carry[user_id] = nil
 	end
+	
+	if userAmount[user_id] then
+		userAmount[user_id] = nil
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERCONNECT
@@ -3874,6 +3875,119 @@ AddEventHandler("inventory:Animals",function(Entity)
 			end
 		else
 			TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- STEALPEDSLIST
+-----------------------------------------------------------------------------------------------------------------------------------------
+local stealpedsList = {
+	{ item = "notepad", min = 1, max = 5 },
+	{ item = "mouse", min = 1, max = 1 },
+	{ item = "silverring", min = 1, max = 1 },
+	{ item = "goldring", min = 1, max = 1 },
+	{ item = "watch", min = 1, max = 2 },
+	{ item = "ominitrix", min = 1, max = 1 },
+	{ item = "bracelet", min = 1, max = 1 },
+	{ item = "spray01", min = 1, max = 2 },
+	{ item = "spray02", min = 1, max = 2 },
+	{ item = "spray03", min = 1, max = 2 },
+	{ item = "spray04", min = 1, max = 2 },
+	{ item = "dices", min = 1, max = 2 },
+	{ item = "dish", min = 1, max = 3 },
+	{ item = "sneakers", min = 1, max = 2 },
+	{ item = "rimel", min = 1, max = 3 },
+	{ item = "blender", min = 1, max = 1 },
+	{ item = "switch", min = 1, max = 3 },
+	{ item = "brush", min = 1, max = 2 },
+	{ item = "domino", min = 1, max = 3 },
+	{ item = "floppy", min = 1, max = 4 },
+	{ item = "deck", min = 1, max = 2 },
+	{ item = "pliers", min = 1, max = 2 },
+	{ item = "slipper", min = 1, max = 1 },
+	{ item = "soap", min = 1, max = 1 },
+	{ item = "dollarsz", min = 425, max = 525 },
+	{ item = "card01", min = 1, max = 1 },
+	{ item = "card02", min = 1, max = 1 },
+	{ item = "card03", min = 1, max = 1 },
+	{ item = "card04", min = 1, max = 1 },
+	{ item = "card05", min = 1, max = 1 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:STEALPEDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("inventory:StealPeds")
+AddEventHandler("inventory:StealPeds",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if (vRP.inventoryWeight(user_id) + 1) <= vRP.getWeight(user_id) then
+			vRP.upgradeStress(user_id,3)
+			local rand = math.random(#stealpedsList)
+			local value = math.random(stealpedsList[rand]["min"],stealpedsList[rand]["max"])
+			vRP.generateItem(user_id,stealpedsList[rand]["item"],value,true)
+		else
+			TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DRUGSLIST
+-----------------------------------------------------------------------------------------------------------------------------------------
+local drugsList = {
+	{ item = "lean", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
+	{ item = "ecstasy", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
+	{ item = "cocaine", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
+	{ item = "meth", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
+	{ item = "joint", priceMin = 45, priceMax = 60, randMin = 2, randMax = 5 },
+	{ item = "oxy", priceMin = 55, priceMax = 65, randMin = 1, randMax = 3 },
+	{ item = "heroine", priceMin = 100, priceMax = 125, randMin = 1, randMax = 1 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- AMOUNTDRUGS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.AmountDrugs()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		for k,v in pairs(drugsList) do
+			local randAmount = math.random(v["randMin"],v["randMax"])
+			local randPrice = math.random(v["priceMin"],v["priceMax"])
+			local consultItem = vRP.getInventoryItemAmount(user_id,v["item"])
+			if consultItem[1] >= parseInt(randAmount) then
+				userAmount[user_id] = { v["item"],randAmount,randPrice * randAmount }
+
+				return true
+			end
+		end
+
+		return false
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:DRUGSPEDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("inventory:DrugsPeds")
+AddEventHandler("inventory:DrugsPeds",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.tryGetInventoryItem(user_id,userAmount[user_id][1],userAmount[user_id][2],true) then
+			vRP.upgradeStress(user_id,3)
+			TriggerClientEvent("player:applyGsr",source)
+			vRP.generateItem(user_id,"dollars",userAmount[user_id][3],true)
+			
+			if math.random(100) >= 75 then
+				local ped = GetPlayerPed(source)
+				local coords = GetEntityCoords(ped)
+				local policeResult = vRP.numPermission("Police")
+				for k,v in pairs(policeResult) do
+					async(function()
+						vRPC.playSound(v,"ATM_WINDOW","HUD_FRONTEND_DEFAULT_SOUNDSET")
+						TriggerClientEvent("NotifyPush",v,{ code = 20, title = "Venda de Drogas", x = coords["x"], y = coords["y"], z = coords["z"], criminal = "Ligação Anônima", time = "Recebido às "..os.date("%H:%M"), blipColor = 16 })
+					end)
+				end
+			end
 		end
 	end
 end)
