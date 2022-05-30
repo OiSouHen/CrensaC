@@ -1,12 +1,12 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
+local Walk = nil
 local uObject = nil
 local uPoint = false
 local animDict = nil
 local animName = nil
 local crouch = false
-local walkSelect = nil
 local animActived = false
 local cdBtns = GetGameTimer()
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -77,11 +77,11 @@ RegisterCommand("andar",function(source,args,rawCommand)
 				end
 
 				SetPedMovementClipset(ped,walkMode[mode],0.25)
-				walkSelect = walkMode[mode]
+				Walk = walkMode[mode]
 			end
 		else
 			ResetPedMovementClipset(ped,0.25)
-			walkSelect = nil
+			Walk = nil
 		end
 	end
 end)
@@ -244,7 +244,7 @@ CreateThread(function()
 		if animActived and LocalPlayer["state"]["Active"] then
 			local ped = PlayerPedId()
 			if not IsEntityPlayingAnim(ped,animDict,animName,3) then
-				TaskPlayAnim(ped,animDict,animName,3.0,3.0,-1,animFlags,0,0,0,0)
+				TaskPlayAnim(ped,animDict,animName,8.0,8.0,-1,animFlags,0,0,0,0)
 				timeDistance = 1
 			end
 		end
@@ -307,10 +307,10 @@ CreateThread(function()
 			local ray = Cast_3dRayPointToPoint(coords["x"],coords["y"],coords["z"]-0.2,coords.x,coords.y,coords.z+0.2,0.4,95,ped,7);
 			nn,blocked,coords,coords = GetRaycastResult(ray)
 
-			Citizen.InvokeNative(0xD5BB4025AE449A4E,ped,"Pitch",camPitch)
-			Citizen.InvokeNative(0xD5BB4025AE449A4E,ped,"Heading",camHeading * -1.0 + 1.0)
-			Citizen.InvokeNative(0xB0A6CFD2C69C1088,ped,"isBlocked",blocked)
-			Citizen.InvokeNative(0xB0A6CFD2C69C1088,ped,"isFirstPerson",Citizen.InvokeNative(0xEE778F8C7E1142E2,Citizen.InvokeNative(0x19CAFA3C87F7C2FF)) == 4)
+			SetTaskMoveNetworkSignalFloat(ped,"Pitch",camPitch)
+			SetTaskMoveNetworkSignalFloat(ped,"Heading",camHeading * -1.0 + 1.0)
+			SetTaskMoveNetworkSignalBool(ped,"isBlocked",blocked)
+			SetTaskMoveNetworkSignalBool(ped,"isFirstPerson",GetCamViewModeForContext(GetCamActiveViewModeContext()) == 4)
 		end
 
 		Wait(timeDistance)
@@ -336,7 +336,7 @@ RegisterCommand("cRhandsup",function(source,args,rawCommand)
 	local ped = PlayerPedId()
 	if not IsPauseMenuActive() and not LocalPlayer["state"]["Buttons"] and not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] and not IsPedInAnyVehicle(ped) and not LocalPlayer["state"]["Phone"] and GetEntityHealth(ped) > 100 and not LocalPlayer["state"]["Cancel"] and LocalPlayer["state"]["Active"] and MumbleIsConnected() and not IsPedReloading(ped) then
 		if IsEntityPlayingAnim(ped,"random@mugging3","handsup_standing_base",3) then
-			StopAnimTask(ped,"random@mugging3","handsup_standing_base",2.0)
+			StopAnimTask(ped,"random@mugging3","handsup_standing_base",8.0)
 			tvRP.stopActived()
 		else
 			tvRP.playAnim(true,{"random@mugging3","handsup_standing_base"},true)
@@ -357,7 +357,7 @@ RegisterCommand("cRpoint",function(source,args,rawCommand)
 			TaskMoveNetwork(ped,"task_mp_pointing",0.5,0,"anim@mp_point",24)
 			uPoint = true
 		else
-			Citizen.InvokeNative(0xD01015C7316AE176,ped,"Stop")
+			RequestTaskMoveNetworkStateTransition(ped,"Stop")
 			if not IsPedInjured(ped) then
 				ClearPedSecondaryTask(ped)
 			end
@@ -400,13 +400,13 @@ RegisterCommand("cRenginecrouch",function(source,args,rawCommand)
 					ResetPedMovementClipset(ped,0.25)
 					crouch = false
 
-					if walkSelect ~= nil then
-						RequestAnimSet(walkSelect)
-						while not HasAnimSetLoaded(walkSelect) do
+					if Walk ~= nil then
+						RequestAnimSet(Walk)
+						while not HasAnimSetLoaded(Walk) do
 							Wait(1)
 						end
 
-						SetPedMovementClipset(ped,walkSelect,0.25)
+						SetPedMovementClipset(ped,Walk,0.25)
 					end
 				else
 					SetPedMovementClipset(ped,"move_ped_crouched",0.25)
@@ -439,7 +439,7 @@ RegisterCommand("cRbind",function(source,args,rawCommand)
 			elseif args[1] == "7" then
 				if not IsPedInAnyVehicle(ped) and not IsPedArmed(ped,6) and not IsPedSwimming(ped) then
 					if IsEntityPlayingAnim(ped,"mini@strip_club@idles@bouncer@base","base",3) then
-						StopAnimTask(ped,"mini@strip_club@idles@bouncer@base","base",2.0)
+						StopAnimTask(ped,"mini@strip_club@idles@bouncer@base","base",8.0)
 						tvRP.stopActived()
 					else
 						tvRP.playAnim(true,{"mini@strip_club@idles@bouncer@base","base"},true)
@@ -448,7 +448,7 @@ RegisterCommand("cRbind",function(source,args,rawCommand)
 			elseif args[1] == "8" then
 				if not IsPedInAnyVehicle(ped) and not IsPedArmed(ped,6) and not IsPedSwimming(ped) then
 					if IsEntityPlayingAnim(ped,"anim@mp_player_intupperfinger","idle_a_fp",3) then
-						StopAnimTask(ped,"anim@mp_player_intupperfinger","idle_a_fp",2.0)
+						StopAnimTask(ped,"anim@mp_player_intupperfinger","idle_a_fp",8.0)
 						tvRP.stopActived()
 					else
 						tvRP.playAnim(true,{"anim@mp_player_intupperfinger","idle_a_fp"},true)
@@ -457,7 +457,7 @@ RegisterCommand("cRbind",function(source,args,rawCommand)
 			elseif args[1] == "9" then
 				if not IsPedInAnyVehicle(ped) and not IsPedArmed(ped,6) and not IsPedSwimming(ped) then
 					if IsEntityPlayingAnim(ped,"random@arrests@busted","idle_a",3) then
-						StopAnimTask(ped,"random@arrests@busted","idle_a",2.0)
+						StopAnimTask(ped,"random@arrests@busted","idle_a",8.0)
 						tvRP.stopActived()
 					else
 						tvRP.playAnim(true,{"random@arrests@busted","idle_a"},true)

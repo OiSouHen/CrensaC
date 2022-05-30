@@ -190,287 +190,19 @@ CreateThread(function()
 	RegisterCommand("-entityTarget",playerTargetDisable)
 	RegisterKeyMapping("+entityTarget","Interação auricular.","keyboard","LMENU")
 
-	AddCircleZone("callTaxi",vec3(-1038.98,-2731.16,20.17),0.75,{
-		name = "callTaxi",
+	AddCircleZone("makePaper",vec3(-533.18,5292.15,74.17),0.75,{
+		name = "makePaper",
 		heading = 3374176
 	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "smartphone:callTaxi",
-				label = "Chamar Taxi",
-				tunnel = "client"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary01",vec3(241.43,225.46,106.29),0.75,{
-		name = "bankSalary01",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary02",vec3(243.21,224.77,106.29),0.75,{
-		name = "bankSalary02",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary03",vec3(246.62,223.61,106.29),0.75,{
-		name = "bankSalary03",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary04",vec3(248.43,222.95,106.29),0.75,{
-		name = "bankSalary04",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary05",vec3(251.79,221.73,106.29),0.75,{
-		name = "bankSalary05",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary06",vec3(253.59,221.08,106.29),0.75,{
-		name = "bankSalary06",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary07",vec3(-113.01,6470.21,31.63),0.75,{
-		name = "bankSalary07",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary08",vec3(-111.99,6469.15,31.63),0.75,{
-		name = "bankSalary08",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("bankSalary09",vec3(-110.92,6468.1,31.63),0.75,{
-		name = "bankSalary09",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "bank:openSystem",
-				label = "Abrir",
-				tunnel = "client"
-			},{
-				event = "vRP:receiveSalary",
-				label = "Receber",
-				tunnel = "server"
-			}
-		}
-	})
-
-	AddCircleZone("treatment01",vec3(-253.92,6331.07,32.42),0.75,{
-		name = "treatment01",
-		heading = 3374176
-	},{
-		shop = "Paleto",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddCircleZone("treatment02",vec3(1833.21,3676.09,34.27),0.75,{
-		name = "treatment02",
-		heading = 3374176
-	},{
-		shop = "Sandy",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddCircleZone("treatment03",vec3(307.03,-595.12,43.29),0.75,{
-		name = "treatment03",
-		heading = 3374176
-	},{
-		shop = "Santos",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddCircleZone("treatment04",vec3(350.92,-587.68,28.8),0.75,{
-		name = "treatment04",
-		heading = 3374176
-	},{
-		shop = "Santos",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddCircleZone("treatment05",vec3(1768.67,2570.59,45.73),0.75,{
-		name = "treatment05",
-		heading = 3374176
-	},{
-		shop = "Bolingbroke",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddCircleZone("treatment06",vec3(-469.26,6289.48,13.61),0.75,{
-		name = "treatment06",
-		heading = 3374176
-	},{
-		shop = "Clandestine",
-		distance = 1.0,
-		options = {
-			{
-				event = "checkin:initCheck",
-				label = "Tratamento",
-				tunnel = "shop"
-			}
-		}
-	})
-
-	AddTargetModel({ -1691644768,-742198632 },{
+		distance = 0.75,
 		options = {
 			{
 				event = "inventory:makeProducts",
-				label = "Encher",
-				tunnel = "police",
-				service = "emptybottle"
-			},
-			{
-				event = "inventory:Drink",
-				label = "Beber",
-				tunnel = "server"
+				label = "Produzir",
+				tunnel = "products",
+				service = "paper"
 			}
-		},
-		distance = 0.75
+		}
 	})
 
 	AddCircleZone("Yoga01",vec3(-492.83,-217.31,35.61),0.75,{
@@ -555,6 +287,364 @@ CreateThread(function()
 				tunnel = "client"
 			}
 		}
+	})
+
+	AddCircleZone("callTaxi",vec3(-1038.98,-2731.16,20.17),0.75,{
+		name = "callTaxi",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "smartphone:callTaxi",
+				label = "Chamar Taxi",
+				tunnel = "client"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary01",vec3(257.39,228.04,106.27),0.75,{
+		name = "bankSalary01",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary02",vec3(259.59,227.25,106.27),0.75,{
+		name = "bankSalary02",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary03",vec3(262.09,226.33,106.27),0.75,{
+		name = "bankSalary03",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary04",vec3(264.31,225.55,106.27),0.75,{
+		name = "bankSalary04",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary05",vec3(266.77,224.64,106.27),0.75,{
+		name = "bankSalary05",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary06",vec3(268.99,223.82,106.27),0.75,{
+		name = "bankSalary06",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary07",vec3(264.86,212.19,106.27),0.75,{
+		name = "bankSalary07",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary08",vec3(262.63,213.02,106.27),0.75,{
+		name = "bankSalary08",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary09",vec3(260.14,213.92,106.27),0.75,{
+		name = "bankSalary09",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary10",vec3(257.94,214.7,106.27),0.75,{
+		name = "bankSalary10",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary11",vec3(255.45,215.62,106.27),0.75,{
+		name = "bankSalary11",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary12",vec3(253.23,216.44,106.27),0.75,{
+		name = "bankSalary12",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary13",vec3(-110.72,6469.84,31.63),0.75,{
+		name = "bankSalary13",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("bankSalary14",vec3(-108.98,6471.57,31.63),0.75,{
+		name = "bankSalary14",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "bank:openSystem",
+				label = "Abrir",
+				tunnel = "client"
+			},{
+				event = "vRP:receiveSalary",
+				label = "Receber",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("treatment01",vec3(-253.92,6331.07,32.42),0.75,{
+		name = "treatment01",
+		heading = 3374176
+	},{
+		shop = "Paleto",
+		distance = 1.0,
+		options = {
+			{
+				event = "checkin:initCheck",
+				label = "Tratamento",
+				tunnel = "shop"
+			}
+		}
+	})
+
+	AddCircleZone("treatment02",vec3(307.03,-595.12,43.29),0.75,{
+		name = "treatment02",
+		heading = 3374176
+	},{
+		shop = "Santos",
+		distance = 1.0,
+		options = {
+			{
+				event = "checkin:initCheck",
+				label = "Tratamento",
+				tunnel = "shop"
+			}
+		}
+	})
+
+	AddCircleZone("treatment03",vec3(350.92,-587.68,28.8),0.75,{
+		name = "treatment03",
+		heading = 3374176
+	},{
+		shop = "Santos",
+		distance = 1.0,
+		options = {
+			{
+				event = "checkin:initCheck",
+				label = "Tratamento",
+				tunnel = "shop"
+			}
+		}
+	})
+
+	AddCircleZone("treatment04",vec3(1768.67,2570.59,45.73),0.75,{
+		name = "treatment04",
+		heading = 3374176
+	},{
+		shop = "Bolingbroke",
+		distance = 1.0,
+		options = {
+			{
+				event = "checkin:initCheck",
+				label = "Tratamento",
+				tunnel = "shop"
+			}
+		}
+	})
+
+	AddCircleZone("treatment05",vec3(-469.26,6289.48,13.61),0.75,{
+		name = "treatment05",
+		heading = 3374176
+	},{
+		shop = "Clandestine",
+		distance = 1.0,
+		options = {
+			{
+				event = "checkin:initCheck",
+				label = "Tratamento",
+				tunnel = "shop"
+			}
+		}
+	})
+
+	AddTargetModel({ -1691644768,-742198632 },{
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Encher",
+				tunnel = "products",
+				service = "emptybottle"
+			},
+			{
+				event = "inventory:Drink",
+				label = "Beber",
+				tunnel = "server"
+			}
+		},
+		distance = 0.75
 	})
 
 	AddTargetModel({ 1631638868,2117668672,-1498379115,-1519439119,-289946279 },{
@@ -667,17 +757,18 @@ CreateThread(function()
 		distance = 1.0
 	})
 
-	AddTargetModel({ 1281992692,1158960338,1511539537,-78626473 },{
+	AddTargetModel({ 684586828,577432224,-1587184881,-1426008804,-228596739,1437508529,-1096777189,-468629664,1143474856,-2096124444,-115771139,1329570871,-130812911 },{
 		options = {
 			{
-				event = "hup:phoneObject",
-				label = "Ligar",
-				tunnel = "client"
+				event = "inventory:verifyObjects",
+				label = "Vasculhar",
+				tunnel = "police",
+				service = "Lixeiro"
 			}
 		},
-		distance = 1.0
+		distance = 0.75
 	})
-
+	
 	AddTargetModel({ -206690185,666561306,218085040,-58485588,1511880420,682791951 },{
 		options = {
 			{
@@ -695,7 +786,7 @@ CreateThread(function()
 		distance = 0.75
 	})
 
-	AddTargetModel({ 1211559620,1363150739,-1186769817,261193082,-756152956,-1383056703,720581693 },{
+	AddTargetModel({ 1211559620,1363150739,-1186769817,261193082,-756152956,-1383056703,720581693,1287257122,917457845,-838860344 },{
 		options = {
 			{
 				event = "inventory:verifyObjects",
@@ -1249,12 +1340,13 @@ CreateThread(function()
 		name = "tabletVehicles01",
 		heading = 3374176
 	},{
+		shop = "Santos",
 		distance = 1.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
@@ -1263,12 +1355,13 @@ CreateThread(function()
 		name = "tabletVehicles02",
 		heading = 3374176
 	},{
+		shop = "Santos",
 		distance = 1.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
@@ -1277,12 +1370,13 @@ CreateThread(function()
 		name = "tabletVehicles03",
 		heading = 3374176
 	},{
+		shop = "Santos",
 		distance = 1.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
@@ -1291,12 +1385,13 @@ CreateThread(function()
 		name = "tabletVehicles04",
 		heading = 3374176
 	},{
+		shop = "Santos",
 		distance = 1.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
@@ -1305,26 +1400,28 @@ CreateThread(function()
 		name = "tabletVehicles05",
 		heading = 3374176
 	},{
+		shop = "Santos",
 		distance = 1.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
 
-	AddCircleZone("tabletVehicles06",vec3(1230.03,2733.74,38.03),0.75,{
+	AddCircleZone("tabletVehicles06",vec3(1224.78,2728.01,38.0),0.75,{
 		name = "tabletVehicles06",
 		heading = 3374176
 	},{
-		distance = 1.5,
+		shop = "Sandy",
+		distance = 2.0,
 		options = {
 			{
 				event = "tablet:enterTablet",
 				label = "Abrir",
-				tunnel = "client"
+				tunnel = "shop"
 			}
 		}
 	})
@@ -1342,249 +1439,67 @@ CreateThread(function()
 			}
 		}
 	})
+
+	AddCircleZone("CassinoWheel",vec3(1112.05,228.11,-49.64),0.5,{
+		name = "CassinoWheel",
+		heading = 3374176
+	},{
+		distance = 1.5,
+		options = {
+			{
+				event = "luckywheel:Target",
+				label = "Roda da Fortuna",
+				tunnel = "client"
+			}
+		}
+	})
 end)
------------------------------------------------------------------------------------------------------------------------------------------
--- POLICEMENU
------------------------------------------------------------------------------------------------------------------------------------------
-local policeMenu = {
-	{
-		event = "police:runInspect",
-		label = "Revistar",
-		tunnel = "police"
-	},{
-		event = "police:prisonClothes",
-		label = "Uniforme Presidiário",
-		tunnel = "police"
-	}
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- PARAMEDICMENU
------------------------------------------------------------------------------------------------------------------------------------------
-local paramedicMenu = {
-	{
-		event = "paramedic:Revive",
-		label = "Reanimar",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:Diagnostic",
-		label = "Diagnóstico",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:Treatment",
-		label = "Tratamento",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:Repose",
-		label = "Colocar de Repouso",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:Bleeding",
-		label = "Sangramento",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:Bed",
-		label = "Deitar Paciente",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:presetBurn",
-		label = "Roupa de Queimadura",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:presetPlaster",
-		label = "Roupa de Gesso",
-		tunnel = "paramedic"
-	},{
-		event = "paramedic:extractBlood",
-		label = "Extrair Sangue",
-		tunnel = "paramedic"
-	}
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- POLICEVEH
------------------------------------------------------------------------------------------------------------------------------------------
-local policeVeh = {
-	{
-		event = "inventory:applyPlate",
-		label = "Trocar Placa",
-		tunnel = "police"
-	},{
-		event = "trunkchest:openTrunk",
-		label = "Abrir Porta-Malas",
-		tunnel = "server"
-	},{
-		event = "police:runPlate",
-		label = "Verificar Placa",
-		tunnel = "police"
-	},{
-		event = "police:impound",
-		label = "Registrar Veículo",
-		tunnel = "police"
-	},{
-		event = "garages:vehicleKey",
-		label = "Criar Chave Cópia",
-		tunnel = "police"
-	},{
-		event = "police:runArrest",
-		label = "Apreender Veículo",
-		tunnel = "police"
-	},{
-		event = "player:enterTrunk",
-		label = "Entrar no Porta-Malas",
-		tunnel = "client"
-	},{
-		event = "inventory:removeTyres",
-		label = "Retirar Pneu",
-		tunnel = "client"
-	}
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- PLAYERVEH
------------------------------------------------------------------------------------------------------------------------------------------
-local playerVeh = {
-	{
-		event = "trunkchest:openTrunk",
-		label = "Abrir Porta-Malas",
-		tunnel = "server"
-	},{
-		event = "inventory:applyPlate",
-		label = "Trocar Placa",
-		tunnel = "police"
-	},{
-		event = "garages:vehicleKey",
-		label = "Criar Chave Cópia",
-		tunnel = "police"
-	},{
-		event = "inventory:stealTrunk",
-		label = "Arrombar Porta-Malas",
-		tunnel = "client"
-	},{
-		event = "player:enterTrunk",
-		label = "Entrar no Porta-Malas",
-		tunnel = "client"
-	},{
-		event = "inventory:removeTyres",
-		label = "Retirar Pneu",
-		tunnel = "client"
-	}
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- STOCKADEVEH
------------------------------------------------------------------------------------------------------------------------------------------
-local stockadeVeh = {
-	{
-		event = "inventory:checkStockade",
-		label = "Vasculhar",
-		tunnel = "police"
-	},{
-		event = "inventory:applyPlate",
-		label = "Trocar Placa",
-		tunnel = "police"
-	},{
-		event = "garages:vehicleKey",
-		label = "Criar Chave Cópia",
-		tunnel = "police"
-	},{
-		event = "inventory:stealTrunk",
-		label = "Arrombar Porta-Malas",
-		tunnel = "client"
-	},{
-		event = "player:enterTrunk",
-		label = "Entrar no Porta-Malas",
-		tunnel = "client"
-	},{
-		event = "inventory:removeTyres",
-		label = "Retirar Pneu",
-		tunnel = "client"
-	}
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- LOCATEVEH
------------------------------------------------------------------------------------------------------------------------------------------
-local locateVeh = {
-	["Desmanche"] = {
-		{
-			event = "inventory:Desmanchar",
-			label = "Desmanchar",
-			tunnel = "police"
-		}
-	},
-	["Reboque"] = {
-		{
-			event = "towdriver:Tow",
-			label = "Rebocar",
-			tunnel = "client"
-		},{
-			event = "impound:Check",
-			label = "Impound",
-			tunnel = "police"
-		}
-	}
-}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERTARGETENABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function playerTargetEnable()
 	if LocalPlayer["state"]["Active"] then
-		local ped = PlayerPedId()
+		local Ped = PlayerPedId()
 
-		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or Sucess or IsPedArmed(ped,6) or IsPedInAnyVehicle(ped) or not MumbleIsConnected() then
+		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or Sucess or IsPedArmed(Ped,6) or IsPedInAnyVehicle(Ped) or not MumbleIsConnected() or LocalPlayer["state"]["Route"] > 900000 then
 			return
 		end
 
+		LocalPlayer["state"]["Target"] = true
 		SendNUIMessage({ response = "openTarget" })
 
-		LocalPlayer["state"]["Target"] = true
 		while LocalPlayer["state"]["Target"] do
-			local coords = GetEntityCoords(ped)
-			local hit,entCoords,entity = RayCastGamePlayCamera(10.0)
+			local hitZone,entCoords,Entity = RayCastGamePlayCamera()
 
-			if hit == 1 then
-				if GetEntityType(entity) ~= 0 then
-					if IsEntityAVehicle(entity) then
-						local vehPlate = GetVehicleNumberPlateText(entity)
-						if #(coords - entCoords) <= 1.0 and vehPlate ~= "PDMSPORT" then
-							local vehNet = nil
-							local vehModel = GetEntityModel(entity)
-							SetEntityAsMissionEntity(entity,true,true)
+			if hitZone == 1 then
+				local Coords = GetEntityCoords(Ped)
 
-							if NetworkGetEntityIsNetworked(entity) then
-								vehNet = VehToNet(entity)
+				for k,v in pairs(Zones) do
+					if Zones[k]:isPointInside(entCoords) then
+						if #(Coords - Zones[k]["center"]) <= v["targetoptions"]["distance"] then
+
+							if v["targetoptions"]["shop"] ~= nil then
+								Selected = v["targetoptions"]["shop"]
 							end
 
-							Selected = { vehPlate,vRP.vehicleModel(vehModel),entity,vehNet }
-
-							if LocalPlayer["state"]["Police"] then
-								SendNUIMessage({ response = "validTarget", data = policeVeh })
-							else
-								local locateMenu = false
-								for k,v in pairs(locateLocs) do
-									local distance = #(coords - vec3(v[1],v[2],v[3]))
-									if distance <= 10 then
-										locateMenu = v[4]
-									end
-								end
-
-								if locateMenu then
-									SendNUIMessage({ response = "validTarget", data = locateVeh[locateMenu] })
-								else
-									SendNUIMessage({ response = "validTarget", data = playerVeh })
-								end
+							if v["targetoptions"]["shopserver"] ~= nil then
+								Selected = v["targetoptions"]["shopserver"]
 							end
+
+							SendNUIMessage({ response = "validTarget", data = Zones[k]["targetoptions"]["options"] })
 
 							Sucess = true
-							while Sucess and LocalPlayer["state"]["Target"] do
-								local ped = PlayerPedId()
-								local coords = GetEntityCoords(ped)
-								local _,entCoords,entity = RayCastGamePlayCamera(10.0)
-
-								DisablePlayerFiring(ped,true)
+							while Sucess do
+								local Ped = PlayerPedId()
+								local Coords = GetEntityCoords(Ped)
+								local _,entCoords = RayCastGamePlayCamera()
 
 								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 									SetCursorLocation(0.5,0.5)
 									SetNuiFocus(true,true)
 								end
 
-								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
+								if not Zones[k]:isPointInside(entCoords) or #(Coords - Zones[k]["center"]) > v["targetoptions"]["distance"] then
 									Sucess = false
 								end
 
@@ -1593,33 +1508,180 @@ function playerTargetEnable()
 
 							SendNUIMessage({ response = "leftTarget" })
 						end
-					elseif IsPedAPlayer(entity) and (LocalPlayer["state"]["Police"] or LocalPlayer["state"]["Paramedic"]) then
-						if #(coords - entCoords) <= 1.0 then
-							local index = NetworkGetPlayerIndexFromPed(entity)
-							local source = GetPlayerServerId(index)
+					end
+				end
 
-							Selected = { source }
+				if GetEntityType(Entity) ~= 0 then
+					if IsEntityAVehicle(Entity) then
+						local vehPlate = GetVehicleNumberPlateText(Entity)
+						if #(Coords - entCoords) <= 1.0 and vehPlate ~= "PDMSPORT" then
+							local vehNet = nil
+							local Combustivel = false
+							local vehModel = GetEntityModel(Entity)
+							SetEntityAsMissionEntity(Entity,true,true)
 
-							if LocalPlayer["state"]["Police"] then
-								SendNUIMessage({ response = "validTarget", data = policeMenu })
-							elseif LocalPlayer["state"]["Paramedic"] then
-								SendNUIMessage({ response = "validTarget", data = paramedicMenu })
+							if NetworkGetEntityIsNetworked(Entity) then
+								vehNet = VehToNet(Entity)
 							end
 
-							Sucess = true
-							while Sucess and LocalPlayer["state"]["Target"] do
-								local ped = PlayerPedId()
-								local coords = GetEntityCoords(ped)
-								local _,entCoords,entity = RayCastGamePlayCamera(10.0)
+							Selected = { vehPlate,vRP.vehicleModel(vehModel),Entity,vehNet }
 
-								DisablePlayerFiring(ped,true)
+							local Menu = {}
+
+							for k,v in pairs(Fuels) do
+								local Distance = #(Coords - vec3(v[1],v[2],v[3]))
+								if Distance <= 2.5 then
+									Combustivel = true
+									break
+								end
+							end
+
+							if not Combustivel then
+								if GetSelectedPedWeapon(Ped) == 883325847 then
+									Selected[5] = true
+									table.insert(Menu,{ event = "engine:Supply", label = "Abastecer", tunnel = "client" })
+								else
+									if GlobalState["vehPlates"][vehPlate] then
+										if GetVehicleDoorLockStatus(Entity) == 1 then
+											for k,Tyre in pairs(tyreList) do
+												local Wheel = GetEntityBoneIndexByName(Entity,k)
+												if Wheel ~= -1 then
+													local cWheel = GetWorldPositionOfEntityBone(Entity,Wheel)
+													local Distance = #(Coords - cWheel)
+													if Distance <= 1.0 then
+														Selected[5] = Tyre
+														table.insert(Menu,{ event = "inventory:removeTyres", label = "Retirar Pneu", tunnel = "server" })
+													end
+												end
+											end
+
+											table.insert(Menu,{ event = "trunkchest:openTrunk", label = "Abrir Porta-Malas", tunnel = "server" })
+										end
+
+										table.insert(Menu,{ event = "garages:vehicleKey", label = "Criar Chave Cópia", tunnel = "police" })
+										table.insert(Menu,{ event = "inventory:applyPlate", label = "Trocar Placa", tunnel = "server" })
+									else
+										if Selected[2] == "stockade" then
+											table.insert(Menu,{ event = "inventory:checkStockade", label = "Vasculhar", tunnel = "police" })
+										end
+									end
+
+									if not IsThisModelABike(vehModel) then
+										local Rolling = GetEntityRoll(Entity)
+										if Rolling > 75.0 or Rolling < -75.0 then
+											table.insert(Menu,{ event = "player:RollVehicle", label = "Desvirar", tunnel = "server" })
+										else
+											if GetEntityBoneIndexByName(Entity,"boot") ~= -1 then
+												local Trunk = GetEntityBoneIndexByName(Entity,"boot")
+												local cTrunk = GetWorldPositionOfEntityBone(Entity,Trunk)
+												local Distance = #(Coords - cTrunk)
+												if Distance <= 1.25 then
+													if GetVehicleDoorLockStatus(Entity) == 1 then
+														table.insert(Menu,{ event = "player:enterTrunk", label = "Entrar no Porta-Malas", tunnel = "client" })
+													end
+
+													table.insert(Menu,{ event = "inventory:stealTrunk", label = "Arrombar Porta-Malas", tunnel = "server" })
+												end
+											end
+										end
+									end
+
+									if LocalPlayer["state"]["Police"] then
+										table.insert(Menu,{ event = "police:Plate", label = "Verificar Placa", tunnel = "police" })
+										table.insert(Menu,{ event = "police:Impound", label = "Registrar Veículo", tunnel = "police" })
+
+										if GlobalState["vehPlates"][vehPlate] then
+											table.insert(Menu,{ event = "police:Arrest", label = "Apreender Veículo", tunnel = "police" })
+										end
+									else
+										if vehPlate == "DISM"..(1000 + LocalPlayer["state"]["Id"]) then
+											local Distance = #(Coords - vec3(Dismantles[Dismantleds][1],Dismantles[Dismantleds][2],Dismantles[Dismantleds][3]))
+											if Distance <= 10 then
+												table.insert(Menu,{ event = "inventory:Dismantle", label = "Desmanchar", tunnel = "police" })
+											end
+										end
+
+										for k,v in pairs(Tows) do
+											local Distance = #(Coords - vec3(v[1],v[2],v[3]))
+											if Distance <= 10 then
+												table.insert(Menu,{ event = "towdriver:Tow", label = "Rebocar", tunnel = "client" })
+												table.insert(Menu,{ event = "impound:Check", label = "Impound", tunnel = "police" })
+											end
+										end
+									end
+								end
+							else
+								Selected[5] = false
+								table.insert(Menu,{ event = "engine:Supply", label = "Abastecer", tunnel = "client" })
+							end
+
+							SendNUIMessage({ response = "validTarget", data = Menu })
+
+							Sucess = true
+							while Sucess do
+								local Ped = PlayerPedId()
+								local Coords = GetEntityCoords(Ped)
+								local _,entCoords,Entity = RayCastGamePlayCamera()
 
 								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 									SetCursorLocation(0.5,0.5)
 									SetNuiFocus(true,true)
 								end
 
-								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
+								if GetEntityType(Entity) == 0 or #(Coords - entCoords) > 1.0 then
+									Sucess = false
+								end
+
+								Wait(1)
+							end
+
+							SendNUIMessage({ response = "leftTarget" })
+						end
+					elseif IsPedAPlayer(Entity) then
+						if #(Coords - entCoords) <= 1.0 then
+							local index = NetworkGetPlayerIndexFromPed(Entity)
+							local source = GetPlayerServerId(index)
+							local Menu = {}
+
+							Selected = { source }
+
+							if LocalPlayer["state"]["Police"] then
+								table.insert(Menu,{ event = "police:runInspect", label = "Revistar", tunnel = "police" })
+								table.insert(Menu,{ event = "police:prisonClothes", label = "Uniforme Presidiário", tunnel = "police" })
+							elseif LocalPlayer["state"]["Paramedic"] then
+								if GetEntityHealth(Entity) <= 100 then
+									table.insert(Menu,{ event = "paramedic:Revive", label = "Reanimar", tunnel = "paramedic" })
+								else
+									table.insert(Menu,{ event = "paramedic:Treatment", label = "Tratamento", tunnel = "paramedic" })
+									table.insert(Menu,{ event = "paramedic:Repose", label = "Colocar de Repouso", tunnel = "paramedic" })
+									table.insert(Menu,{ event = "paramedic:Bandage", label = "Passar Ataduras", tunnel = "paramedic" })
+									table.insert(Menu,{ event = "paramedic:presetBurn", label = "Roupa de Queimadura", tunnel = "paramedic" })
+									table.insert(Menu,{ event = "paramedic:presetPlaster", label = "Colocar Gesso", tunnel = "paramedic" })
+									table.insert(Menu,{ event = "paramedic:extractBlood", label = "Extrair Sangue", tunnel = "paramedic" })
+								end
+
+								table.insert(Menu,{ event = "paramedic:Diagnostic", label = "Informações", tunnel = "paramedic" })
+								table.insert(Menu,{ event = "paramedic:Bed", label = "Deitar Paciente", tunnel = "paramedic" })
+							end
+
+							if IsEntityPlayingAnim(Entity,"random@mugging3","handsup_standing_base",3) then
+								table.insert(Menu,{ event = "player:checkShoes", label = "Roubar Sapatos", tunnel = "paramedic" })
+							end
+
+							SendNUIMessage({ response = "validTarget", data = Menu })
+
+							Sucess = true
+							while Sucess do
+								local Ped = PlayerPedId()
+								local Coords = GetEntityCoords(Ped)
+								local _,entCoords,Entity = RayCastGamePlayCamera()
+
+								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
+									SetCursorLocation(0.5,0.5)
+									SetNuiFocus(true,true)
+								end
+
+								if GetEntityType(Entity) == 0 or #(Coords - entCoords) > 1.0 then
 									Sucess = false
 								end
 
@@ -1630,32 +1692,30 @@ function playerTargetEnable()
 						end
 					else
 						for k,v in pairs(Models) do
-							if DoesEntityExist(entity) then
-								if k == GetEntityModel(entity) then
-									if #(coords - entCoords) <= Models[k]["distance"] then
+							if DoesEntityExist(Entity) then
+								if k == GetEntityModel(Entity) then
+									if #(Coords - entCoords) <= Models[k]["distance"] then
 										local objNet = nil
-										if NetworkGetEntityIsNetworked(entity) then
-											objNet = ObjToNet(entity)
+										if NetworkGetEntityIsNetworked(Entity) then
+											objNet = ObjToNet(Entity)
 										end
 
-										Selected = { entity,k,objNet,GetEntityCoords(entity) }
+										Selected = { Entity,k,objNet,GetEntityCoords(Entity) }
 
 										SendNUIMessage({ response = "validTarget", data = Models[k]["options"] })
 
 										Sucess = true
-										while Sucess and LocalPlayer["state"]["Target"] do
-											local ped = PlayerPedId()
-											local coords = GetEntityCoords(ped)
-											local _,entCoords,entity = RayCastGamePlayCamera(10.0)
-
-											DisablePlayerFiring(ped,true)
+										while Sucess do
+											local Ped = PlayerPedId()
+											local Coords = GetEntityCoords(Ped)
+											local _,entCoords,Entity = RayCastGamePlayCamera()
 
 											if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 												SetCursorLocation(0.5,0.5)
 												SetNuiFocus(true,true)
 											end
 
-											if GetEntityType(entity) == 0 or #(coords - entCoords) > Models[k]["distance"] then
+											if GetEntityType(Entity) == 0 or #(Coords - entCoords) > Models[k]["distance"] then
 												Sucess = false
 											end
 
@@ -1669,69 +1729,99 @@ function playerTargetEnable()
 						end
 					end
 				end
-
-				for k,v in pairs(Zones) do
-					if Zones[k]:isPointInside(entCoords) then
-						if #(coords - Zones[k]["center"]) <= v["targetoptions"]["distance"] then
-							SendNUIMessage({ response = "validTarget", data = Zones[k]["targetoptions"]["options"] })
-
-							if v["targetoptions"]["shop"] ~= nil then
-								Selected = { v["targetoptions"]["shop"] }
-							end
-
-							Sucess = true
-							while Sucess and LocalPlayer["state"]["Target"] do
-								local ped = PlayerPedId()
-								local coords = GetEntityCoords(ped)
-								local _,entCoords = RayCastGamePlayCamera(10.0)
-
-								DisablePlayerFiring(ped,true)
-
-								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
-									SetCursorLocation(0.5,0.5)
-									SetNuiFocus(true,true)
-								end
-
-								if not Zones[k]:isPointInside(entCoords) or #(coords - Zones[k]["center"]) > v["targetoptions"]["distance"] then
-									Sucess = false
-								end
-
-								Wait(1)
-							end
-
-							SendNUIMessage({ response = "leftTarget" })
-						end
-					end
-				end
 			end
 
-			Wait(250)
+			Wait(100)
 		end
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:ROLLVEHICLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("target:RollVehicle")
+AddEventHandler("target:RollVehicle",function(vehNet)
+	if NetworkDoesNetworkIdExist(vehNet) then
+		local Vehicle = NetToEnt(vehNet)
+		if DoesEntityExist(Vehicle) then
+			SetVehicleOnGroundProperly(Vehicle)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- TARGET:ANIMDEITAR
 -----------------------------------------------------------------------------------------------------------------------------------------
+local bedAttach = false
 local beds = {
 	[1631638868] = { 0.0,0.0 },
 	[2117668672] = { 0.0,0.0 },
 	[-1498379115] = { 1.0,90.0 },
 	[-1519439119] = { 1.0,0.0 },
-	[-289946279] = { 1.0,0.0 }
+	[-289946279] = { 1.0,0.0 },
+	[-935625561] = { 0.0,0.0 }
 }
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:ANIMDEITAR
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("target:animDeitar")
 AddEventHandler("target:animDeitar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
-		local ped = PlayerPedId()
-		if GetEntityHealth(ped) > 100 then
-			local objCoords = GetEntityCoords(Selected[1])
+		local Ped = PlayerPedId()
+		if GetEntityHealth(Ped) > 100 then
+			local Coords = GetEntityCoords(Selected[1])
 
-			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + beds[Selected[2]][1],1,0,0,0)
-			SetEntityHeading(ped,GetEntityHeading(Selected[1]) + beds[Selected[2]][2] - 180.0)
+			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + beds[Selected[2]][1],1,0,0,0)
+			SetEntityHeading(Ped,GetEntityHeading(Selected[1]) + beds[Selected[2]][2] - 180.0)
 
 			vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
+
+			if Selected[2] == -935625561 then
+				AttachEntityToEntity(Ped,Selected[1],11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
+				bedAttach = Selected[1]
+			end
 		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:BEDPICKUP
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("target:bedPickup")
+AddEventHandler("target:bedPickup",function()
+	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
+		local Ped = PlayerPedId()
+		if GetEntityHealth(Ped) > 100 then
+			local spawnObjects = 0
+			local uObject = NetworkGetEntityFromNetworkId(Selected[3])
+			local objectControl = NetworkRequestControlOfEntity(uObject)
+			while not objectControl and spawnObjects <= 1000 do
+				objectControl = NetworkRequestControlOfEntity(uObject)
+				spawnObjects = spawnObjects + 1
+				Wait(1)
+			end
+
+			AttachEntityToEntity(uObject,Ped,11816,0.0,1.25,-0.15,0.0,0.0,0.0,false,false,false,false,2,true)
+			bedAttach = Selected[1]
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:BEDDETACH
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("target:bedDetach")
+AddEventHandler("target:bedDetach",function()
+	if bedAttach then
+		DetachEntity(PlayerPedId(),false,false)
+		FreezeEntityPosition(bedAttach,true)
+		DetachEntity(bedAttach,false,false)
+		bedAttach = false
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TARGET:BEDDESTROY
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("target:bedDestroy")
+AddEventHandler("target:bedDestroy",function()
+	if not LocalPlayer["state"]["Commands"] and LocalPlayer["state"]["Paramedic"] then
+		TriggerServerEvent("tryDeleteObject",Selected[3])
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1739,18 +1829,24 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("target:pacienteDeitar")
 AddEventHandler("target:pacienteDeitar",function()
-	local ped = PlayerPedId()
-	local coords = GetEntityCoords(ped)
+	local Ped = PlayerPedId()
+	local Coords = GetEntityCoords(Ped)
 
 	for k,v in pairs(beds) do
-		local object = GetClosestObjectOfType(coords["x"],coords["y"],coords["z"],0.9,k,0,0,0)
+		local object = GetClosestObjectOfType(Coords["x"],Coords["y"],Coords["z"],0.9,k,0,0,0)
 		if DoesEntityExist(object) then
-			local objCoords = GetEntityCoords(object)
+			local Coords = GetEntityCoords(object)
 
-			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + v[1],1,0,0,0)
-			SetEntityHeading(ped,GetEntityHeading(object) + v[2] - 180.0)
+			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + v[1],1,0,0,0)
+			SetEntityHeading(Ped,GetEntityHeading(object) + v[2] - 180.0)
 
 			vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
+
+			if k == -935625561 then
+				AttachEntityToEntity(Ped,object,11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
+				bedAttach = object
+			end
+
 			break
 		end
 	end
