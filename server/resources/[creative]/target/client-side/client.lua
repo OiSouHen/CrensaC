@@ -1550,7 +1550,7 @@ function playerTargetEnable()
 													local Distance = #(Coords - cWheel)
 													if Distance <= 1.0 then
 														Selected[5] = Tyre
-														table.insert(Menu,{ event = "inventory:removeTyres", label = "Retirar Pneu", tunnel = "server" })
+														table.insert(Menu,{ event = "inventory:removeTyres", label = "Retirar Pneu", tunnel = "client" })
 													end
 												end
 											end
@@ -1559,7 +1559,7 @@ function playerTargetEnable()
 										end
 
 										table.insert(Menu,{ event = "garages:vehicleKey", label = "Criar Chave Cópia", tunnel = "police" })
-										table.insert(Menu,{ event = "inventory:applyPlate", label = "Trocar Placa", tunnel = "server" })
+										table.insert(Menu,{ event = "inventory:applyPlate", label = "Trocar Placa", tunnel = "police" })
 									else
 										if Selected[2] == "stockade" then
 											table.insert(Menu,{ event = "inventory:checkStockade", label = "Vasculhar", tunnel = "police" })
@@ -1580,24 +1580,24 @@ function playerTargetEnable()
 														table.insert(Menu,{ event = "player:enterTrunk", label = "Entrar no Porta-Malas", tunnel = "client" })
 													end
 
-													table.insert(Menu,{ event = "inventory:stealTrunk", label = "Arrombar Porta-Malas", tunnel = "server" })
+													table.insert(Menu,{ event = "inventory:stealTrunk", label = "Arrombar Porta-Malas", tunnel = "client" })
 												end
 											end
 										end
 									end
 
 									if LocalPlayer["state"]["Police"] then
-										table.insert(Menu,{ event = "police:Plate", label = "Verificar Placa", tunnel = "police" })
-										table.insert(Menu,{ event = "police:Impound", label = "Registrar Veículo", tunnel = "police" })
+										table.insert(Menu,{ event = "police:runPlate", label = "Verificar Placa", tunnel = "police" })
+										table.insert(Menu,{ event = "police:impound", label = "Registrar Veículo", tunnel = "police" })
 
 										if GlobalState["vehPlates"][vehPlate] then
-											table.insert(Menu,{ event = "police:Arrest", label = "Apreender Veículo", tunnel = "police" })
+											table.insert(Menu,{ event = "police:runArrest", label = "Apreender Veículo", tunnel = "police" })
 										end
 									else
 										if vehPlate == "DISM"..(1000 + LocalPlayer["state"]["Id"]) then
 											local Distance = #(Coords - vec3(Dismantles[Dismantleds][1],Dismantles[Dismantleds][2],Dismantles[Dismantleds][3]))
 											if Distance <= 10 then
-												table.insert(Menu,{ event = "inventory:Dismantle", label = "Desmanchar", tunnel = "police" })
+												table.insert(Menu,{ event = "inventory:Desmanchar", label = "Desmanchar", tunnel = "police" })
 											end
 										end
 
