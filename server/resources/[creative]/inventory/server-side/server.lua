@@ -14,6 +14,7 @@ vPLAYER = Tunnel.getInterface("player")
 vGARAGE = Tunnel.getInterface("garages")
 vTASKBAR = Tunnel.getInterface("taskbar")
 vDELIVER = Tunnel.getInterface("deliver")
+vPARAMEDIC = Tunnel.getInterface("paramedic")
 vCLIENT = Tunnel.getInterface("inventory")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
@@ -1284,7 +1285,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								TriggerClientEvent("inventory:Buttons",source,false)
 
 								if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-									TriggerClientEvent("resetBleeding",source)
+									TriggerClientEvent("paramedic:Reset",source)
 									Healths[user_id] = os.time() + 120
 									vRPC.updateHealth(source,40)
 								end
@@ -1316,7 +1317,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							TriggerClientEvent("sounds:source",source,"bandage",0.5)
-							TriggerClientEvent("resetBleeding",source)
+							vPARAMEDIC.Bandage(source)
 						end
 					end
 
