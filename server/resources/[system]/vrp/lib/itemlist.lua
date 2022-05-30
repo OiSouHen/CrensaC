@@ -774,14 +774,14 @@ local itemlist = {
 	["fidentity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["weight"] = 0.15,
 		["economy"] = 10000
 	},
 	["identity"] = {
 		["index"] = "identity",
 		["name"] = "Passaporte",
-		["type"] = "Comum",
+		["type"] = "Usável",
 		["weight"] = 0.15,
 		["economy"] = 5000
 	},
