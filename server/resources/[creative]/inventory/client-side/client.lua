@@ -27,7 +27,7 @@ LocalPlayer["state"]["Buttons"] = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLOCKBUTTONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		local timeDistance = 999
 		if LocalPlayer["state"]["Buttons"] then
@@ -38,7 +38,7 @@ Citizen.CreateThread(function()
 			DisablePlayerFiring(PlayerPedId(),true)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
