@@ -4035,6 +4035,33 @@ AddEventHandler("inventory:makeProducts",function(Entity,Table)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:DRINK
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("inventory:Drink")
+AddEventHandler("inventory:Drink",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and Active[user_id] == nil then
+		vRPC.stopActived(source)
+		Active[user_id] = os.time() + 15
+		TriggerClientEvent("Progress",source,15000)
+		TriggerClientEvent("inventory:Close",source)
+		TriggerClientEvent("inventory:Buttons",source,true)
+		vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_plastic_cup_02",49,60309,0.0,0.0,0.1,0.0,0.0,130.0)
+		
+		repeat
+			if os.time() >= parseInt(Active[user_id]) then
+				Active[user_id] = nil
+				vRP.upgradeThirst(user_id,20)
+				vRPC.removeObjects(source,"one")
+				TriggerClientEvent("inventory:Buttons",source,false)
+			end
+			
+			Wait(100)
+		until Active[user_id] == nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- INVENTORY:DESMANCHAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("inventory:Desmanchar")
