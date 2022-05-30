@@ -4,27 +4,28 @@
 CreateThread(function()
 	while true do
 		local timeDistance = 100
-		local ped = PlayerPedId()
-		if not IsPedInAnyVehicle(ped) and IsPedJumping(ped) then
-			timeDistance = 1
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) and IsPedJumping(ped) then
+				timeDistance = 1
 
-			if IsControlJustReleased(1,51) then
-				local tackled = {}
-				local coords = GetEntityForwardVector(ped)
+				if IsControlJustReleased(1,51) then
+					local tackled = {}
+					local coords = GetEntityForwardVector(ped)
 
-				TriggerServerEvent("upgradeStress",5)
-				SetPedToRagdollWithFall(ped,1000,1000,0,coords,1.0,0.0,0.0,0.0,0.0,0.0,0.0)
+					SetPedToRagdollWithFall(ped,2500,1500,0,coords,1.0,0.0,0.0,0.0,0.0,0.0,0.0)
 
-				while IsPedRagdoll(ped) do
-					for _,v in ipairs(touchedPlayers()) do
-						if not tackled[v] then
-							tackled[v] = true
-							TriggerServerEvent("inventory:Cancel")
-							TriggerServerEvent("tackle:Update",GetPlayerServerId(v),{ coords["x"],coords["y"],coords["z"] })
+					while IsPedRagdoll(ped) do
+						for _,v in ipairs(touchedPlayers()) do
+							if not tackled[v] then
+								tackled[v] = true
+								TriggerServerEvent("inventory:Cancel")
+								TriggerServerEvent("tackle:Update",GetPlayerServerId(v),{ coords["x"],coords["y"],coords["z"] })
+							end
 						end
-					end
 
-					Wait(1)
+						Wait(1)
+					end
 				end
 			end
 		end
@@ -37,9 +38,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("tackle:Player")
 AddEventHandler("tackle:Player",function(coords)
-	SetPedToRagdollWithFall(PlayerPedId(),10000,10000,0,coords[1],coords[2],coords[3],10.0,0.0,0.0,0.0,0.0,0.0,0.0)
+	SetPedToRagdollWithFall(PlayerPedId(),5000,5000,0,coords[1],coords[2],coords[3],10.0,0.0,0.0,0.0,0.0,0.0,0.0)
 	TriggerServerEvent("inventory:Cancel")
-	TriggerServerEvent("upgradeStress",5)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TOUCHEDPLAYERS

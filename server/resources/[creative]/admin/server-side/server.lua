@@ -122,6 +122,26 @@ RegisterCommand("nc",function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- SPECTATE
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Spectate = false
+RegisterCommand("spectate",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasGroup(user_id,"Admin") then
+			if Spectate then
+				Spectate = false
+				TriggerClientEvent("admin:resetSpectate",source)
+				TriggerClientEvent("Notify",source,"amarelo","Desativado.",5000)
+			else
+				Spectate = true
+				TriggerClientEvent("admin:initSpectate",source)
+				TriggerClientEvent("Notify",source,"verde","Ativado.",5000)
+			end
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- KICK
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("kick",function(source,args,rawCommand)
@@ -195,9 +215,9 @@ RegisterCommand("cds",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.hasGroup(user_id,"Moderator") then
-			local ped = GetPlayerPed(source)
-			local coords = GetEntityCoords(ped)
-			local heading = GetEntityHeading(ped)
+			local Ped = GetPlayerPed(source)
+			local coords = GetEntityCoords(Ped)
+			local heading = GetEntityHeading(Ped)
 
 			vRP.prompt(source,"Cordenadas:",mathLegth(coords["x"])..","..mathLegth(coords["y"])..","..mathLegth(coords["z"])..","..mathLegth(heading))
 		end
