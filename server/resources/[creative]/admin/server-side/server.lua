@@ -54,7 +54,7 @@ RegisterCommand("god",function(source,args,rawCommand)
 					vRP.upgradeHunger(nuser_id,100)
 					vRP.downgradeStress(nuser_id,100)
 					vRPC.revivePlayer(otherPlayer,200)
-					TriggerClientEvent("paramedic:Reset",source) -- TRY
+					TriggerClientEvent("paramedic:Reset",nuser_id)
 				end
 			else
 				vRP.setArmour(source,100)
