@@ -17,7 +17,6 @@ local cam = -1
 local skinData = {}
 local animation = false
 local previousSkinData = {}
-local customCamLocation = nil
 local creatingCharacter = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SKINDATA
@@ -68,9 +67,9 @@ AddEventHandler("skinshop:updateTattoo",function()
 	resetClothing(skinData)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- LOCATESHOPS
+-- SKINSHOPS
 -----------------------------------------------------------------------------------------------------------------------------------------
-local locateShops = {
+local Skinshops = {
 	{ -1124.28,-1442.92,5.22 },
 	{ 74.88,-1400.08,29.37 },
 	{ 80.42,-1400.13,29.37 },
@@ -98,11 +97,11 @@ local locateShops = {
 	{ 420.55,-799.1,29.49 },
 	{ 1210.61,-1474.0,34.85 }, -- Bombeiros
 	{ -1181.86,-900.55,13.99 }, -- BurgerShot
-	{ 461.46,-998.05,31.19 }, -- departamentStoreo LSPD
-	{ 387.29,799.17,187.45 }, -- departamentStoreo Ranger
-	{ 1841.13,3679.86,34.19 }, -- departamentStoreo Sheriff
-	{ -437.49,6009.62,36.99 }, -- departamentStoreo Sheriff
-	{ 361.77,-1593.19,25.9 }, -- departamentStoreo State
+	{ 461.46,-998.05,31.19 }, -- Departamento LSPD
+	{ 387.29,799.17,187.45 }, -- Departamento Ranger
+	{ 1841.13,3679.86,34.19 }, -- Departamento Sheriff
+	{ -437.49,6009.62,36.99 }, -- Departamento Sheriff
+	{ 361.77,-1593.19,25.9 }, -- Departamento State
 	{ -586.89,-1049.92,22.34 }, -- Uwu Café
 	{ 300.2,-598.85,43.29 }, -- Hospital Sul
 	{ -256.56,6327.32,32.42 }, -- Hospital Norte
@@ -115,7 +114,7 @@ local locateShops = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	local innerTable = {}
-	for k,v in pairs(locateShops) do
+	for k,v in pairs(Skinshops) do
 		table.insert(innerTable,{ v[1],v[2],v[3],2,"E","Loja de Roupas","Pressione para abrir" })
 	end
 
@@ -129,22 +128,22 @@ CreateThread(function()
 
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		if not IsPedInAnyVehicle(ped) and not creatingCharacter then
-			local coords = GetEntityCoords(ped)
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) and not creatingCharacter then
+				local coords = GetEntityCoords(ped)
 
-			for k,v in pairs(locateShops) do
-				local distance = #(coords - vec3(v[1],v[2],v[3]))
-				if distance <= 2 then
-					timeDistance = 1
+				for k,v in pairs(Skinshops) do
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
+					if distance <= 2 then
+						timeDistance = 1
 
-					if IsControlJustPressed(0,38) and vSERVER.checkShares() then
-						customCamLocation = nil
-
-						openMenu({
-							{ menu = "character", label = "Roupas", selected = true },
-							{ menu = "accessoires", label = "Utilidades", selected = false }
-						})
+						if IsControlJustPressed(0,38) and vSERVER.checkShares() then
+							openMenu({
+								{ menu = "character", label = "Roupas", selected = true },
+								{ menu = "accessoires", label = "Utilidades", selected = false }
+							})
+						end
 					end
 				end
 			end
@@ -158,9 +157,9 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("skinshop:openShop")
 AddEventHandler("skinshop:openShop",function()
-	if not creatingCharacter and vSERVER.checkShares() then
-		customCamLocation = nil
+	TriggerEvent("dynamic:closeSystem")
 
+	if not creatingCharacter and vSERVER.checkShares() then
 		openMenu({
 			{ menu = "character", label = "Roupas", selected = true },
 			{ menu = "accessoires", label = "Utilidades", selected = false }
@@ -286,10 +285,6 @@ function enableCam()
 		RenderScriptCams(true,false,0,true,true)
 		SetCamCoord(cam,coords["x"],coords["y"],coords["z"] + 0.5)
 		SetCamRot(cam,0.0,0.0,GetEntityHeading(PlayerPedId()) + 180)
-	end
-
-	if customCamLocation ~= nil then
-		SetCamCoord(cam,customCamLocation["x"],customCamLocation["y"],customCamLocation["z"])
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -572,7 +567,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("skinshop:setMask")
 AddEventHandler("skinshop:setMask",function()
-	if not animation then
+	if not animation and not LocalPlayer["state"]["Buttons"] then
 		animation = true
 		vRP.playAnim(true,{"missfbi4","takeoff_mask"},true)
 		Wait(1000)
@@ -594,7 +589,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("skinshop:setHat")
 AddEventHandler("skinshop:setHat",function()
-	if not animation then
+	if not animation and not LocalPlayer["state"]["Buttons"] then
 		animation = true
 		vRP.playAnim(true,{"mp_masks@standard_car@ds@","put_on_mask"},true)
 		Wait(1000)
@@ -616,7 +611,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("skinshop:setGlasses")
 AddEventHandler("skinshop:setGlasses",function()
-	if not animation then
+	if not animation and not LocalPlayer["state"]["Buttons"] then
 		animation = true
 		vRP.playAnim(true,{"clothingspecs","take_off"},true)
 		Wait(1000)
@@ -634,160 +629,72 @@ AddEventHandler("skinshop:setGlasses",function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- SETARMS
+-- CHECKSHOES
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setArms")
-AddEventHandler("skinshop:setArms",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
-
-		local ped = PlayerPedId()
-
-		if GetPedDrawableVariation(ped,3) == skinData["arms"]["item"] then
-			SetPedComponentVariation(ped,3,15,0,1)
-		else
-			SetPedComponentVariation(ped,3,skinData["arms"]["item"],skinData["arms"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
+function cRP.checkShoes()
+	local Number = 34
+	local Ped = PlayerPedId()
+	if GetEntityModel(Ped) == GetHashKey("mp_f_freemode_01") then
+		Number = 35
 	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETSHOES
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setShoes")
-AddEventHandler("skinshop:setShoes",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
 
-		local ped = PlayerPedId()
+	if skinData["shoes"]["item"] ~= Number then
+		skinData["shoes"]["item"] = Number
+		skinData["shoes"]["texture"] = 0
+		SetPedComponentVariation(Ped,6,skinData["shoes"]["item"],skinData["shoes"]["texture"],1)
 
-		if GetPedDrawableVariation(ped,6) == skinData["shoes"]["item"] then
-			SetPedComponentVariation(ped,6,5,0,1)
-		else
-			SetPedComponentVariation(ped,6,skinData["shoes"]["item"],skinData["shoes"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
+		return true
 	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETPANTS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setPants")
-AddEventHandler("skinshop:setPants",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
 
-		local ped = PlayerPedId()
-
-		if GetPedDrawableVariation(ped,4) == skinData["pants"]["item"] then
-			if GetEntityModel(ped) == GetHashKey("mp_m_freemode_01") then
-				SetPedComponentVariation(ped,4,14,0,1)
-			elseif GetEntityModel(ped) == GetHashKey("mp_f_freemode_01") then
-				SetPedComponentVariation(ped,4,15,0,1)
-			end
-		else
-			SetPedComponentVariation(ped,4,skinData["pants"]["item"],skinData["pants"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETSHIRT
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setShirt")
-AddEventHandler("skinshop:setShirt",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
-
-		local ped = PlayerPedId()
-
-		if GetPedDrawableVariation(ped,8) == skinData["tshirt"]["item"] then
-			SetPedComponentVariation(ped,8,15,0,1)
-			SetPedComponentVariation(ped,3,15,0,1)
-		else
-			SetPedComponentVariation(ped,8,skinData["tshirt"]["item"],skinData["tshirt"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETJACKET
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setJacket")
-AddEventHandler("skinshop:setJacket",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
-
-		local ped = PlayerPedId()
-
-		if GetPedDrawableVariation(ped,11) == skinData["torso"]["item"] then
-			SetPedComponentVariation(ped,11,15,0,1)
-			SetPedComponentVariation(ped,3,15,0,1)
-		else
-			SetPedComponentVariation(ped,11,skinData["torso"]["item"],skinData["torso"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETVEST
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("skinshop:setVest")
-AddEventHandler("skinshop:setVest",function()
-	if not animation then
-		animation = true
-		vRP.playAnim(true,{"clothingtie","try_tie_negative_a"},true)
-		Wait(1000)
-
-		local ped = PlayerPedId()
-
-		if GetPedDrawableVariation(ped,9) == skinData["vest"]["item"] then
-			SetPedComponentVariation(ped,9,0,0,1)
-		else
-			SetPedComponentVariation(ped,9,skinData["vest"]["item"],skinData["vest"]["texture"],1)
-		end
-
-		vRP.removeObjects()
-		animation = false
-	end
-end)
+	return false
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TOGGLEBACKPACK
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("skinshop:toggleBackpack")
-AddEventHandler("skinshop:toggleBackpack",function(numBack)
-	if skinData["backpack"]["item"] == parseInt(numBack) then
+AddEventHandler("skinshop:toggleBackpack",function(Infos)
+	local splitName = splitString(Infos,"-")
+	local Modelo = parseInt(splitName[1])
+	local Textura = parseInt(splitName[2])
+
+	if skinData["backpack"]["item"] == Modelo then
 		skinData["backpack"]["item"] = 0
 		skinData["backpack"]["texture"] = 0
 	else
-		skinData["backpack"]["texture"] = 0
-		skinData["backpack"]["item"] = parseInt(numBack)
+		skinData["backpack"]["texture"] = Textura
+		skinData["backpack"]["item"] = Modelo
 	end
 
 	SetPedComponentVariation(PlayerPedId(),5,skinData["backpack"]["item"],skinData["backpack"]["texture"],1)
 
 	vSERVER.updateClothes(skinData)
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GETCUSTOMIZATION
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.getCustomization()
+	return skinData
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SKINSHOP:DEFIBRILLATOR
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Defibrillator = false
+RegisterNetEvent("skinshop:Defibrillator")
+AddEventHandler("skinshop:Defibrillator",function()
+	if Defibrillator then
+		Defibrillator = false
+		SetPedComponentVariation(PlayerPedId(),5,0,0,1)
+	else
+		Defibrillator = true
+		SetPedComponentVariation(PlayerPedId(),5,100,0,1)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DEFIBRILLATOR
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.Defibrillator()
+	return Defibrillator
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REMOVEBACKPACK
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -802,12 +709,6 @@ AddEventHandler("skinshop:removeBackpack",function(numBack)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- GETCUSTOMIZATION
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.getCustomization()
-	return skinData
-end
------------------------------------------------------------------------------------------------------------------------------------------
 -- CHECKBACKPACK
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.checkBackpack()
@@ -817,3 +718,26 @@ function cRP.checkBackpack()
 
 	return false
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADHOVERFY
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BackWeight = false
+CreateThread(function()
+	while true do
+		if skinData["backpack"] then
+			if skinData["backpack"]["item"] ~= 0 and skinData["backpack"]["item"] >= 100 then
+				if not BackWeight then
+					TriggerServerEvent("vRP:BackpackWeight",true)
+					BackWeight = true
+				end
+			else
+				if BackWeight then
+					TriggerServerEvent("vRP:BackpackWeight",false)
+					BackWeight = false
+				end
+			end
+		end
+
+		Wait(1000)
+	end
+end)
