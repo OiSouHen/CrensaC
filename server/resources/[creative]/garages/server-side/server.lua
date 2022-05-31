@@ -759,6 +759,8 @@ AddEventHandler("garages:Tax",function(vehModel)
 				else
 					TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 				end
+			else
+				TriggerClientEvent("Notify",source,"azul",completeTimers(vehicle[1]["tax"] - os.time()),1000)
 			end
 		end
 	end
