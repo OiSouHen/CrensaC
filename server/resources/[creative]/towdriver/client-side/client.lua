@@ -19,13 +19,12 @@ local spawnCoords = 0
 local inService = false
 local serviceLocate = 1
 local spawnVehicle = false
+local timeService = GetGameTimer()
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INITLOCATES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local initLocates = {
-	{ -193.23,-1162.39,23.67 },
-	{ 1737.95,3709.1,34.14 },
-	{ -273.96,6121.63,31.41 }
+	{ -193.23,-1162.39,23.67 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VEHMODELS
@@ -80,51 +79,6 @@ local vehRescue = {
 		{ -613.22,979.3,240.3,277.8 },
 		{ 51.47,1039.24,217.83,68.04 },
 		{ 304.2,929.97,205.21,167.25 }
-	},
-	[2] = {
-		{ 1879.32,3821.21,32.0,300.48 },
-		{ 1966.01,3777.16,31.86,25.52 },
-		{ 2187.55,3510.93,45.11,70.87 },
-		{ 1754.84,3342.44,40.81,294.81 },
-		{ 2008.58,3074.77,46.72,325.99 },
-		{ 1537.71,2781.66,37.71,121.89 },
-		{ 1168.17,2695.24,37.52,175.75 },
-		{ 685.6,2707.86,40.12,87.88 },
-		{ 646.21,2757.55,41.65,187.09 },
-		{ 253.86,2634.52,44.82,96.38 },
-		{ -6.81,2800.15,57.22,59.53 },
-		{ 231.59,3094.28,42.12,102.05 },
-		{ 225.71,3368.46,38.92,34.02 },
-		{ 100.01,3460.58,39.39,0.0 },
-		{ 437.64,3521.79,33.33,93.55 },
-		{ 888.22,3656.44,32.5,181.42 },
-		{ 1573.38,3768.74,34.26,306.15 },
-		{ 1707.0,3876.76,34.53,5.67 },
-		{ 1925.95,3871.48,32.0,116.23 },
-		{ 2437.43,4005.0,36.7,246.62 },
-		{ 2502.0,4197.8,39.58,209.77 }
-	},
-	[3] = {
-		{ -325.38,6138.76,31.16,42.52 },
-		{ -82.76,6561.0,31.16,223.94 },
-		{ 23.69,6527.71,31.1,45.36 },
-		{ 134.72,6652.75,31.32,226.78 },
-		{ 21.24,6663.29,31.21,184.26 },
-		{ -577.95,6108.47,7.95,5.67 },
-		{ -433.78,6360.32,13.01,34.02 },
-		{ -199.21,6562.95,10.75,314.65 },
-		{ -681.17,5939.75,15.5,178.59 },
-		{ -804.36,5556.76,32.01,221.11 },
-		{ -971.22,5419.9,39.14,121.89 },
-		{ -1291.04,5230.11,53.82,331.66 },
-		{ -1463.12,5056.95,61.54,124.73 },
-		{ -1732.24,4796.22,58.06,127.56 },
-		{ 809.78,6485.31,23.05,266.46 },
-		{ 1314.11,6511.21,19.46,133.23 },
-		{ 1478.02,6352.05,23.4,297.64 },
-		{ 1951.09,6200.55,44.6,204.1 },
-		{ 1819.56,6372.82,39.51,82.21 },
-		{ 1604.44,6542.75,14.68,11.34 }
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -157,18 +111,22 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("towdriver:Toggle")
 AddEventHandler("towdriver:Toggle",function(id)
-	if inService then
-		inService = false
-	else
-		inService = true
-		serviceLocate = id
-		spawnSelect = math.random(#vehModels)
-		spawnCoords = math.random(#vehRescue[serviceLocate])
+	if GetGameTimer() >= timeService then
+		timeService = GetGameTimer() + 60000
 
-		TriggerEvent("NotifyPush",{ code = 20, title = "Registro de Veículo", x = vehRescue[serviceLocate][spawnCoords][1], y = vehRescue[serviceLocate][spawnCoords][2], z = vehRescue[serviceLocate][spawnCoords][3], name = "Aguardando reboque", blipColor = 2 })
+		if inService then
+			inService = false
+		else
+			inService = true
+			serviceLocate = id
+			spawnSelect = math.random(#vehModels)
+			spawnCoords = math.random(#vehRescue[serviceLocate])
+
+			TriggerEvent("NotifyPush",{ code = 20, title = "Registro de Veículo", x = vehRescue[serviceLocate][spawnCoords][1], y = vehRescue[serviceLocate][spawnCoords][2], z = vehRescue[serviceLocate][spawnCoords][3], name = "Aguardando reboque", blipColor = 2 })
+		end
+
+		vSERVER.toggleService()
 	end
-
-	vSERVER.toggleService()
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADVEHICLE
@@ -215,7 +173,7 @@ RegisterNetEvent("towdriver:invokeTow")
 AddEventHandler("towdriver:invokeTow",function()
 	local ped = PlayerPedId()
 	local vehicle = GetLastDrivenVehicle()
-	if IsVehicleModel(vehicle,GetHashKey("flatbed")) and not IsPedInAnyVehicle(ped) then
+	if (GetEntityModel(vehicle) == GetHashKey("flatbed") or GetEntityModel(vehicle) == GetHashKey("flatbed2")) and not IsPedInAnyVehicle(ped) then
 		local vehTowed = vRP.nearVehicle(10)
 
 		if DoesEntityExist(vehicle) and DoesEntityExist(vehTowed) then
@@ -238,16 +196,16 @@ AddEventHandler("towdriver:invokeTow",function()
 						vehTower = vehTowed
 						LocalPlayer["state"]["Cancel"] = true
 						TriggerEvent("sounds:source","tow",0.5)
-						TaskTurnPedToFaceEntity(ped,vehTowed,5000)
 						LocalPlayer["state"]["Commands"] = true
-						TaskPlayAnim(ped,"mini@repair","fixing_a_player",3.0,3.0,-1,50,0,0,0,0)
+						TaskTurnPedToFaceEntity(ped,vehTowed,5000)
+						vRP.playAnim(false,{"mini@repair","fixing_a_player"},true)
 
 						Wait(4500)
 
 						inTowed = vehTowed
+						vRP.removeObjects()
 						LocalPlayer["state"]["Cancel"] = false
 						LocalPlayer["state"]["Commands"] = false
-						StopAnimTask(ped,"mini@repair","fixing_a_player",2.0)
 						TriggerServerEvent("towdriver:ServerTow",VehToNet(vehicle),VehToNet(vehTowed),"in")
 					end
 				end
@@ -274,7 +232,7 @@ AddEventHandler("towdriver:ClientTow",function(veh01,veh02,mode)
 
 				local vehHeading = GetEntityHeading(vehicle)
 				local vehCoords = GetOffsetFromEntityInWorldCoords(vehicle,0.0,-10.0,0.0)
-				SetEntityCoords(vehTowed,vehCoords["x"],vehCoords["y"],vehCoords["z"],1,0,0,0)
+				SetEntityCoords(vehTowed,vehCoords["x"],vehCoords["y"],vehCoords["z"],false,false,false,false)
 				SetEntityHeading(vehTowed,vehHeading)
 				SetVehicleOnGroundProperly(vehTowed)
 			end
