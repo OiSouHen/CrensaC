@@ -108,7 +108,7 @@ local garageLocates = {
 	["43"] = { name = "Paramedic", payment = false, perm = "Paramedic" },
 	["44"] = { name = "heliParamedic", payment = false, perm = "Paramedic" },
 
-	["45"] = { name = "Paramedic", payment = false, perm = "Paramedic" }, -- BOMBEIRO
+	["45"] = { name = "fireDepartment", payment = false, perm = "Paramedic" },
 
 	-- Police
 	["61"] = { name = "Police", payment = false, perm = "Police" },
@@ -239,8 +239,7 @@ local workGarages = {
 		"ambulance2"
 	},
 	["heliParamedic"] = {
-		"maverick2",
-		"firetruk"
+		"maverick2"
 	},
 	["Police"] = {
 		"ballerpol",
@@ -270,6 +269,9 @@ local workGarages = {
 	["busPolice"] = {
 		"pbus",
 		"riot"
+	},
+	["fireDepartment"] = {
+		"firetruk"
 	},
 	["Driver"] = {
 		"bus"
