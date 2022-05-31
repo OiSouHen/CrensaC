@@ -673,6 +673,8 @@ CreateThread(function()
 								if parseInt(#Vehicles) > 0 then
 									for _,v in pairs(Vehicles) do
 										exports["dynamic"]:AddButton("Pegar","Clique para pega-lo na garagem.","garages:Spawn",v["model"].."-"..k,v["model"],true)
+										exports["dynamic"]:AddButton("Taxas","Clique para o pagamento das taxas.","garages:Tax",v["model"],v["model"],true)
+										exports["dynamic"]:AddButton("Vender","Clique para o vender o veículo.","garages:Sell",v["model"],v["model"],true)
 										exports["dynamic"]:AddButton("Transferência","Clique para transferir a outra pessoa.","garages:Transfer",v["model"],v["model"],true)
 
 										exports["dynamic"]:SubMenu(v["name"],"Todas as funções do veículo.",v["model"])

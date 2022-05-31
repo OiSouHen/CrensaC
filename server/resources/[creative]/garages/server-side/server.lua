@@ -15,6 +15,7 @@ vCLIENT = Tunnel.getInterface("garages")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
+local actived = {}
 local vehSpawn = {}
 local vehSignal = {}
 local searchTimers = {}
@@ -474,6 +475,8 @@ AddEventHandler("garages:Spawn",function(Table)
 
 									vehPlates[vehPlate] = user_id
 									GlobalState["vehPlates"] = vehPlates
+									
+									TriggerClientEvent("Notify",source,"azul",completeTimers(vehicle[1]["tax"] - os.time()),1000)
 								end
 							else
 								local vehPrice = vehiclePrice(vehName)
@@ -489,6 +492,8 @@ AddEventHandler("garages:Spawn",function(Table)
 
 											vehPlates[vehPlate] = user_id
 											GlobalState["vehPlates"] = vehPlates
+											
+											TriggerClientEvent("Notify",source,"azul",completeTimers(vehicle[1]["tax"] - os.time()),1000)
 										end
 									else
 										TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -506,6 +511,8 @@ AddEventHandler("garages:Spawn",function(Table)
 
 								vehPlates[vehPlate] = user_id
 								GlobalState["vehPlates"] = vehPlates
+								
+								TriggerClientEvent("Notify",source,"azul",completeTimers(vehicle[1]["tax"] - os.time()),1000)
 							end
 						end
 					end
@@ -722,6 +729,80 @@ AddEventHandler("garages:removeGarages",function(homeName)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:TAX
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("garages:Tax")
+AddEventHandler("garages:Tax",function(vehModel)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehModel })
+		if vehicle[1] then
+			if vehicle[1]["tax"] <= os.time() then
+				local vehiclePrice = parseInt(vehiclePrice(vehModel) * 0.10)
+
+				if vRP.paymentFull(user_id,vehiclePrice) then
+					vRP.execute("vehicles/updateVehiclesTax",{ user_id = user_id, vehicle = vehModel })
+				else
+					TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
+				end
+			end
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:SELL
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("garages:Sell")
+AddEventHandler("garages:Sell",function(vehModel)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		TriggerClientEvent("dynamic:closeSystem",source)
+
+		if actived[user_id] == nil then
+			actived[user_id] = true
+
+			if vRP.getFines(user_id) > 0 then
+				TriggerClientEvent("Notify",source,"amarelo","Multas pendentes encontradas.",3000)
+				actived[user_id] = nil
+				return false
+			end
+
+			local vehType = vehicleType(vehModel)
+			if vehType == "work" then
+				TriggerClientEvent("Notify",source,"amarelo","Veículos de serviço não podem ser vendidos.",3000)
+				actived[user_id] = nil
+				return false
+			end
+
+			local vehPrices = vehiclePrice(vehModel) * 0.5
+			local sellText = "Vender o veículo <b>"..vehicleName(vehModel).."</b> por <b>$"..parseFormat(vehPrices).."</b>?"
+
+			if vehType == "rental" then
+				sellText = "Remover o veículo de sua lista de possuídos?"
+			end
+
+			if vRP.request(source,sellText) then
+				local vehicles = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehModel })
+				if vehicles[1] then
+					vRP.remSrvdata("custom:"..user_id..":"..vehModel)
+					vRP.remSrvdata("vehChest:"..user_id..":"..vehModel)
+					vRP.remSrvdata("vehGloves:"..user_id..":"..vehModel)
+					vRP.execute("vehicles/removeVehicles",{ user_id = user_id, vehicle = vehModel })
+
+					if vehType ~= "rental" then
+						vRP.addBank(user_id,vehPrices,"Private")
+						TriggerClientEvent("itensNotify",source,{ "recebeu","dollars",parseFormat(vehPrices),"Dólares" })
+					end
+				end
+			end
+
+			actived[user_id] = nil
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- GARAGES:TRANSFER
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("garages:Transfer")
@@ -814,6 +895,10 @@ end)
 -- PLAYERDISCONNECT
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("playerDisconnect",function(user_id)
+	if actived[user_id] then
+		actived[user_id] = nil
+	end
+
 	if searchTimers[user_id] then
 		searchTimers[user_id] = nil
 	end

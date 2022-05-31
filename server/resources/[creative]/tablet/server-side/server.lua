@@ -41,64 +41,6 @@ CreateThread(function()
 	GlobalState["Rental"] = Rental
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- REQUESTPOSSUIDOS
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.requestPossuidos()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		local vehList = {}
-		local vehicles = vRP.query("vehicles/getVehicles",{ user_id = user_id })
-		for k,v in pairs(vehicles) do
-			local vehicleRental = 0
-			local vehicleTax = "Atrasado"
-			local vehPrices = vehiclePrice(v["vehicle"]) * 0.50
-
-			if v["tax"] > os.time() then
-				vehicleTax = minimalTimers(v["tax"] - os.time())
-			end
-
-			if vehicleType(v["vehicle"]) == "work" then
-				vehPrices = vehiclePrice(v["vehicle"]) * 0.25
-			end
-
-			if v["rental"] > 0 then
-				if v["rental"] <= os.time() then
-					vehicleRental = "Vencido"
-				else
-					vehicleRental = minimalTimers(v["rental"] - os.time())
-				end
-			end
-
-			table.insert(vehList,{ k = v["vehicle"], name = vehicleName(v["vehicle"]), plate = v["plate"], price = parseInt(vehPrices), chest = vehicleChest(v["vehicle"]), tax = vehicleTax, rental = vehicleRental })
-		end
-
-		return vehList
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- REQUESTTAX
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.requestTax(vehName)
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehName })
-		if vehicle[1] then
-			if vehicle[1]["tax"] <= os.time() then
-				local vehiclePrice = parseInt(vehiclePrice(vehName) * 0.10)
-
-				if vRP.paymentFull(user_id,vehiclePrice) then
-					vRP.execute("vehicles/updateVehiclesTax",{ user_id = user_id, vehicle = vehName })
-					TriggerClientEvent("tablet:Update",source,"requestPossuidos")
-				else
-					TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
-				end
-			end
-		end
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
 -- REQUESTRENTAL
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.requestRental(vehName)
@@ -132,47 +74,6 @@ function cRP.requestRental(vehName)
 					end
 				else
 					TriggerClientEvent("Notify",source,"vermelho","<b>Gemas</b> insuficientes.",5000)
-				end
-			end
-
-			actived[user_id] = nil
-		end
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- RENTALMONEY
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.rentalMoney(vehName)
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if actived[user_id] == nil then
-			actived[user_id] = true
-
-			if vRP.getFines(user_id) > 0 then
-				TriggerClientEvent("Notify",source,"amarelo","Multas pendentes encontradas.",3000)
-				actived[user_id] = nil
-				return
-			end
-
-			local vehPrice = vehicleGems(vehName) * 2250
-			if vRP.request(source,"Alugar o veículo <b>"..vehicleName(vehName).."</b> por <b>$"..parseFormat(vehPrice).."</b> dólares?") then
-				if vRP.paymentFull(user_id,vehPrice) then
-					local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehName })
-					if vehicle[1] then
-						if vehicle[1]["rental"] <= os.time() then
-							vRP.execute("vehicles/rentalVehiclesUpdate",{ user_id = user_id, vehicle = vehName })
-							TriggerClientEvent("Notify",source,"verde","Aluguel do veículo <b>"..vehicleName(vehName).."</b> atualizado.",5000)
-						else
-							vRP.execute("vehicles/rentalVehiclesDays",{ user_id = user_id, vehicle = vehName })
-							TriggerClientEvent("Notify",source,"verde","Adicionado <b>30 Dias</b> de aluguel no veículo <b>"..vehicleName(vehName).."</b>.",5000)
-						end
-					else
-						vRP.execute("vehicles/rentalVehicles",{ user_id = user_id, vehicle = vehName, plate = vRP.generatePlate(), work = "false" })
-						TriggerClientEvent("Notify",source,"verde","Aluguel do veículo <b>"..vehicleName(vehName).."</b> concluído.",5000)
-					end
-				else
-					TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 				end
 			end
 
@@ -240,56 +141,6 @@ function cRP.requestBuy(vehName)
 						else
 							TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 						end
-					end
-				end
-			end
-
-			actived[user_id] = nil
-		end
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- REQUESTSELL
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.requestSell(vehName)
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if actived[user_id] == nil then
-			actived[user_id] = true
-
-			if vRP.getFines(user_id) > 0 then
-				TriggerClientEvent("Notify",source,"amarelo","Multas pendentes encontradas.",3000)
-				actived[user_id] = nil
-				return false
-			end
-
-			local vehType = vehicleType(vehName)
-			if vehType == "work" then
-				TriggerClientEvent("Notify",source,"amarelo","Veículos de serviço não podem ser vendidos.",3000)
-				actived[user_id] = nil
-				return false
-			end
-
-			local vehPrices = vehiclePrice(vehName) * 0.5
-			local sellText = "Vender o veículo <b>"..vehicleName(vehName).."</b> por <b>$"..parseFormat(vehPrices).."</b>?"
-
-			if vehType == "rental" then
-				sellText = "Remover o veículo de sua lista de possuídos?"
-			end
-
-			if vRP.request(source,sellText) then
-				local vehicles = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehName })
-				if vehicles[1] then
-					vRP.remSrvdata("custom:"..user_id..":"..vehName)
-					vRP.remSrvdata("vehChest:"..user_id..":"..vehName)
-					vRP.remSrvdata("vehGloves:"..user_id..":"..vehName)
-					vRP.execute("vehicles/removeVehicles",{ user_id = user_id, vehicle = vehName })
-					TriggerClientEvent("tablet:Update",source,"requestPossuidos")
-
-					if vehType ~= "rental" then
-						vRP.addBank(user_id,vehPrices,"Private")
-						TriggerClientEvent("itensNotify",source,{ "recebeu","dollars",parseFormat(vehPrices),"Dólares" })
 					end
 				end
 			end

@@ -96,8 +96,8 @@ local stopVehicle = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 local spawnPeds = {
 	[1] = {
-		{ -1978.03,-509.14,11.85,235.28 },
-		{ -1667.57,-441.15,40.36,51.03 },
+		{ -1966.04,-506.83,11.83,323.15 },
+		{ -1666.47,-442.11,40.29,232.45 },
 		{ -1359.63,-963.53,9.69,306.15 },
 		{ -1256.22,-1330.9,4.08,110.56 },
 		{ -1097.49,-1673.1,8.39,306.15 },
@@ -115,7 +115,7 @@ local spawnPeds = {
 		{ 1204.51,-1367.64,35.37,266.46 },
 		{ 828.89,-1067.89,28.19,274.97 },
 		{ 20.66,-1505.68,31.85,48.19 },
-		{ -40.66,-1082.03,26.61,252.29 },
+		{ -50.98,-1077.66,27.04,345.83 },
 		{ -598.49,-929.96,23.86,272.13 },
 		{ -727.85,-690.97,30.31,5.67 },
 		{ -1213.56,-567.34,27.35,158.75 },
@@ -302,6 +302,8 @@ function generatePassenger(vehicle)
 	local randModels = math.random(#spawnModels)
 	local myObject,objNet = vRPS.CreatePed(spawnModels[randModels],spawnPeds[locateSelect][selectPosition][1],spawnPeds[locateSelect][selectPosition][2],spawnPeds[locateSelect][selectPosition][3],3374176,4)
 	if myObject then
+		Wait(1000)
+
 		local spawnPassenger = 0
 		currentPassenger = NetworkGetEntityFromNetworkId(objNet)
 		while not DoesEntityExist(currentPassenger) and spawnPassenger <= 1000 do
