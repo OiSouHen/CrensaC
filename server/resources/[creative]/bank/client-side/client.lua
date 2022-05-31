@@ -12,10 +12,12 @@ vSERVER = Tunnel.getInterface("bank")
 -- BANK:OPENSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("bank:openSystem",function()
-	if vSERVER.requestWanted() then
-		SetNuiFocus(true,true)
-		SendNUIMessage({ action = "show" })
-		vRP.playAnim(false,{"amb@prop_human_atm@male@idle_a","idle_a"},false)
+	if LocalPlayer["state"]["Route"] < 900000 then
+		if vSERVER.requestWanted() then
+			SetNuiFocus(true,true)
+			SendNUIMessage({ action = "show" })
+			vRP.playAnim(false,{"amb@prop_human_atm@male@idle_a","idle_a"},false)
+		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
