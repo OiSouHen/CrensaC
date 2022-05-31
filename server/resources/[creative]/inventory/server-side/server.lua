@@ -689,26 +689,6 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 				end
 			end
 		return end
-		
-		if nameItem == "woodlog" then
-			if not vRPC.lastVehicle(source,"ratloader") then
-				TriggerClientEvent("Notify",source,"amarelo","Precisa utilizar o veículo <b>Ratloader</b>.",3000)
-				return
-			end
-			
-			if vDELIVER.Deliver(source,"Lumberman") then
-				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
-					vDELIVER.Update(source)
-					vRP.generateItem(user_id,"dollars",45,true)
-					
-					if vRP.userPremium(user_id) then
-						vRP.generateItem(user_id,"dollars",10,true)
-					end
-					
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-				end
-			end
-		return end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
