@@ -107,13 +107,12 @@ local garageLocates = {
 	["43"] = { name = "Paramedic", payment = false, perm = "Paramedic" },
 	["44"] = { name = "heliParamedic", payment = false, perm = "Paramedic" },
 
-	["45"] = { name = "Paramedic", payment = false, perm = "Paramedic" },
-	["46"] = { name = "heliParamedic", payment = false, perm = "Paramedic" },
+	["45"] = { name = "Paramedic", payment = false, perm = "Paramedic" }, -- BOMBEIRO
 
 	-- Police
 	["61"] = { name = "Police", payment = false, perm = "Police" },
 	["62"] = { name = "heliPolice", payment = false, perm = "Police" },
-
+	
 	["63"] = { name = "Police", payment = false, perm = "Police" },
 	["64"] = { name = "heliPolice", payment = false, perm = "Police" },
 
@@ -128,26 +127,15 @@ local garageLocates = {
 	["70"] = { name = "Police", payment = false, perm = "Police" },
 	["71"] = { name = "heliPolice", payment = false, perm = "Police" },
 	["72"] = { name = "busPolice", payment = false, perm = "Police" },
-
-	-- Bikes
-	["101"] = { name = "Bikes", payment = false },
-	["102"] = { name = "Bikes", payment = false },
-	["103"] = { name = "Bikes", payment = false },
-	["104"] = { name = "Bikes", payment = false },
-	["105"] = { name = "Bikes", payment = false },
-	["106"] = { name = "Bikes", payment = false },
-	["107"] = { name = "Bikes", payment = false },
-	["108"] = { name = "Bikes", payment = false },
-	["109"] = { name = "Bikes", payment = false },
-	["110"] = { name = "Bikes", payment = false },
-	["111"] = { name = "Bikes", payment = false },
-	["112"] = { name = "Bikes", payment = false },
-	["113"] = { name = "Bikes", payment = false },
-	["114"] = { name = "Bikes", payment = false },
-	["115"] = { name = "Bikes", payment = false },
-	["116"] = { name = "Bikes", payment = false },
-	["117"] = { name = "Bikes", payment = false },
-	["118"] = { name = "Bikes", payment = false },
+	
+	-- Gangs
+	["91"] = { name = "Garage", payment = false, perm = "Ballas" },
+	["92"] = { name = "Garage", payment = false }, -- S/G
+	["93"] = { name = "Garage", payment = false, perm = "Vagos" },
+	["94"] = { name = "Garage", payment = false }, -- S/G
+	["95"] = { name = "Garage", payment = false }, -- S/G
+	["96"] = { name = "Garage", payment = false, perm = "Triads" },
+	["97"] = { name = "Garage", payment = false }, -- S/G
 
 	-- Boats
 	["121"] = { name = "Boats", payment = false },
@@ -164,14 +152,10 @@ local garageLocates = {
 	["144"] = { name = "Transporter", payment = false },
 	["145"] = { name = "Taxi", payment = false },
 	["146"] = { name = "TowDriver", payment = false },
-	["147"] = { name = "TowDriver", payment = false },
-	["148"] = { name = "TowDriver", payment = false },
-	["149"] = { name = "Garbageman", payment = false },
-	["150"] = { name = "Garbageman", payment = false },
-	["151"] = { name = "Taxi", payment = false },
-	["152"] = { name = "TowDriver", payment = false, perm = "Mechanic" },
-	["153"] = { name = "Desserts", payment = false, perm = "Desserts" },
-	["154"] = { name = "Vinhedo", payment = true, perm = "Vinhedo" }
+	["147"] = { name = "Garbageman", payment = false },
+	["148"] = { name = "Garbageman", payment = false },
+	["149"] = { name = "Taxi", payment = false },
+	["150"] = { name = "Trucker", payment = false }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SIGNALREMOVE
@@ -308,14 +292,8 @@ local workGarages = {
 	["Desserts"] = {
 		"youga2"
 	},
-	["Bikes"] = {
-		"bmx",
-		"cruiser",
-		"fixter",
-		"scorcher",
-		"tribike",
-		"tribike2",
-		"tribike3"
+	["Trucker"] = {
+		"packer"
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -741,6 +719,75 @@ AddEventHandler("garages:removeGarages",function(homeName)
 		end
 
 		TriggerClientEvent("garages:updateRemove",-1,homeName)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:TRANSFER
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("garages:Transfer")
+AddEventHandler("garages:Transfer",function(vehModel)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		TriggerClientEvent("dynamic:closeSystem",source)
+
+		local myVehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehModel })
+		if myVehicle[1] then
+			if myVehicle[1]["rental"] >= 1 then
+				TriggerClientEvent("Notify",source,"amarelo","Veículos alugados não podem ser transferidos.",5000)
+				return
+			end
+
+			local passport = vRP.prompt(source,"Passaporte:","")
+			if passport == "" then
+				return
+			end
+
+			local nuser_id = parseInt(passport)
+			local identity = vRP.userIdentity(nuser_id)
+			if identity then
+				local maxVehs = vRP.query("vehicles/countVehicles",{ user_id = parseInt(nuser_id), work = "false" })
+				local amountVehs = identity["garage"]
+
+				if vRP.userPremium(nuser_id) then
+					amountVehs = amountVehs + 2
+				end
+
+				if parseInt(maxVehs[1]["qtd"]) >= parseInt(amountVehs) then
+					TriggerClientEvent("Notify",source,"amarelo","Atingiu o máximo de veículos.",3000)
+					return
+				end
+
+				if vRP.request(source,"Transferir o veículo <b>"..vehicleName(vehModel).."</b> para <b>"..identity["name"].." "..identity["name2"].."</b>?") then
+					local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = parseInt(nuser_id), vehicle = vehModel })
+					if vehicle[1] then
+						TriggerClientEvent("Notify",source,"amarelo","<b>"..identity["name"].." "..identity["name2"].."</b> já possui este modelo de veículo.",5000)
+					else
+						vRP.execute("vehicles/moveVehicles",{ user_id = user_id, nuser_id = parseInt(nuser_id), vehicle = vehModel })
+
+						local custom = vRP.query("entitydata/getData",{ dkey = "custom:"..user_id..":"..vehModel })
+						if parseInt(#custom) > 0 then
+							vRP.execute("entitydata/setData",{ dkey = "custom:"..nuser_id..":"..vehModel, value = custom[1]["dvalue"] })
+							vRP.execute("entitydata/removeData",{ dkey = "custom:"..user_id..":"..vehModel })
+						end
+
+						local vehChest = vRP.getSrvdata("vehChest:"..user_id..":"..vehModel)
+						if vehChest ~= nil then
+							vRP.setSrvdata("vehChest:"..nuser_id..":"..vehModel,vehChest)
+							vRP.remSrvdata("vehChest:"..user_id..":"..vehModel)
+						end
+
+						local vehGloves = vRP.getSrvdata("vehGloves:"..user_id..":"..vehModel)
+						if vehGloves ~= nil then
+							vRP.setSrvdata("vehGloves:"..nuser_id..":"..vehModel,vehGloves)
+							vRP.remSrvdata("vehGloves:"..user_id..":"..vehModel)
+						end
+
+						TriggerClientEvent("Notify",source,"verde","Transferência concluída.",5000)
+					end
+				end
+			end
+		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

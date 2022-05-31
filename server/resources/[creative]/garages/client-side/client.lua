@@ -11,17 +11,20 @@ cRP = {}
 Tunnel.bindInterface("garages",cRP)
 vSERVER = Tunnel.getInterface("garages")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- DECOR
+-----------------------------------------------------------------------------------------------------------------------------------------
+DecorRegister("PlayerVehicle",3)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local searchBlip = nil
-local spawnSelected = {}
 local vehHotwired = false
 local anim = "machinic_loop_mechandplayer"
 local animDict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@"
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
-local garageLocates = {
+local Garages = {
 	["1"] = { x = 55.44, y = -876.17, z = 30.67,
 		["1"] = { 60.44,-866.47,30.23,340.16 },
 		["2"] = { 57.26,-865.35,30.25,340.16 },
@@ -171,21 +174,18 @@ local garageLocates = {
 	["42"] = { x = 338.19, y = -586.91, z = 74.16,
 		["1"] = { 351.76,-588.19,74.16,337.33 }
 	},
-	["43"] = { x = 1836.32, y = 3671.52, z = 34.27,
-		["1"] = { 1834.99,3665.03,33.41,212.6 },
-		["2"] = { 1831.73,3663.18,33.51,212.6 },
-		["3"] = { 1828.42,3661.31,33.56,212.6 }
-	},
-	["44"] = { x = 1845.6, y = 3642.89, z = 35.64,
-		["1"] = { 1843.61,3636.48,35.64,5.0 }
-	},
-	["45"] = { x = -253.92, y = 6339.42, z = 32.42,
+	["43"] = { x = -253.92, y = 6339.42, z = 32.42,
 		["1"] = { -258.47,6347.58,32.1,269.3 },
 		["2"] = { -261.6,6344.21,32.1,269.3 },
 		["3"] = { -264.97,6340.84,32.1,272.13 }
 	},
-	["46"] = { x = -271.7, y = 6321.75, z = 32.42,
+	["44"] = { x = -271.7, y = 6321.75, z = 32.42,
 		["1"] = { -273.13,6329.85,32.1,133.23 }
+	},
+	["45"] = { x = 1206.15, y = -1474.68, z = 34.85,
+		["1"] = { 1196.58,-1468.52,34.93,0.0 },
+		["2"] = { 1200.73,-1468.58,34.93,0.0 },
+		["3"] = { 1204.83,-1468.62,34.93,0.0 }
 	},
 	["61"] = { x = 443.49, y = -974.47, z = 25.7,
 		["1"] = { 436.84,-986.18,25.38,87.88 },
@@ -210,15 +210,13 @@ local garageLocates = {
 	["62"] = { x = 463.15, y = -982.33, z = 43.69,
 		["1"] = { 449.27,-981.34,43.69,87.88 }
 	},
-	["63"] = { x = 1883.85, y = 3697.3, z = 33.53,
-		["1"] = { 1877.4,3707.32,33.21,212.6 },
-		["2"] = { 1874.37,3705.61,33.21,212.6 },
-		["3"] = { 1871.24,3703.79,33.21,212.6 },
-		["4"] = { 1879.31,3690.02,33.21,28.35 },
-		["5"] = { 1882.29,3691.76,33.21,28.35 }
+	["63"] = { x = 1839.35, y = 3691.23, z = 33.97,
+		["1"] = { 1844.43,3689.35,33.78,303.31 },
+		["2"] = { 1846.28,3686.09,33.78,303.31 },
+		["3"] = { 1848.23,3682.71,33.78,303.31 }
 	},
-	["64"] = { x = 1867.51, y = 3656.31, z = 35.6,
-		["1"] = { 1865.32,3647.66,35.6,28.35 }
+	["64"] = { x = 1844.42, y = 3707.33, z = 33.97,
+		["1"] = { 1853.31,3706.24,33.97,28.35 }
 	},
 	["65"] = { x = -459.37, y = 6016.01, z = 31.49,
 		["1"] = { -469.04,6038.77,31.0,226.78 },
@@ -251,61 +249,26 @@ local garageLocates = {
 	["72"] = { x = 392.56, y = -1632.1, z = 29.28,
 		["1"] = { 397.13,-1622.63,29.55,320.32 }
 	},
-	["101"] = { x = 156.44, y = -1065.79, z = 30.04,
-		["1"] = { 162.3,-1069.1,29.18,70.87 }
+	["91"] = { x = 84.47, y = -1972.8, z = 20.84,
+		["1"] = { 88.7,-1967.4,20.51,323.15 }
 	},
-	["102"] = { x = -1188.13, y = -1574.47, z = 4.35,
-		["1"] = { -1188.48,-1572.54,4.33,306.15 },
-		["2"] = { -1189.39,-1571.49,4.33,306.15 }
+	["92"] = { x = -25.01, y = -1433.2, z = 30.65,
+		["1"] = { -25.01,-1437.79,30.41,178.59 }
 	},
-	["103"] = { x = -777.44, y = 5593.64, z = 33.63,
-		["1"] = { -776.98,5590.38,33.48,260.79 },
-		["2"] = { -778.25,5586.74,33.48,255.12 }
+	["93"] = { x = 337.43, y = -2036.08, z = 21.35,
+		["1"] = { 332.6,-2031.48,20.98,138.9 }
 	},
-	["104"] = { x = 435.06, y = -647.39, z = 28.73,
-		["1"] = { 430.22,-646.82,27.89,116.23 }
+	["94"] = { x = 504.18, y = -1798.77, z = 28.49,
+		["1"] = { 498.32,-1803.21,28.22,51.03 }
 	},
-	["105"] = { x = -896.38, y = -779.06, z = 15.91,
-		["1"] = { -898.74,-779.98,15.22,113.39 }
+	["95"] = { x = 232.26, y = -1757.15, z = 29.0,
+		["1"] = { 238.84,-1760.94,28.78,320.32 }
 	},
-	["106"] = { x = -1668.56, y = -998.63, z = 7.38,
-		["1"] = { -1670.4,-1000.79,6.77,138.9 }
+	["96"] = { x = -816.25, y = -726.19, z = 23.78,
+		["1"] = { -816.3,-731.23,23.54,181.42 }
 	},
-	["107"] = { x = 821.79, y = -786.84, z = 26.18,
-		["1"] = { 824.47,-787.3,25.58,255.12 }
-	},
-	["108"] = { x = -1164.77, y = -896.74, z = 14.02,
-		["1"] = { -1167.52,-897.2,13.33,34.02 }
-	},
-	["109"] = { x = 1576.12, y = 6464.71, z = 24.94,
-		["1"] = { 1574.55,6462.57,24.28,161.58 }
-	},
-	["110"] = { x = 102.53, y = -1957.14, z = 20.74,
-		["1"] = { 104.77,-1957.89,20.14,17.01 }
-	},
-	["111"] = { x = -161.23, y = -1623.57, z = 33.65,
-		["1"] = { -162.25,-1626.75,33.65,130.4 }
-	},
-	["112"] = { x = 337.84, y = -2036.2, z = 21.37,
-		["1"] = { 334.74,-2039.98,20.47,51.03 }
-	},
-	["113"] = { x = 524.05, y = -1829.38, z = 28.43,
-		["1"] = { 525.55,-1831.05,27.58,141.74 }
-	},
-	["114"] = { x = 232.37, y = -1756.87, z = 29.0,
-		["1"] = { 234.81,-1754.17,28.43,320.32 }
-	},
-	["115"] = { x = 143.91, y = 6653.49, z = 31.53,
-		["1"] = { 139.73,6649.65,30.9,229.61 }
-	},
-	["116"] = { x = 1703.32, y = 4820.19, z = 41.97,
-		["1"] = { 1706.85,4823.46,41.4,39.69 }
-	},
-	["117"] = { x = 958.53, y = 3618.86, z = 32.67,
-		["1"] = { 952.0,3619.3,31.95,87.88 }
-	},
-	["118"] = { x = 1032.52, y = 2656.05, z = 39.55,
-		["1"] = { 1030.05,2656.78,38.94,2.84 }
+	["97"] = { x = 496.3, y = -103.58, z = 61.33,
+		["1"] = { 500.42,-105.01,61.81,252.29 }
 	},
 	["121"] = { x = -1728.06, y = -1050.69, z = 1.7,
 		["1"] = { -1734.05,-1057.01,0.94,133.23 }
@@ -325,8 +288,8 @@ local garageLocates = {
 	["126"] = { x = 4971.79, y = -5170.93, z = 2.27,
 		["1"] = { 4952.76,-5163.61,-0.39,65.2 }
 	},
-	["141"] = { x = -842.47, y = 5403.79, z = 34.61,
-		["1"] = { -838.49,5405.64,33.78,345.83 }
+	["141"] = { x = 2434.96, y = 5012.06, z = 46.84,
+		["1"] = { 2441.6,5010.56,45.76,277.8 }
 	},
 	["142"] = { x = 453.74, y = -600.6, z = 28.59,
 		["1"] = { 462.81,-606.03,28.49,212.6 },
@@ -351,19 +314,13 @@ local garageLocates = {
 	["146"] = { x = -154.58, y = -1174.61, z = 23.99,
 		["1"] = { -141.94,-1180.86,23.86,87.88 }
 	},
-	["147"] = { x = 1731.42, y = 3708.32, z = 34.17,
-		["1"] = { 1728.51,3715.11,34.26,19.85 }
-	},
-	["148"] = { x = -275.07, y = 6120.22, z = 31.32,
-		["1"] = { -282.22,6133.17,31.59,226.78 }
-	},
-	["149"] = { x = 283.93, y = 2849.5, z = 43.64,
+	["147"] = { x = 283.93, y = 2849.5, z = 43.64,
 		["1"] = { 277.34,2840.0,43.29,28.35 }
 	},
-	["150"] = { x = -412.39, y = 6171.06, z = 31.48,
+	["148"] = { x = -412.39, y = 6171.06, z = 31.48,
 		["1"] = { -401.19,6167.31,31.24,317.49 }
 	},
-	["151"] = { x = 1695.55, y = 4787.69, z = 42.01,
+	["149"] = { x = 1695.55, y = 4787.69, z = 42.01,
 		["1"] = { 1691.56,4782.3,41.52,87.88 },
 		["2"] = { 1691.54,4778.38,41.53,87.88 },
 		["3"] = { 1691.56,4774.37,41.53,87.88 },
@@ -371,15 +328,11 @@ local garageLocates = {
 		["5"] = { 1691.5,4766.35,41.53,87.88 },
 		["6"] = { 1691.52,4762.46,41.52,87.88 }
 	},
-	["152"] = { x = 156.45, y = -3044.33, z = 7.03,
-		["1"] = { 165.67,-3043.99,5.98,272.13 },
-		["2"] = { 165.67,-3050.43,5.98,272.13 }
-	},
-	["153"] = { x = -593.07, y = -1058.59, z = 22.34,
-		["1"] = { -596.71,-1059.2,22.31,87.88 }
-	},
-	["154"] = { x = -1924.44, y = 2060.51, z = 140.83,
-		["1"] = { -1919.81,2067.46,140.17,226.78 }
+	["150"] = { x = 1241.65, y = -3262.85, z = 5.53,
+		["1"] = { 1271.56,-3287.96,6.10,91.00 },
+		["2"] = { 1271.82,-3282.63,6.10,91.00 },
+		["3"] = { 1271.95,-3271.04,6.10,91.00 },
+		["4"] = { 1272.11,-3266.03,6.10,91.00 }
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -472,20 +425,23 @@ end
 -- SPAWNPOSITION
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.spawnPosition(openGarage)
+	local Slot = "0"
 	local checkSlot = 0
 	local checkPos = nil
+	local spawnSelected = {}
 
 	repeat
 		checkSlot = checkSlot + 1
 
-		if garageLocates[openGarage][tostring(checkSlot)] ~= nil then
-			local _,groundZ = GetGroundZAndNormalFor_3dCoord(garageLocates[openGarage][tostring(checkSlot)][1],garageLocates[openGarage][tostring(checkSlot)][2],garageLocates[openGarage][tostring(checkSlot)][3])
-			spawnSelected = { garageLocates[openGarage][tostring(checkSlot)][1],garageLocates[openGarage][tostring(checkSlot)][2],groundZ,garageLocates[openGarage][tostring(checkSlot)][4] }
+		Slot = tostring(checkSlot)
+		if Garages[openGarage][Slot] ~= nil then
+			local _,Groundz = GetGroundZAndNormalFor_3dCoord(Garages[openGarage][Slot][1],Garages[openGarage][Slot][2],Garages[openGarage][Slot][3])
+			spawnSelected = { Garages[openGarage][Slot][1],Garages[openGarage][Slot][2],Groundz,Garages[openGarage][Slot][4] }
 			checkPos = GetClosestVehicle(spawnSelected[1],spawnSelected[2],spawnSelected[3],2.501,0,71)
 		end
-	until not DoesEntityExist(checkPos) or garageLocates[openGarage][tostring(checkSlot)] == nil
+	until not DoesEntityExist(checkPos) or Garages[openGarage][Slot] == nil
 
-	if garageLocates[openGarage][tostring(checkSlot)] == nil then
+	if Garages[openGarage][tostring(checkSlot)] == nil then
 		TriggerEvent("Notify","amarelo","Vagas estão ocupadas.",5000)
 		return false
 	end
@@ -499,7 +455,6 @@ function cRP.createVehicle(vehModel,vehNet,vehEngine,vehCustom,vehWindows,vehTyr
 	if NetworkDoesNetworkIdExist(vehNet) then
 		local Vehicle = NetToEnt(vehNet)
 		if DoesEntityExist(Vehicle) then
-
 			if vehCustom ~= nil then
 				local vehMods = json.decode(vehCustom)
 				vehicleMods(Vehicle,vehMods)
@@ -527,6 +482,18 @@ function cRP.createVehicle(vehModel,vehNet,vehEngine,vehCustom,vehWindows,vehTyr
 						end
 					end
 				end
+			end
+
+			if vehModel == "maverick2" then
+				if LocalPlayer["state"]["Police"] then
+					SetVehicleLivery(Vehicle,0)
+				elseif LocalPlayer["state"]["Paramedic"] then
+					SetVehicleLivery(Vehicle,1)
+				end
+			end
+
+			if not DecorExistOn(Vehicle,"PlayerVehicle") then
+				DecorSetInt(Vehicle,"PlayerVehicle",-1)
 			end
 
 			SetModelAsNoLongerNeeded(vehModel)
@@ -563,6 +530,10 @@ AddEventHandler("garages:Delete",function(Vehicle)
 			end
 
 			Tyres[i] = Status
+		end
+
+		if DecorExistOn(Vehicle,"PlayerVehicle") then
+			DecorRemove(Vehicle,"PlayerVehicle")
 		end
 
 		vSERVER.tryDelete(VehToNet(Vehicle),GetVehicleEngineHealth(Vehicle),GetVehicleBodyHealth(Vehicle),GetVehicleFuelLevel(Vehicle),Doors,Windows,Tyres,GetVehicleNumberPlateText(Vehicle))
@@ -602,28 +573,28 @@ function cRP.startAnimHotwired()
 		Wait(1)
 	end
 
-	TaskPlayAnim(PlayerPedId(),animDict,anim,3.0,3.0,-1,49,5.0,0,0,0)
+	TaskPlayAnim(PlayerPedId(),animDict,anim,8.0,8.0,-1,49,5.0,0,0,0)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STOPANIMHOTWIRED
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.stopAnimHotwired(vehicle)
+function cRP.stopAnimHotwired(Vehicle)
 	RequestAnimDict(animDict)
 	while not HasAnimDictLoaded(animDict) do
 		Wait(1)
 	end
 
 	vehHotwired = false
-	StopAnimTask(PlayerPedId(),animDict,anim,2.0)
+	StopAnimTask(PlayerPedId(),animDict,anim,8.0)
 
-	if vehicle ~= nil then
-		local netVeh = VehToNet(vehicle)
+	if Vehicle ~= nil then
+		SetEntityAsMissionEntity(Vehicle,true,false)
+		SetVehicleHasBeenOwnedByPlayer(Vehicle,true)
+		SetVehicleNeedsToBeHotwired(Vehicle,false)
 
-		SetNetworkIdCanMigrate(netVeh,true)
-
-		SetEntityAsMissionEntity(vehicle,true,false)
-		SetVehicleHasBeenOwnedByPlayer(vehicle,true)
-		SetVehicleNeedsToBeHotwired(vehicle,false)
+		if not DecorExistOn(Vehicle,"PlayerVehicle") then
+			DecorSetInt(Vehicle,"PlayerVehicle",-1)
+		end
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -638,49 +609,26 @@ end
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		if IsPedInAnyVehicle(ped) then
-			local vehicle = GetVehiclePedIsUsing(ped)
-			local platext = GetVehicleNumberPlateText(vehicle)
-			if GetPedInVehicleSeat(vehicle,-1) == ped and not GlobalState["vehPlates"][platext] then
-				SetVehicleEngineOn(vehicle,false,true,true)
-				DisablePlayerFiring(ped,true)
-				timeDistance = 1
-			end
+		if LocalPlayer["state"]["Route"] == 0 then
+			local ped = PlayerPedId()
+			if IsPedInAnyVehicle(ped) then
+				local vehicle = GetVehiclePedIsUsing(ped)
+				local platext = GetVehicleNumberPlateText(vehicle)
+				if GetPedInVehicleSeat(vehicle,-1) == ped and not GlobalState["vehPlates"][platext] then
+					SetVehicleEngineOn(vehicle,false,true,true)
+					DisablePlayerFiring(ped,true)
+					timeDistance = 1
+				end
 
-			if vehHotwired and vehicle then
-				DisableControlAction(1,75,true)
-				DisableControlAction(1,20,true)
-				timeDistance = 1
+				if vehHotwired and vehicle then
+					DisableControlAction(1,75,true)
+					DisableControlAction(1,20,true)
+					timeDistance = 1
+				end
 			end
 		end
 
 		Wait(timeDistance)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- GARAGES:UPDATELOCS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("garages:updateLocs")
-AddEventHandler("garages:updateLocs",function(homeName,homeInfos)
-	garageLocates[homeName] = homeInfos
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- GARAGES:UPDATEREMOVE
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("garages:updateRemove")
-AddEventHandler("garages:updateRemove",function(homeName,homeInfos)
-	if garageLocates[homeName] then
-		garageLocates[homeName] = nil
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- GARAGES:ALLLOCS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("garages:allLocs")
-AddEventHandler("garages:allLocs",function(garageTable)
-	for k,v in pairs(garageTable) do
-		garageLocates[k] = v
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -707,29 +655,32 @@ end)
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		if not IsPedInAnyVehicle(ped) then
-			local coords = GetEntityCoords(ped)
-			for k,v in pairs(garageLocates) do
-				local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
-				if distance <= 15 then
-					timeDistance = 1
-					DrawMarker(23,v["x"],v["y"],v["z"] - 0.95,0.0,0.0,0.0,0.0,0.0,0.0,1.75,1.75,0.0,46,110,76,100,0,0,0,0)
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) then
+				local coords = GetEntityCoords(ped)
+				for k,v in pairs(Garages) do
+					local distance = #(coords - vec3(v["x"],v["y"],v["z"]))
+					if distance <= 15 then
+						timeDistance = 1
+						DrawMarker(23,v["x"],v["y"],v["z"] - 0.95,0.0,0.0,0.0,0.0,0.0,0.0,1.75,1.75,0.0,46,110,76,100,0,0,0,0)
 
-					if IsControlJustPressed(1,38) and distance <= 1.0 and MumbleIsConnected() then
-						local Vehicles = vSERVER.Vehicles(k)
-						if Vehicles then
-							if parseInt(#Vehicles) > 0 then
-								exports["dynamic"]:SubMenu("Retirar","Mostrar sua lista de veículos.","vehicles")
+						if IsControlJustPressed(1,38) and distance <= 1.0 and MumbleIsConnected() then
+							local Vehicles = vSERVER.Vehicles(k)
+							if Vehicles then
+								exports["dynamic"]:AddButton("Guardar","Guardar o veículo mais próximo.","garages:Delete","",false,false)
 
-								for _,v in pairs(Vehicles) do
-									exports["dynamic"]:AddButton(v["name"],"Clique para retira-lo.","garages:Spawn",v["model"].."-"..k,"vehicles",true)
+								if parseInt(#Vehicles) > 0 then
+									for _,v in pairs(Vehicles) do
+										exports["dynamic"]:AddButton("Pegar","Clique para pega-lo na garagem.","garages:Spawn",v["model"].."-"..k,v["model"],true)
+										exports["dynamic"]:AddButton("Transferência","Clique para transferir a outra pessoa.","garages:Transfer",v["model"],v["model"],true)
+
+										exports["dynamic"]:SubMenu(v["name"],"Todas as funções do veículo.",v["model"])
+									end
 								end
+
+								exports["dynamic"]:openMenu()
 							end
-
-							exports["dynamic"]:AddButton("Guardar","Guardar o veículo mais próximo.","garages:Delete","",false,false)
-
-							exports["dynamic"]:openMenu()
 						end
 					end
 				end
@@ -737,5 +688,30 @@ CreateThread(function()
 		end
 
 		Wait(timeDistance)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:UPDATELOCS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("garages:updateLocs")
+AddEventHandler("garages:updateLocs",function(homeName,homeInfos)
+	Garages[homeName] = homeInfos
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:UPDATEREMOVE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("garages:updateRemove")
+AddEventHandler("garages:updateRemove",function(homeName,homeInfos)
+	if Garages[homeName] then
+		Garages[homeName] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GARAGES:ALLLOCS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("garages:allLocs")
+AddEventHandler("garages:allLocs",function(garageTable)
+	for k,v in pairs(garageTable) do
+		Garages[k] = v
 	end
 end)

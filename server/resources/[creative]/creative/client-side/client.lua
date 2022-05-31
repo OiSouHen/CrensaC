@@ -134,6 +134,7 @@ local blips = {
 	{ -776.72,-1495.02,2.29,266,62,"Embarcações",0.5 },
 	{ -893.97,5687.78,3.29,266,62,"Embarcações",0.5 },
 	{ 4952.76,-5163.6,-0.3,266,62,"Embarcações",0.5 },
+	{ 452.99,-607.74,28.59,513,62,"Motorista",0.5 },
 	{ 356.42,274.61,103.14,67,62,"Transportador",0.5 },
 	{ 2433.45,5013.46,46.99,285,62,"Lenhador",0.5 },
 	{ -172.21,6385.85,31.49,403,5,"Farmácia",0.7 },
@@ -148,9 +149,7 @@ local blips = {
 	{ -428.56,-1728.33,19.79,467,11,"Reciclagem",0.6 },
 	{ 180.07,2793.29,45.65,467,11,"Reciclagem",0.6 },
 	{ -195.42,6264.62,31.49,467,11,"Reciclagem",0.6 },
-	{ -191.92,-1155.04,23.05,357,9,"Impound",0.6 },
-	{ 1724.84,3715.31,34.22,357,9,"Impound",0.6 },
-	{ -273.96,6121.63,31.41,357,9,"Impound",0.6 },
+	{ -142.24,-1174.19,23.76,357,9,"Impound",0.6 },
 	{ 946.2,-991.64,39.14,402,26,"Mecânica",0.7 },
 	{ -1426.52,-436.65,35.76,402,26,"Mecânica",0.7 },
 	{ -48.03,-1042.28,28.24,402,26,"Mecânica",0.7 },
@@ -200,6 +199,7 @@ CreateThread(function()
 	for _,v in pairs(blips) do
 		local blip = AddBlipForCoord(v[1],v[2],v[3])
 		SetBlipSprite(blip,v[4])
+		SetBlipDisplay(blip,4)
 		SetBlipAsShortRange(blip,true)
 		SetBlipColour(blip,v[5])
 		SetBlipScale(blip,v[7])
