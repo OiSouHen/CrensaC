@@ -243,15 +243,26 @@ local workGarages = {
 		"firetruk"
 	},
 	["Police"] = {
-		"bmwr1200",
-		"hondanc700",
-		"fordtaurus",
-		"fordexplorer",
-		"corvette",
-		"challenger",
-		"fordmustanggt",
-		"crownvictoria",
-		"dodgecharger2014"
+		"ballerpol",
+		"elegy2pol",
+		"fugitivepol",
+		"komodapol",
+		"kurumapol",
+		"polchar",
+		"polvic",
+		"oracle2pol",
+		"police3pol",
+		"policepol",
+		"policetpol",
+		"r1250pol",
+		"schafter2pol",
+		"sheriff2pol",
+		"sultanrspol",
+		"tailgater2pol",
+		"polcorv",
+		"polchall",
+		"poltang",
+		"nc700pol"
 	},
 	["heliPolice"] = {
 		"maverick2"
