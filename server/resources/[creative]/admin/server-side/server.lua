@@ -209,6 +209,17 @@ RegisterCommand("tpcds",function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- HENSA
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand("hensa",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasGroup(user_id,"Moderator") then
+			vCLIENT.teleportHensa(source)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- CDS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("cds",function(source,args,rawCommand)
@@ -292,7 +303,7 @@ RegisterCommand("tpway",function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- TPWAY
+-- LIMBO
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("limbo",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then

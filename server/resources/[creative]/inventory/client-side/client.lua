@@ -636,7 +636,7 @@ function cRP.storeWeaponHands()
 
 			TaskPlayAnim(Ped,"weapons@pistol@","aim_2_holster",8.0,8.0,-1,48,0,0,0,0)
 
-			Citizen.Wait(450)
+			Wait(450)
 
 			ClearPedTasks(Ped)
 		end
@@ -1425,7 +1425,7 @@ Citizen.CreateThread(function()
 
 							RequestAnimDict("random@mugging3")
 							while not HasAnimDictLoaded("random@mugging3") do
-								Citizen.Wait(1)
+								Wait(1)
 							end
 
 							local SelectedRobbery = 500
@@ -1451,19 +1451,19 @@ Citizen.CreateThread(function()
 
 										RequestModel(Hash)
 										while not HasModelLoaded(Hash) do
-											Citizen.Wait(1)
+											Wait(1)
 										end
 
 										RequestAnimDict(Anim)
 										while not HasAnimDictLoaded(Anim) do
-											Citizen.Wait(1)
+											Wait(1)
 										end
 
 										local Object = CreateObject(Hash,Coords["x"],Coords["y"],Coords["z"],false,false,false)
 										AttachEntityToEntity(Object,Selected,GetPedBoneIndex(Selected,28422),0.0,-0.05,0.05,180.0,0.0,0.0,false,false,false,false,2,true)
 										TaskPlayAnim(Selected,Anim,"package_dropoff",8.0,8.0,-1,16,0,0,0,0)
 
-										Citizen.Wait(3000)
+										Wait(3000)
 
 										if DoesEntityExist(Object) then
 											SetModelAsNoLongerNeeded(Hash)
@@ -1489,7 +1489,7 @@ Citizen.CreateThread(function()
 									break
 								end
 
-								Citizen.Wait(1)
+								Wait(1)
 							end
 						end
 					end
@@ -1499,7 +1499,7 @@ Citizen.CreateThread(function()
 			until not Success EndFindPed(Handler)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -1562,12 +1562,12 @@ Citizen.CreateThread(function()
 
 										RequestModel(Hash)
 										while not HasModelLoaded(Hash) do
-											Citizen.Wait(1)
+											Wait(1)
 										end
 
 										RequestAnimDict(Anim)
 										while not HasAnimDictLoaded(Anim) do
-											Citizen.Wait(1)
+											Wait(1)
 										end
 
 										local Object = CreateObject(Hash,Coords["x"],Coords["y"],Coords["z"],false,false,false)
@@ -1575,7 +1575,7 @@ Citizen.CreateThread(function()
 										vRP.createObjects(Anim,"package_dropoff","prop_paper_bag_small",16,28422,0.0,-0.05,0.05,180.0,0.0,0.0)
 										TaskPlayAnim(Selected,Anim,"package_dropoff",8.0,8.0,-1,16,0,0,0,0)
 
-										Citizen.Wait(3000)
+										Wait(3000)
 
 										if DoesEntityExist(Object) then
 											SetModelAsNoLongerNeeded(Hash)
@@ -1602,7 +1602,7 @@ Citizen.CreateThread(function()
 									break
 								end
 
-								Citizen.Wait(1)
+								Wait(1)
 							end
 						end
 					end
@@ -1612,7 +1612,7 @@ Citizen.CreateThread(function()
 			until not Success EndFindPed(Handler)
 		end
 
-		Citizen.Wait(timeDistance)
+		Wait(timeDistance)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

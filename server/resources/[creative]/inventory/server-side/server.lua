@@ -594,21 +594,117 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 			end
 		return end
 
-		if nameItem == "foodbox" then
-			if not vRPC.lastVehicle(source,"bmx") then
-				TriggerClientEvent("Notify",source,"amarelo","Precisa utilizar o veículo <b>BMX</b>.",3000)
-				return
-			end
-
-			if vDELIVER.Deliver(source) then
+		if nameItem == "burgershot3" or nameItem == "burgershot4" then
+			if vDELIVER.Deliver(source,"BurgerShot") then
 				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
 					vDELIVER.Update(source)
-					vRP.generateItem(user_id,"dollars",100,true)
 
+					if nameItem == "burgershot3" then
+						vRP.generateItem(user_id,"dollars",120,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					elseif nameItem == "burgershot4" then
+						vRP.generateItem(user_id,"dollars",270,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					end
+
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+				end
+			end
+		return end
+		
+		if nameItem == "pizzathis3" or nameItem == "pizzathis4" then
+			if vDELIVER.Deliver(source,"PizzaThis") then
+				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
+					vDELIVER.Update(source)
+
+					if nameItem == "pizzathis3" then
+						vRP.generateItem(user_id,"dollars",120,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					elseif nameItem == "pizzathis4" then
+						vRP.generateItem(user_id,"dollars",270,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					end
+
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+				end
+			end
+		return end
+		
+		if nameItem == "uwucoffee3" or nameItem == "uwucoffee4" then
+			if vDELIVER.Deliver(source,"UwuCoffee") then
+				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
+					vDELIVER.Update(source)
+
+					if nameItem == "uwucoffee3" then
+						vRP.generateItem(user_id,"dollars",120,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					elseif nameItem == "uwucoffee4" then
+						vRP.generateItem(user_id,"dollars",270,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					end
+
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+				end
+			end
+		return end
+		
+		if nameItem == "beanmachine3" or nameItem == "beanmachine4" then
+			if vDELIVER.Deliver(source,"BeanMachine") then
+				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
+					vDELIVER.Update(source)
+
+					if nameItem == "beanmachine3" then
+						vRP.generateItem(user_id,"dollars",120,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					elseif nameItem == "beanmachine4" then
+						vRP.generateItem(user_id,"dollars",270,true)
+						
+						if vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",10,true)
+						end
+					end
+
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+				end
+			end
+		return end
+		
+		if nameItem == "woodlog" then
+			if not vRPC.lastVehicle(source,"ratloader") then
+				TriggerClientEvent("Notify",source,"amarelo","Precisa utilizar o veículo <b>Ratloader</b>.",3000)
+				return
+			end
+			
+			if vDELIVER.Deliver(source,"Lumberman") then
+				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
+					vDELIVER.Update(source)
+					vRP.generateItem(user_id,"dollars",45,true)
+					
 					if vRP.userPremium(user_id) then
 						vRP.generateItem(user_id,"dollars",10,true)
 					end
-
+					
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
 				end
 			end
