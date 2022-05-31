@@ -78,19 +78,8 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 			exports["dynamic"]:AddButton("Chapéu","Colocar/Retirar o chapéu.","player:outfitFunctions","Hat","clothes",true)
 			exports["dynamic"]:AddButton("Máscara","Colocar/Retirar a máscara.","player:outfitFunctions","Mask","clothes",true)
 			exports["dynamic"]:AddButton("Óculos","Colocar/Retirar o óculos.","player:outfitFunctions","Glasses","clothes",true)
-			exports["dynamic"]:AddButton("Jaqueta","Colocar/Retirar a jaqueta.","player:outfitFunctions","Jacket","clothes",true)
-			exports["dynamic"]:AddButton("Camiseta","Colocar/Retirar a camiseta.","player:outfitFunctions","Shirt","clothes",true)
-			exports["dynamic"]:AddButton("Luvas","Colocar/Retirar as luvas.","player:outfitFunctions","Arms","clothes",true)
-			exports["dynamic"]:AddButton("Calças","Colocar/Retirar as calças.","player:outfitFunctions","Pants","clothes",true)
-			exports["dynamic"]:AddButton("Sapatos","Colocar/Retirar os sapatos.","player:outfitFunctions","Shoes","clothes",true)
-			exports["dynamic"]:AddButton("Colete","Colocar/Retirar o colete.","player:outfitFunctions","Vest","clothes",true)
-			exports["dynamic"]:AddButton("Acessórios","Colocar/Retirar o acessório.","player:outfitFunctions","Accessory","clothes",true)
-			exports["dynamic"]:AddButton("Todas","Retira todas as peças de roupa.","player:outfitFunctions","remover","clothes",true)
-
-			exports["dynamic"]:AddButton("Aplicar Comum","Vestir as roupas comuns.","player:outfitFunctions","aplicar","outfit",true)
-			exports["dynamic"]:AddButton("Salvar Comum","Salvar as roupas comuns.","player:outfitFunctions","salvar","outfit",true)
-			exports["dynamic"]:AddButton("Aplicar Premium","Vestir as roupas premium.","player:outfitFunctions","preaplicar","outfit",true)
-			exports["dynamic"]:AddButton("Salvar Premium","Salvar as roupas premium.","player:outfitFunctions","presalvar","outfit",true)
+			exports["dynamic"]:AddButton("Vestir","Vestir-se com as vestimentas guardadas.","player:outfitFunctions","aplicar","clothes",true)
+			exports["dynamic"]:AddButton("Guardar","Salvar suas vestimentas do corpo.","player:outfitFunctions","salvar","clothes",true)
 
 			if animalHash ~= nil then
 				exports["dynamic"]:AddButton("Seguir","Seguir o proprietário.","dynamic:animalFunctions","seguir","animal",false)
@@ -113,12 +102,12 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 				exports["dynamic"]:AddButton("Geladeira","Aumentar a galadeira da propriedade.","homes:invokeSystem","geladeira","propertys",true)
 				exports["dynamic"]:AddButton("Vender","Vender a propriedade.","homes:invokeSystem","vender","propertys",true)
 
-				exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","otherPlayers",true)
-				exports["dynamic"]:AddButton("Remover do Veículo","Remover do veículo mais próximo.","player:cvFunctions","rv","otherPlayers",true)
-				exports["dynamic"]:AddButton("Checar Porta-Malas","Vericar pessoa dentro do mesmo.","player:checkTrunk","","otherPlayers",true)
-				exports["dynamic"]:AddButton("Checar Lixeira","Vericar pessoa dentro da mesma.","player:checkTrash","","otherPlayers",true)
+				exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","ClosestPeds",true)
+				exports["dynamic"]:AddButton("Remover do Veículo","Remover do veículo mais próximo.","player:cvFunctions","rv","ClosestPeds",true)
+				exports["dynamic"]:AddButton("Checar Porta-Malas","Vericar pessoa dentro do mesmo.","player:checkTrunk","","ClosestPeds",true)
+				exports["dynamic"]:AddButton("Checar Lixeira","Vericar pessoa dentro da mesma.","player:checkTrash","","ClosestPeds",true)
 				
-				exports["dynamic"]:SubMenu("Jogador","Pessoa mais próxima de você.","otherPlayers")
+				exports["dynamic"]:SubMenu("Jogador","Pessoa mais próxima de você.","ClosestPeds")
 			else
 				exports["dynamic"]:AddButton("Banco Dianteiro Esquerdo","Sentar no banco do motorista.","player:seatPlayer","0","vehicle",false)
 				exports["dynamic"]:AddButton("Banco Dianteiro Direito","Sentar no banco do passageiro.","player:seatPlayer","1","vehicle",false)
@@ -133,7 +122,7 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 			exports["dynamic"]:AddButton("Propriedades","Ativa/Desativa as propriedades no mapa.","homes:togglePropertys","","propertys",false)
 
 			exports["dynamic"]:SubMenu("Roupas","Colocar/Retirar roupas.","clothes")
-			exports["dynamic"]:SubMenu("Vestuário","Mudança de roupas rápidas.","outfit")
+			
 			exports["dynamic"]:SubMenu("Propriedades","Todas as funções das propriedades.","propertys")
 
 			if animalHash ~= nil then
