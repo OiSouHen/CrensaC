@@ -2,7 +2,7 @@ body,
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto";
     outline: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -12,12 +12,6 @@ body,
 }
 
 .openBarbershop {
-    display: none;
-}
-
-#cursorPointer {
-    position: absolute;
-    z-index: 999999;
     display: none;
 }
 

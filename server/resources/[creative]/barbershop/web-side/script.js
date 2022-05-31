@@ -1,9 +1,6 @@
 $(document).ready(function() {
     var documentWidth = document.documentElement.clientWidth;
     var documentHeight = document.documentElement.clientHeight;
-    var cursor = $('#cursorPointer');
-    var cursorX = documentWidth / 2;
-    var cursorY = documentHeight / 2;
 
     function triggerClick(x, y) {
         var element = $(document.elementFromPoint(x, y));
@@ -71,10 +68,6 @@ $(document).ready(function() {
 
         if (event.data.openBarbershop == false) {
             $(".openBarbershop").css("display", "none");
-        }
-
-        if (event.data.type == "click") {
-            triggerClick(cursorX - 1, cursorY - 1);
         }
     });
 

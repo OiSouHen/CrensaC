@@ -179,17 +179,19 @@ CreateThread(function()
 
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		if not IsPedInAnyVehicle(ped) then
-			local coords = GetEntityCoords(ped)
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) then
+				local coords = GetEntityCoords(ped)
 
-			for k,v in pairs(locations) do
-				local distance = #(coords - vec3(v[1],v[2],v[3]))
-				if distance <= 2.5 then
-					timeDistance = 1
+				for k,v in pairs(locations) do
+					local distance = #(coords - vec3(v[1],v[2],v[3]))
+					if distance <= 2.5 then
+						timeDistance = 1
 
-					if IsControlJustPressed(1,38) and vSERVER.checkShares() then
-						displayBarbershop(true)
+						if IsControlJustPressed(1,38) and vSERVER.checkShares() then
+							displayBarbershop(true)
+						end
 					end
 				end
 			end
