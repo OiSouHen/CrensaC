@@ -15,6 +15,7 @@ vGARAGE = Tunnel.getInterface("garages")
 vTASKBAR = Tunnel.getInterface("taskbar")
 vDELIVER = Tunnel.getInterface("deliver")
 vPARAMEDIC = Tunnel.getInterface("paramedic")
+vKEYBOARD = Tunnel.getInterface("keyboard")
 vCLIENT = Tunnel.getInterface("inventory")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
@@ -987,33 +988,31 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "namechange" then
 				TriggerClientEvent("inventory:Close",source)
 
-				local name = vRP.prompt(source,"Primeiro Nome:","")
-				local name2 = vRP.prompt(source,"Segundo Nome:","")
-				if name == "" or name2 == "" then
+				local changeName = vKEYBOARD.keyDouble(source,"Nome:","Sobrenome:")
+				if not changeName then
 					return
 				end
 
 				if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 					TriggerClientEvent("Notify",source,"verde","Passaporte atualizado.",5000)
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					vRP.upgradeNames(user_id,name,name2)
+					vRP.upgradeNames(user_id,changeName[1],changeName[2])
 				end
 			return end
 
 			if nameItem == "chip" then
 				TriggerClientEvent("inventory:Close",source)
 
-				local firstNumber = vRP.prompt(source,"Três primeiros digitos:","")
-				local lastNumber = vRP.prompt(source,"Três ultimos digitos:","")
-				if firstNumber == "" or lastNumber == "" then
+				local newNumber = vKEYBOARD.keyDouble(source,"Três primeiros digitos:","Três ultimos digitos")
+				if not newNumber then
 					return
 				end
 
-				local initCheck = sanitizeString(firstNumber,"0123456789",true)
-				local finiCheck = sanitizeString(lastNumber,"0123456789",true)
+				local initCheck = sanitizeString(newNumber[1],"0123456789",true)
+				local finiCheck = sanitizeString(newNumber[2],"0123456789",true)
 
 				if string.len(initCheck) == 3 and string.len(finiCheck) == 3 then
-					local newPhone = firstNumber.."-"..lastNumber
+					local newPhone = newNumber[1].."-"..newNumber[2]
 					if not vRP.userPhone(newPhone) then
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							TriggerClientEvent("Notify",source,"verde","Telefone atualizado.",5000)
@@ -2908,12 +2907,12 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 					local vehModel = vRPC.vehicleName(source)
 					local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehModel })
 					if vehicle[1] then
-						local vehPlate = vRP.prompt(source,"Placa:","")
-						if vehPlate == "" or string.upper(vehPlate) == "CREATIVE" then
+						local vehPlate = vKEYBOARD.keySingle(source,"Placa:")
+						if not vehPlate or string.upper(vehPlate[1]) == "CREATIVE" then
 							return
 						end
 
-						local namePlate = string.sub(vehPlate,1,8)
+						local namePlate = string.sub(vehPlate[1],1,8)
 						local plateCheck = sanitizeString(namePlate,"abcdefghijklmnopqrstuvwxyz0123456789",true)
 
 						if string.len(plateCheck) ~= 8 then
