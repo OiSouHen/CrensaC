@@ -231,7 +231,7 @@ RegisterCommand("cds",function(source,args,rawCommand)
 			local coords = GetEntityCoords(Ped)
 			local heading = GetEntityHeading(Ped)
 
-			vRP.prompt(source,"Cordenadas:",mathLegth(coords["x"])..","..mathLegth(coords["y"])..","..mathLegth(coords["z"])..","..mathLegth(heading))
+			vKEYBOARD.keyCopy(source,"Cordenadas:",mathLegth(coords["x"])..","..mathLegth(coords["y"])..","..mathLegth(coords["z"])..","..mathLegth(heading))
 		end
 	end
 end)
@@ -385,6 +385,23 @@ RegisterCommand("players",function(source,args,rawCommand)
 	if user_id then
 		if vRP.hasGroup(user_id,"Moderator") then
 			TriggerClientEvent("Notify",source,"azul","<b>Jogadores Conectados:</b> "..GetNumPlayerIndices(),5000)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SUGESTÃO
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand("sugestao",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local suggestion = vKEYBOARD.keyArea(source,"Sugestão:")
+		if not suggestion then
+			return
+		end
+		
+		local identity = vRP.userIdentity(user_id)
+		if identity then
+			TriggerEvent("discordLogs","Suggestions","**Enviado pelo ID: **"..parseFormat(user_id).."**.\nHorário: **"..os.date("%H:%M:%S").."**\nSugestão: **"..suggestion[1].."**.",13541152)
 		end
 	end
 end)
