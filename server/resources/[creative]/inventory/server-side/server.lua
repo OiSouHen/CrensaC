@@ -66,7 +66,7 @@ local tableList = {
 	["tablecoke"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
 		[1] = { ["timer"] = 10, ["need"] = "sulfuric", ["needAmount"] = 1 },
-		[2] = { ["timer"] = 10, ["need"] = "cokeleaf", ["needAmount"] = 1 },
+		[2] = { ["timer"] = 10, ["need"] = "cokeseed", ["needAmount"] = 1 },
 		[3] = { ["timer"] = 10, ["item"] = "cocaine", ["itemAmount"] = 3 }
 	},
 	["tablemeth"] = {
@@ -120,8 +120,8 @@ local tableList = {
 		[4] = { ["timer"] = 5, ["item"] = "pouch", ["itemAmount"] = 1 },
 		[5] = { ["timer"] = 5, ["item"] = "switchblade", ["itemAmount"] = 1 },
 		[6] = { ["timer"] = 5, ["item"] = "joint", ["itemAmount"] = 1 },
-		[7] = { ["timer"] = 5, ["item"] = "weedclone", ["itemAmount"] = 1 },
-		[8] = { ["timer"] = 5, ["item"] = "cokeleaf", ["itemAmount"] = 1 },
+		[7] = { ["timer"] = 5, ["item"] = "weedseed", ["itemAmount"] = 1 },
+		[8] = { ["timer"] = 5, ["item"] = "cokeseed", ["itemAmount"] = 1 },
 		[9] = { ["timer"] = 5, ["item"] = "mushseed", ["itemAmount"] = 1 },
 		[10] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
 		[11] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
@@ -269,8 +269,8 @@ local lootItens = {
 			[10] = { ["item"] = "alcohol", ["min"] = 1, ["max"] = 2 },
 			[11] = { ["item"] = "syringe", ["min"] = 2, ["max"] = 3 },
 			[12] = { ["item"] = "card01", ["min"] = 1, ["max"] = 1 },
-			[13] = { ["item"] = "weedclone", ["min"] = 2, ["max"] = 3 },
-			[14] = { ["item"] = "cokeleaf", ["min"] = 2, ["max"] = 3 },
+			[13] = { ["item"] = "weedseed", ["min"] = 2, ["max"] = 3 },
+			[14] = { ["item"] = "cokeseed", ["min"] = 2, ["max"] = 3 },
 			[15] = { ["item"] = "mushseed", ["min"] = 2, ["max"] = 3 },
 			[16] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 }
 		}
@@ -2397,30 +2397,28 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "weedclone" then
+			if nameItem == "weedseed" then
 				if not exports["homes"]:checkHotel(user_id) then
 					TriggerClientEvent("inventory:Close",source)
-
 					local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 					if application then
 						local Route = GetPlayerRoutingBucket(source)
 						vRP.removeInventoryItem(user_id,totalName,1,false)
 						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						exports["plants"]:initPlants("weedclone",coords,Route,"bkr_prop_weed_med_01a",user_id)
+						exports["plants"]:initPlants("weedseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
 					end
 				end
 			return end
 
-			if nameItem == "cokeleaf" then
+			if nameItem == "cokeseed" then
 				if not exports["homes"]:checkHotel(user_id) then
 					TriggerClientEvent("inventory:Close",source)
-
 					local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 					if application then
 						local Route = GetPlayerRoutingBucket(source)
 						vRP.removeInventoryItem(user_id,totalName,1,false)
 						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						exports["plants"]:initPlants("cokeleaf",coords,Route,"bkr_prop_weed_med_01a",user_id)
+						exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
 					end
 				end
 			return end
