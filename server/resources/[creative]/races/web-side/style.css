@@ -4,7 +4,7 @@ html,body {
 	font-size: 12px;
 	overflow: hidden;
 	background: transparent;
-	font-family: "Roboto",Arial,Helvetica,sans-serif;
+	font-family: "Roboto";
 }
 
 * {
@@ -17,7 +17,7 @@ html,body {
 	top: 400px;
 	right: 50px;
 	color: #ccc;
-	width: 515px;
+	width: 465px;
 	display: none;
 	text-align: left;
 	line-height: 30px;
@@ -31,14 +31,14 @@ html,body {
 #raceTitle {
 	line-height: 15px;
 	font-size: 20px;
-	width: 475px;
+	width: 425px;
 	float: left;
 }
 
 #raceLegend {
 	margin-bottom: 10px;
 	font-size: 11px;
-	width: 475px;
+	width: 425px;
 	float: left;
 	color: #999;
 }
@@ -47,25 +47,25 @@ html,body {
 	text-align: right;
 	font-size: 11px;
 	color: #777777;
-	width: 475px;
+	width: 425px;
 	float: left;
 }
 
 #raceLine {
 	background: rgba(15,15,15,.50);
 	margin-bottom: 5px;
-	width: 475px;
+	width: 425px;
 	float: left;
 }
 
 .racePosition {
 	float: left;
 	width: 40px;
-	color: #a0ceb6;
+	color: #4a380c;
 	padding: 3px 0;
 	text-shadow: none;
 	text-align: center;
-	background: #2e6e4c;
+	background: #fec026;
 }
 
 .raceName {
@@ -73,6 +73,8 @@ html,body {
 	width: 190px;
 	padding: 3px 0;
 	padding-left: 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .raceVehicle {
@@ -80,12 +82,14 @@ html,body {
 	float: left;
 	width: 135px;
 	padding: 3px 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .racePoints {
 	color: #888;
 	float: left;
-	width: 100px;
+	width: 50px;
 	padding: 3px 0;
 }
 
@@ -94,10 +98,10 @@ key {
 }
 
 #displayRunners {
-	left: 53px;
-	bottom: 250px;
+	left: 4.7vw;
+	bottom: 18vw;
 	display: none;
-	color: #939393;
+	color: #b8f5d4;
 	text-align: left;
 	line-height: 30px;
 	letter-spacing: 2px;

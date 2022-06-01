@@ -1,6 +1,30 @@
 var maxCheckpoint = 0;
 var Checkpoint = 0;
+// -------------------------------------------------------------------------------------------
+function minimalTimers(Seconds){
+	var Seconds = parseInt(Seconds / 1000)
+	var Days = Math.floor(Seconds / 86400)
+	Seconds = Seconds - Days * 86400
+	var Hours = Math.floor(Seconds / 3600)
+	Seconds = Seconds - Hours * 3600
+	var Minutes = Math.floor(Seconds / 60)
+	Seconds = Seconds - Minutes * 60
 
+	const [D,H,M,S] = [Days,Hours,Minutes,Seconds].map(s => s.toString().padStart(2,0))
+
+	if (Days > 0){
+		return D + ":" + H
+	} else if (Hours > 0){
+		return H + ":" + M
+	} else if (Minutes > 0){
+		return M + ":" + S
+	} else if (Seconds > 0){
+		return "00:" + S
+	} else {
+		return "00:00"
+	}
+}
+// -------------------------------------------------------------------------------------------
 $(document).ready(function(){
 	window.addEventListener("message",function(event){
 		if (event["data"]["show"] !== undefined){
@@ -42,10 +66,10 @@ $(document).ready(function(){
 					$.each(JSON.parse(resultTable),(k,v) => {
 						$('#displayRanking').append(`
 							<div id="raceLine">
-								<div class="racePosition">${position = position + 1}</div>
-								<div class="raceName">${v["name"]}</div>
-								<div class="raceVehicle">${v["vehicle"]}</div>
-								<div class="racePoints">${formatarNumero(v["points"])}</div>
+							<div class="racePosition">${position = position + 1}</div>
+							<div class="raceName">${v["name"]}</div>
+							<div class="raceVehicle">${v["vehicle"]}</div>
+							<div class="racePoints">${minimalTimers(v["points"])}</div>
 							</div>
 						`);
 					});
@@ -59,11 +83,11 @@ $(document).ready(function(){
 
 		$("#displayRunners").html(`
 			CHECKPOINTS <s>${Checkpoint} / ${maxCheckpoint}</s><br>
-			PONTOS <s>${parseInt(event["data"]["Points"])}</s>
+			PERCORRIDO <s>${minimalTimers(event["data"]["Points"])}</s>
 		`);
 
 		if (parseInt(event["data"]["Explosive"]) > 0){
-			$('#displayRunners').append(`<br>TEMPO <s>${parseInt(event["data"]["Explosive"] / 1000)}</s>`);
+			$('#displayRunners').append(`<br>EXPLOSÃO <s>${minimalTimers(event["data"]["Explosive"])}</s>`);
 		}
 	});
 });
