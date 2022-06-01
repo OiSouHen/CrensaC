@@ -24,17 +24,17 @@ AddEventHandler("paramedic:Repose",function(entity)
 	local user_id = vRP.getUserId(source)
 	if user_id and vRP.getHealth(source) > 100 and vRP.getHealth(entity) > 100 then
 		if vRP.hasGroup(user_id,"Paramedic") then
-			local timer = vRP.prompt(source,"Minutos:","")
-			if timer == "" or parseInt(timer) <= 0 then
+			local timer = vKEYBOARD.keySingle(source,"Minutos:")
+			if not timer or parseInt(timer[1]) <= 0 then
 				return
 			end
 
 			local nuser_id = vRP.getUserId(entity)
-			local playerTimer = parseInt(timer * 60)
+			local playerTimer = parseInt(timer[1] * 60)
 			local identity = vRP.userIdentity(nuser_id)
 			if identity then
-				if vRP.request(source,"Adicionar <b>"..timer.." minutos</b> de repouso no(a) <b>"..identity["name"].."</b>?.","Aplicar") then
-					TriggerClientEvent("Notify",source,"azul","Aplicou <b>"..timer.." minutos</b> de repouso.",10000)
+				if vRP.request(source,"Adicionar <b>"..timer[1].." minutos</b> de repouso no(a) <b>"..identity["name"].."</b>?.","Aplicar") then
+					TriggerClientEvent("Notify",source,"azul","Aplicou <b>"..timer[1].." minutos</b> de repouso.",10000)
 					TriggerEvent("Repose",entity,nuser_id,playerTimer)
 				end
 			end
