@@ -11,6 +11,7 @@ vRP = Proxy.getInterface("vRP")
 cRP = {}
 Tunnel.bindInterface("admin",cRP)
 vCLIENT = Tunnel.getInterface("admin")
+vKEYBOARD = Tunnel.getInterface("keyboard")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GEM
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -191,22 +192,22 @@ end)
 -- TPCDS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("tpcds",function(source,args,rawCommand)
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if vRP.hasGroup(user_id,"Moderator") then
-			local fcoords = vRP.prompt(source,"Cordenadas:","")
-			if fcoords == "" then
-				return
-			end
+    local user_id = vRP.getUserId(source)
+    if user_id then
+        if vRP.hasGroup(user_id,"Moderator") then
+            local fcoords = vKEYBOARD.keySingle(source,"Cordenadas:")
+            if not fcoords then
+                return
+            end
 
-			local coords = {}
-			for coord in string.gmatch(fcoords or "0,0,0","[^,]+") do
-				table.insert(coords,parseInt(coord))
-			end
+            local coords = {}
+            for coord in string.gmatch(fcoords[1] or "0,0,0","[^,]+") do
+                table.insert(coords,parseInt(coord))
+            end
 
-			vRP.teleport(source,coords[1] or 0,coords[2] or 0,coords[3] or 0)
-		end
-	end
+            vRP.teleport(source,coords[1] or 0,coords[2] or 0,coords[3] or 0)
+        end
+    end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HENSA

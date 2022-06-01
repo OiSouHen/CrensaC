@@ -12,6 +12,7 @@ cRP = {}
 Tunnel.bindInterface("garages",cRP)
 vPLAYER = Tunnel.getInterface("player")
 vCLIENT = Tunnel.getInterface("garages")
+vKEYBOARD = Tunnel.getInterface("keyboard")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -834,12 +835,12 @@ AddEventHandler("garages:Transfer",function(vehModel)
 				return
 			end
 
-			local passport = vRP.prompt(source,"Passaporte:","")
-			if passport == "" then
-				return
-			end
+			local passport = vKEYBOARD.keySingle(source,"Passaporte:")
+            if not passport then
+                return
+            end
 
-			local nuser_id = parseInt(passport)
+			local nuser_id = parseInt(passport[1])
 			local identity = vRP.userIdentity(nuser_id)
 			if identity then
 				local maxVehs = vRP.query("vehicles/countVehicles",{ user_id = parseInt(nuser_id), work = "false" })
