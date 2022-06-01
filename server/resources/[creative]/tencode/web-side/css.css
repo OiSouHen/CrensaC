@@ -37,8 +37,8 @@ body {
 }
 
 #midCode div:hover {
-	color: #a0ceb6;
-	background: #2e6e4c;
+	color: #4a380c;
+	background: #fec026;
 }
 
 #midCode div:last-child {
@@ -80,7 +80,7 @@ body {
 }
 
 c {
-	color: #a0ceb6;
+	color: #929292;
 	float: left;
 }
 
@@ -94,13 +94,13 @@ v {
 legend {
 	text-align: center;
 	display: block;
-	color: #a0ceb6;
+	color: #4a380c;
 	margin-top: 5px;
 	font-size: 10px;
 	letter-spacing: 2px;
 	text-shadow: none;
 	margin-bottom: 5px;
-	background: #2e6e4c;
+	background: #fec026;
 	padding-right: 5px;
 	border-radius: 3px;
 }
