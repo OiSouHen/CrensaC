@@ -1,4 +1,14 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- VRP
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Tunnel = module("vrp","lib/Tunnel")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CONNECTION
+-----------------------------------------------------------------------------------------------------------------------------------------
+cRP = {}
+Tunnel.bindInterface("plants",cRP)
+vSERVER = Tunnel.getInterface("plants")
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Route = 0
@@ -21,29 +31,17 @@ CreateThread(function()
 						heading = 3374176
 					},{
 						shop = k,
-						distance = 1.0,
+						distance = 1.5,
 						options = {
 							{
-								event = "plants:Coletar",
-								label = "Coletar",
-								tunnel = "shop"
-							},{
-								event = "plants:Estaquia",
-								label = "Estaquia",
-								tunnel = "shop"
-							},{
-								event = "plants:Fertilizar",
-								label = "Fertilizar",
-								tunnel = "shop"
-							},{
-								event = "plants:Informacoes",
-								label = "Informações",
+								event = "plants:Informations",
+								label = "Verificar",
 								tunnel = "shop"
 							}
 						}
 					})
 
-					createModels(k,v["prop"],v["coords"][1],v["coords"][2],v["coords"][3])
+					createModels(k,v["prop"],v["coords"])
 				end
 			else
 				if Objects[k] then
@@ -67,37 +65,22 @@ AddEventHandler("update:Route",function(Number)
 	Route = Number
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:COLETAR
+-- PLANTS:INFORMATIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("plants:Coletar")
-AddEventHandler("plants:Coletar",function(Number)
-	TriggerServerEvent("plants:Coletar",Number)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:ESTAQUIA
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("plants:Estaquia")
-AddEventHandler("plants:Estaquia",function(Number)
-	TriggerServerEvent("plants:Estaquia",Number)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:FERTILIZAR
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("plants:Fertilizar")
-AddEventHandler("plants:Fertilizar",function(Number)
-	TriggerServerEvent("plants:Fertilizar",Number)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:INFORMACOES
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("plants:Informacoes")
-AddEventHandler("plants:Informacoes",function(Number)
-	TriggerServerEvent("plants:Informacoes",Number)
+RegisterNetEvent("plants:Informations")
+AddEventHandler("plants:Informations",function(Number)
+	-- local Informations = vSERVER.Informations(Number)
+	-- if Informations then
+		exports["dynamic"]:AddButton("Coletar","Clique aqui para coletar.","plants:Collect",Number,false,true)
+		exports["dynamic"]:AddButton("Clonagem","Clique aqui para clonar.","plants:Cloning",Number,false,true)
+
+		exports["dynamic"]:openMenu()
+	-- end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CREATEMODELS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function createModels(Number,model,x,y,z)
+function createModels(Number,model,coords)
 	local mHash = GetHashKey(model)
 
 	RequestModel(mHash)
@@ -105,7 +88,7 @@ function createModels(Number,model,x,y,z)
 		Wait(1)
 	end
 
-	Objects[Number] = CreateObject(mHash,x,y,z,false,false,false)
+	Objects[Number] = CreateObjectNoOffset(mHash,coords[1],coords[2],coords[3],false,false,false)
 	PlaceObjectOnGroundProperly(Objects[Number])
 	FreezeEntityPosition(Objects[Number],true)
 	SetModelAsNoLongerNeeded(mHash)
@@ -120,10 +103,10 @@ AddEventHandler("plants:Table",function(table)
 	Plants = table
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:ADICIONAR
+-- PLANTS:NEW
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("plants:Adicionar")
-AddEventHandler("plants:Adicionar",function(Number,Table)
+RegisterNetEvent("plants:New")
+AddEventHandler("plants:New",function(Number,Table)
 	Plants[Number] = Table
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

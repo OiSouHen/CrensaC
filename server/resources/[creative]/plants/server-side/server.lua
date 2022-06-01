@@ -6,6 +6,12 @@ local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPC = Tunnel.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- CONNECTION
+-----------------------------------------------------------------------------------------------------------------------------------------
+cRP = {}
+Tunnel.bindInterface("plants",cRP)
+vCLIENT = Tunnel.getInterface("plants")
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Plants = {}
@@ -13,8 +19,8 @@ local Plants = {}
 -- PLANTTYPES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local plantTypes = {
-	["weedclone"] = { "Maconha","weedleaf" },
-	["cokeleaf"] = { "Cocaína","cokeleaf" },
+	["weedseed"] = { "Maconha","weedleaf" },
+	["cokeseed"] = { "Cocaína","cokeleaf" },
 	["mushseed"] = { "Cogumelo","mushroom" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -36,22 +42,30 @@ exports("initPlants",function(seedType,coords,route,prop,user_id)
 		["user_id"] = user_id
 	}
 
-	TriggerClientEvent("plants:Adicionar",-1,tostring(Number),Plants[tostring(Number)])
+	TriggerClientEvent("plants:New",-1,tostring(Number),Plants[tostring(Number)])
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:COLETAR
+-- PLANTS:COLLECT
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("plants:Coletar")
-AddEventHandler("plants:Coletar",function(Number)
+RegisterServerEvent("plants:Collect")
+AddEventHandler("plants:Collect",function(Number)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id and Plants[Number] then
 		if vRP.hasGroup(user_id,"Moderator") then
 			TriggerClientEvent("Notify",source,"vermelho","Passaporte: "..Plants[Number]["user_id"],5000)
+			return
+		end
+		
+		local percPlants = 100
+		if os.time() < Plants[Number]["time"] then
+			local timePlants = parseInt((os.time() - Plants[Number]["time"]) / 120) + 100
+			percPlants = timePlants
 		end
 
 		if os.time() >= Plants[Number]["time"] then
 			if (vRP.inventoryWeight(user_id) + itemWeight(plantTypes[Plants[Number]["type"]][2]) * 3) <= vRP.getWeight(user_id) then
+				TriggerClientEvent("dynamic:closeSystem",source)
 				local Type = Plants[Number]["type"]
 				Plants[Number] = nil
 
@@ -67,25 +81,30 @@ AddEventHandler("plants:Coletar",function(Number)
 				TriggerClientEvent("plants:Remover",-1,Number)
 				TriggerClientEvent("vRP:Cancel",source,false)
 				vRPC.stopAnim(source,false)
-
-				if Type ~= "mushseed" then
-					vRP.generateItem(user_id,"bucket",1,true)
-				end
 			else
 				TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
 			end
+		else
+			TriggerClientEvent("Notify",source,"amarelo","<b>"..plantTypes[Plants[Number]["type"]][1].."</b> ainda em crescimento.",5000)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:ESTAQUIA
+-- PLANTS:CLONING
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("plants:Estaquia")
-AddEventHandler("plants:Estaquia",function(Number)
+RegisterServerEvent("plants:Cloning")
+AddEventHandler("plants:Cloning",function(Number)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id and Plants[Number] then
+		local percPlants = 100
+		if os.time() < Plants[Number]["time"] then
+			local timePlants = parseInt((os.time() - Plants[Number]["time"]) / 120) + 100
+			percPlants = timePlants
+		end
+			
 		if (Plants[Number]["time"] - os.time()) <= 6000 then
+			TriggerClientEvent("dynamic:closeSystem",source)
 			local provPlants = Plants[Number]
 			Plants[Number] = nil
 
@@ -101,32 +120,21 @@ AddEventHandler("plants:Estaquia",function(Number)
 			TriggerClientEvent("plants:Remover",-1,Number)
 			TriggerClientEvent("vRP:Cancel",source,false)
 			vRPC.stopAnim(source,false)
-
-			if provPlants["type"] ~= "mushseed" then
-				vRP.generateItem(user_id,"bucket",1,true)
-			end
 		else
-			TriggerClientEvent("Notify",source,"amarelo","Progresso mínimo <b>50%</b> para a <b>Estaquia</b>.",5000)
+			TriggerClientEvent("Notify",source,"amarelo","O progresso mínimo para a <b>Clonagem</b> é de <b>50%</b>.",5000)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLANTS:INFORMACOES
+-- INFORMATIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("plants:Informacoes")
-AddEventHandler("plants:Informacoes",function(Number)
+function cRP.Informations(Number)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id and Plants[Number] then
-		local percPlants = 100
-		if os.time() < Plants[Number]["time"] then
-			local timePlants = parseInt((os.time() - Plants[Number]["time"]) / 120) + 100
-			percPlants = timePlants
-		end
-
-		TriggerClientEvent("Notify",source,"azul","<b>Tipo:</b> "..plantTypes[Plants[Number]["type"]][1].."<br><b>Progresso:</b> "..percPlants,10000)
+		return true
 	end
-end)
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ADMIN:KICKALL
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +145,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ASYNCFUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
+Citizen.CreateThread(function()
 	local coordsFile = LoadResourceFile("logsystem","plants.json")
 	Plants = json.decode(coordsFile)
 end)
