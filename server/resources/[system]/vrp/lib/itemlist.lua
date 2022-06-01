@@ -566,13 +566,6 @@ local itemlist = {
 		["weight"] = 7.25,
 		["economy"] = 2250
 	},
-	["bucket"] = {
-		["index"] = "bucket",
-		["name"] = "Balde",
-		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 175
-	},
 	["scanner"] = {
 		["index"] = "scanner",
 		["name"] = "Scanner",
