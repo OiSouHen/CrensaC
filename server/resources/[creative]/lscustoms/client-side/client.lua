@@ -93,13 +93,11 @@ local bennysLocations = {
 	},
 	["mechanic14"] = {
 		pos = vec3(135.97,-3030.56,6.71),
-		heading = 178.59,
-		permission = "Mechanic"
+		heading = 178.59
 	},
 	["mechanic15"] = {
 		pos = vec3(144.91,-3030.35,6.71),
-		heading = 0.0,
-		permission = "Mechanic"
+		heading = 0.0
 	},
 	["mechanic16"] = {
 		pos = vec3(-1423.62,-450.23,35.28),
@@ -113,35 +111,21 @@ local bennysLocations = {
 		pos = vec3(936.6,-970.85,38.91),
 		heading = 273.00
 	},
-	["thelost01"] = {
-		pos = vec3(959.41,-113.15,73.73),
-		permission = "TheLost",
-		heading = 223.00,
-		bikes = true
+	["mechanic19"] = {
+		pos = vec3(380.35,-1626.4,29.1),
+		heading = 320.32
 	},
-	["thelost02"] = {
-		pos = vec3(964.82,-108.0,73.73),
-		permission = "TheLost",
-		heading = 223.00,
-		bikes = true
+	["mechanic20"] = {
+		pos = vec3(1881.54,3700.57,33.35),
+		heading = 28.35
 	},
-	["thelost03"] = {
-		pos = vec3(2518.66,4113.51,38.13),
-		permission = "TheLost",
-		heading = 61.00,
-		bikes = true
+	["mechanic21"] = {
+		pos = vec3(374.39,797.98,187.2),
+		heading = 178.59
 	},
-	["thelost04"] = {
-		pos = vec3(2520.06,4116.33,38.13),
-		permission = "TheLost",
-		heading = 61.00,
-		bikes = true
-	},
-	["thelost05"] = {
-		pos = vec3(2521.38,4118.97,38.13),
-		permission = "TheLost",
-		heading = 61.00,
-		bikes = true
+	["mechanic22"] = {
+		pos = vec3(548.42,-198.58,54.31),
+		heading = 181.42
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -149,66 +133,68 @@ local bennysLocations = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 local function saveVehicle()
 	local ped = PlayerPedId()
-	local vehicle = GetVehiclePedIsUsing(ped)
-	local vehicleMods = {
-		neon = {},
-		colors = {},
-		extracolors = {},
-		dashColour = -1,
-		interColour = -1,
-		lights = {},
-		tint = GetVehicleWindowTint(vehicle),
-		wheeltype = GetVehicleWheelType(vehicle),
-		platestyle = GetVehicleNumberPlateTextIndex(vehicle),
-		mods = {},
-		var = {},
-		smokecolor = {},
-		xenonColor = -1,
-		liverys = 24,
-		extras = {},
-		plateIndex = 0
-	}
+	if IsPedInAnyVehicle(ped) then
+		local vehicle = GetVehiclePedIsUsing(ped)
+		local vehicleMods = {
+			neon = {},
+			colors = {},
+			extracolors = {},
+			dashColour = -1,
+			interColour = -1,
+			lights = {},
+			tint = GetVehicleWindowTint(vehicle),
+			wheeltype = GetVehicleWheelType(vehicle),
+			platestyle = GetVehicleNumberPlateTextIndex(vehicle),
+			mods = {},
+			var = {},
+			smokecolor = {},
+			xenonColor = -1,
+			liverys = 24,
+			extras = {},
+			plateIndex = 0
+		}
 
-	vehicleMods["xenonColor"] = GetCurrentXenonColour(vehicle)
-	vehicleMods["lights"][1],vehicleMods["lights"][2],vehicleMods["lights"][3] = GetVehicleNeonLightsColour(vehicle)
-	vehicleMods["colors"][1],vehicleMods["colors"][2] = GetVehicleColours(vehicle)
-	vehicleMods["extracolors"][1],vehicleMods["extracolors"][2] = GetVehicleExtraColours(vehicle)
-	vehicleMods["smokecolor"][1],vehicleMods["smokecolor"][2],vehicleMods["smokecolor"][3] = GetVehicleTyreSmokeColor(vehicle)
-	vehicleMods["dashColour"] = GetVehicleInteriorColour(vehicle)
-	vehicleMods["interColour"] = GetVehicleDashboardColour(vehicle)
-	vehicleMods["liverys"] = GetVehicleLivery(vehicle)
-	vehicleMods["plateIndex"] = GetVehicleNumberPlateTextIndex(vehicle)
+		vehicleMods["xenonColor"] = GetCurrentXenonColour(vehicle)
+		vehicleMods["lights"][1],vehicleMods["lights"][2],vehicleMods["lights"][3] = GetVehicleNeonLightsColour(vehicle)
+		vehicleMods["colors"][1],vehicleMods["colors"][2] = GetVehicleColours(vehicle)
+		vehicleMods["extracolors"][1],vehicleMods["extracolors"][2] = GetVehicleExtraColours(vehicle)
+		vehicleMods["smokecolor"][1],vehicleMods["smokecolor"][2],vehicleMods["smokecolor"][3] = GetVehicleTyreSmokeColor(vehicle)
+		vehicleMods["dashColour"] = GetVehicleInteriorColour(vehicle)
+		vehicleMods["interColour"] = GetVehicleDashboardColour(vehicle)
+		vehicleMods["liverys"] = GetVehicleLivery(vehicle)
+		vehicleMods["plateIndex"] = GetVehicleNumberPlateTextIndex(vehicle)
 
-	for i = 0,3 do
-		vehicleMods["neon"][i] = IsVehicleNeonLightEnabled(vehicle,i)
-	end
-
-	for i = 0,16 do
-		vehicleMods["mods"][i] = GetVehicleMod(vehicle,i)
-	end
-
-	for i = 17,22 do
-		vehicleMods["mods"][i] = IsToggleModOn(vehicle,i)
-	end
-
-	for i = 23,48 do
-		vehicleMods["mods"][i] = GetVehicleMod(vehicle,i)
-
-		if i == 24 or i == 23 then
-			vehicleMods["var"][i] = GetVehicleModVariation(vehicle,i)
+		for i = 0,3 do
+			vehicleMods["neon"][i] = IsVehicleNeonLightEnabled(vehicle,i)
 		end
-	end
 
-	for i = 1,12 do
-		local ison = IsVehicleExtraTurnedOn(vehicle,i)
-		if 1 == tonumber(ison) then
-			vehicleMods["extras"][i] = 1
-		else
-			vehicleMods["extras"][i] = 0
+		for i = 0,16 do
+			vehicleMods["mods"][i] = GetVehicleMod(vehicle,i)
 		end
-	end
 
-	TriggerServerEvent("lscustoms:updateVehicle",vehicleMods,GetVehicleNumberPlateText(vehicle),vRP.vehicleName())  
+		for i = 17,22 do
+			vehicleMods["mods"][i] = IsToggleModOn(vehicle,i)
+		end
+
+		for i = 23,48 do
+			vehicleMods["mods"][i] = GetVehicleMod(vehicle,i)
+
+			if i == 24 or i == 23 then
+				vehicleMods["var"][i] = GetVehicleModVariation(vehicle,i)
+			end
+		end
+
+		for i = 1,12 do
+			local ison = IsVehicleExtraTurnedOn(vehicle,i)
+			if 1 == tonumber(ison) then
+				vehicleMods["extras"][i] = 1
+			else
+				vehicleMods["extras"][i] = 0
+			end
+		end
+
+		TriggerServerEvent("lscustoms:updateVehicle",vehicleMods,GetVehicleNumberPlateText(vehicle),vRP.vehicleName())
+	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ATTEMPTPURCHASE
@@ -998,74 +984,76 @@ end)
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		if not activeBennys then
-			local ped = PlayerPedId()
-			if IsPedInAnyVehicle(ped) then
-				local coords = GetEntityCoords(ped)
-				local vehicle = GetVehiclePedIsUsing(ped)
-				if GetPedInVehicleSeat(vehicle,-1) == ped then
-					for k,v in pairs(bennysLocations) do
-						local distance = #(coords - v["pos"])
+		if LocalPlayer["state"]["Route"] < 900000 then
+			if not activeBennys then
+				local ped = PlayerPedId()
+				if IsPedInAnyVehicle(ped) then
+					local coords = GetEntityCoords(ped)
+					local vehicle = GetVehiclePedIsUsing(ped)
+					if GetPedInVehicleSeat(vehicle,-1) == ped then
+						for k,v in pairs(bennysLocations) do
+							local distance = #(coords - v["pos"])
 
-						if distance <= 2.5 then
-							timeDistance = 1
+							if distance <= 2.5 then
+								timeDistance = 1
 
-							if IsControlJustPressed(1,38) and vSERVER.checkPermission(v["permission"]) then
-								local isMotorcycle = false
+								if IsControlJustPressed(1,38) and vSERVER.checkPermission(v["permission"]) then
+									local isMotorcycle = false
 
-								if v["bikes"] then
-									if GetVehicleClass(vehicle) == 8 then
-										isMotorcycle = true
+									if v["bikes"] then
+										if GetVehicleClass(vehicle) == 8 then
+											isMotorcycle = true
+										else
+											goto skipBennys
+										end
 									else
-										goto skipBennys
+										if GetVehicleClass(vehicle) == 8 then
+											isMotorcycle = true
+										else
+											isMotorcycle = false
+										end
 									end
-								else
-									if GetVehicleClass(vehicle) == 8 then
-										isMotorcycle = true
-									else
-										isMotorcycle = false
-									end
+
+									SetVehicleModKit(vehicle,0)
+									SetEntityCoords(vehicle,v["pos"])
+									SetEntityHeading(vehicle,v["heading"])
+									FreezeEntityPosition(vehicle,true)
+									SetVehicleOnGroundProperly(vehicle)
+
+									originalCategory = nil
+									originalMod = nil
+									originalPrimaryColour = nil
+									originalSecondaryColour = nil
+									originalPearlescentColour = nil
+									originalWheelColour = nil
+									originalDashColour = nil
+									originalInterColour = nil
+									originalWindowTint = nil
+									originalWheelCategory = nil
+									originalWheel = nil
+									originalWheelType = nil
+									originalCustomWheels = nil
+									originalNeonLightState = nil
+									originalNeonLightSide = nil
+									originalNeonColourR = nil
+									originalNeonColourG = nil
+									originalNeonColourB = nil
+									originalXenonColour = nil
+									originalPoliceLivery = nil
+									originalPlateIndex = nil
+
+									InitiateMenus(isMotorcycle)
+
+									DisplayMenuContainer(true)
+									DisplayMenu(true,"mainMenu")
+									TriggerEvent("player:inBennys",true)
+									PlaySoundFrontend(-1,"OK","HUD_FRONTEND_DEFAULT_SOUNDSET",1)
+									TriggerServerEvent("lscustoms:inVehicle",VehToNet(vehicle),GetVehicleNumberPlateText(vehicle))
+
+									disableControls()
+
+									::skipBennys::
 								end
-
-								SetVehicleModKit(vehicle,0)
-								SetEntityCoords(vehicle,v["pos"])
-								SetEntityHeading(vehicle,v["heading"])
-								FreezeEntityPosition(vehicle,true)
-								SetVehicleOnGroundProperly(vehicle)
-
-								originalCategory = nil
-								originalMod = nil
-								originalPrimaryColour = nil
-								originalSecondaryColour = nil
-								originalPearlescentColour = nil
-								originalWheelColour = nil
-								originalDashColour = nil
-								originalInterColour = nil
-								originalWindowTint = nil
-								originalWheelCategory = nil
-								originalWheel = nil
-								originalWheelType = nil
-								originalCustomWheels = nil
-								originalNeonLightState = nil
-								originalNeonLightSide = nil
-								originalNeonColourR = nil
-								originalNeonColourG = nil
-								originalNeonColourB = nil
-								originalXenonColour = nil
-								originalPoliceLivery = nil
-								originalPlateIndex = nil
-
-								InitiateMenus(isMotorcycle)
-
-								DisplayMenuContainer(true)
-								DisplayMenu(true,"mainMenu")
-								TriggerEvent("player:inBennys",true)
-								PlaySoundFrontend(-1,"OK","HUD_FRONTEND_DEFAULT_SOUNDSET",1)
-								TriggerServerEvent("lscustoms:inVehicle",VehToNet(vehicle),GetVehicleNumberPlateText(vehicle))
-
-								disableControls()
-
-								::skipBennys::
 							end
 						end
 					end
