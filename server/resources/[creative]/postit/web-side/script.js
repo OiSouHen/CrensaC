@@ -9,7 +9,7 @@ addEventListener("message",function(event){
 	if (event["data"]["action"] !== undefined){
 		if (event["data"]["action"] == "update"){
 			$(`#${event["data"]["id"]}`).css("left",event["data"]["x"] * 87 + "%").css("top",event["data"]["y"] * 100 + "%");
-			$(`#${event["data"]["id"]}`).html("<span class='background'>"+event["data"]["text"]+"</span>")
+			$(`#${event["data"]["id"]}`).text(event["data"]["text"])
 		}
 
 		if (event["data"]["action"] == "remove"){
