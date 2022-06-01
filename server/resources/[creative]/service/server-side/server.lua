@@ -1,8 +1,15 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
+local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CONNECTION
+-----------------------------------------------------------------------------------------------------------------------------------------
+cRP = {}
+Tunnel.bindInterface("service",cRP)
+vCLIENT = Tunnel.getInterface("service")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICE:TOGGLE
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -46,6 +53,18 @@ AddEventHandler("service:Toggle",function(Service,Color)
 			vRP.updatePermission(user_id,"wait"..serviceName,serviceName)
 			TriggerClientEvent("Notify",source,"azul","Entrou em serviço.",5000)
 			TriggerClientEvent("service:Label",source,serviceName,"Sair de Serviço",5000)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PAINEL
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand("painel",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasGroup(user_id,args[1]) then
+			local playerList = vRP.userList()
+			TriggerClientEvent("service:Open",source,args[1])
 		end
 	end
 end)

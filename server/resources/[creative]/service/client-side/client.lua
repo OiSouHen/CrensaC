@@ -1,25 +1,32 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- VRP
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Tunnel = module("vrp","lib/Tunnel")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CONNECTION
+-----------------------------------------------------------------------------------------------------------------------------------------
+vSERVER = Tunnel.getInterface("service")
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICELIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local serviceList = {
-	{ 441.81,-982.05,30.83,"Lspd",1.0,18 },
-	{ 1852.85,3687.79,34.07,"Sheriff-1",1.0,17 },
-	{ -447.28,6013.01,32.41,"Sheriff-2",1.0,17 },
-	{ 1840.20,2578.48,46.07,"Corrections",1.0,24 },
+	{ 441.81,-982.05,30.83,"Lspd",1.0,63 },
+	{ 1833.75,3678.34,34.27,"Sheriff-1",1.0,47 },
+	{ -447.28,6013.01,32.41,"Sheriff-2",1.0,47 },
+	{ 1840.20,2578.48,46.07,"Corrections",1.0,60 },
 	{ 385.43,794.42,187.48,"Ranger",1.0,69 },
-	{ 382.01,-1596.39,29.91,"State",1.0,11 },
+	{ 382.01,-1596.39,29.91,"State",1.0,7 },
 	{ 310.23,-597.54,43.29,"Paramedic-1",1.0,6 },
-	{ 1831.79,3672.95,34.27,"Paramedic-2",1.0,6 },
-	{ -254.77,6331.03,32.79,"Paramedic-3",1.5,6 },
-	{ 126.03,-3007.25,6.85,"Mechanic",1.0,0 }
+	{ -254.77,6331.03,32.79,"Paramedic-2",1.5,6 },
+	{ 1188.05,-1468.31,34.66,"Paramedic-3",1.5,6 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTARGET
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	for k,v in pairs(serviceList) do
-		exports["target"]:AddCircleZone("service:"..v[4],vec3(v[1],v[2],v[3]),0.25,{
-			name = "service:"..v[4],
+		exports["target"]:AddCircleZone("Service:"..v[4],vec3(v[1],v[2],v[3]),0.25,{
+			name = "Service:"..v[4],
 			heading = 3374176
 		},{
 			shop = k,
@@ -39,7 +46,9 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("service:Toggle")
 AddEventHandler("service:Toggle",function(Service)
-	TriggerServerEvent("service:Toggle",serviceList[Service][4],serviceList[Service][6])
+	if LocalPlayer["state"]["Route"] < 900000 then
+		TriggerServerEvent("service:Toggle",serviceList[Service][4],serviceList[Service][6])
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICE:LABEL
@@ -47,13 +56,55 @@ end)
 RegisterNetEvent("service:Label")
 AddEventHandler("service:Label",function(Service,Text)
 	if Service == "Sheriff" then
-		exports["target"]:LabelText("service:Sheriff-1",Text)
-		exports["target"]:LabelText("service:Sheriff-2",Text)
+		exports["target"]:LabelText("Service:Sheriff-1",Text)
+		exports["target"]:LabelText("Service:Sheriff-2",Text)
 	elseif Service == "Paramedic" then
-		exports["target"]:LabelText("service:Paramedic-1",Text)
-		exports["target"]:LabelText("service:Paramedic-2",Text)
-		exports["target"]:LabelText("service:Paramedic-3",Text)
+		exports["target"]:LabelText("Service:Paramedic-1",Text)
+		exports["target"]:LabelText("Service:Paramedic-2",Text)
+		exports["target"]:LabelText("Service:Paramedic-3",Text)
 	else
-		exports["target"]:LabelText("service:"..Service,Text)
+		exports["target"]:LabelText("Service:"..Service,Text)
 	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SERVICE:OPEN
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("service:Open")
+AddEventHandler("service:Open",function(Title)
+	SetNuiFocus(true,true)
+	SetCursorLocation(0.5,0.5)
+	SendNUIMessage({ action = "openSystem", title = Title })
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CLOSESYSTEM
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("closeSystem",function()
+	SetNuiFocus(false,false)
+	SetCursorLocation(0.5,0.5)
+	SendNUIMessage({ action = "closeSystem" })
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- REQUEST
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("Request",function(Data,cb)
+	cb({ Result = vSERVER.Request() })
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- REMOVE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("Remove",function(Data)
+	TriggerServerEvent("service:Remove",Data["passport"])
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ADD
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("Add",function(Data)
+	TriggerServerEvent("service:Add",Data["passport"])
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SERVICE:UPDATE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("service:Update")
+AddEventHandler("service:Update",function()
+	SendNUIMessage({ action = "updateSystem" })
 end)

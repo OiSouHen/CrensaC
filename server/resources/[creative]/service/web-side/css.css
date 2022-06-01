@@ -1,0 +1,188 @@
+::-webkit-scrollbar { width: 0; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: transparent; }
+::-webkit-scrollbar-thumb:hover { background: transparent; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #ccc;
+	font-size: 13px;
+	font-family: "Roboto";
+}
+
+* {
+	overflow: hidden;
+	user-select: none;
+	box-sizing: border-box;
+}
+
+#Body {
+	width: 100vw;
+	height: 100vh;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+#Services {
+	width: 600px;
+	height: 695px;
+	padding: 30px;
+	border-radius: 3px;
+	position: absolute;
+	background: #141414;
+	top: calc(50% - 350px);
+	left: calc(50% - 350px);
+}
+
+#Content {
+	width: 600px;
+	max-height: 595px;
+	overflow: auto;
+}
+
+.Line {
+	float: left;
+	width: 540px;
+	padding: 5px;
+	border-radius: 3px;
+	margin-bottom: 3px;
+	background: #0f0f0f;
+}
+
+.Line:last-child {
+	margin-bottom: 0;
+}
+
+.Title {
+	float: left;
+	width: 540px;
+	font-size: 16px;
+	letter-spacing: 2px;
+	padding-bottom: 21px;
+	text-transform: uppercase;
+}
+
+.Line-Number {
+	float: left;
+	width: 50px;
+	padding: 9px 0;
+	text-align: center;
+}
+
+.Line-Name {
+	float: left;
+	width: 200px;
+	text-align: left;
+	padding: 9px 0 9px 10px;
+}
+
+.Line-Phone {
+	float: left;
+	width: 100px;
+	padding: 9px 0;
+	text-align: center;
+}
+
+.Line-Status {
+	float: left;
+	width: 100px;
+	padding: 9px 0;
+	text-align: center;
+}
+
+.Line-Remove {
+	float: left;
+	width: 75px;
+	color: #4a380c;
+	padding: 6px 0;
+	margin-top: 3px;
+	border-radius: 3px;
+	text-align: center;
+	background: #fec026;
+	letter-spacing: 1px;
+}
+
+.Add {
+	top: 32px;
+	right: 45px;
+	color: #fec026;
+	position: absolute;
+}
+
+verde {
+	color: #26fe5e;
+}
+
+vermelho {
+	color: #fe6326;
+}
+
+#Modal {
+	top: 100px;
+	z-index: 1;
+	right: 150px;
+	width: 300px;
+	display: none;
+	padding: 30px;
+	color: #4a380c;
+	border-radius: 3px;
+	position: absolute;
+	background: #fec026;
+	box-shadow: 0 0 10px #181818;
+}
+
+.ModalTitle {
+	float: left;
+	width: 240px;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+.ModalTitle b {
+	color: #9c771c;
+	display: block;
+	font-size: 11px;
+	font-weight: 300;
+}
+
+.Button {
+	border: 0;
+	float: left;
+	width: 115px;
+	color: #fec026;
+	padding: 10px 0;
+	margin-right: 10px;
+	border-radius: 3px;
+	letter-spacing: 1px;
+	background: #4a380c;
+}
+
+.Button:last-child {
+	margin-right: 0;
+}
+
+.Input {
+	border: 0;
+	color: #333;
+	float: left;
+	width: 240px;
+	padding: 10px;
+	background: #fff;
+	margin-right: 5px;
+	border-radius: 3px;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+}
+
+.Input:focus {
+	outline: 0;
+	color: #333;
+}
+
+.Input::placeholder {
+	color: #333;
+}
