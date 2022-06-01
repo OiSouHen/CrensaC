@@ -10,6 +10,7 @@ vRP = Proxy.getInterface("vRP")
 cRP = {}
 Tunnel.bindInterface("postit",cRP)
 vCLIENT = Tunnel.getInterface("postit")
+vKEYBOARD = Tunnel.getInterface("keyboard")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -22,14 +23,15 @@ function cRP.newPostIts(coords)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		local globalPostIts = GlobalState["Postit"]
-		local message = vRP.prompt(source,"Texto:","")
-		if message ~= "" then
-			local distance = vRP.prompt(source,"Distância: (Mínimo: 3 / Máximo: 15)","")
-			if distance ~= "" and parseInt(distance) >= 3 and parseInt(distance) <= 15 then
-				if vRP.tryGetInventoryItem(user_id,"postit",1,true) then
-					table.insert(globalPostIts,{ mathLegth(coords["x"]),mathLegth(coords["y"]),mathLegth(coords["z"]),string.sub(message,1,100),parseInt(distance),user_id,os.time() + 60 })
-					GlobalState["Postit"] = globalPostIts
-				end
+		local newPostIts = vKEYBOARD.keyDouble(source,"Texto:","Distância: (Mín. 3 / Máx. 15)")
+		if not newPostIts then
+			return
+		end
+
+		if newPostIts[1] ~= "" and newPostIts[2] ~= "" and parseInt(newPostIts[2]) >= 3 and parseInt(newPostIts[2]) <= 15 then
+			if vRP.tryGetInventoryItem(user_id,"postit",1,true) then
+				table.insert(globalPostIts,{ mathLegth(coords["x"]),mathLegth(coords["y"]),mathLegth(coords["z"]),string.sub(newPostIts[1],1,100),parseInt(newPostIts[2]),user_id,os.time() + 60 })
+				GlobalState["Postit"] = globalPostIts
 			end
 		end
 	end
