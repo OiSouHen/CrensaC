@@ -29,13 +29,11 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("radio:openSystem")
 AddEventHandler("radio:openSystem",function()
-	if not exports["police"]:checkPrison() then
-		SetNuiFocus(true,true)
-		SendNUIMessage({ action = "showMenu" })
+	SetNuiFocus(true,true)
+	SendNUIMessage({ action = "showMenu" })
 
-		if not IsPedInAnyVehicle(PlayerPedId()) then
-			vRP.createObjects("cellphone@","cellphone_text_in","prop_cs_hand_radio",50,28422)
-		end
+	if not IsPedInAnyVehicle(PlayerPedId()) then
+		vRP.createObjects("cellphone@","cellphone_text_in","prop_cs_hand_radio",50,28422)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +82,7 @@ CreateThread(function()
 	SetNuiFocus(false,false)
 
 	while true do
-		if GetGameTimer() >= timeCheck and activeRadio then
+		if GetGameTimer() >= timeCheck and activeRadio and LocalPlayer["state"]["Route"] < 900000 then
 			timeCheck = GetGameTimer() + 60000
 
 			local ped = PlayerPedId()
