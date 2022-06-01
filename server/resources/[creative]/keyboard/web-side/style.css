@@ -19,25 +19,16 @@ body {
 	box-sizing: border-box;
 }
 
-.root-wrapper {
-	top: 50%;
-	left: 50%;
-	width: 50vw;
-	overflow: hidden;
-	position: absolute;
-	background: transparent !important;
-	transform: translateY(-50%) translateX(-50%);
-}
-
 .main-wrapper {
+	right: 150px;
 	width: 300px;
-	margin: auto;
+	bottom: 200px;
 	display: none;
 	overflow: hidden;
-	border-radius: 4px;
-	position: relative;
+	border-radius: 3px;
+	position: absolute;
+	background: #fec026;
 	padding: 20px 35px 35px;
-	background: rgba(15,15,15,0.75);
 }
 
 .body {
@@ -50,40 +41,40 @@ body {
 }
 
 .body label {
-	color: #ccc;
+	color: #4a380c;
 	margin-top: 15px;
 	margin-bottom: 10px;
 	letter-spacing: 1px;
 }
 
 .body input {
-	color: #666;
+	color: #333;
 	border: none;
 	padding: 10px;
-	background: #ccc;
-	border-radius: 4px;
+	background: #fff;
+	border-radius: 3px;
 }
 
 .body textarea {
-	color: #666;
+	color: #333;
 	border: none;
 	resize: none;
 	padding: 10px;
 	height: 100px;
-	background: #ccc;
-	border-radius: 4px;
+	background: #fff;
+	border-radius: 3px;
 }
 
 .body select {
-	color: #666;
+	color: #333;
 	border: none;
-	background: #ccc;
+	background: #fff;
 }
 
 .body option {
-	color: #666;
+	color: #333;
 	padding: 1rem 0;
-	background: #ccc;
+	background: #fff;
 }
 
 .footer {
@@ -96,9 +87,10 @@ body {
 
 .btn {
 	border: 0;
-	color: #4a380c;
-	padding: 10px 20px;
-	border-radius: 4px;
+	width: 230px;
+	color: #fec026;
+	padding: 20px 0;
+	border-radius: 3px;
 	letter-spacing: 1px;
-	background: #fec026;
+	background: #4a380c;
 }
