@@ -14,14 +14,14 @@ vCLIENT = Tunnel.getInterface("shops")
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local shops = {
-	["weedShop"] = {
+	["Weeds"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
 			["silk"] = 3
 		}
 	},
-	["imoveisShop"] = {
+	["Imoveis"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -37,21 +37,21 @@ local shops = {
 			["contract10"] = 100000
 		}
 	},
-	["identityStore"] = {
+	["Identity"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
 			["identity"] = 5000
 		}
 	},
-	["fidentityStore"] = {
+	["Identity2"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
 			["fidentity"] = 10000
 		}
 	},
-	["animalStore"] = {
+	["Petz"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -65,7 +65,7 @@ local shops = {
 			["cat"] = 25000
 		}
 	},
-	["departamentStore"] = {
+	["Departament"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -89,15 +89,6 @@ local shops = {
 			["soda"] = 15,
 			["coffee"] = 20,
 			["bread"] = 5
-		}
-	},
-	["fishdepartamentStore"] = {
-		["mode"] = "Buy",
-		["type"] = "Cash",
-		["list"] = {
-			["bait"] = 4,
-			["chocolate"] = 15,
-			["fishingrod"] = 725
 		}
 	},
 	["mercadoCentral"] = {
@@ -125,7 +116,7 @@ local shops = {
 			["rope"] = 875
 		}
 	},
-	["mechanicTools"] = {
+	["Mechanic"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -150,7 +141,7 @@ local shops = {
 			["advtoolbox"] = 925
 		}
 	},
-	["weaponsStore"] = {
+	["Weapons"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -159,14 +150,14 @@ local shops = {
 			["riflebody"] = 625
 		}
 	},
-	["oxyStore"] = {
+	["Oxy"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
 			["oxy"] = 35
 		}
 	},
-	["pharmacyStore"] = {
+	["Pharmacy"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -176,7 +167,7 @@ local shops = {
 			["ritmoneury"] = 475
 		}
 	},
-	["pharmacyParamedic"] = {
+	["Paramedic"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["perm"] = "Paramedic",
@@ -193,7 +184,7 @@ local shops = {
 			["medicbag"] = 425
 		}
 	},
-	["ammunationStore"] = {
+	["Ammunation"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -212,7 +203,7 @@ local shops = {
 			["WEAPON_FLASHLIGHT"] = 675
 		}
 	},
-	["premiumStore"] = {
+	["Premium"] = {
 		["mode"] = "Buy",
 		["type"] = "Premium",
 		["list"] = {
@@ -226,7 +217,42 @@ local shops = {
 			["newlocate"] = 100
 		}
 	},
-	["huntingSell"] = {
+	["Fishing"] = {
+		["mode"] = "Sell",
+		["type"] = "Cash",
+		["list"] = {
+			["octopus"] = 20,
+			["shrimp"] = 20,
+			["carp"] = 18,
+			["horsefish"] = 18,
+			["tilapia"] = 20,
+			["codfish"] = 22,
+			["catfish"] = 22,
+			["goldenfish"] = 24,
+			["pirarucu"] = 24,
+			["pacu"] = 24,
+			["tambaqui"] = 24
+		}
+	},
+	["Fishing2"] = {
+		["mode"] = "Buy",
+		["type"] = "Cash",
+		["list"] = {
+			["bait"] = 4,
+			["chocolate"] = 15,
+			["fishingrod"] = 725
+		}
+	},
+	["Hunting2"] = {
+		["mode"] = "Buy",
+		["type"] = "Cash",
+		["list"] = {
+			["switchblade"] = 525,
+			["WEAPON_MUSKET"] = 3250,
+			["WEAPON_MUSKET_AMMO"] = 7
+		}
+	},
+	["Hunting"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -245,34 +271,7 @@ local shops = {
 			["leather"] = 25
 		}
 	},
-	["fishingSell"] = {
-		["mode"] = "Sell",
-		["type"] = "Cash",
-		["list"] = {
-			["octopus"] = 20,
-			["shrimp"] = 20,
-			["carp"] = 18,
-			["horsefish"] = 18,
-			["tilapia"] = 20,
-			["codfish"] = 22,
-			["catfish"] = 22,
-			["goldenfish"] = 24,
-			["pirarucu"] = 24,
-			["pacu"] = 24,
-			["tambaqui"] = 24
-		}
-	},
-	["huntingStore"] = {
-		["mode"] = "Buy",
-		["type"] = "Cash",
-		["list"] = {
-			["switchblade"] = 525,
-			["WEAPON_MUSKET"] = 3250,
---			["WEAPON_SNIPERRIFLE"] = 7250,
-			["WEAPON_MUSKET_AMMO"] = 7
-		}
-	},
-	["recyclingSell"] = {
+	["Recycle"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -304,7 +303,7 @@ local shops = {
 			["goldcoin"] = 10
 		}
 	},
-	["minerShop"] = {
+	["Miners"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -372,7 +371,7 @@ local shops = {
 			["water"] = 30
 		}
 	},
-	["policeStore"] = {
+	["Police"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["perm"] = "Police",
@@ -406,7 +405,7 @@ local shops = {
 			["badge10"] = 10
 		}
 	},
-	["ilegalHouse"] = {
+	["Criminal"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -423,7 +422,7 @@ local shops = {
 			["lampshade"] = 60
 		}
 	},
-	["ilegalCosmetics"] = {
+	["Criminal2"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -442,7 +441,7 @@ local shops = {
 			["soap"] = 40
 		}
 	},
-	["ilegalToys"] = {
+	["Criminal3"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {
@@ -456,7 +455,7 @@ local shops = {
 			["deck"] = 40
 		}
 	},
-	["ilegalCriminal"] = {
+	["Criminal4"] = {
 		["mode"] = "Sell",
 		["type"] = "Cash",
 		["list"] = {

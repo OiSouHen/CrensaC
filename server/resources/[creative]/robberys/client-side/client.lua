@@ -36,6 +36,8 @@ CreateThread(function()
 
 						if IsControlJustPressed(1,38) and robberySeconds <= 0 then
 							robberySeconds = 5
+							
+							TriggerEvent("Notify","amarelo","Notify.",5000)
 
 							if vSERVER.checkRobbery(k) then
 								robberyId = k
