@@ -15,47 +15,6 @@ html,body {
 	background-color: white;
 }
 
-.wprompt {
-	color: #fff;
-	width: 600px;
-	height: 150px;
-	display: flex;
-	border-radius: 3px;
-	position: absolute;
-	padding: 10px 15px;
-	font-family: "Roboto";
-	flex-direction: column;
-	background-color: rgba(15,15,15,.75);
-}
-
-.wprompt h1 {
-	font-size: 13px;
-	font-weight: 300;
-	padding: 7px 0 12px 5px;
-}
-
-.wprompt textarea {
-	flex: 1;
-	color: #ccc;
-	width: 100%;
-	resize: none;
-	padding: 10px;
-	font-size: 15px;
-	box-sizing: border-box;
-	outline: none !important;
-	background-color: rgba(15,15,15,.50);
-	border: 1px solid rgba(255,255,255,0.2);
-}
-
-.wprompt textarea:focus {
-	outline: none !important;
-}
-
-.wprompt .help {
-	font-size: 12px;
-	padding: 12px 0 7px 5px;
-}
-
 .requestManager {
 	width: 450px;
 	bottom: 50px;
@@ -71,7 +30,7 @@ html,body {
 	font-size: 14px;
 	margin-top: 25px;
  	line-height: 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	margin-bottom: 10px;
 	font-family: "Roboto";
 	background: rgba(15,15,15,.75);
@@ -91,7 +50,7 @@ html,body {
 	padding: 20px 10px;
 	margin-right: 10px;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	letter-spacing: 2px;
 	font-family: "Roboto";
 	background: rgba(43,135,86,.75);
@@ -105,7 +64,7 @@ html,body {
 	position: relative;
 	padding: 20px 10px;
 	text-align: center;
-	border-radius: 4px;
+	border-radius: 3px;
 	letter-spacing: 3px;
 	font-family: "Roboto";
 	background: rgba(237,105,106,.75);
@@ -150,7 +109,7 @@ html,body {
 	font-size: 13px;
 	line-height: 20px;
 	padding: 15px 20px;
-	border-radius: 4px;
+	border-radius: 3px;
 	text-align: center;
 	font-family: "Roboto";
 	text-shadow: 1px 1px #000;
@@ -178,7 +137,7 @@ html,body {
 	padding: 10px 20px 20px;
 	text-shadow: 1px 1px #000;
 	background: rgba(15,15,15,.75);
-	border-left: 5px solid #2e6e4c;
+	border-left: 5px solid #bd962e;
 }
 
 .identityLeft {
