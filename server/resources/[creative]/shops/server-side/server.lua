@@ -277,7 +277,6 @@ local shops = {
 		["type"] = "Cash",
 		["list"] = {
 			["key"] = 45,
-			["bucket"] = 50,
 			["notepad"] = 5,
 			["plastic"] = 8,
 			["glass"] = 8,
