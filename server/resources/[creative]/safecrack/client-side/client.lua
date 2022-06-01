@@ -182,12 +182,12 @@ function crackingAnim(animType)
 
 		if animType == 1 then
 			if not IsEntityPlayingAnim(ped,"mini@safe_cracking","dial_turn_anti_fast_1",3) then
-				TaskPlayAnim(ped,"mini@safe_cracking","dial_turn_anti_fast_1",8.0,-8,-1,49,0,0,0,0)
+				TaskPlayAnim(ped,"mini@safe_cracking","dial_turn_anti_fast_1",8.0,8.0,-1,49,0,0,0,0)
 			end
 		end
 
 		if animType == 2 then
-			TaskPlayAnim(ped,"mini@safe_cracking",animsSucceed[math.floor(math.ceil(4))],8.0,1.0,-1,49,0,0,0,0)
+			TaskPlayAnim(ped,"mini@safe_cracking",animsSucceed[math.floor(math.ceil(4))],8.0,8.0,-1,49,0,0,0,0)
 		end
 	end
 end
