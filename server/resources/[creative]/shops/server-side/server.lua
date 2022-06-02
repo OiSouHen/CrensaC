@@ -239,7 +239,6 @@ local shops = {
 		["type"] = "Cash",
 		["list"] = {
 			["bait"] = 4,
-			["chocolate"] = 15,
 			["fishingrod"] = 725
 		}
 	},

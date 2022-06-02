@@ -44,21 +44,8 @@ local verifyAnimals = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DISMANTLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-local dismantleList = {}
 local dismantleProgress = {}
 local dismantleTimer = os.time()
------------------------------------------------------------------------------------------------------------------------------------------
--- DISMANTLEVEHS
------------------------------------------------------------------------------------------------------------------------------------------
-local dismantleVehs = {
-	"baller","jackal","mule","youga","mesa","nemesis","primo","biff","bison","seminole","zion2","landstalker","panto",
-	"boxville2","premier","scrap","rhapsody","pcj","jester","superd","sentinel","bus","sentinel2","blazer2","asea",
-	"regina","pounder","huntley","tornado","rubble","tribike","bjxl","patriot","ingot","serrano","fq2","bobcatxl",
-	"journey","bfinjection","sanchez2","surfer2","caddy2","rebel2","bagger","dilettante","blista","hexer",
-	"buffalo","emperor2","fugitive","rocoto","dukes","thrust","faggio2","double","camper","massacro","feltzer2",
-	"sabregt","ninef2","banshee","infernus","bullet","coquette","phoenix","cavalcade","stratum","minivan","picador",
-	"taco","glendale","intruder","ruffian","schafter2","asterope","mixer2","rumpo","exemplar","surfer","cavalcade2"
-}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INVENTORY:TABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -107,12 +94,11 @@ local tableList = {
 		[3] = { ["timer"] = 5, ["item"] = "syringe", ["itemAmount"] = 1 },
 		[4] = { ["timer"] = 5, ["item"] = "fishingrod", ["itemAmount"] = 1 },
 		[5] = { ["timer"] = 5, ["item"] = "plate", ["itemAmount"] = 1 },
-		[6] = { ["timer"] = 5, ["item"] = "brokenpick", ["itemAmount"] = 1 },
-		[7] = { ["timer"] = 5, ["item"] = "aluminum", ["itemAmount"] = 1 },
-		[8] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
-		[9] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
-		[10] = { ["timer"] = 5, ["item"] = "battery", ["itemAmount"] = 1 },
-		[11] = { ["timer"] = 5, ["item"] = "metalcan", ["itemAmount"] = 1 }
+		[6] = { ["timer"] = 5, ["item"] = "aluminum", ["itemAmount"] = 1 },
+		[7] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
+		[8] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
+		[9] = { ["timer"] = 5, ["item"] = "battery", ["itemAmount"] = 1 },
+		[10] = { ["timer"] = 5, ["item"] = "metalcan", ["itemAmount"] = 1 }
 	},
 	["cemitery"] = {
 		[1] = { ["timer"] = 5, ["item"] = "silk", ["itemAmount"] = 1 },
@@ -126,33 +112,32 @@ local tableList = {
 		[9] = { ["timer"] = 5, ["item"] = "mushseed", ["itemAmount"] = 1 },
 		[10] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
 		[11] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
-		[12] = { ["timer"] = 5, ["item"] = "brokenpick", ["itemAmount"] = 1 },
-		[13] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
-		[14] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
-		[15] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
-		[16] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
-		[17] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
-		[18] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
-		[19] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
-		[20] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
-		[21] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
-		[22] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
-		[23] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
-		[24] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
-		[25] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
-		[26] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
-		[27] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
-		[28] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
-		[29] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
-		[30] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
+		[12] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
+		[13] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
+		[14] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
+		[15] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
+		[16] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
+		[17] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
+		[18] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
+		[19] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
+		[20] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
+		[21] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
+		[22] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
+		[23] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
+		[24] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
+		[25] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
+		[26] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
+		[27] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
+		[28] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
+		[29] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
 	},
 	["fishfillet"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
-		[1] = { ["timer"] = 20, ["need"] = "fishfillet", ["needAmount"] = 1,  ["item"] = "cookedfishfillet", ["itemAmount"] = 1 }
+		[1] = { ["timer"] = 20, ["need"] = "fishfillet", ["needAmount"] = 1, ["item"] = "cookedfishfillet", ["itemAmount"] = 1 }
 	},
 	["marshmallow"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
-		[1] = { ["timer"] = 20, ["need"] = "sugar", ["needAmount"] = 4,  ["item"] = "marshmallow", ["itemAmount"] = 1 }
+		[1] = { ["timer"] = 20, ["need"] = "sugar", ["needAmount"] = 4, ["item"] = "marshmallow", ["itemAmount"] = 1 }
 	},
 	["animalmeat"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
@@ -161,6 +146,18 @@ local tableList = {
 	["emptybottle"] = {
 		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
 		[1] = { ["timer"] = 3, ["need"] = "emptybottle", ["needAmount"] = 1,  ["item"] = "water", ["itemAmount"] = 1 }
+	},
+	["dollars100"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = "dollarsroll", ["needAmount"] = 100, ["item"] = "dollars100", ["itemAmount"] = 1 }
+	},
+	["dollars500"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = "dollarsroll", ["needAmount"] = 500, ["item"] = "dollars500", ["itemAmount"] = 1 }
+	},
+	["dollars1000"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = "dollarsroll", ["needAmount"] = 1000, ["item"] = "dollars1000", ["itemAmount"] = 1 }
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -211,13 +208,12 @@ local stealItens = {
 	[42] = { ["item"] = "cellphone", ["min"] = 1, ["max"] = 1, ["rand"] = 150 },
 	[43] = { ["item"] = "tyres", ["min"] = 1, ["max"] = 1, ["rand"] = 175 },
 	[44] = { ["item"] = "notepad", ["min"] = 1, ["max"] = 5, ["rand"] = 225 },
-	[45] = { ["item"] = "brokenpick", ["min"] = 1, ["max"] = 3, ["rand"] = 175 },
-	[46] = { ["item"] = "plate", ["min"] = 1, ["max"] = 1, ["rand"] = 175 },
-	[47] = { ["item"] = "emptybottle", ["min"] = 2, ["max"] = 5, ["rand"] = 225 },
-	[48] = { ["item"] = "bait", ["min"] = 1, ["max"] = 6, ["rand"] = 225 },
-	[49] = { ["item"] = "switchblade", ["min"] = 1, ["max"] = 1, ["rand"] = 175 },
-	[50] = { ["item"] = "card01", ["min"] = 1, ["max"] = 1, ["rand"] = 200 },
-	[51] = { ["item"] = "card02", ["min"] = 1, ["max"] = 1, ["rand"] = 200 }
+	[45] = { ["item"] = "plate", ["min"] = 1, ["max"] = 1, ["rand"] = 175 },
+	[46] = { ["item"] = "emptybottle", ["min"] = 2, ["max"] = 5, ["rand"] = 225 },
+	[47] = { ["item"] = "bait", ["min"] = 1, ["max"] = 6, ["rand"] = 225 },
+	[48] = { ["item"] = "switchblade", ["min"] = 1, ["max"] = 1, ["rand"] = 175 },
+	[49] = { ["item"] = "card01", ["min"] = 1, ["max"] = 1, ["rand"] = 200 },
+	[50] = { ["item"] = "card02", ["min"] = 1, ["max"] = 1, ["rand"] = 200 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LOOTITENS
@@ -923,6 +919,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "contract"..string.sub(totalName,9,10) then
 				TriggerClientEvent("inventory:Close",source)
 				TriggerEvent("homes:propItem",source,totalName,string.sub(totalName,9,10))
+			return end
+			
+			if nameItem == "dismantle" then
+				TriggerClientEvent("inventory:Close",source)
+				if not vCLIENT.DismantleStatus(source) then
+					vCLIENT.Dismantle(source,math.random(100,1001))
+					vRP.removeInventoryItem(user_id,"dismantle",1,true)
+				end
 			return end
 
 			if string.sub(nameItem,1,5) == "badge" then
@@ -1758,7 +1762,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							return
 						end
 
-						if vRPC.inVehicle(source) then
+						if vRPC.inVehicle(source) and not vCLIENT.DismantleStatus(source) then
 							vRPC.stopActived(source)
 							vGARAGE.startAnimHotwired(source)
 							Active[user_id] = os.time() + 100
@@ -1775,6 +1779,10 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 									if GetVehicleDoorLockStatus(idNetwork) == 2 then
 										SetVehicleDoorsLocked(idNetwork,1)
 									end
+									
+									if vCLIENT.DismantleStatus(source) then
+										TriggerClientEvent("target:Dismantles",source)
+									end
 								end
 
 								if math.random(100) >= 75 then
@@ -1792,11 +1800,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 											TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
 										end)
 									end
+									
+									if vCLIENT.DismantleStatus(source) then
+										TriggerClientEvent("inventory:DisPed",source)
+									end
 								end
 							end
 
 							if parseInt(math.random(1000)) >= 900 then
-								vRP.generateItem(user_id,"brokenpick",1,false)
 								vRP.removeInventoryItem(user_id,totalName,1,false)
 								TriggerClientEvent("itensNotify",source,{ "quebrou","lockpick",1,"Lockpick de Alumínio" })
 							end
@@ -1811,18 +1822,15 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							TriggerClientEvent("inventory:Buttons",source,true)
 							vRPC.playAnim(source,false,{"missfbi_s4mop","clean_mop_back_player"},true)
 
-							if vTASKBAR.taskLockpick(source) then
-								if math.random(100) >= 75 then
+							if vCLIENT.DismantleStatus(source) and vehPlate == "DISM"..(1000 + user_id) then
+								if vTASKBAR.UpgradeVehicle(source) then
 									vRP.upgradeStress(user_id,2)
 									TriggerEvent("plateEveryone",vehPlate)
-
 									local idNetwork = NetworkGetEntityFromNetworkId(vehNet)
 									if GetVehicleDoorLockStatus(idNetwork) == 2 then
 										SetVehicleDoorsLocked(idNetwork,1)
 									end
-								end
 
-								if math.random(100) >= 75 then
 									local activePlayers = vRPC.activePlayers(source)
 									for _,v in ipairs(activePlayers) do
 										async(function()
@@ -1830,18 +1838,55 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 										end)
 									end
 
-									local coords = vRPC.getEntityCoords(source)
-									local policeResult = vRP.numPermission("Police")
-									for k,v in pairs(policeResult) do
-										async(function()
-											TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
-										end)
+									if vCLIENT.DismantleStatus(source) then
+										TriggerClientEvent("target:Dismantles",source)
+									end
+
+									if math.random(100) >= 75 then
+										local coords = vRPC.getEntityCoords(source)
+										local policeResult = vRP.numPermission("Police")
+										for k,v in pairs(policeResult) do
+											async(function()
+												TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
+											end)
+										end
+										
+										if vCLIENT.DismantleStatus(source) then
+											TriggerClientEvent("inventory:DisPed",source)
+										end
+									end
+								end
+							else
+								if vTASKBAR.taskLockpick(source) then
+									if math.random(100) >= 75 then
+										vRP.upgradeStress(user_id,2)
+										TriggerEvent("plateEveryone",vehPlate)
+										local idNetwork = NetworkGetEntityFromNetworkId(vehNet)
+										if GetVehicleDoorLockStatus(idNetwork) == 2 then
+											SetVehicleDoorsLocked(idNetwork,1)
+										end
+									end
+									
+									if math.random(100) >= 75 then
+										local activePlayers = vRPC.activePlayers(source)
+										for _,v in ipairs(activePlayers) do
+											async(function()
+												TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
+											end)
+										end
+										
+										local coords = vRPC.getEntityCoords(source)
+										local policeResult = vRP.numPermission("Police")
+										for k,v in pairs(policeResult) do
+											async(function()
+												TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
+											end)
+										end
 									end
 								end
 							end
 
 							if parseInt(math.random(1000)) >= 900 then
-								vRP.generateItem(user_id,"brokenpick",1,false)
 								vRP.removeInventoryItem(user_id,totalName,1,false)
 								TriggerClientEvent("itensNotify",source,{ "quebrou","lockpick",1,"Lockpick de Alumínio" })
 							end
@@ -1876,7 +1921,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						end
 
 						if parseInt(math.random(1000)) >= 900 then
-							vRP.generateItem(user_id,"brokenpick",1,false)
 							vRP.removeInventoryItem(user_id,totalName,1,false)
 							TriggerClientEvent("itensNotify",source,{ "quebrou","lockpick2",1,"Lockpick de Cobre" })
 						end
@@ -3149,7 +3193,6 @@ AddEventHandler("playerDisconnect",function(user_id)
 
 	if dismantleProgress[user_id] then
 		local vehName = dismantleProgress[user_id]
-		dismantleList[vehName] = true
 		dismantleProgress[user_id] = nil
 	end
 
@@ -3209,7 +3252,6 @@ AddEventHandler("inventory:Cancel",function()
 
 			if dismantleProgress[user_id] then
 				local vehName = dismantleProgress[user_id]
-				dismantleList[vehName] = true
 				dismantleProgress[user_id] = nil
 			end
 		end
@@ -4221,83 +4263,45 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INVENTORY:DESMANCHAR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("inventory:Desmanchar")
-AddEventHandler("inventory:Desmanchar",function(Entity)
+RegisterServerEvent("inventory:Dismantle")
+AddEventHandler("inventory:Dismantle",function(Entity)
 	local source = source
 	local vehName = Entity[2]
 	local user_id = vRP.getUserId(source)
-	if user_id and dismantleList[vehName] and Active[user_id] == nil then
-		dismantleList[vehName] = nil
+	if user_id and Active[user_id] == nil then
 		dismantleProgress[user_id] = vehName
 		Active[user_id] = os.time() + 15
+		
 		TriggerClientEvent("Progress",source,15000)
 		TriggerClientEvent("inventory:Close",source)
 		TriggerClientEvent("inventory:Buttons",source,true)
 		vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
-
+		
 		repeat
 			if os.time() >= parseInt(Active[user_id]) then
 				Active[user_id] = nil
 				vRPC.removeObjects(source)
 				vRP.upgradeStress(user_id,10)
 				dismantleProgress[user_id] = nil
+				
 				TriggerClientEvent("player:applyGsr",source)
 				TriggerClientEvent("inventory:Buttons",source,false)
 				TriggerEvent("garages:deleteVehicle",Entity[4],Entity[1])
-
-				vRP.generateItem(user_id,"plastic",math.random(8,10),true)
-				vRP.generateItem(user_id,"glass",math.random(8,10),true)
-				vRP.generateItem(user_id,"rubber",math.random(8,10),true)
-				vRP.generateItem(user_id,"aluminum",math.random(4,6),true)
-				vRP.generateItem(user_id,"copper",math.random(4,6),true)
-				vRP.generateItem(user_id,"dollarsz",math.random(525,625),true)
-
+				
+				vRP.generateItem(user_id,"dollarsroll",math.random(80,120),true)
+				vRP.generateItem(user_id,"dismantle",1,true)
+				
 				if math.random(1000) <= 25 then
 					vRP.generateItem(user_id,"plate",1,true)
 				end
+				
+				TriggerClientEvent("inventory:Disreset",source)
+				TriggerClientEvent("Notify",source,"amarelo","O veículo do seu contrato foi encaminhado para o <b>Impound</b> e o <b>Lester</b> disse que você poe assinar um novo contrato quando quiser.",10000)
 			end
-
 			Wait(100)
 		until Active[user_id] == nil
 	end
 end)
------------------------------------------------------------------------------------------------------------------------------------------
--- INVENTORY:DISMANTLE
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("inventory:Dismantle")
-AddEventHandler("inventory:Dismantle",function()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if os.time() >= dismantleTimer then
-			dismantleUpdate()
-		end
-
-		local vehListNames = ""
-		for k,v in pairs(dismantleList) do
-			vehListNames = vehListNames.."<b>"..vehicleName(k).."</b>, "
-		end
-
-		TriggerClientEvent("Notify",source,"azul",vehListNames.." a lista vai ser atualizada em <b>"..(dismantleTimer - os.time()).."</b> segundos.",60000)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- DISMANTLEUPDATE
------------------------------------------------------------------------------------------------------------------------------------------
-function dismantleUpdate()
-	dismantleList = {}
-	local amountVeh = 0
-	local selectVehs = 0
-	dismantleTimer = os.time() + 3600
-
-	repeat
-		selectVehs = math.random(#dismantleVehs)
-		if dismantleList[dismantleVehs[selectVehs]] == nil then
-			dismantleList[dismantleVehs[selectVehs]] = true
-			amountVeh = amountVeh + 1
-		end
-	until amountVeh >= 10
-end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INVENTORY:REMOVETYRES
 -----------------------------------------------------------------------------------------------------------------------------------------

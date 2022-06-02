@@ -10,38 +10,32 @@ local Zones = {}
 local Models = {}
 local Selected = {}
 local Sucess = false
-local Dismantleds = 1
 LocalPlayer["state"]["Target"] = false
 -----------------------------------------------------------------------------------------------------------------------------------------
--- TOWS
+-- EXCLUSIVES
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tows = {
-	{ -142.24,-1174.19,23.76 },
-	{ 1724.84,3715.31,34.22 },
-	{ -305.45,6117.62,31.49 }
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- DISMANTLES
------------------------------------------------------------------------------------------------------------------------------------------
-local Dismantles = {
-	{ 943.23,-1497.87,30.11 },
-	{ -1172.57,-2037.65,13.75 },
-	{ -524.94,-1680.63,19.21 },
-	{ 1358.14,-2095.41,52.0 },
-	{ 602.47,-437.82,24.75 },
-	{ -413.86,-2179.29,10.31 },
-	{ 146.51,320.62,112.14 },
-	{ 520.91,169.14,99.36 },
-	{ 1137.99,-794.32,57.59 },
-	{ -93.07,-2549.6,6.0 }
+local Exclusives = {
+	{ 943.23,-1497.87,30.11,"Desmanche" },
+	{ -1172.57,-2037.65,13.75,"Desmanche" },
+	{ -574.2,-1669.71,19.23,"Desmanche" },
+	{ 1358.14,-2095.41,52.0,"Desmanche" },
+	{ 602.47,-437.82,24.75,"Desmanche" },
+	{ -413.86,-2179.29,10.31,"Desmanche" },
+	{ -142.24,-1174.19,23.76,"Reboque" },
+	{ 1724.84,3715.31,34.22,"Reboque" },
+	{ -305.45,6117.62,31.49,"Reboque" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TARGET:DISMANTLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("target:Dismantles")
 AddEventHandler("target:Dismantles",function()
-	Dismantleds = math.random(#Dismantles)
-	TriggerEvent("NotifyPush",{ code = 20, title = "Localização do Desmanche", x = Dismantles[Dismantleds][1], y = Dismantles[Dismantleds][2], z = Dismantles[Dismantleds][3], blipColor = 60 })
+	for k,v in pairs(Exclusives) do
+		if v[4] == "Desmanche" then
+			TriggerEvent("NotifyPush",{ code = 20, title = "Localização do Desmanche", x = v[1], y = v[2], z = v[3], blipColor = 60 })
+			break
+		end
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TYRELIST
@@ -808,6 +802,81 @@ CreateThread(function()
 		},
 		distance = 0.75
 	})
+	
+	AddCircleZone("dollarsRoll01",vec3(-610.87,-1089.48,25.86),0.5,{
+		name = "dollarsRoll01",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Empacotar 100 Rolos",
+				tunnel = "police",
+				service = "dollars100"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 500 Rolos",
+				tunnel = "police",
+				service = "dollars500"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 1000 Rolos",
+				tunnel = "police",
+				service = "dollars1000"
+			}
+		}
+	})
+	
+	AddCircleZone("dollarsRoll03",vec3(-1181.8,-888.09,19.97),0.5,{
+		name = "dollarsRoll03",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Empacotar 100 Rolos",
+				tunnel = "police",
+				service = "dollars100"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 500 Rolos",
+				tunnel = "police",
+				service = "dollars500"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 1000 Rolos",
+				tunnel = "police",
+				service = "dollars1000"
+			}
+		}
+	})
+	
+	AddCircleZone("dollarsRoll03",vec3(825.87,-828.52,26.34),0.5,{
+		name = "dollarsRoll03",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Empacotar 100 Rolos",
+				tunnel = "police",
+				service = "dollars100"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 500 Rolos",
+				tunnel = "police",
+				service = "dollars500"
+			},{
+				event = "inventory:makeProducts",
+				label = "Empacotar 1000 Rolos",
+				tunnel = "police",
+				service = "dollars1000"
+			}
+		}
+	})
 
 	AddCircleZone("foodJuice01",vec3(-1190.78,-904.23,13.99),0.5,{
 		name = "foodJuice01",
@@ -1459,9 +1528,9 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 function playerTargetEnable()
 	if LocalPlayer["state"]["Active"] then
-		local Ped = PlayerPedId()
+		local ped = PlayerPedId()
 
-		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or Sucess or IsPedArmed(Ped,6) or IsPedInAnyVehicle(Ped) or not MumbleIsConnected() or LocalPlayer["state"]["Route"] > 900000 then
+		if LocalPlayer["state"]["Buttons"] or LocalPlayer["state"]["Commands"] or LocalPlayer["state"]["Handcuff"] or Sucess or IsPedArmed(ped,6) or IsPedInAnyVehicle(ped) or not MumbleIsConnected() or LocalPlayer["state"]["Route"] > 900000 then
 			return
 		end
 
@@ -1469,14 +1538,14 @@ function playerTargetEnable()
 		SendNUIMessage({ response = "openTarget" })
 
 		while LocalPlayer["state"]["Target"] do
-			local hitZone,entCoords,Entity = RayCastGamePlayCamera()
+			local hitZone,entCoords,entity = RayCastGamePlayCamera()
 
 			if hitZone == 1 then
-				local Coords = GetEntityCoords(Ped)
+				local coords = GetEntityCoords(ped)
 
 				for k,v in pairs(Zones) do
 					if Zones[k]:isPointInside(entCoords) then
-						if #(Coords - Zones[k]["center"]) <= v["targetoptions"]["distance"] then
+						if #(coords - Zones[k]["center"]) <= v["targetoptions"]["distance"] then
 
 							if v["targetoptions"]["shop"] ~= nil then
 								Selected = v["targetoptions"]["shop"]
@@ -1490,8 +1559,8 @@ function playerTargetEnable()
 
 							Sucess = true
 							while Sucess do
-								local Ped = PlayerPedId()
-								local Coords = GetEntityCoords(Ped)
+								local ped = PlayerPedId()
+								local coords = GetEntityCoords(ped)
 								local _,entCoords = RayCastGamePlayCamera()
 
 								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
@@ -1499,7 +1568,7 @@ function playerTargetEnable()
 									SetNuiFocus(true,true)
 								end
 
-								if not Zones[k]:isPointInside(entCoords) or #(Coords - Zones[k]["center"]) > v["targetoptions"]["distance"] then
+								if not Zones[k]:isPointInside(entCoords) or #(coords - Zones[k]["center"]) > v["targetoptions"]["distance"] then
 									Sucess = false
 								end
 
@@ -1511,25 +1580,25 @@ function playerTargetEnable()
 					end
 				end
 
-				if GetEntityType(Entity) ~= 0 then
-					if IsEntityAVehicle(Entity) then
-						local vehPlate = GetVehicleNumberPlateText(Entity)
-						if #(Coords - entCoords) <= 1.0 and vehPlate ~= "PDMSPORT" then
+				if GetEntityType(entity) ~= 0 then
+					if IsEntityAVehicle(entity) then
+						local vehPlate = GetVehicleNumberPlateText(entity)
+						if #(coords - entCoords) <= 1.0 and vehPlate ~= "PDMSPORT" then
 							local vehNet = nil
 							local Combustivel = false
-							local vehModel = GetEntityModel(Entity)
-							SetEntityAsMissionEntity(Entity,true,true)
+							local vehModel = GetEntityModel(entity)
+							SetEntityAsMissionEntity(entity,true,true)
 
-							if NetworkGetEntityIsNetworked(Entity) then
-								vehNet = VehToNet(Entity)
+							if NetworkGetEntityIsNetworked(entity) then
+								vehNet = VehToNet(entity)
 							end
 
-							Selected = { vehPlate,vRP.vehicleModel(vehModel),Entity,vehNet }
+							Selected = { vehPlate,vRP.vehicleModel(vehModel),entity,vehNet }
 
 							local Menu = {}
 
 							for k,v in pairs(Fuels) do
-								local Distance = #(Coords - vec3(v[1],v[2],v[3]))
+								local Distance = #(coords - vec3(v[1],v[2],v[3]))
 								if Distance <= 2.5 then
 									Combustivel = true
 									break
@@ -1537,17 +1606,17 @@ function playerTargetEnable()
 							end
 
 							if not Combustivel then
-								if GetSelectedPedWeapon(Ped) == 883325847 then
+								if GetSelectedPedWeapon(ped) == 883325847 then
 									Selected[5] = true
 									table.insert(Menu,{ event = "engine:Supply", label = "Abastecer", tunnel = "client" })
 								else
 									if GlobalState["vehPlates"][vehPlate] then
-										if GetVehicleDoorLockStatus(Entity) == 1 then
+										if GetVehicleDoorLockStatus(entity) == 1 then
 											for k,Tyre in pairs(tyreList) do
-												local Wheel = GetEntityBoneIndexByName(Entity,k)
+												local Wheel = GetEntityBoneIndexByName(entity,k)
 												if Wheel ~= -1 then
-													local cWheel = GetWorldPositionOfEntityBone(Entity,Wheel)
-													local Distance = #(Coords - cWheel)
+													local cWheel = GetWorldPositionOfEntityBone(entity,Wheel)
+													local Distance = #(coords - cWheel)
 													if Distance <= 1.0 then
 														Selected[5] = Tyre
 														table.insert(Menu,{ event = "inventory:removeTyres", label = "Retirar Pneu", tunnel = "client" })
@@ -1567,16 +1636,16 @@ function playerTargetEnable()
 									end
 
 									if not IsThisModelABike(vehModel) then
-										local Rolling = GetEntityRoll(Entity)
+										local Rolling = GetEntityRoll(entity)
 										if Rolling > 75.0 or Rolling < -75.0 then
 											table.insert(Menu,{ event = "player:RollVehicle", label = "Desvirar", tunnel = "server" })
 										else
-											if GetEntityBoneIndexByName(Entity,"boot") ~= -1 then
-												local Trunk = GetEntityBoneIndexByName(Entity,"boot")
-												local cTrunk = GetWorldPositionOfEntityBone(Entity,Trunk)
-												local Distance = #(Coords - cTrunk)
+											if GetEntityBoneIndexByName(entity,"boot") ~= -1 then
+												local Trunk = GetEntityBoneIndexByName(entity,"boot")
+												local cTrunk = GetWorldPositionOfEntityBone(entity,Trunk)
+												local Distance = #(coords - cTrunk)
 												if Distance <= 1.25 then
-													if GetVehicleDoorLockStatus(Entity) == 1 then
+													if GetVehicleDoorLockStatus(entity) == 1 then
 														table.insert(Menu,{ event = "player:enterTrunk", label = "Entrar no Porta-Malas", tunnel = "client" })
 													end
 
@@ -1594,18 +1663,15 @@ function playerTargetEnable()
 											table.insert(Menu,{ event = "police:runArrest", label = "Apreender Veículo", tunnel = "police" })
 										end
 									else
-										if vehPlate == "DISM"..(1000 + LocalPlayer["state"]["Id"]) then
-											local Distance = #(Coords - vec3(Dismantles[Dismantleds][1],Dismantles[Dismantleds][2],Dismantles[Dismantleds][3]))
+										for _,v in pairs(Exclusives) do
+											local Distance = #(coords - vec3(v[1],v[2],v[3]))
 											if Distance <= 10 then
-												table.insert(Menu,{ event = "inventory:Desmanchar", label = "Desmanchar", tunnel = "police" })
-											end
-										end
-
-										for k,v in pairs(Tows) do
-											local Distance = #(Coords - vec3(v[1],v[2],v[3]))
-											if Distance <= 10 then
-												table.insert(Menu,{ event = "towdriver:Tow", label = "Rebocar", tunnel = "client" })
-												table.insert(Menu,{ event = "impound:Check", label = "Impound", tunnel = "police" })
+												if v[4] == "Desmanche" and vehPlate == "DISM"..(1000 + LocalPlayer["state"]["Id"]) then
+													table.insert(Menu,{ event = "inventory:Dismantle", label = "Desmanchar", tunnel = "police" })
+												elseif v[4] == "Reboque" then
+													table.insert(Menu,{ event = "towdriver:Tow", label = "Rebocar", tunnel = "client" })
+													table.insert(Menu,{ event = "impound:Check", label = "Impound", tunnel = "police" })
+												end
 											end
 										end
 									end
@@ -1619,16 +1685,16 @@ function playerTargetEnable()
 
 							Sucess = true
 							while Sucess do
-								local Ped = PlayerPedId()
-								local Coords = GetEntityCoords(Ped)
-								local _,entCoords,Entity = RayCastGamePlayCamera()
+								local ped = PlayerPedId()
+								local coords = GetEntityCoords(ped)
+								local _,entCoords,entity = RayCastGamePlayCamera()
 
 								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 									SetCursorLocation(0.5,0.5)
 									SetNuiFocus(true,true)
 								end
 
-								if GetEntityType(Entity) == 0 or #(Coords - entCoords) > 1.0 then
+								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
 									Sucess = false
 								end
 
@@ -1637,9 +1703,9 @@ function playerTargetEnable()
 
 							SendNUIMessage({ response = "leftTarget" })
 						end
-					elseif IsPedAPlayer(Entity) then
-						if #(Coords - entCoords) <= 1.0 then
-							local index = NetworkGetPlayerIndexFromPed(Entity)
+					elseif IsPedAPlayer(entity) then
+						if #(coords - entCoords) <= 1.0 then
+							local index = NetworkGetPlayerIndexFromPed(entity)
 							local source = GetPlayerServerId(index)
 							local Menu = {}
 
@@ -1649,7 +1715,7 @@ function playerTargetEnable()
 								table.insert(Menu,{ event = "police:runInspect", label = "Revistar", tunnel = "police" })
 								table.insert(Menu,{ event = "police:prisonClothes", label = "Uniforme Presidiário", tunnel = "police" })
 							elseif LocalPlayer["state"]["Paramedic"] then
-								if GetEntityHealth(Entity) <= 100 then
+								if GetEntityHealth(entity) <= 100 then
 									table.insert(Menu,{ event = "paramedic:Revive", label = "Reanimar", tunnel = "paramedic" })
 								else
 									table.insert(Menu,{ event = "paramedic:Treatment", label = "Tratamento", tunnel = "paramedic" })
@@ -1664,7 +1730,7 @@ function playerTargetEnable()
 								table.insert(Menu,{ event = "paramedic:Bed", label = "Deitar Paciente", tunnel = "paramedic" })
 							end
 
-							if IsEntityPlayingAnim(Entity,"random@mugging3","handsup_standing_base",3) then
+							if IsEntityPlayingAnim(entity,"random@mugging3","handsup_standing_base",3) then
 								table.insert(Menu,{ event = "player:checkShoes", label = "Roubar Sapatos", tunnel = "paramedic" })
 							end
 
@@ -1672,16 +1738,16 @@ function playerTargetEnable()
 
 							Sucess = true
 							while Sucess do
-								local Ped = PlayerPedId()
-								local Coords = GetEntityCoords(Ped)
-								local _,entCoords,Entity = RayCastGamePlayCamera()
+								local ped = PlayerPedId()
+								local coords = GetEntityCoords(ped)
+								local _,entCoords,entity = RayCastGamePlayCamera()
 
 								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 									SetCursorLocation(0.5,0.5)
 									SetNuiFocus(true,true)
 								end
 
-								if GetEntityType(Entity) == 0 or #(Coords - entCoords) > 1.0 then
+								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
 									Sucess = false
 								end
 
@@ -1692,30 +1758,30 @@ function playerTargetEnable()
 						end
 					else
 						for k,v in pairs(Models) do
-							if DoesEntityExist(Entity) then
-								if k == GetEntityModel(Entity) then
-									if #(Coords - entCoords) <= Models[k]["distance"] then
+							if DoesEntityExist(entity) then
+								if k == GetEntityModel(entity) then
+									if #(coords - entCoords) <= Models[k]["distance"] then
 										local objNet = nil
-										if NetworkGetEntityIsNetworked(Entity) then
-											objNet = ObjToNet(Entity)
+										if NetworkGetEntityIsNetworked(entity) then
+											objNet = ObjToNet(entity)
 										end
 
-										Selected = { Entity,k,objNet,GetEntityCoords(Entity) }
+										Selected = { entity,k,objNet,GetEntityCoords(entity) }
 
 										SendNUIMessage({ response = "validTarget", data = Models[k]["options"] })
 
 										Sucess = true
 										while Sucess do
-											local Ped = PlayerPedId()
-											local Coords = GetEntityCoords(Ped)
-											local _,entCoords,Entity = RayCastGamePlayCamera()
+											local ped = PlayerPedId()
+											local coords = GetEntityCoords(ped)
+											local _,entCoords,entity = RayCastGamePlayCamera()
 
 											if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
 												SetCursorLocation(0.5,0.5)
 												SetNuiFocus(true,true)
 											end
 
-											if GetEntityType(Entity) == 0 or #(Coords - entCoords) > Models[k]["distance"] then
+											if GetEntityType(entity) == 0 or #(coords - entCoords) > Models[k]["distance"] then
 												Sucess = false
 											end
 
@@ -1765,17 +1831,17 @@ local beds = {
 RegisterNetEvent("target:animDeitar")
 AddEventHandler("target:animDeitar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
-		local Ped = PlayerPedId()
-		if GetEntityHealth(Ped) > 100 then
-			local Coords = GetEntityCoords(Selected[1])
+		local ped = PlayerPedId()
+		if GetEntityHealth(ped) > 100 then
+			local objCoords = GetEntityCoords(Selected[1])
 
-			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + beds[Selected[2]][1],1,0,0,0)
-			SetEntityHeading(Ped,GetEntityHeading(Selected[1]) + beds[Selected[2]][2] - 180.0)
+			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + beds[Selected[2]][1],1,0,0,0)
+			SetEntityHeading(ped,GetEntityHeading(Selected[1]) + beds[Selected[2]][2] - 180.0)
 
 			vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
 
 			if Selected[2] == -935625561 then
-				AttachEntityToEntity(Ped,Selected[1],11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
+				AttachEntityToEntity(ped,Selected[1],11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
 				bedAttach = Selected[1]
 			end
 		end
@@ -1787,8 +1853,8 @@ end)
 RegisterNetEvent("target:bedPickup")
 AddEventHandler("target:bedPickup",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
-		local Ped = PlayerPedId()
-		if GetEntityHealth(Ped) > 100 then
+		local ped = PlayerPedId()
+		if GetEntityHealth(ped) > 100 then
 			local spawnObjects = 0
 			local uObject = NetworkGetEntityFromNetworkId(Selected[3])
 			local objectControl = NetworkRequestControlOfEntity(uObject)
@@ -1798,7 +1864,7 @@ AddEventHandler("target:bedPickup",function()
 				Wait(1)
 			end
 
-			AttachEntityToEntity(uObject,Ped,11816,0.0,1.25,-0.15,0.0,0.0,0.0,false,false,false,false,2,true)
+			AttachEntityToEntity(uObject,ped,11816,0.0,1.25,-0.15,0.0,0.0,0.0,false,false,false,false,2,true)
 			bedAttach = Selected[1]
 		end
 	end
@@ -1829,21 +1895,21 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("target:pacienteDeitar")
 AddEventHandler("target:pacienteDeitar",function()
-	local Ped = PlayerPedId()
-	local Coords = GetEntityCoords(Ped)
+	local ped = PlayerPedId()
+	local coords = GetEntityCoords(ped)
 
 	for k,v in pairs(beds) do
-		local object = GetClosestObjectOfType(Coords["x"],Coords["y"],Coords["z"],0.9,k,0,0,0)
+		local object = GetClosestObjectOfType(coords["x"],coords["y"],coords["z"],0.9,k,0,0,0)
 		if DoesEntityExist(object) then
-			local Coords = GetEntityCoords(object)
+			local objCoords = GetEntityCoords(object)
 
-			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + v[1],1,0,0,0)
-			SetEntityHeading(Ped,GetEntityHeading(object) + v[2] - 180.0)
+			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + v[1],1,0,0,0)
+			SetEntityHeading(ped,GetEntityHeading(object) + v[2] - 180.0)
 
 			vRP.playAnim(false,{"anim@gangops@morgue@table@","body_search"},true)
 
 			if k == -935625561 then
-				AttachEntityToEntity(Ped,object,11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
+				AttachEntityToEntity(ped,object,11816,0.0,0.0,1.0,0.0,0.0,0.0,false,false,false,false,2,true)
 				bedAttach = object
 			end
 
@@ -1892,16 +1958,16 @@ local chairs = {
 RegisterNetEvent("target:animSentar")
 AddEventHandler("target:animSentar",function()
 	if not LocalPlayer["state"]["Commands"] and not LocalPlayer["state"]["Handcuff"] then
-		local Ped = PlayerPedId()
-		if GetEntityHealth(Ped) > 100 then
-			local Coords = GetEntityCoords(Selected[1])
+		local ped = PlayerPedId()
+		if GetEntityHealth(ped) > 100 then
+			local objCoords = GetEntityCoords(Selected[1])
 
 			FreezeEntityPosition(Selected[1],true)
-			SetEntityCoords(Ped,Coords["x"],Coords["y"],Coords["z"] + chairs[Selected[2]],1,0,0,0)
+			SetEntityCoords(ped,objCoords["x"],objCoords["y"],objCoords["z"] + chairs[Selected[2]],1,0,0,0)
 			if chairs[Selected[2]] == 0.7 then
-				SetEntityHeading(Ped,GetEntityHeading(Selected[1]))
+				SetEntityHeading(ped,GetEntityHeading(Selected[1]))
 			else
-				SetEntityHeading(Ped,GetEntityHeading(Selected[1]) - 180.0)
+				SetEntityHeading(ped,GetEntityHeading(Selected[1]) - 180.0)
 			end
 
 			vRP.playAnim(false,{ task = "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" },false)

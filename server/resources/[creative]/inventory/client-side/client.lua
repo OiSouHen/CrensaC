@@ -896,14 +896,16 @@ end)
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
-		local coords = GetEntityCoords(ped)
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local ped = PlayerPedId()
+			local coords = GetEntityCoords(ped)
 
-		for _,v in pairs(Drops) do
-			local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
-			if distance <= 50 then
-				timeDistance = 1
-				DrawMarker(21,v["coords"][1],v["coords"][2],v["coords"][3] + 0.25,0.0,0.0,0.0,0.0,180.0,0.0,0.25,0.35,0.25,46,110,76,100,0,0,0,1)
+			for _,v in pairs(Drops) do
+				local distance = #(coords - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
+				if distance <= 50 then
+					timeDistance = 1
+					DrawMarker(21,v["coords"][1],v["coords"][2],v["coords"][3] + 0.25,0.0,0.0,0.0,0.0,180.0,0.0,0.25,0.35,0.25,46,110,76,100,0,0,0,1)
+				end
 			end
 		end
 
@@ -915,17 +917,20 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestInventory",function(data,cb)
 	local Items = {}
-	local ped = PlayerPedId()
-	local coords = GetEntityCoords(ped)
-	local _,cdz = GetGroundZFor_3dCoord(coords["x"],coords["y"],coords["z"])
 
-	for k,v in pairs(Drops) do
-		local distance = #(vec3(coords["x"],coords["y"],cdz) - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
-		if distance <= 0.9 then
-			local Number = #Items + 1
+	if LocalPlayer["state"]["Route"] < 900000 then
+		local ped = PlayerPedId()
+		local coords = GetEntityCoords(ped)
+		local _,cdz = GetGroundZFor_3dCoord(coords["x"],coords["y"],coords["z"])
 
-			Items[Number] = v
-			Items[Number]["id"] = k
+		for k,v in pairs(Drops) do
+			local distance = #(vec3(coords["x"],coords["y"],cdz) - vec3(v["coords"][1],v["coords"][2],v["coords"][3]))
+			if distance <= 0.9 then
+				local Number = #Items + 1
+
+				Items[Number] = v
+				Items[Number]["id"] = k
+			end
 		end
 	end
 
@@ -964,12 +969,12 @@ end
 local wheelChair = false
 CreateThread(function()
 	while true do
-		local ped = PlayerPedId()
-		if IsPedInAnyVehicle(ped) then
-			local vehicle = GetVehiclePedIsUsing(ped)
-			local model = GetEntityModel(vehicle)
-			if model == -1178021069 then
-				if not IsEntityPlayingAnim(ped,"missfinale_c2leadinoutfin_c_int","_leadin_loop2_lester",3) then
+		local Ped = PlayerPedId()
+		if IsPedInAnyVehicle(Ped) then
+			local Vehicle = GetVehiclePedIsUsing(Ped)
+			local Model = GetEntityModel(Vehicle)
+			if Model == -1178021069 then
+				if not IsEntityPlayingAnim(Ped,"missfinale_c2leadinoutfin_c_int","_leadin_loop2_lester",3) then
 					vRP.playAnim(true,{"missfinale_c2leadinoutfin_c_int","_leadin_loop2_lester"},true)
 					wheelChair = true
 				end
@@ -1624,3 +1629,273 @@ end)
 function cRP.CheckArms()
 	return exports["paramedic"]:Arms()
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISVARIABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local disSelect = 1
+local disPlate = nil
+local disModel = nil
+local disActive = false
+local disVehicle = false
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISCOORDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local disCoords = {
+	{ 1222.5,-704.47,60.46,280.63 },
+	{ 1130.51,-485.59,65.38,73.71 },
+	{ 1145.64,-275.44,68.73,87.88 },
+	{ 870.49,-36.63,78.54,56.7 },
+	{ 686.17,270.39,93.18,240.95 },
+	{ 424.75,248.87,102.97,252.29 },
+	{ 320.31,344.97,104.97,164.41 },
+	{ -305.23,379.3,110.1,14.18 },
+	{ -585.54,526.74,107.3,215.44 },
+	{ -141.85,-1415.44,30.26,119.06 },
+	{ 78.27,-1442.22,29.08,323.15 },
+	{ 37.9,-1627.08,29.05,320.32 },
+	{ 8.93,-1758.65,29.07,48.19 },
+	{ -57.56,-1845.21,26.25,320.32 },
+	{ 165.33,-1862.16,23.88,155.91 },
+	{ 281.15,-2081.27,16.58,110.56 },
+	{ 273.47,-2569.7,5.48,204.1 },
+	{ 879.22,-2174.3,30.28,172.92 },
+	{ 1116.02,-1502.53,34.46,272.13 },
+	{ 1318.13,-534.38,71.83,158.75 },
+	{ 1272.4,-353.88,68.85,110.56 },
+	{ 653.32,176.89,94.78,68.04 },
+	{ 638.88,285.34,102.97,150.24 },
+	{ 320.97,495.35,152.24,286.3 },
+	{ -74.63,495.95,144.22,8.51 },
+	{ 176.89,483.66,141.99,351.5 },
+	{ 181.24,380.51,108.55,0.0 },
+	{ -398.45,337.43,108.48,0.0 },
+	{ -472.76,353.61,103.64,337.33 },
+	{ -947.26,574.26,100.76,343.0 },
+	{ -1093.13,597.22,102.83,212.6 },
+	{ -1271.82,452.79,94.8,19.85 },
+	{ -1452.14,533.73,118.98,243.78 },
+	{ -1507.85,429.28,110.84,45.36 },
+	{ -1945.59,461.12,101.76,96.38 },
+	{ -2001.96,368.42,94.24,184.26 },
+	{ -1325.69,275.44,63.19,221.11 },
+	{ -1281.53,251.9,63.1,0.0 },
+	{ -905.31,-161.16,41.65,25.52 },
+	{ -1023.98,-889.95,5.43,28.35 },
+	{ -1318.87,-1141.38,4.26,90.71 },
+	{ -1311.98,-1262.24,4.33,17.01 },
+	{ -1297.72,-1316.22,4.5,0.0 },
+	{ -1245.66,-1408.65,4.08,306.15 },
+	{ -1092.76,-1595.64,4.31,306.15 },
+	{ -963.01,-1592.08,4.79,19.85 },
+	{ -915.94,-1541.24,4.79,17.01 },
+	{ -1612.04,172.37,59.56,206.93 },
+	{ -1242.87,381.54,75.12,14.18 },
+	{ -1486.76,40.22,54.19,345.83 },
+	{ -1576.99,-81.09,53.9,272.13 },
+	{ -1391.2,75.67,53.46,130.4 },
+	{ -1371.61,-26.18,53.01,0.0 },
+	{ -1643.74,-232.78,54.63,252.29 },
+	{ -1656.27,-379.46,45.09,232.45 },
+	{ -1591.38,-643.5,29.93,232.45 },
+	{ -1486.49,-735.27,25.29,181.42 },
+	{ -1423.37,-963.41,7.03,56.7 },
+	{ -1277.8,-1149.11,6.08,113.39 },
+	{ -1070.8,-1424.54,5.12,257.96 },
+	{ -1069.67,-1250.98,5.49,119.06 },
+	{ -1610.2,-812.21,9.81,138.9 },
+	{ -2061.94,-455.86,11.44,320.32 },
+	{ -2981.69,83.31,11.29,147.41 },
+	{ -3045.4,111.55,11.32,320.32 },
+	{ -2960.51,368.42,14.54,31.19 },
+	{ -3052.28,599.99,7.11,289.14 },
+	{ -3253.1,987.45,12.23,0.0 },
+	{ -3236.9,1038.27,11.42,266.46 },
+	{ -3156.21,1153.75,20.83,246.62 },
+	{ -1819.34,785.21,137.68,223.94 },
+	{ -1749.7,366.06,89.47,116.23 },
+	{ -1194.9,322.62,70.48,17.01 },
+	{ -1207.54,272.21,69.3,286.3 },
+	{ -722.21,-76.25,37.31,243.78 },
+	{ -475.64,-218.96,36.16,212.6 },
+	{ -532.25,-270.6,34.98,110.56 },
+	{ -465.2,-451.88,33.97,82.21 },
+	{ -391.09,-456.15,30.72,127.56 },
+	{ -357.4,-767.63,38.55,272.13 },
+	{ -330.9,-935.02,30.85,68.04 },
+	{ -27.99,-2547.6,5.78,53.86 },
+	{ -140.18,-2506.08,5.76,53.86 },
+	{ -168.21,-2583.56,5.76,0.0 },
+	{ -219.34,-2488.65,5.76,87.88 },
+	{ -340.93,-2430.9,5.76,138.9 },
+	{ -434.24,-2441.94,5.76,232.45 },
+	{ 124.19,-2898.73,5.76,0.0 },
+	{ 237.55,-3315.73,5.56,201.26 },
+	{ 150.76,-3184.91,5.63,178.59 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISMANTLECATEGORY
+-----------------------------------------------------------------------------------------------------------------------------------------
+local DismantleCategory = {
+	["B"] = {
+		"panto","prairie","rhapsody","blista","dilettante","emperor2","emperor","bfinjection","ingot","regina"
+	},
+	["B+"] = {
+		"asbo","brioso","club","weevil","felon","felon2","jackal","oracle","zion","zion2","buccaneer","virgo",
+		"voodoo","bifta","rancherxl","bjxl","cavalcade","gresley","habanero","rocoto","primo","stratum","pigalle",
+		"peyote","manana","streiter"
+	},
+	["A"] = {
+		"exemplar","windsor","windsor2","blade","clique","dominator","faction2","gauntlet","moonbeam","nightshade",
+		"sabregt2","tampa","rebel","baller","cavalcade2","fq2","huntley","landstalker","patriot","radi","xls","blista2",
+		"retinue","stingergt","surano","specter","sultan","schwarzer","schafter2","ruston","rapidgt","raiden","ninef",
+		"ninef2","omnis","massacro","jester","feltzer2","futo","carbonizzare"
+	},
+	["A+"] = {
+		"voltic","sc1","sultanrs","tempesta","nero","nero2","reaper","gp1","infernus","bullet","banshee2","turismo2","retinue",
+		"mamba","infernus2","feltzer3","coquette2","futo2","zr350","tampa2","sugoi","sultan2","schlagen","penumbra","pariah",
+		"paragon","jester3","gb200","elegy","furoregt"
+	},
+	["S"] = {
+		"zentorno","xa21","visione","vagner","vacca","turismor","t20","osiris","italigtb","entityxf","cheetah","autarch","sultan3",
+		"cypher","vectre","growler","comet6","jester4","euros","calico","neon","kuruma","issi7","italigto","komoda","elegy2","coquette4"
+	},
+	["S+"] = {
+		"mazdarx72","rangerover","civictyper","subaruimpreza","corvettec7","ferrariitalia","mustang1969","vwtouareg",
+		"mercedesg65","bugattiatlantic","m8competition","audirs6","audir8","silvias15","camaro","mercedesamg63",
+		"dodgechargerrt69","skyliner342","astonmartindbs","panameramansory","lamborghinihuracanlw","lancerevolutionx",
+		"porsche911","jeepcherokee","dodgecharger1970","golfgti","subarubrz","nissangtr","mustangfast","golfmk7",
+		"lancerevolution9","shelbygt500","ferrari812","bmwm4gts","ferrarif12","bmwm5e34","toyotasupra2","escalade2021",
+		"fordmustang","mclarensenna","lamborghinihuracan","acuransx","toyotasupra","escaladegt900","bentleybacalar"
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISMANTLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.Dismantle(Experience)
+	if not disActive then
+		disActive = true
+		disSelect = math.random(#disCoords)
+		disPlate = "DISM"..(1000 + LocalPlayer["state"]["Id"])
+
+		local Category = ClassCategory(Experience)
+		local ModelRandom = math.random(#DismantleCategory[Category])
+		disModel = DismantleCategory[Category][ModelRandom]
+
+		local RandomX = math.random(25,100)
+		local RandomY = math.random(25,100)
+
+		if math.random(2) >= 2 then
+			TriggerEvent("NotifyPush",{ code = 20, title = "Localização do Veículo", x = disCoords[disSelect][1] + RandomX + 0.0, y = disCoords[disSelect][2] - RandomY + 0.0, z = disCoords[disSelect][3], vehicle = vehicleName(disModel).." - "..disPlate, blipColor = 60 })
+		else
+			TriggerEvent("NotifyPush",{ code = 20, title = "Localização do Veículo", x = disCoords[disSelect][1] - RandomX + 0.0, y = disCoords[disSelect][2] + RandomY + 0.0, z = disCoords[disSelect][3], vehicle = vehicleName(disModel).." - "..disPlate, blipColor = 60 })
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISMANTLESTATUS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.DismantleStatus()
+	return disActive
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:DISRESET
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:Disreset")
+AddEventHandler("inventory:Disreset",function()
+	disSelect = 1
+	disPlate = nil
+	disModel = nil
+	disActive = false
+	disVehicle = false
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADDISMANTLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	while true do
+		if disActive and not disVehicle then
+			local Ped = PlayerPedId()
+			local Coords = GetEntityCoords(Ped)
+			local Distance = #(Coords - vec3(disCoords[disSelect][1],disCoords[disSelect][2],disCoords[disSelect][3]))
+
+			if Distance <= 125 then
+				disVehicle = vGARAGE.serverVehicle(disModel,disCoords[disSelect][1],disCoords[disSelect][2],disCoords[disSelect][3],disCoords[disSelect][4],disPlate,1000,nil,1000)
+
+				if NetworkDoesNetworkIdExist(disVehicle) then
+					local vehNet = NetToEnt(disVehicle)
+					if NetworkDoesNetworkIdExist(vehNet) then
+						SetVehicleOnGroundProperly(vehNet)
+					end
+				end
+			end
+		end
+
+		Wait(1000)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISPEDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local disPeds = {
+	"ig_abigail","a_m_m_afriamer_01","ig_mp_agent14","csb_agent","ig_amandatownley","s_m_y_ammucity_01","u_m_y_antonb","g_m_m_armboss_01",
+	"g_m_m_armgoon_01","g_m_m_armlieut_01","ig_ashley","s_m_m_autoshop_01","ig_money","g_m_y_ballaeast_01","g_f_y_ballas_01","g_m_y_ballasout_01",
+	"s_m_y_barman_01","u_m_y_baygor","a_m_o_beach_01","ig_bestmen","a_f_y_bevhills_01","a_m_m_bevhills_02","u_m_m_bikehire_01","u_f_y_bikerchic",
+	"mp_f_boatstaff_01","s_m_m_bouncer_01","ig_brad","ig_bride","u_m_y_burgerdrug_01","a_m_m_business_01","a_m_y_business_02","s_m_o_busker_01",
+	"ig_car3guy2","cs_carbuyer","g_m_m_chiboss_01","g_m_m_chigoon_01","g_m_m_chigoon_02","u_f_y_comjane","ig_dale","ig_davenorton","s_m_y_dealer_01",
+	"ig_denise","ig_devin","a_m_y_dhill_01","ig_dom","a_m_y_downtown_01","ig_dreyfuss"
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DISWEAPONS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local disWeapons = { "WEAPON_HEAVYPISTOL","WEAPON_SMG","WEAPON_ASSAULTSMG","WEAPON_APPISTOL","WEAPON_SPECIALCARBINE","WEAPON_PUMPSHOTGUN" }
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:DISPED
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:DisPed")
+AddEventHandler("inventory:DisPed",function()
+local Ped = PlayerPedId()
+	local Rand = math.random(#disPeds)
+	local Coords = GetEntityCoords(Ped)
+	local Weapon = math.random(#disWeapons)
+	local cX = Coords["x"] + math.random(-25.0,25.0)
+	local cY = Coords["y"] + math.random(-25.0,25.0)
+	local Hit,EntCoords = GetSafeCoordForPed(cX,cY,Coords["z"],false,16)
+	local Entity,EntityNet = vRPS.CreatePed(disPeds[Rand],EntCoords["x"],EntCoords["y"],EntCoords["z"],3374176,4)
+	if Entity then
+		Wait(1000)
+
+		local SpawnEntity = 0
+		local NetEntity = NetworkGetEntityFromNetworkId(EntityNet)
+		while not DoesEntityExist(NetEntity) and SpawnEntity <= 1000 do
+			NetEntity = NetworkGetEntityFromNetworkId(EntityNet)
+			SpawnEntity = SpawnEntity + 1
+			Wait(1)
+		end
+
+		SpawnEntity = 0
+		local NetControl = NetworkRequestControlOfEntity(NetEntity)
+		while not NetControl and SpawnEntity <= 1000 do
+			NetControl = NetworkRequestControlOfEntity(NetEntity)
+			SpawnEntity = SpawnEntity + 1
+			Wait(1)
+		end
+
+		SetPedArmour(NetEntity,100)
+		SetPedAccuracy(NetEntity,100)
+		SetPedKeepTask(NetEntity,true)
+		SetCanAttackFriendly(NetEntity,false,true)
+		TaskCombatPed(NetEntity,Ped,0,16)
+		SetPedCombatAttributes(NetEntity,46,true)
+		SetPedCombatAbility(NetEntity,2)
+		SetPedCombatAttributes(NetEntity,0,true)
+		GiveWeaponToPed(NetEntity,disWeapons[Weapon],-1,false,true)
+		SetPedDropsWeaponsWhenDead(NetEntity,false)
+		SetPedCombatRange(NetEntity,2)
+		SetPedFleeAttributes(NetEntity,0,0)
+		SetPedConfigFlag(NetEntity,58,true)
+		SetPedConfigFlag(NetEntity,75,true)
+		SetPedFiringPattern(NetEntity,-957453492)
+		SetBlockingOfNonTemporaryEvents(NetEntity,true)
+		SetEntityAsNoLongerNeeded(NetEntity)
+	end
+end)
