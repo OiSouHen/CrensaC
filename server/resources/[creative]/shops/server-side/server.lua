@@ -91,21 +91,6 @@ local shops = {
 			["bread"] = 5
 		}
 	},
-	["mercadoCentral"] = {
-		["mode"] = "Buy",
-		["type"] = "Cash",
-		["list"] = {
-			["rose"] = 25,
-			["firecracker"] = 100,
-			["radio"] = 975,
-			["cellphone"] = 575,
-			["binoculars"] = 275,
-			["camera"] = 275,
-			["vape"] = 4750,
-			["scanner"] = 6750,
-			["chair01"] = 750
-		}
-	},
 	["Clothes"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
@@ -161,10 +146,10 @@ local shops = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
-			["gauze"] = 225,
-			["sinkalmy"] = 375,
 			["analgesic"] = 125,
-			["ritmoneury"] = 475
+			["gauze"] = 100,
+			["bandage"] = 225,
+			["medkit"] = 575
 		}
 	},
 	["Paramedic"] = {
@@ -468,22 +453,6 @@ local shops = {
 			["card04"] = 225,
 			["card05"] = 315,
 			["pendrive"] = 275
-		}
-	},
-	["mcFridge"] = {
-		["mode"] = "Buy",
-		["type"] = "Cash",
-		["list"] = {
-			["dewars"] = 10,
-			["chandon"] = 15,
-			["hennessy"] = 13,
-			["absolut"] = 11,
-			["energetic"] = 15,
-			["soda"] = 15,
-			["cola"] = 15,
-			["sandwich"] = 15,
-			["fries"] = 15,
-			["donut"] = 15
 		}
 	}
 }
