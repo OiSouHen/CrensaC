@@ -58,29 +58,30 @@ end)
 -- CRAFTING:UPDATE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("crafting:Update")
-AddEventHandler("crafting:Update",function(action)
-	SendNUIMessage({ action = action })
+AddEventHandler("crafting:Update",function(Action)
+	SendNUIMessage({ action = Action })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CRAFTLIST
+-- LIST
 -----------------------------------------------------------------------------------------------------------------------------------------
-local craftList = {
-	{ 82.45,-1553.26,29.59,"lixeiroShop" },
-	{ 287.36,2843.6,44.7,"lixeiroShop" },
-	{ -413.68,6171.99,31.48,"lixeiroShop" },
-	{ 1272.26,-1712.57,54.76,"ilegalWeapons" },
-	{ 46.98,-1748.2,29.64,"legalShop" },
-	{ 2747.42,3471.54,55.67,"legalShop" },
-	{ 2524.34,4106.46,38.59,"theLostShop" },
-	{ 813.34,-752.94,26.77,"pizzaThis" },
-	{ -1200.02,-898.15,13.99,"burgerShot" },
-	{ 1593.9,6455.35,26.02,"popsDiner" },
-	{ -590.37,-1059.77,22.34,"Desserts" },
-	{ -818.2,-717.87,23.78,"Triads" },
-	{ 128.59,-3008.95,7.04,"mechanicShop" },
-	{ -1870.5,2060.64,135.44,"vinhedoShop" },
-	{ -1543.54,79.91,57.00,"playboyShop" },
-	{ 415.73,-1508.83,33.8,"salierisShop" }
+local List = {
+	["1"] = { 82.45,-1553.26,29.59,"Lixeiro" },
+	["2"] = { 287.36,2843.6,44.7,"Lixeiro" },
+	["3"] = { -413.68,6171.99,31.48,"Lixeiro" },
+	["4"] = { 1272.26,-1712.57,54.76,"Lester" },
+	["5"] = { 46.21,-1749.45,29.64,"Mercado" },
+	["6"] = { 2747.81,3472.91,55.67,"Mercado" },
+	["7"] = { 807.67,-757.51,26.77,"PizzaThis" },
+	["8"] = { -1198.04,-899.07,13.99,"BurgerShot" },
+	["9"] = { -590.37,-1059.77,22.34,"UwuCoffee" },
+	["10"] = { 122.69,-1041.57,29.56,"BeanMachine" },
+	["11"] = { 95.58,-1985.56,20.44,"Ballas" },
+	["12"] = { -31.47,-1434.84,31.49,"Families" },
+	["13"] = { 347.45,-2069.06,20.89,"Vagos" },
+	["14"] = { 512.29,-1803.52,28.51,"Aztecas" },
+	["15"] = { 230.55,-1753.35,28.98,"Bloods" },
+	["16"] = { -818.26,-717.89,23.78,"Triads" },
+	["17"] = { 501.38,-66.92,58.15,"Razors" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADTARGET
@@ -88,8 +89,8 @@ local craftList = {
 CreateThread(function()
 	SetNuiFocus(false,false)
 
-	for k,v in pairs(craftList) do
-		exports["target"]:AddCircleZone("Crafting:"..k,vec3(v[1],v[2],v[3]),1.0,{
+	for k,v in pairs(List) do
+		exports["target"]:AddCircleZone("Crafting:"..k,vec3(v[1],v[2],v[3]),0.75,{
 			name = "Crafting:"..k,
 			heading = 3374176
 		},{
@@ -108,18 +109,13 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CRAFTING:OPENSYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("crafting:openSystem",function(shopId)
-	if vSERVER.requestPerm(craftList[shopId][4]) then
-		SetNuiFocus(true,true)
-		SendNUIMessage({ action = "showNUI", name = craftList[shopId][4] })
+AddEventHandler("crafting:openSystem",function(Number)
+	if List[Number] then
+		if vSERVER.requestPerm(Number,List[Number][4]) then
+			SetNuiFocus(true,true)
+			SendNUIMessage({ action = "showNUI", name = List[Number][4] })
+		end
 	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- CRAFTING:FUELSHOP
------------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("crafting:fuelShop",function()
-	SetNuiFocus(true,true)
-	SendNUIMessage({ action = "showNUI", name = "fuelShop" })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CRAFTING:OPENSOURCE
@@ -127,13 +123,13 @@ end)
 RegisterNetEvent("crafting:openSource")
 AddEventHandler("crafting:openSource",function()
 	SetNuiFocus(true,true)
-	SendNUIMessage({ action = "showNUI", name = "craftShop" })
+	SendNUIMessage({ action = "showNUI", name = "Inventory" })
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CRAFTING:AMMUNATION
+-- CRAFTING:CONTAINERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("crafting:Ammunation")
-AddEventHandler("crafting:Ammunation",function()
+RegisterNetEvent("crafting:Containers")
+AddEventHandler("crafting:Containers",function()
 	SetNuiFocus(true,true)
-	SendNUIMessage({ action = "showNUI", name = "ammuShop" })
+	SendNUIMessage({ action = "showNUI", name = "Containers" })
 end)

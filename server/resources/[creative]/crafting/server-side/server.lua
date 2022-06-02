@@ -13,7 +13,7 @@ Tunnel.bindInterface("crafting",cRP)
 -- CRAFTLIST
 -----------------------------------------------------------------------------------------------------------------------------------------
 local craftList = {
-	["salierisShop"] = {
+	["Salieris"] = {
 		["perm"] = "Salieris",
 		["list"] = {
 			["WEAPON_NAIL_AMMO"] = {
@@ -25,7 +25,7 @@ local craftList = {
 			}
 		}
 	},
-	["playboyShop"] = {
+	["Playboy"] = {
 		["perm"] = "Playboy",
 		["list"] = {
 			["WEAPON_PISTOL_AMMO"] = {
@@ -83,7 +83,7 @@ local craftList = {
 			}
 		}
 	},
-	["mechanicShop"] = {
+	["Mechanic"] = {
 		["perm"] = "Mechanic",
 		["list"] = {
 			["toolbox"] = {
@@ -160,7 +160,7 @@ local craftList = {
 			}
 		}
 	},
-	["legalShop"] = {
+	["Mercado"] = {
 		["list"] = {
 			["keyboard"] = {
 				["amount"] = 1,
@@ -517,7 +517,7 @@ local craftList = {
 			}
 		}
 	},
-	["pizzaThis"] = {
+	["PizzaThis"] = {
 		["list"] = {
 			["pizza"] = {
 				["amount"] = 1,
@@ -539,7 +539,7 @@ local craftList = {
 			}
 		}
 	},
-	["burgerShot"] = {
+	["BurgerShot"] = {
 		["list"] = {
 			["hamburger2"] = {
 				["amount"] = 1,
@@ -553,7 +553,7 @@ local craftList = {
 			}
 		}
 	},
-	["popsDiner"] = {
+	["PopsDiner"] = {
 		["list"] = {
 			["orangejuice"] = {
 				["amount"] = 1,
@@ -613,39 +613,16 @@ local craftList = {
 			}
 		}
 	},
-	["craftShop"] = {
+	["Inventory"] = {
 		["list"] = {
-			["ketchup"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["emptybottle"] = 1,
-					["tomato"] = 6
-				}
-			},
-			["bandage"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["plaster"] = 1,
-					["cotton"] = 1,
-					["alcohol"] = 1
-				}
-			},
 			["gauze"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["saline"] = 1,
-					["cotton"] = 1
-				}
-			},
-			["bucket"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["plastic"] = 5,
-					["aluminum"] = 2
+					["plaster"] = 1,
+					["cotton"] = 2,
+					["alcohol"] = 1,
+					["silk"] = 1
 				}
 			},
 			["campfire"] = {
@@ -657,11 +634,12 @@ local craftList = {
 					["woodlog"] = 10
 				}
 			},
-			["seaweed"] = {
+			["ketchup"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["wheat"] = 3
+					["emptybottle"] = 1,
+					["tomato"] = 6
 				}
 			}
 		}
@@ -708,7 +686,7 @@ local craftList = {
 			}
 		}
 	},
-	["theLostShop"] = {
+	["TheLost"] = {
 		["perm"] = "TheLost",
 		["list"] = {
 			["tablecoke"] = {
@@ -843,7 +821,7 @@ local craftList = {
 			}
 		}
 	},
-	["vinhedoShop"] = {
+	["Vinhedo"] = {
 		["perm"] = "Vinhedo",
 		["list"] = {
 			["tablecoke"] = {
@@ -1204,7 +1182,7 @@ local craftList = {
 			}
 		}
 	},
-	["lixeiroShop"] = {
+	["Lixeiro"] = {
 		["list"] = {
 			["glass"] = {
 				["amount"] = 3,
@@ -1261,7 +1239,7 @@ local craftList = {
 			}
 		}
 	},
-	["ilegalWeapons"] = {
+	["Lester"] = {
 		["list"] = {
 			["vest"] = {
 				["amount"] = 1,
