@@ -87,7 +87,6 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 				exports["dynamic"]:AddButton("Remover do Veículo","Remover o animal no veículo.","dynamic:animalFunctions","remover","animal",false)
 			end
 
-			exports["dynamic"]:AddButton("Desmanche","Listagem dos veículos.","inventory:Dismantle","","others",true)
 			exports["dynamic"]:AddButton("Ferimentos","Verificar ferimentos no corpo.","paramedic:Injuries","","others",false)
 
 			if not IsPedInAnyVehicle(Ped) then
