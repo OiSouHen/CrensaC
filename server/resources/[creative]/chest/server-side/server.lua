@@ -10,9 +10,9 @@ vRP = Proxy.getInterface("vRP")
 cRP = {}
 Tunnel.bindInterface("chest",cRP)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- CHECKINTPERMISSIONS
+-- PERMISSIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.checkIntPermissions(chestName)
+function cRP.Permissions(chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
