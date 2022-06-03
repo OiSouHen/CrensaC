@@ -800,7 +800,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			end
 		return end
 
-		if nameItem == "attachsFlashlight" or nameItem == "attachsCrosshair" or nameItem == "attachsSilencer" or nameItem == "attachsGrip" then
+		if nameItem == "attachsFlashlight" or nameItem == "attachsCrosshair" or nameItem == "attachsSilencer" or nameItem == "attachsGrip" or nameItem == "attachsMagazine" then
 			local returnWeapon = vCLIENT.returnWeapon(source)
 			if returnWeapon then
 				if Attachs[user_id][returnWeapon] == nil then
@@ -3404,7 +3404,6 @@ function cRP.removeThrowable(nameItem)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		vRP.removeInventoryItem(user_id,nameItem,1,true)
-		vRP.removeInventoryItem(user_id,nameItem,1,true)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -3461,10 +3460,10 @@ function cRP.StealPeds()
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- INVENTORY:CLEARWEAPONS
+-- INVENTORY:CLEANWEAPONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterServerEvent("inventory:clearWeapons")
-AddEventHandler("inventory:clearWeapons",function(user_id)
+RegisterServerEvent("inventory:CleanWeapons")
+AddEventHandler("inventory:CleanWeapons",function(user_id)
 	if Ammos[user_id] then
 		Ammos[user_id] = {}
 		Attachs[user_id] = {}

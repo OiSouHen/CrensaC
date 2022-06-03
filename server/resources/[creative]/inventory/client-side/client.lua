@@ -18,12 +18,32 @@ vSERVER = Tunnel.getInterface("inventory")
 local Drops = {}
 local Types = ""
 local Weapon = ""
+local PushSlot = 1
 local Backpack = false
 local weaponActive = false
 local putWeaponHands = false
 local storeWeaponHands = false
 local timeReload = GetGameTimer()
 LocalPlayer["state"]["Buttons"] = false
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:CLEANWEAPONS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:CleanWeapons")
+AddEventHandler("inventory:CleanWeapons",function(Create)
+	if Weapon ~= "" then
+		if Create and PushSlot <= 5 then
+			TriggerEvent("inventory:CreateWeapon",Weapon)
+		end
+
+		RemoveWeaponFromPed(PlayerPedId(),Weapon)
+		SetPedAmmo(PlayerPedId(),Weapon,0)
+	end
+
+	TriggerEvent("hud:Weapon",false)
+	weaponActive = false
+	Weapon = ""
+	Types = ""
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADBLOCKBUTTONS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -109,12 +129,20 @@ RegisterNUICallback("Deliver",function(data)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:SLOT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:Slot")
+AddEventHandler("inventory:Slot",function(Number,Amount)
+	if MumbleIsConnected() then
+		PushSlot = parseInt(Number)
+		TriggerServerEvent("inventory:useItem",Number,Amount)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- USEITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("useItem",function(data)
-	if MumbleIsConnected() then
-		TriggerServerEvent("inventory:useItem",data["slot"],data["amount"])
-	end
+	TriggerEvent("inventory:Slot",data["slot"],data["amount"])
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SENDITEM
@@ -142,30 +170,15 @@ AddEventHandler("inventory:Update",function(action)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- INVENTORY:CLEARWEAPONS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("inventory:clearWeapons")
-AddEventHandler("inventory:clearWeapons",function()
-	if Weapon ~= "" then
-		Weapon = ""
-		weaponActive = false
-		TriggerEvent("hud:Weapon",false)
-		RemoveAllPedWeapons(PlayerPedId(),true)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- INVENTORY:VERIFYWEAPON
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("inventory:verifyWeapon")
 AddEventHandler("inventory:verifyWeapon",function(splitName)
 	if Weapon == splitName then
-		local Ped = PlayerPedId()
-		local weaponAmmo = GetAmmoInPedWeapon(Ped,Weapon)
+		local ped = PlayerPedId()
+		local weaponAmmo = GetAmmoInPedWeapon(ped,Weapon)
 		if not vSERVER.verifyWeapon(Weapon,weaponAmmo) then
-			TriggerEvent("hud:Weapon",false)
-			RemoveAllPedWeapons(Ped,true)
-			weaponActive = false
-			Weapon = ""
+			TriggerEvent("inventory:CleanWeapons",false)
 		end
 	else
 		if Weapon == "" then
@@ -185,9 +198,13 @@ AddEventHandler("inventory:preventWeapon",function(storeWeapons)
 		vSERVER.preventWeapon(Weapon,weaponAmmo)
 
 		if storeWeapons then
-			RemoveAllPedWeapons(Ped,true)
+			if Weapon ~= "" then
+				TriggerEvent("inventory:CreateWeapon",Weapon)
+				RemoveWeaponFromPed(Ped,Weapon)
+				SetPedAmmo(Ped,Weapon,0)
+			end
 		end
-		
+
 		Types = ""
 		Weapon = ""
 		weaponActive = false
@@ -521,6 +538,33 @@ local weaponAttachs = {
 		["WEAPON_ASSAULTRIFLE_MK2"] = "COMPONENT_AT_SCOPE_MEDIUM_MK2",
 		["WEAPON_ASSAULTSMG"] = "COMPONENT_AT_SCOPE_MACRO"
 	},
+	["attachsMagazine"] = {
+		["WEAPON_PISTOL"] = "COMPONENT_PISTOL_CLIP_02",
+		["WEAPON_PISTOL_MK2"] = "COMPONENT_PISTOL_MK2_CLIP_02",
+		["WEAPON_COMPACTRIFLE"] = "COMPONENT_COMPACTRIFLE_CLIP_02",
+		["WEAPON_APPISTOL"] = "COMPONENT_APPISTOL_CLIP_02",
+		["WEAPON_HEAVYPISTOL"] = "COMPONENT_HEAVYPISTOL_CLIP_02",
+		["WEAPON_MACHINEPISTOL"] = "COMPONENT_MACHINEPISTOL_CLIP_02",
+		["WEAPON_MICROSMG"] = "COMPONENT_MICROSMG_CLIP_02",
+		["WEAPON_MINISMG"] = "COMPONENT_MINISMG_CLIP_02",
+		["WEAPON_SNSPISTOL"] = "COMPONENT_SNSPISTOL_CLIP_02",
+		["WEAPON_SNSPISTOL_MK2"] = "COMPONENT_SNSPISTOL_MK2_CLIP_02",
+		["WEAPON_VINTAGEPISTOL"] = "COMPONENT_VINTAGEPISTOL_CLIP_02",
+		["WEAPON_PISTOL50"] = "COMPONENT_PISTOL50_CLIP_02",
+		["WEAPON_COMBATPISTOL"] = "COMPONENT_COMBATPISTOL_CLIP_02",
+		["WEAPON_CARBINERIFLE"] = "COMPONENT_CARBINERIFLE_CLIP_02",
+		["WEAPON_CARBINERIFLE_MK2"] = "COMPONENT_CARBINERIFLE_MK2_CLIP_02",
+		["WEAPON_ADVANCEDRIFLE"] = "COMPONENT_ADVANCEDRIFLE_CLIP_02",
+		["WEAPON_BULLPUPRIFLE"] = "COMPONENT_BULLPUPRIFLE_CLIP_02",
+		["WEAPON_BULLPUPRIFLE_MK2"] = "COMPONENT_BULLPUPRIFLE_MK2_CLIP_02",
+		["WEAPON_SPECIALCARBINE"] = "COMPONENT_SPECIALCARBINE_CLIP_02",
+		["WEAPON_SMG"] = "COMPONENT_SMG_CLIP_02",
+		["WEAPON_SMG_MK2"] = "COMPONENT_SMG_MK2_CLIP_02",
+		["WEAPON_ASSAULTRIFLE"] = "COMPONENT_ASSAULTRIFLE_CLIP_02",
+		["WEAPON_ASSAULTRIFLE_MK2"] = "COMPONENT_ASSAULTRIFLE_MK2_CLIP_02",
+		["WEAPON_ASSAULTSMG"] = "COMPONENT_ASSAULTSMG_CLIP_02",
+		["WEAPON_GUSENBERG"] = "COMPONENT_GUSENBERG_CLIP_02"
+	},
 	["attachsSilencer"] = {
 		["WEAPON_PISTOL"] = "COMPONENT_AT_PI_SUPP_02",
 		["WEAPON_APPISTOL"] = "COMPONENT_AT_PI_SUPP",
@@ -529,6 +573,7 @@ local weaponAttachs = {
 		["WEAPON_PUMPSHOTGUN_MK2"] = "COMPONENT_AT_SR_SUPP_03",
 		["WEAPON_SMG"] = "COMPONENT_AT_PI_SUPP",
 		["WEAPON_SMG_MK2"] = "COMPONENT_AT_PI_SUPP",
+		["WEAPON_CARBINERIFLE"] = "COMPONENT_AT_AR_SUPP",
 		["WEAPON_ASSAULTSMG"] = "COMPONENT_AT_AR_SUPP_02"
 	},
 	["attachsGrip"] = {
@@ -571,28 +616,23 @@ function cRP.putWeaponHands(weaponName,weaponAmmo,attachs)
 		putWeaponHands = true
 		LocalPlayer["state"]["Cancel"] = true
 
-		local Ped = PlayerPedId()
-		if HasPedGotWeapon(Ped,GetHashKey("GADGET_PARACHUTE"),false) then
-			RemoveAllPedWeapons(Ped,true)
-			cRP.parachuteColors()
-		else
-			RemoveAllPedWeapons(Ped,true)
-		end
-
-		if not IsPedInAnyVehicle(Ped) then
+		local ped = PlayerPedId()
+		if not IsPedInAnyVehicle(ped) then
 			loadAnimDict("rcmjosh4")
 
-			TaskPlayAnim(Ped,"rcmjosh4","josh_leadout_cop2",3.0,2.0,-1,48,10,0,0,0)
+			TaskPlayAnim(ped,"rcmjosh4","josh_leadout_cop2",8.0,8.0,-1,48,0,0,0,0)
 
 			Wait(200)
 
-			GiveWeaponToPed(Ped,weaponName,weaponAmmo,false,true)
+			TriggerEvent("inventory:RemoveWeapon",weaponName)
+			GiveWeaponToPed(ped,weaponName,weaponAmmo,false,true)
 
 			Wait(300)
 
-			ClearPedTasks(Ped)
+			ClearPedTasks(ped)
 		else
-			GiveWeaponToPed(Ped,weaponName,weaponAmmo,true,true)
+			TriggerEvent("inventory:RemoveWeapon",weaponName)
+			GiveWeaponToPed(ped,weaponName,weaponAmmo,false,true)
 		end
 
 		if attachs ~= nil then
@@ -604,15 +644,13 @@ function cRP.putWeaponHands(weaponName,weaponAmmo,attachs)
 		Weapon = weaponName
 		putWeaponHands = false
 		LocalPlayer["state"]["Cancel"] = false
-		
+
 		if itemAmmo(weaponName) then
 			TriggerEvent("hud:Weapon",true,weaponName)
 		end
 
-		if vSERVER.dropWeapons(Weapon) then
-			RemoveAllPedWeapons(Ped,true)
-			weaponActive = false
-			Weapon = ""
+		if vSERVER.dropWeapons(weaponName) then
+			TriggerEvent("inventory:CleanWeapons",true)
 		end
 
 		return true
@@ -626,28 +664,26 @@ end
 function cRP.storeWeaponHands()
 	if not storeWeaponHands then
 		storeWeaponHands = true
-		local Ped = PlayerPedId()
-		local lastWeapon = Weapon
+		local ped = PlayerPedId()
 		LocalPlayer["state"]["Cancel"] = true
-		local weaponAmmo = GetAmmoInPedWeapon(Ped,Weapon)
+		local lastWeapon = Weapon
+		local weaponAmmo = GetAmmoInPedWeapon(ped,Weapon)
 
-		if not IsPedInAnyVehicle(Ped) then
+		if not IsPedInAnyVehicle(ped) then
 			loadAnimDict("weapons@pistol@")
 
-			TaskPlayAnim(Ped,"weapons@pistol@","aim_2_holster",8.0,8.0,-1,48,0,0,0,0)
+			TaskPlayAnim(ped,"weapons@pistol@","aim_2_holster",8.0,8.0,-1,48,0,0,0,0)
 
 			Wait(450)
 
-			ClearPedTasks(Ped)
+			ClearPedTasks(ped)
 		end
 
 		LocalPlayer["state"]["Cancel"] = false
-		TriggerEvent("hud:Weapon",false)
-		RemoveAllPedWeapons(Ped,true)
+
+		TriggerEvent("inventory:CleanWeapons",true)
 
 		storeWeaponHands = false
-		weaponActive = false
-		Weapon = ""
 
 		return true,weaponAmmo,lastWeapon
 	end
@@ -755,10 +791,7 @@ CreateThread(function()
 
 			if weaponAmmo <= 0 or (Weapon == "WEAPON_PETROLCAN" and weaponAmmo <= 135 and IsPedShooting(ped)) or IsPedSwimming(ped) then
 				vSERVER.preventWeapon(Weapon,weaponAmmo)
-				TriggerEvent("hud:Weapon",false)
-				RemoveAllPedWeapons(ped,true)
-				weaponActive = false
-				Weapon = ""
+				TriggerEvent("inventory:CleanWeapons",true)
 			end
 		end
 
@@ -1907,5 +1940,327 @@ local Ped = PlayerPedId()
 		SetPedFiringPattern(NetEntity,-957453492)
 		SetBlockingOfNonTemporaryEvents(NetEntity,true)
 		SetEntityAsNoLongerNeeded(NetEntity)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WEAPONABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local WeaObjects = {}
+local WeaConfig = {
+	["WEAPON_KATANA"] = {
+		["Bone"] = 24818,
+		["x"] = 0.32,
+		["y"] = -0.15,
+		["z"] = 0.20,
+		["RotX"] = -30.0,
+		["RotY"] = -225.0,
+		["RotZ"] = 205.0,
+		["Model"] = "w_me_katana"
+	},
+	["WEAPON_CARBINERIFLE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_carbinerifle"
+	},
+	["WEAPON_CARBINERIFLE_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_carbineriflemk2"
+	},
+	["WEAPON_ADVANCEDRIFLE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.02,
+		["y"] = -0.14,
+		["z"] = -0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_advancedrifle"
+	},
+	["WEAPON_BULLPUPRIFLE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.02,
+		["y"] = -0.14,
+		["z"] = -0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_bullpuprifle"
+	},
+	["WEAPON_BULLPUPRIFLE_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.02,
+		["y"] = -0.14,
+		["z"] = -0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_bullpupriflemk2"
+	},
+	["WEAPON_SPECIALCARBINE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_specialcarbine"
+	},
+	["WEAPON_SPECIALCARBINE_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_specialcarbinemk2"
+	},
+	["WEAPON_MUSKET"] = {
+		["Bone"] = 24818,
+		["x"] = -0.1,
+		["y"] = -0.14,
+		["z"] = 0.0,
+		["RotX"] = 0.0,
+		["RotY"] = 0.8,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_musket"
+	},
+	["WEAPON_PUMPSHOTGUN"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.08,
+		["RotX"] = 0.0,
+		["RotY"] = 180.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sg_pumpshotgun"
+	},
+	["WEAPON_PUMPSHOTGUN_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.08,
+		["RotX"] = 0.0,
+		["RotY"] = 180.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sg_pumpshotgunmk2"
+	},
+	["WEAPON_SMG"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sb_smg"
+	},
+	["WEAPON_SMG_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.22,
+		["y"] = -0.14,
+		["z"] = 0.12,
+		["RotX"] = 0.0,
+		["RotY"] = 180.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sb_smgmk2"
+	},
+	["WEAPON_COMPACTRIFLE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.22,
+		["y"] = -0.14,
+		["z"] = 0.12,
+		["RotX"] = 0.0,
+		["RotY"] = 180.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_assaultrifle_smg"
+	},
+	["WEAPON_ASSAULTSMG"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = -0.07,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sb_assaultsmg"
+	},
+	["WEAPON_ASSAULTRIFLE"] = {
+		["Bone"] = 24818,
+		["x"] = 0.08,
+		["y"] = -0.14,
+		["z"] = 0.08,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_assaultrifle"
+	},
+	["WEAPON_ASSAULTRIFLE_MK2"] = {
+		["Bone"] = 24818,
+		["x"] = 0.08,
+		["y"] = -0.14,
+		["z"] = 0.08,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_ar_assaultrifle"
+	},
+	["WEAPON_GUSENBERG"] = {
+		["Bone"] = 24818,
+		["x"] = 0.12,
+		["y"] = -0.14,
+		["z"] = 0.04,
+		["RotX"] = 0.0,
+		["RotY"] = 135.0,
+		["RotZ"] = 5.0,
+		["Model"] = "w_sb_gusenberg"
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:REMOVEWEAPON
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:RemoveWeapon")
+AddEventHandler("inventory:RemoveWeapon",function(Name)
+	if WeaObjects[Name] then
+		TriggerServerEvent("tryDeleteObject",Name)
+		WeaObjects[Name] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:CREATEWEAPON
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("inventory:CreateWeapon")
+AddEventHandler("inventory:CreateWeapon",function(Name)
+	if WeaObjects[Name] == nil and WeaConfig[Name] then
+		local Ped = PlayerPedId()
+		local Config = WeaConfig[Name]
+		local Coords = GetEntityCoords(Ped)
+		local Bone = GetPedBoneIndex(Ped,Config["Bone"])
+
+		local myObject,objNet = vRPS.CreateObject(Config["Model"],Coords["x"],Coords["y"],Coords["z"],Name)
+		if myObject then
+			local spawnObjects = 0
+			local uObject = NetworkGetEntityFromNetworkId(objNet)
+			while not DoesEntityExist(uObject) and spawnObjects <= 1000 do
+				uObject = NetworkGetEntityFromNetworkId(objNet)
+				spawnObjects = spawnObjects + 1
+				Wait(1)
+			end
+
+			spawnObjects = 0
+			local objectControl = NetworkRequestControlOfEntity(uObject)
+			while not objectControl and spawnObjects <= 1000 do
+				objectControl = NetworkRequestControlOfEntity(uObject)
+				spawnObjects = spawnObjects + 1
+				Wait(1)
+			end
+
+			WeaObjects[Name] = true
+			AttachEntityToEntity(uObject,Ped,Bone,Config["x"],Config["y"],Config["z"],Config["RotX"],Config["RotY"],Config["RotZ"],false,false,false,false,2,true)
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CHECKMODS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.CheckMods(Vehicle,Mod)
+	return GetNumVehicleMods(Vehicle,Mod) - 1
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CHECKCAR
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.CheckCar(Vehicle)
+	local Model = GetEntityModel(Vehicle)
+	return IsThisModelACar(Model)
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ACTIVEMODS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.ActiveMods(Vehicle,Plate,Mod,Number)
+	if NetworkDoesNetworkIdExist(Vehicle) then
+		local Vehicle = NetToEnt(Vehicle)
+		if DoesEntityExist(Vehicle) then
+			if GetVehicleNumberPlateText(Vehicle) == Plate then
+				SetVehicleMod(Vehicle,Mod,Number)
+			end
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFSHOT
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BuffShot = PolyZone:Create({
+	vector2(-1174.21,-898.17),
+	vector2(-1188.63,-908.10),
+	vector2(-1198.07,-906.52),
+	vector2(-1208.42,-891.13),
+	vector2(-1188.37,-877.37)
+},{ name = "BurgerShot" })
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFTHIS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BuffThis = PolyZone:Create({
+	vector2(793.94,-747.72),
+	vector2(794.00,-768.85),
+	vector2(814.90,-768.82),
+	vector2(814.93,-747.62),
+	vector2(812.48,-739.99),
+	vector2(794.07,-740.05)
+},{ name = "PizzaThis" })
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFBEAN
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BuffBean = PolyZone:Create({
+	vector2(129.73,-1029.63),
+	vector2(118.45,-1025.35),
+	vector2(110.82,-1046.34),
+	vector2(122.31,-1050.47)
+},{ name = "BeanMachine" })
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFCOFFEE
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BuffCoffee = PolyZone:Create({
+	vector2(-565.30,-1071.24),
+	vector2(-575.38,-1070.52),
+	vector2(-601.44,-1069.51),
+	vector2(-601.53,-1046.78),
+	vector2(-565.33,-1047.50)
+},{ name = "UwUCoffe" })
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local BuffTimer = 0
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADBUFF
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	while true do
+		if LocalPlayer["state"]["Route"] < 900000 then
+			local Ped = PlayerPedId()
+			if GetGameTimer() >= BuffTimer then
+				local Coords = GetEntityCoords(Ped)
+				if (BuffShot:isPointInside(Coords) or BuffBean:isPointInside(Coords)) then
+					TriggerServerEvent("inventory:BuffClient","Destreza",90)
+					BuffTimer = GetGameTimer() + 60000
+				elseif (BuffThis:isPointInside(Coords) or BuffCoffee:isPointInside(Coords)) then
+					TriggerServerEvent("inventory:BuffClient","Sorte",90)
+					BuffTimer = GetGameTimer() + 60000
+				end
+			end
+		end
+
+		Wait(1000)
 	end
 end)

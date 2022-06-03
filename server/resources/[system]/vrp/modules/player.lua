@@ -125,7 +125,7 @@ RegisterCommand("gg",function(source,args,rawCommand)
 				vRP.downgradeStress(user_id,100)
 			end
 
-			TriggerEvent("inventory:clearWeapons",user_id)
+			TriggerEvent("inventory:CleanWeapons",user_id)
 			TriggerClientEvent("dynamic:animalFunctions",source,"deletar")
 			TriggerEvent("discordLogs","Airport","**Passaporte:** "..parseFormat(user_id).."\n**Horário:** "..os.date("%H:%M:%S"),3092790)
 		end
