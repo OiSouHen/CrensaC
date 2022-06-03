@@ -195,30 +195,14 @@ RegisterCommand("tpcds",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id then
         if vRP.hasGroup(user_id,"Moderator") then
-            local fcoords = vKEYBOARD.keySingle(source,"Cordenadas:")
+            local fcoords = vKEYBOARD.keyTriple(source,"Cordenada <b>X</b>:","Cordenada <b>Y</b>:","Cordenada <b>Z</b>:")
             if not fcoords then
                 return
             end
 
-            local coords = {}
-            for coord in string.gmatch(fcoords[1] or "0,0,0","[^,]+") do
-                table.insert(coords,parseInt(coord))
-            end
-
-            vRP.teleport(source,coords[1] or 0,coords[2] or 0,coords[3] or 0)
+            vRP.teleport(source,fcoords[1] or 0,fcoords[2] or 0,fcoords[3] or 0)
         end
     end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- HENSA
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("hensa",function(source,args,rawCommand)
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		if vRP.hasGroup(user_id,"Moderator") then
-			vCLIENT.teleportHensa(source)
-		end
-	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CDS

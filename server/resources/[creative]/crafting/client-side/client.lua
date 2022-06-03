@@ -111,7 +111,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("crafting:openSystem",function(Number)
 	if List[Number] then
-		if vSERVER.requestPerm(Number,List[Number][4]) then
+		if vSERVER.requestPerm(List[Number][4]) then
 			SetNuiFocus(true,true)
 			SendNUIMessage({ action = "showNUI", name = List[Number][4] })
 		end
