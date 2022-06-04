@@ -141,8 +141,6 @@ local shopList = {
 	{ 1179.12,2635.86,37.74,"Mechanic",false },
 	{ -1636.74,-1092.17,13.08,"Oxy",false },
 	{ 563.19,2752.92,42.87,"Petz",false },
-	{ -307.63,-164.17,40.42,"Imoveis",false },
-	{ 1655.77,4874.38,42.04,"Imoveis",false },
 	{ -1196.9,-901.58,13.99,"BurgerShot",false },
 	{ 806.22,-761.68,26.77,"PizzaThis",false },
 	{ -588.5,-1066.23,22.34,"UwuCoffee",false },
