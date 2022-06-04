@@ -12,7 +12,7 @@
 		"database_prefix": "summerz",
 		"vehicles": "summerz_vehicles",
 		"priority": "vrp_priority",
-		"homes": "summerz_property",
+		"propertys": "summerz_property",
 		"esx": {
 			"admin_group": "admin",
 			"default_group": "unemployed",
