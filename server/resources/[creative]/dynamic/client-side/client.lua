@@ -93,14 +93,6 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 				exports["dynamic"]:AddButton("Rebocar","Colocar veículo na prancha do reboque.","towdriver:invokeTow","","others",false)
 				exports["dynamic"]:AddButton("Desbugar","Recarregar o personagem.","barbershop:debug","","others",true)
 
-				exports["dynamic"]:AddButton("Trancar","Trancar a propriedade.","homes:invokeSystem","trancar","propertys",true)
-				exports["dynamic"]:AddButton("Garagem","Comprar garagem da propriedade.","homes:invokeSystem","garagem","propertys",true)
-				exports["dynamic"]:AddButton("Permissões","Checar permissões da propriedade.","homes:invokeSystem","checar","propertys",true)
-				exports["dynamic"]:AddButton("Taxas","Pagar as taxas da propriedade.","homes:invokeSystem","tax","propertys",true)
-				exports["dynamic"]:AddButton("Armário","Aumentar o armário da propriedade.","homes:invokeSystem","armario","propertys",true)
-				exports["dynamic"]:AddButton("Geladeira","Aumentar a galadeira da propriedade.","homes:invokeSystem","geladeira","propertys",true)
-				exports["dynamic"]:AddButton("Vender","Vender a propriedade.","homes:invokeSystem","vender","propertys",true)
-
 				exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","ClosestPeds",true)
 				exports["dynamic"]:AddButton("Remover do Veículo","Remover do veículo mais próximo.","player:cvFunctions","rv","ClosestPeds",true)
 				exports["dynamic"]:AddButton("Checar Porta-Malas","Vericar pessoa dentro do mesmo.","player:checkTrunk","","ClosestPeds",true)
@@ -118,11 +110,7 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 				exports["dynamic"]:SubMenu("Veículo","Funções do veículo.","vehicle")
 			end
 
-			exports["dynamic"]:AddButton("Propriedades","Ativa/Desativa as propriedades no mapa.","homes:togglePropertys","","propertys",false)
-
 			exports["dynamic"]:SubMenu("Roupas","Colocar/Retirar roupas.","clothes")
-			
-			exports["dynamic"]:SubMenu("Propriedades","Todas as funções das propriedades.","propertys")
 
 			if animalHash ~= nil then
 				exports["dynamic"]:SubMenu("Domésticos","Todas as funções dos animais domésticos.","animal")

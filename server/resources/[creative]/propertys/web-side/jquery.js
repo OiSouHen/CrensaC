@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	document.onkeyup = data => {
 		if (data["key"] === "Escape"){
-			$.post("http://homes/invClose");
+			$.post("http://propertys/invClose");
 			$(".invRight").html("");
 			$(".invLeft").html("");
 		}
@@ -115,21 +115,21 @@ const updateDrag = () => {
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invRight" && tInv === "invLeft"){
-				$.post("http://homes/takeItem",JSON.stringify({
+				$.post("http://propertys/takeItem",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invLeft" && tInv === "invRight"){
-				$.post("http://homes/storeItem",JSON.stringify({
+				$.post("http://propertys/storeItem",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invRight" && tInv === "invRight"){
-				$.post("http://homes/updateChest",JSON.stringify({
+				$.post("http://propertys/updateChest",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
@@ -215,21 +215,21 @@ const updateDrag = () => {
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invRight" && tInv === "invLeft"){
-				$.post("http://homes/takeItem",JSON.stringify({
+				$.post("http://propertys/takeItem",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invLeft" && tInv === "invRight"){
-				$.post("http://homes/storeItem",JSON.stringify({
+				$.post("http://propertys/storeItem",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
 					amount: parseInt(amount)
 				}));
 			} else if (origin === "invRight" && tInv === "invRight"){
-				$.post("http://homes/updateChest",JSON.stringify({
+				$.post("http://propertys/updateChest",JSON.stringify({
 					item: itemData.key,
 					slot: itemData.slot,
 					target: target,
@@ -277,7 +277,7 @@ const colorPicker = (percent) => {
 }
 
 const requestChest = () => {
-	$.post("http://homes/requestChest",JSON.stringify({}),(data) => {
+	$.post("http://propertys/requestChest",JSON.stringify({}),(data) => {
 		$("#weightTextLeft").html(`${(data["invPeso"]).toFixed(2)}   /   ${(data["invMaxpeso"]).toFixed(2)}`);
 		$("#weightTextRight").html(`${(data["chestPeso"]).toFixed(2)}   /   ${(data["chestMaxpeso"]).toFixed(2)}`);
 

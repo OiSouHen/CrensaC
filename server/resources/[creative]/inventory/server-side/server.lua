@@ -579,7 +579,7 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 				return
 			end
 
-			if exports["homes"]:initNewspapers(source) then
+			if exports["propertys"]:initNewspapers(source) then
 				vRP.generateItem(user_id,"dollars",60,true)
 
 				if vRP.userPremium(user_id) then
@@ -916,11 +916,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				vRPC.playAnim(source,true,{"rcmnigel1c","hailing_whistle_waive_a"},false)
 			return end
 
-			if nameItem == "contract"..string.sub(totalName,9,10) then
-				TriggerClientEvent("inventory:Close",source)
-				TriggerEvent("homes:propItem",source,totalName,string.sub(totalName,9,10))
-			return end
-			
 			if nameItem == "dismantle" then
 				TriggerClientEvent("inventory:Close",source)
 				if not vCLIENT.DismantleStatus(source) then
@@ -1905,7 +1900,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						return
 					end
 
-					local homeName = exports["homes"]:homesTheft(source)
+					local homeName = exports["propertys"]:homesTheft(source)
 					if homeName then
 						vRPC.stopActived(source)
 						vRP.upgradeStress(user_id,2)
@@ -1915,9 +1910,9 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.playAnim(source,false,{"missheistfbi3b_ig7","lift_fibagent_loop"},false)
 
 						if vTASKBAR.taskLockpick(source) then
-							exports["homes"]:enterHomes(source,user_id,homeName,true)
+							exports["propertys"]:enterHomes(source,user_id,homeName,true)
 						else
-							exports["homes"]:resetTheft(homeName)
+							exports["propertys"]:resetTheft(homeName)
 						end
 
 						if parseInt(math.random(1000)) >= 900 then
@@ -2441,181 +2436,161 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "weedseed" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
-					if application then
-						local Route = GetPlayerRoutingBucket(source)
-						vRP.removeInventoryItem(user_id,totalName,1,false)
-						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						exports["plants"]:initPlants("weedseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
-					end
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
+				if application then
+					local Route = GetPlayerRoutingBucket(source)
+					vRP.removeInventoryItem(user_id,totalName,1,false)
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+					exports["plants"]:initPlants("weedseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
 				end
 			return end
 
 			if nameItem == "cokeseed" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
-					if application then
-						local Route = GetPlayerRoutingBucket(source)
-						vRP.removeInventoryItem(user_id,totalName,1,false)
-						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
-					end
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
+				if application then
+					local Route = GetPlayerRoutingBucket(source)
+					vRP.removeInventoryItem(user_id,totalName,1,false)
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+					exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
 				end
 			return end
 
 			if nameItem == "mushseed" then
-				if not exports["homes"]:checkHotel(user_id) then
-					local rand = math.random(2)
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords = vRPC.objectCoords(source,"prop_stoneshroom"..rand)
-					if application then
-						local Route = GetPlayerRoutingBucket(source)
-						vRP.removeInventoryItem(user_id,totalName,1,false)
-						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						exports["plants"]:initPlants("mushseed",coords,Route,"prop_stoneshroom"..rand,user_id)
-					end
+				local rand = math.random(2)
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords = vRPC.objectCoords(source,"prop_stoneshroom"..rand)
+				if application then
+					local Route = GetPlayerRoutingBucket(source)
+					vRP.removeInventoryItem(user_id,totalName,1,false)
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+					exports["plants"]:initPlants("mushseed",coords,Route,"prop_stoneshroom"..rand,user_id)
 				end
 			return end
 
 			if nameItem == "tablecoke" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_coke_table01a")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_coke_table01a")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_coke_table01a", item = "tablecoke", distance = 50, mode = "1" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_coke_table01a", item = "tablecoke", distance = 50, mode = "1" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "tablemeth" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_meth_table01a")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_meth_table01a")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_meth_table01a", item = totalName, distance = 50, mode = "1" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_meth_table01a", item = totalName, distance = 50, mode = "1" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "tableweed" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_weed_table_01a")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_weed_table_01a")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_weed_table_01a", item = totalName, distance = 50, mode = "1" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "bkr_prop_weed_table_01a", item = totalName, distance = 50, mode = "1" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "campfire" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"prop_beach_fire")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"prop_beach_fire")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]) - 0.6, h = heading, object = "prop_beach_fire", item = totalName, distance = 50, mode = "2" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]) - 0.6, h = heading, object = "prop_beach_fire", item = totalName, distance = 50, mode = "2" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "barrier" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"prop_mp_barrier_02b")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"prop_mp_barrier_02b")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "prop_mp_barrier_02b", item = totalName, distance = 100, mode = "3" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "prop_mp_barrier_02b", item = totalName, distance = 100, mode = "3" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "medicbag" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"xm_prop_x17_bag_med_01a")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"xm_prop_x17_bag_med_01a")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "xm_prop_x17_bag_med_01a", item = totalName, distance = 50, mode = "5" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "xm_prop_x17_bag_med_01a", item = totalName, distance = 50, mode = "5" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end
 
 			if nameItem == "chair01" then
-				if not exports["homes"]:checkHotel(user_id) then
-					TriggerClientEvent("inventory:Close",source)
-					local application,coords,heading = vRPC.objectCoords(source,"prop_off_chair_01")
-					if application then
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							local Number = 0
+				TriggerClientEvent("inventory:Close",source)
+				local application,coords,heading = vRPC.objectCoords(source,"prop_off_chair_01")
+				if application then
+					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+						local Number = 0
 
-							repeat
-								Number = Number + 1
-							until Objects[tostring(Number)] == nil
+						repeat
+							Number = Number + 1
+						until Objects[tostring(Number)] == nil
 
-							Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "prop_off_chair_01", item = totalName, distance = 50, mode = "4" }
-							TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
-							TriggerClientEvent("inventory:Close",source)
-						end
+						Objects[tostring(Number)] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]), h = heading, object = "prop_off_chair_01", item = totalName, distance = 50, mode = "4" }
+						TriggerClientEvent("objects:Adicionar",-1,tostring(Number),Objects[tostring(Number)])
+						TriggerClientEvent("inventory:Close",source)
 					end
 				end
 			return end

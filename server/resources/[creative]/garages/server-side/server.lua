@@ -324,7 +324,7 @@ function cRP.Vehicles(Garage)
 		end
 
 		local garageName = garageLocates[Garage]["name"]
-		if string.sub(garageName,0,5) == "Homes" then
+		if string.sub(garageName,0,5) == "Propertys" then
 			local consult = vRP.query("propertys/userPermissions",{ name = garageName, user_id = user_id })
 			if consult[1] == nil then
 				return false
