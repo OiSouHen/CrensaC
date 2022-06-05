@@ -66,10 +66,9 @@ $(document).ready(() => {
 		var name = $("#charNome").val();
 		var name2 = $("#charSobrenome").val();
 		var gender = returnSeleted("gender");
-		var locate = returnSeleted("locate");
 
 		if (name != "" && name2 != ""){
-			$.post("http://spawn/newCharacter",JSON.stringify({ name: name, name2: name2, sex: gender, loc: locate }));
+			$.post("http://spawn/newCharacter",JSON.stringify({ name: name, name2: name2, sex: gender }));
 		}
 	});
 });
@@ -87,7 +86,6 @@ const generateDisplay = () => {
 					<div class="playerInfo">
 						<p><b>Passaporte:</b> ${item["user_id"]}</p>
 						<p><b>Nome:</b> ${item["name"]}</p>
-						<p><b>Nacionalidade:</b> ${item["locate"]}</p>
 					</div>
 					<div class="playerButton">
 						<p>Entrar</p>

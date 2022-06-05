@@ -25,7 +25,7 @@ function cRP.initSystem()
 
 	if consult[1] then
 		for k,v in pairs(consult) do
-			table.insert(characterList,{ user_id = v["id"], name = v["name"].." "..v["name2"], locate = v["locate"] })
+			table.insert(characterList,{ user_id = v["id"], name = v["name"].." "..v["name2"] })
 		end
 	end
 
@@ -63,7 +63,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- NEWCHARACTER
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.newCharacter(name,name2,sex,locate)
+function cRP.newCharacter(name,name2,sex)
 	local source = source
 	if charActived[source] == nil then
 		charActived[source] = true
@@ -84,15 +84,15 @@ function cRP.newCharacter(name,name2,sex,locate)
 		end
 
 		if sex == "mp_m_freemode_01" then
-			vRP.execute("characters/newCharacter",{ steam = steam, name = name, name2 = name2, locate = locate, sex = "M", phone = vRP.generatePhone(), serial = vRP.generateSerial(), blood = math.random(4) })
+			vRP.execute("characters/newCharacter",{ steam = steam, name = name, name2 = name2, sex = "M", phone = vRP.generatePhone(), serial = vRP.generateSerial(), blood = math.random(4) })
 		else
-			vRP.execute("characters/newCharacter",{ steam = steam, name = name, name2 = name2, locate = locate, sex = "F", phone = vRP.generatePhone(), serial = vRP.generateSerial(), blood = math.random(4) })
+			vRP.execute("characters/newCharacter",{ steam = steam, name = name, name2 = name2, sex = "F", phone = vRP.generatePhone(), serial = vRP.generateSerial(), blood = math.random(4) })
 		end
 
 		local consult = vRP.query("characters/lastCharacters",{ steam = steam })
 		if consult[1] then
 			vRP.execute("bank/newAccount",{ user_id = consult[1]["id"], value = 2000, mode = "Private", owner = 1 })
-			vRP.characterChosen(source,consult[1]["id"],sex,locate)
+			vRP.characterChosen(source,consult[1]["id"],sex)
 			vCLIENT.closeNew(source)
 		end
 
