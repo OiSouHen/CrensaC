@@ -127,7 +127,7 @@ function cRP.doorsPermission(doorNumber)
 			if vRP.hasGroup(user_id,GlobalState["Doors"][doorNumber]["perm"]) then
 				return true
 			else
-				local consultItem = vRP.getInventoryItemAmount(user_id,"lockpick2")
+				local consultItem = vRP.getInventoryItemAmount(user_id,"lockpick")
 				if consultItem[1] >= 1 then
 					if math.random(100) >= 50 then
 						vRP.removeInventoryItem(user_id,consultItem[2],1,true)
