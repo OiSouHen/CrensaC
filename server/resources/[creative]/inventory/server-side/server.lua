@@ -719,7 +719,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return
 		end
 
-		if vPLAYER.getHandcuff(source) and nameItem ~= "lockpick2" then
+		if vPLAYER.getHandcuff(source) and nameItem ~= "lockpick" then
 			return
 		end
 
@@ -843,14 +843,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "newlocate" then
-				if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
-					vRP.updateLocate(user_id)
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					TriggerClientEvent("Notify",source,"verde","Nacionalidade atualizada.",5000)
-				end
-			return end
-
 			if nameItem == "newchars" then
 				if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
 					vRP.upgradeChars(user_id)
@@ -942,7 +934,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							vRPC.createObjects(source,"paper_1_rcm_alt1-8","player_one_dual-8","prop_police_badge",49,28422,0.065,0.029,-0.035,80.0,-1.90,75.0)
 						end
 
-						TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], nacionalidade = identity["locate"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
+						TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
 					end
 				end
 			return end
@@ -956,7 +948,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 					local identity = vRP.falseIdentity(numberIdentity)
 					if identity then
 						openIdentity[user_id] = true
-						TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], nacionalidade = identity["locate"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
+						TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
 					end
 				end
 			return end
@@ -976,9 +968,9 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								premium = minimalTimers(identity["premium"] - os.time())
 							end
 
-							TriggerClientEvent("vRP:Identity",source,{ mode = "identity", nome = identity["name"].." "..identity["name2"], nacionalidade = identity["locate"], veiculos = identity["garage"], gemas = vRP.userGemstone(identity["steam"]), porte = identity["port"], premium = premium, sangue = bloodTypes(identity["blood"]) })
+							TriggerClientEvent("vRP:Identity",source,{ mode = "identity", nome = identity["name"].." "..identity["name2"], veiculos = identity["garage"], gemas = vRP.userGemstone(identity["steam"]), porte = identity["port"], premium = premium, sangue = bloodTypes(identity["blood"]) })
 						else
-							TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], nacionalidade = identity["locate"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
+							TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
 						end
 					end
 				end
@@ -1548,7 +1540,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 									end
 
 									openIdentity[user_id] = true
-									TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], nacionalidade = identity["locate"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
+									TriggerClientEvent("vRP:Identity",source,{ mode = "fidentity", nome = identity["name"].." "..identity["name2"], porte = identity["port"], sangue = bloodTypes(identity["blood"]) })
 									TriggerClientEvent("Notify",source,"azul","<b>Químicos:</b> "..chemStr.."<br><b>Álcool:</b> "..alcoholStr.."<br><b>Drogas:</b> "..weedStr,8000)
 								end
 							end
@@ -1890,39 +1882,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							vRPC.stopAnim(source,false)
 							Active[user_id] = nil
 						end
-					end
-				end
-			return end
-
-			if nameItem == "lockpick2" then
-				if not vPLAYER.getHandcuff(source) then
-					if exports["hud"]:Wanted(user_id) then
-						return
-					end
-
-					local homeName = exports["propertys"]:homesTheft(source)
-					if homeName then
-						vRPC.stopActived(source)
-						vRP.upgradeStress(user_id,2)
-						Active[user_id] = os.time() + 100
-						TriggerClientEvent("inventory:Close",source)
-						TriggerClientEvent("inventory:Buttons",source,true)
-						vRPC.playAnim(source,false,{"missheistfbi3b_ig7","lift_fibagent_loop"},false)
-
-						if vTASKBAR.taskLockpick(source) then
-							exports["propertys"]:enterHomes(source,user_id,homeName,true)
-						else
-							exports["propertys"]:resetTheft(homeName)
-						end
-
-						if parseInt(math.random(1000)) >= 900 then
-							vRP.removeInventoryItem(user_id,totalName,1,false)
-							TriggerClientEvent("itensNotify",source,{ "quebrou","lockpick2",1,"Lockpick de Cobre" })
-						end
-
-						TriggerClientEvent("inventory:Buttons",source,false)
-						vRPC.stopAnim(source,false)
-						Active[user_id] = nil
 					end
 				end
 			return end

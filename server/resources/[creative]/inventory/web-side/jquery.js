@@ -376,7 +376,7 @@ const updateMochila = () => {
 				if (actualPercent <= 1)
 					actualPercent = 1;
 
-				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-economy="${v["economy"]}" data-description="${v["desc"]}" style="background-image: url('images/${v["index"]}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v["amount"]}" data-peso="${v["peso"]}" data-item-key="${v["key"]}" data-name-key="${v["name"]}" data-slot="${slot}" data-idName="${v["idName"]}" data-idNacionalidade="${v["idNacionalidade"]}" data-idPort="${v["idPort"]}" data-idBlood="${v["idBlood"]}" data-idGems="${v["idGems"]}" data-idPremium="${v["idPremium"]}" data-idRolepass="${v["idRolepass"]}" data-Suitcase="${v["Suitcase"]}" data-Vehkey="${v["Vehkey"]}">
+				const item = `<div class="item populated" title="" data-max="${v["max"]}" data-economy="${v["economy"]}" data-description="${v["desc"]}" style="background-image: url('images/${v["index"]}.png'); background-position: center; background-repeat: no-repeat;" data-amount="${v["amount"]}" data-peso="${v["peso"]}" data-item-key="${v["key"]}" data-name-key="${v["name"]}" data-slot="${slot}" data-idName="${v["idName"]}" data-idPort="${v["idPort"]}" data-idBlood="${v["idBlood"]}" data-idGems="${v["idGems"]}" data-idPremium="${v["idPremium"]}" data-idRolepass="${v["idRolepass"]}" data-Suitcase="${v["Suitcase"]}" data-Vehkey="${v["Vehkey"]}">
 					<div class="top">
 						<div class="itemWeight">${(v["peso"] * v["amount"]).toFixed(2)}</div>
 						<div class="itemAmount">${formatarNumero(v["amount"])}x</div>
