@@ -61,7 +61,6 @@ const functionSearch = (passaporte) => {
 							<b>Nome:</b> ${data["result"][1]}<br>
 							<b>Telefone:</b> ${data["result"][2]}<br>
 							<b>Multas:</b> $${formatarNumero(data["result"][3])}<br>
-							<b>Nacionalidade:</b> ${data["result"][6]}<br>
 							<b>Porte:</b> ${data["result"][5] == 0 ? "Não":"Sim"} <update id="portSearch" data-id="${passaporte}">Atualizar</update>
 						</div>
 

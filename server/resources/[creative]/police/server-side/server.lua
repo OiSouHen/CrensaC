@@ -135,7 +135,7 @@ function cRP.searchUser(nuser_id)
 			local fines = vRP.getFines(nuser_id)
 			local records = vRP.query("prison/getRecords",{ nuser_id = parseInt(nuser_id) })
 
-			return { true,identity["name"].." "..identity["name2"],identity["phone"],fines,records,identity["port"],identity["locate"] }
+			return { true,identity["name"].." "..identity["name2"],identity["phone"],fines,records,identity["port"] }
 		end
 	end
 
