@@ -75,10 +75,5 @@ function cRP.paymentMethod(locate)
 		vRP.upgradeStress(user_id,3)
 		TriggerEvent("Wanted",source,user_id,30)
 		vRP.generateItem(user_id,"dollars",parseInt(randPrice),true)
-
-		local identity = vRP.userIdentity(user_id)
-		if identity["locate"] ~= locate then
-			vRP.generateItem(user_id,"dollars",parseInt(randPrice * 0.1),true)
-		end
 	end
 end
