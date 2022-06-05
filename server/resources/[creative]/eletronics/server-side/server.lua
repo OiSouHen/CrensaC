@@ -64,11 +64,6 @@ function cRP.paymentSystems(locate)
 
 			TriggerEvent("Wanted",source,user_id,20)
 			vRP.generateItem(user_id,"dollars",parseInt(randPrice))
-
-			local identity = vRP.userIdentity(user_id)
-			if identity["locate"] ~= locate then
-				vRP.generateItem(user_id,"dollars",parseInt(randPrice * 0.1),true)
-			end
 		end
 	end
 end
