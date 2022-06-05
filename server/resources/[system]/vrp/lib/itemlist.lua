@@ -1438,14 +1438,6 @@ local itemlist = {
 		["weight"] = 0.00,
 		["economy"] = 200000
 	},
-	["newlocate"] = {
-		["index"] = "newlocate",
-		["name"] = "Nacionalidade",
-		["type"] = "Usável",
-		["desc"] = "Inverte nacionalidade de Sul/Norte.",
-		["weight"] = 0.00,
-		["economy"] = 200000
-	},
 	["premiumplate"] = {
 		["index"] = "platepremium",
 		["name"] = "Placa Premium",
@@ -2019,17 +2011,6 @@ local itemlist = {
 		["index"] = "lockpick",
 		["name"] = "Lockpick de Alumínio",
 		["desc"] = "Utilizada para roubar veículos.",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 1.25,
-		["ilegal"] = true,
-		["economy"] = 575
-	},
-	["lockpick2"] = {
-		["index"] = "lockpick2",
-		["name"] = "Lockpick de Cobre",
-		["desc"] = "Utilizada para roubar propriedades.",
 		["repair"] = "repairkit01",
 		["type"] = "Usável",
 		["durability"] = 3,

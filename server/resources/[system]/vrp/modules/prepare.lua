@@ -9,7 +9,6 @@ vRP.prepare("characters/getBlood","SELECT id FROM summerz_characters WHERE blood
 vRP.prepare("characters/updatePort","UPDATE summerz_characters SET port = @port WHERE id = @id")
 vRP.prepare("characters/updatePhone","UPDATE summerz_characters SET phone = @phone WHERE id = @id")
 vRP.prepare("characters/removeCharacters","UPDATE summerz_characters SET deleted = 1 WHERE id = @id")
-vRP.prepare("characters/updateLocate","UPDATE summerz_characters SET locate = @locate WHERE id = @id")
 vRP.prepare("characters/addFines","UPDATE summerz_characters SET fines = fines + @fines WHERE id = @id")
 vRP.prepare("characters/setPrison","UPDATE summerz_characters SET prison = @prison WHERE id = @user_id")
 vRP.prepare("characters/updateGarages","UPDATE summerz_characters SET garage = garage + 1 WHERE id = @id")
@@ -19,7 +18,7 @@ vRP.prepare("characters/removePrison","UPDATE summerz_characters SET prison = pr
 vRP.prepare("characters/updateName","UPDATE summerz_characters SET name = @name, name2 = @name2 WHERE id = @user_id")
 vRP.prepare("characters/lastCharacters","SELECT id FROM summerz_characters WHERE steam = @steam ORDER BY id DESC LIMIT 1")
 vRP.prepare("characters/countPersons","SELECT COUNT(steam) as qtd FROM summerz_characters WHERE steam = @steam and deleted = 0")
-vRP.prepare("characters/newCharacter","INSERT INTO summerz_characters(steam,name,name2,locate,sex,phone,serial,blood) VALUES(@steam,@name,@name2,@locate,@sex,@phone,@serial,@blood)")
+vRP.prepare("characters/newCharacter","INSERT INTO summerz_characters(steam,name,name2,sex,phone,serial,blood) VALUES(@steam,@name,@name2,@sex,@phone,@serial,@blood)")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BANK
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +114,7 @@ vRP.prepare("races/insertRecords","INSERT INTO summerz_races(raceid,user_id,name
 -----------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare("fidentity/getResults","SELECT * FROM summerz_fidentity WHERE id = @id")
 vRP.prepare("fidentity/lastIdentity","SELECT id FROM summerz_fidentity ORDER BY id DESC LIMIT 1")
-vRP.prepare("fidentity/newIdentity","INSERT INTO summerz_fidentity(name,name2,locate,blood) VALUES(@name,@name2,@locate,@blood)")
+vRP.prepare("fidentity/newIdentity","INSERT INTO summerz_fidentity(name,name2,blood) VALUES(@name,@name2,@blood)")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CLEANSMARTPHONE
 -----------------------------------------------------------------------------------------------------------------------------------------

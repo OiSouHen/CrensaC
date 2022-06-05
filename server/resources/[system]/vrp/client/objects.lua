@@ -144,7 +144,7 @@ CreateThread(function()
 					if HasModelLoaded(mHash) then
 						targetLabel(v["x"],v["y"],v["z"],k,v["item"],v["mode"])
 
-						initObjects[k] = CreateObject(mHash,v["x"],v["y"],v["z"],false,false,false)
+						initObjects[k] = CreateObjectNoOffset(mHash,v["x"],v["y"],v["z"],false,false,false)
 						FreezeEntityPosition(initObjects[k],true)
 						SetEntityHeading(initObjects[k],v["h"])
 						SetEntityLodDist(initObjects[k],0xFFFF)
@@ -215,10 +215,11 @@ function tvRP.objectCoords(model)
 
 	local coords = GetEntityCoords(ped)
 	local pedHeading = GetEntityHeading(ped)
-	local newObject = CreateObject(mHash,coords["x"],coords["y"],coords["z"],false,false,false)
+	local newObject = CreateObjectNoOffset(mHash,coords["x"],coords["y"],coords["z"],false,false,false)
 	SetEntityCollision(newObject,false,false)
 	SetEntityHeading(newObject,pedHeading)
 	SetEntityAlpha(newObject,100,false)
+	SetModelAsNoLongerNeeded(mHash)
 
 	while objectProgress do
 		local ped = PlayerPedId()
@@ -226,7 +227,11 @@ function tvRP.objectCoords(model)
 		local handle = StartExpensiveSynchronousShapeTestLosProbe(cam,GetCoordsFromCam(10.0,cam),-1,ped,4)
 		local _,_,coords = GetShapeTestResult(handle)
 
-		SetEntityCoordsNoOffset(newObject,coords["x"],coords["y"],coords["z"],1,0,0)
+		if model == "prop_ld_binbag_01" then
+			SetEntityCoords(newObject,coords["x"],coords["y"],coords["z"] + 0.9,false,false,false,false)
+		else
+			SetEntityCoords(newObject,coords["x"],coords["y"],coords["z"],false,false,false,false)
+		end
 
 		dwText("~g~F~w~  CANCELAR",4,0.015,0.86,0.38,255,255,255,255)
 		dwText("~g~E~w~  COLOCAR OBJETO",4,0.015,0.89,0.38,255,255,255,255)
@@ -244,30 +249,23 @@ function tvRP.objectCoords(model)
 
 		if IsControlJustPressed(1,180) then
 			local headObject = GetEntityHeading(newObject)
-			SetEntityHeading(newObject,headObject + 2.5)
+			SetEntityHeading(newObject,headObject + 0.5)
 		end
 
 		if IsControlJustPressed(1,181) then
 			local headObject = GetEntityHeading(newObject)
-			SetEntityHeading(newObject,headObject - 2.5)
+			SetEntityHeading(newObject,headObject - 0.5)
 		end
 
 		Wait(1)
 	end
 
-	local headObject = GetEntityHeading(newObject)
 	local coordsObject = GetEntityCoords(newObject)
-	local _,GroundZ = GetGroundZFor_3dCoord(coordsObject["x"],coordsObject["y"],coordsObject["z"])
-
-	local newCoords = {
-		["x"] = coordsObject["x"],
-		["y"] = coordsObject["y"],
-		["z"] = GroundZ
-	}
+	local headObject = GetEntityHeading(newObject)
 
 	DeleteEntity(newObject)
 
-	return aplicationObject,newCoords,headObject
+	return aplicationObject,coordsObject,headObject
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DWTEXT
@@ -281,6 +279,13 @@ function dwText(text,font,x,y,scale,r,g,b,a)
 	AddTextComponentString(text)
 	DrawText(x,y)
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VRP:EXPLOSION
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("vRP:Explosion")
+AddEventHandler("vRP:Explosion",function(Coords)
+	AddExplosion(Coords,2,1.0,true,false,false)
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CHAIRS
 -----------------------------------------------------------------------------------------------------------------------------------------

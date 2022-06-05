@@ -282,7 +282,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CHARACTERCHOSEN
 -----------------------------------------------------------------------------------------------------------------------------------------
-function vRP.characterChosen(source,user_id,model,locate)
+function vRP.characterChosen(source,user_id,model)
 	vRP.userIds[source] = user_id
 	vRP.userSources[user_id] = source
 	local identity = vRP.userIdentity(user_id)
@@ -295,12 +295,7 @@ function vRP.characterChosen(source,user_id,model,locate)
 		vRP.generateItem(user_id,"cellphone",1,false)
 		vRP.userTables[user_id]["skin"] = GetHashKey(model)
 		vRP.generateItem(user_id,"identity-"..user_id,1,false)
-
-		if locate == "Sul" then
-			vRP.userTables[user_id]["position"] = { x = -28.08, y = -145.96, z = 56.99 }
-		else
-			vRP.userTables[user_id]["position"] = { x = 1935.59, y = 3721.93, z = 32.87 }
-		end
+		vRP.userTables[user_id]["position"] = { x = -28.08, y = -145.96, z = 56.99 }
 	end
 
 	local userBank = vRP.userBank(user_id,"Private")

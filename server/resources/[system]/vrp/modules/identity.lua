@@ -22,7 +22,6 @@ function vRP.userIdentity(user_id)
 			vRP.userInfos[user_id]["garage"] = identity[1]["garage"]
 			vRP.userInfos[user_id]["fines"] = identity[1]["fines"]
 			vRP.userInfos[user_id]["bank"] = identity[1]["bank"]
-			vRP.userInfos[user_id]["locate"] = identity[1]["locate"]
 			vRP.userInfos[user_id]["serial"] = identity[1]["serial"]
 			vRP.userInfos[user_id]["phone"] = identity[1]["phone"]
 			vRP.userInfos[user_id]["name"] = identity[1]["name"]
@@ -78,20 +77,6 @@ function vRP.upgradeGarage(user_id)
 
 	if vRP.userInfos[user_id] then
 		vRP.userInfos[user_id]["garage"] = vRP.userInfos[user_id]["garage"] + 1
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- UPDATELOCATE
------------------------------------------------------------------------------------------------------------------------------------------
-function vRP.updateLocate(user_id)
-	if vRP.userInfos[user_id] then
-		if vRP.userInfos[user_id]["locate"] == "Sul" then
-			vRP.execute("characters/updateLocate",{ id = user_id, locate = "Norte" })
-			vRP.userInfos[user_id]["locate"] = "Norte"
-		else
-			vRP.execute("characters/updateLocate",{ id = user_id, locate = "Sul" })
-			vRP.userInfos[user_id]["locate"] = "Sul"
-		end
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
