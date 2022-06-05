@@ -137,16 +137,6 @@ local craftList = {
 					["glass"] = 4
 				}
 			},
-			["lockpick2"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["plastic"] = 5,
-					["rubber"] = 5,
-					["copper"] = 10,
-					["glass"] = 4
-				}
-			},
 			["notebook"] = {
 				["amount"] = 1,
 				["destroy"] = false,
