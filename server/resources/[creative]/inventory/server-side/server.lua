@@ -402,7 +402,6 @@ AddEventHandler("inventory:Drops",function(Item,Slot,Amount,x,y,z)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if Active[user_id] == nil and not vPLAYER.getHandcuff(source) and not exports["hud"]:Wanted(user_id) and not vRPC.inVehicle(source) then
-			print(Item)
 			if vRP.tryGetInventoryItem(user_id,Item,Amount,false,Slot) then
 				local Days = 1
 				local Number = 0
@@ -778,6 +777,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 				if vCLIENT.putWeaponHands(source,nameItem,Ammos[user_id][wHash] or 0,Attachs[user_id][nameItem] or nil) then
 					TriggerClientEvent("itensNotify",source,{ "equipou",itemIndex(totalName),1,itemName(totalName) })
+					TriggerClientEvent("inventory:RemoveWeapon",nameItem)
+					-- print(nameItem)
 				end
 			end
 		return end
