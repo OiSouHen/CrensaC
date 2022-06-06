@@ -1,0 +1,33 @@
+html,body {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	overflow: hidden;
+	font-family: "Roboto";
+	background: transparent;
+}
+
+* {
+	overflow: hidden;
+	user-select: none;
+	box-sizing: border-box;
+}
+
+#Arena {
+	left: 50px;
+	color: #666;
+	bottom: 50px;
+	display: none;
+	line-height: 24px;
+	position: absolute;
+	letter-spacing: 6px;
+	text-shadow: 1px 1px #000;
+}
+
+#Arena b {
+	color: #ccc;
+	font-size: 16px;
+	font-weight: 300;
+	font-family: "Jura";
+	letter-spacing: 2px;
+}
