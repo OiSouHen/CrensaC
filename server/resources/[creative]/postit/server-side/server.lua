@@ -23,7 +23,7 @@ function cRP.newPostIts(coords)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		local globalPostIts = GlobalState["Postit"]
-		local newPostIts = vKEYBOARD.keyDouble(source,"Texto:","Distância: (Mín. 3 / Máx. 15)")
+		local newPostIts = vKEYBOARD.keyDouble(source,"Mensagem:","Distância: (3 a 15)")
 		if not newPostIts then
 			return
 		end
