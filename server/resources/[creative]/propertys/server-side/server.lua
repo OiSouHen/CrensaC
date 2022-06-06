@@ -1895,7 +1895,6 @@ local noStore = {
 	["pacu"] = true,
 	["pirarucu"] = true,
 	["tambaqui"] = true,
-	["energetic"] = true,
 	["milkbottle"] = true,
 	["water"] = true,
 	["coffee"] = true,
