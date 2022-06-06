@@ -3,12 +3,38 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 local Objects = {}
 local initObjects = {}
+local ContainerBlip = nil
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTS:TABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("objects:Table")
 AddEventHandler("objects:Table",function(Table)
 	Objects = Table
+
+	for k,v in pairs(Objects) do
+		if tonumber(k) <= 61 then
+			local Blip = AddBlipForRadius(v["x"],v["y"],v["z"],7.5)
+			SetBlipAlpha(Blip,150)
+			SetBlipColour(Blip,15)
+		end
+	end
+
+	if Objects["9999"] then
+		if DoesBlipExist(ContainerBlip) then
+			RemoveBlip(ContainerBlip)
+			ContainerBlip = nil
+		end
+
+		ContainerBlip = AddBlipForCoord(Objects["9999"]["x"],Objects["9999"]["y"],Objects["9999"]["z"])
+		SetBlipSprite(ContainerBlip,478)
+		SetBlipDisplay(ContainerBlip,4)
+		SetBlipAsShortRange(ContainerBlip,true)
+		SetBlipColour(ContainerBlip,47)
+		SetBlipScale(ContainerBlip,0.8)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString("Container")
+		EndTextCommandSetBlipName(ContainerBlip)
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTS:ADICIONAR
@@ -16,6 +42,23 @@ end)
 RegisterNetEvent("objects:Adicionar")
 AddEventHandler("objects:Adicionar",function(Number,Table)
 	Objects[Number] = Table
+
+	if Number == "9999" then
+		if DoesBlipExist(ContainerBlip) then
+			RemoveBlip(ContainerBlip)
+			ContainerBlip = nil
+		end
+
+		ContainerBlip = AddBlipForCoord(Objects[Number]["x"],Objects[Number]["y"],Objects[Number]["z"])
+		SetBlipSprite(ContainerBlip,478)
+		SetBlipDisplay(ContainerBlip,4)
+		SetBlipAsShortRange(ContainerBlip,true)
+		SetBlipColour(ContainerBlip,47)
+		SetBlipScale(ContainerBlip,0.8)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString("Container")
+		EndTextCommandSetBlipName(ContainerBlip)
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTCOORDS
@@ -115,6 +158,21 @@ function targetLabel(x,y,z,Number,item,mode)
 					tunnel = "shop"
 				},{
 					event = "shops:medicBag",
+					label = "Abrir",
+					tunnel = "client"
+				}
+			}
+		})
+	elseif mode == "Containers" then
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(x,y,z),2.0,{
+			name = "Objects:"..Number,
+			heading = 3374176
+		},{
+			shop = Number,
+			distance = 2.75,
+			options = {
+				{
+					event = "crafting:Containers",
 					label = "Abrir",
 					tunnel = "client"
 				}
