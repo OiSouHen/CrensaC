@@ -132,7 +132,6 @@ CREATE TABLE IF NOT EXISTS `summerz_fidentity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `name2` varchar(50) NOT NULL DEFAULT '',
-  `locate` varchar(10) NOT NULL DEFAULT 'Sul',
   `port` int(1) NOT NULL DEFAULT '1',
   `blood` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),

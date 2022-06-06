@@ -13,6 +13,10 @@ Tunnel.bindInterface("player",cRP)
 vCLIENT = Tunnel.getInterface("player")
 vSKINSHOP = Tunnel.getInterface("skinshop")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- VARIABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Active = {}
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- ME
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("me",function(source,args,rawCommand)
@@ -236,19 +240,6 @@ AddEventHandler("player:carryPlayer",function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLAYERDISCONNECT
------------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("playerDisconnect",function(user_id)
-	if playerCarry[user_id] then
-		TriggerClientEvent("player:Commands",playerCarry[user_id],false)
-		playerCarry[user_id] = nil
-	end
-	
-	if Active[user_id] then
-		Active[user_id] = nil
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYER:WINSFUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("player:winsFunctions")
@@ -300,7 +291,6 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYER:ROLLVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Active = {}
 RegisterServerEvent("player:RollVehicle")
 AddEventHandler("player:RollVehicle",function()
 	local source = source
@@ -949,3 +939,16 @@ function cRP.bikesBackpack()
 		vRP.setWeight(user_id,amountWeight)
 	end
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYERDISCONNECT
+-----------------------------------------------------------------------------------------------------------------------------------------
+AddEventHandler("playerDisconnect",function(user_id)
+	if playerCarry[user_id] then
+		TriggerClientEvent("player:Commands",playerCarry[user_id],false)
+		playerCarry[user_id] = nil
+	end
+	
+	if Active[user_id] then
+		Active[user_id] = nil
+	end
+end)
