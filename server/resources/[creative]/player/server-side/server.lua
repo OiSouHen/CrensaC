@@ -294,6 +294,25 @@ AddEventHandler("player:cvFunctions",function(mode)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYER:ROLLVEHICLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("player:RollVehicle")
+AddEventHandler("player:RollVehicle",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local vehicle,vehNet = vRPC.vehList(source,5)
+		if vehicle then
+			local activePlayers = vRPC.activePlayers(source)
+			for _,v in ipairs(activePlayers) do
+				async(function()
+					TriggerClientEvent("target:RollVehicle",source,vehNet)
+				end)
+			end
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- PRESET
 -----------------------------------------------------------------------------------------------------------------------------------------
 local preset = {
