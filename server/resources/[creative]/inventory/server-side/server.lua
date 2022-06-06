@@ -1811,37 +1811,49 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 							if vCLIENT.DismantleStatus(source) and vehPlate == "DISM"..(1000 + user_id) then
 								if vTASKBAR.UpgradeVehicle(source) then
-									vRP.upgradeStress(user_id,2)
-									TriggerEvent("plateEveryone",vehPlate)
-									local idNetwork = NetworkGetEntityFromNetworkId(vehNet)
-									if GetVehicleDoorLockStatus(idNetwork) == 2 then
-										SetVehicleDoorsLocked(idNetwork,1)
-									end
+									vRPC.stopActived(source)
+									Active[user_id] = os.time() + 30
+									TriggerClientEvent("Progress",source,30000)
+									TriggerClientEvent("inventory:Close",source)
+									TriggerClientEvent("inventory:Buttons",source,true)
+									vRPC.playAnim(source,false,{"missfbi_s4mop","clean_mop_back_player"},true)
 
-									local activePlayers = vRPC.activePlayers(source)
-									for _,v in ipairs(activePlayers) do
-										async(function()
-											TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
-										end)
-									end
+									TriggerClientEvent("inventory:DisPed",source)
 
-									if vCLIENT.DismantleStatus(source) then
-										TriggerClientEvent("target:Dismantles",source)
-									end
+									repeat
+										if os.time() >= parseInt(Active[user_id]) then
+											Active[user_id] = nil
+											TriggerClientEvent("inventory:Buttons",source,false)
 
-									if math.random(100) >= 75 then
-										local coords = vRPC.getEntityCoords(source)
-										local policeResult = vRP.numPermission("Police")
-										for k,v in pairs(policeResult) do
-											async(function()
-												TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
-											end)
+											vRP.upgradeStress(user_id,2)
+											TriggerEvent("plateEveryone",vehPlate)
+											local idNetwork = NetworkGetEntityFromNetworkId(vehNet)
+											if GetVehicleDoorLockStatus(idNetwork) == 2 then
+												SetVehicleDoorsLocked(idNetwork,1)
+											end
+
+											TriggerClientEvent("target:Dismantles",source)
+
+											local activePlayers = vRPC.activePlayers(source)
+											for _,v in ipairs(activePlayers) do
+												async(function()
+													TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
+												end)
+											end
+
+											if math.random(100) >= 75 then
+												local coords = vRPC.getEntityCoords(source)
+												local policeResult = vRP.numPermission("Police")
+												for k,v in pairs(policeResult) do
+													async(function()
+														TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Veículo", x = coords["x"], y = coords["y"], z = coords["z"], vehicle = vehicleName(vehName).." - "..vehPlate, time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
+													end)
+												end
+											end
 										end
 										
-										if vCLIENT.DismantleStatus(source) then
-											TriggerClientEvent("inventory:DisPed",source)
-										end
-									end
+										Wait(100)
+									until Active[user_id] == nil
 								end
 							else
 								if vTASKBAR.taskLockpick(source) then
@@ -1917,30 +1929,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "postit" then
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("postit:initPostit",source)
-			return end
-
-			if nameItem == "energetic" then
-				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_energy_drink",49,60309,0.0,0.0,0.0,0.0,0.0,130.0)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.removeObjects(source,"one")
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-							TriggerClientEvent("setEnergetic",source,20,1.10)
-							vRP.upgradeStress(user_id,5)
-						end
-					end
-
-					Wait(100)
-				until Active[user_id] == nil
 			return end
 
 			if nameItem == "absolut" then
@@ -2082,8 +2070,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "orange" or nameItem == "apple" or nameItem == "strawberry" or nameItem == "coffee2" or nameItem == "grape" or nameItem == "tange" or nameItem == "banana" or nameItem == "passion" or nameItem == "tomato" or nameItem == "mushroom" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -2143,6 +2131,30 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							vRP.upgradeThirst(user_id,20)
 							vRP.generateItem(user_id,"emptybottle",1)
+						end
+					end
+
+					Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "guarananatural" then
+				vRPC.stopActived(source)
+				Active[user_id] = os.time() + 15
+				TriggerClientEvent("Progress",source,15000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_plastic_cup_02",49,60309,0.0,0.0,0.1,0.0,0.0,130.0)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.removeObjects(source,"one")
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
+							vRP.upgradeThirst(user_id,20)
 						end
 					end
 
@@ -2295,6 +2307,30 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							TriggerClientEvent("setEnergetic",source,10,1.05)
+							vRP.upgradeThirst(user_id,15)
+						end
+					end
+
+					Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "coffeemilk" then
+				vRPC.stopActived(source)
+				Active[user_id] = os.time() + 15
+				TriggerClientEvent("Progress",source,15000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.createObjects(source,"amb@world_human_aa_coffee@idle_a", "idle_a","p_amb_coffeecup_01",49,28422)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.removeObjects(source,"one")
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
 							vRP.upgradeThirst(user_id,15)
 						end
 					end
@@ -2723,6 +2759,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,false)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
 							vRP.downgradeStress(user_id,10)
 							vRP.upgradeHunger(user_id,8)
 						end
@@ -2747,6 +2784,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,false)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
 							vRP.downgradeStress(user_id,25)
 							vRP.upgradeHunger(user_id,10)
 						end
@@ -2806,8 +2844,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "donut" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@code_human_wander_eating_donut@male@idle_a","idle_c","prop_amb_donut",49,28422)
@@ -2819,6 +2857,32 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,false)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
+							vRP.downgradeStress(user_id,10)
+							vRP.upgradeHunger(user_id,5)
+						end
+					end
+
+					Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "cookies" then
+				vRPC.stopActived(source)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.removeObjects(source,"one")
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
 							vRP.downgradeStress(user_id,10)
 							vRP.upgradeHunger(user_id,5)
 						end
@@ -3993,7 +4057,7 @@ AddEventHandler("inventory:DrugsPeds",function()
 		if vRP.tryGetInventoryItem(user_id,userAmount[user_id][1],userAmount[user_id][2],true) then
 			vRP.upgradeStress(user_id,3)
 			TriggerClientEvent("player:applyGsr",source)
-			vRP.generateItem(user_id,"dollars",userAmount[user_id][3],true)
+			vRP.generateItem(user_id,"dollarsroll",userAmount[user_id][3],true)
 			
 			if math.random(100) >= 75 then
 				local ped = GetPlayerPed(source)
@@ -4175,8 +4239,8 @@ AddEventHandler("inventory:Drink",function()
 	local user_id = vRP.getUserId(source)
 	if user_id and Active[user_id] == nil then
 		vRPC.stopActived(source)
-		Active[user_id] = os.time() + 15
-		TriggerClientEvent("Progress",source,15000)
+		Active[user_id] = os.time() + 10
+		TriggerClientEvent("Progress",source,10000)
 		TriggerClientEvent("inventory:Close",source)
 		TriggerClientEvent("inventory:Buttons",source,true)
 		vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_plastic_cup_02",49,60309,0.0,0.0,0.1,0.0,0.0,130.0)
