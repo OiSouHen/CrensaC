@@ -1550,14 +1550,6 @@ local itemlist = {
 		["weight"] = 0.00,
 		["economy"] = 100000
 	},
-	["energetic"] = {
-		["index"] = "energetic",
-		["name"] = "Energético",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 5,
-		["economy"] = 15
-	},
 	["milkbottle"] = {
 		["index"] = "milkbottle",
 		["name"] = "Garrafa de Leite",
