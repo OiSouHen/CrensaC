@@ -95,8 +95,6 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 
 				exports["dynamic"]:AddButton("Colocar no Veículo","Colocar no veículo mais próximo.","player:cvFunctions","cv","ClosestPeds",true)
 				exports["dynamic"]:AddButton("Remover do Veículo","Remover do veículo mais próximo.","player:cvFunctions","rv","ClosestPeds",true)
-				exports["dynamic"]:AddButton("Checar Porta-Malas","Vericar pessoa dentro do mesmo.","player:checkTrunk","","ClosestPeds",true)
-				exports["dynamic"]:AddButton("Checar Lixeira","Vericar pessoa dentro da mesma.","player:checkTrash","","ClosestPeds",true)
 				
 				exports["dynamic"]:SubMenu("Jogador","Pessoa mais próxima de você.","ClosestPeds")
 			else
