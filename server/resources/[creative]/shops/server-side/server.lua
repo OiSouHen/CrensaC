@@ -65,7 +65,7 @@ local shops = {
 			["cat"] = 25000
 		}
 	},
-	["Departament"] = {
+	["OldDepartament"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
@@ -73,7 +73,6 @@ local shops = {
 			["cheese"] = 10,
 			["postit"] = 20,
 			["notepad"] = 10,
-			["energetic"] = 15,
 			["hamburger"] = 25,
 			["emptybottle"] = 30,
 			["cigarette"] = 10,
@@ -89,6 +88,27 @@ local shops = {
 			["soda"] = 15,
 			["coffee"] = 20,
 			["bread"] = 5
+		}
+	},
+	["Departament"] = {
+		["mode"] = "Buy",
+		["type"] = "Cash",
+		["list"] = {
+			["sugar"] = 5,
+			["binoculars"] = 275,
+			["notepad"] = 10,
+			["cellphone"] = 575,
+			["cigarette"] = 10,
+			["rope"] = 875,
+			["camera"] = 275,
+			["firecracker"] = 100,
+			["emptybottle"] = 30,
+			["lighter"] = 175,
+			["postit"] = 20,
+			["rose"] = 25,
+			["radio"] = 975,
+			["scanner"] = 6750,
+			["vape"] = 4750
 		}
 	},
 	["Clothes"] = {
