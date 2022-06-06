@@ -775,6 +775,11 @@ CreateThread(function()
 				event = "player:enterTrash",
 				label = "Esconder",
 				tunnel = "client"
+			},
+			{
+				event = "player:checkTrash",
+				label = "Checar",
+				tunnel = "server"
 			}
 		},
 		distance = 0.75
@@ -1627,6 +1632,8 @@ function playerTargetEnable()
 											table.insert(Menu,{ event = "trunkchest:openTrunk", label = "Abrir Porta-Malas", tunnel = "server" })
 										end
 
+										table.insert(Menu,{ event = "player:checkTrunk", label = "Checar Porta-Malas", tunnel = "server" })
+										
 										table.insert(Menu,{ event = "garages:vehicleKey", label = "Criar Chave Cópia", tunnel = "police" })
 										table.insert(Menu,{ event = "inventory:applyPlate", label = "Trocar Placa", tunnel = "police" })
 									else
