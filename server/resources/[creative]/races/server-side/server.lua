@@ -4975,7 +4975,7 @@ function cRP.finishRace(id,points)
 
 		if ilegalRace[user_id] then
 			local minValue,maxValue = Races[id]["payment"][1],Races[id]["payment"][1]
-			vRP.generateItem(user_id,"dollars",math.random(minValue,maxValue),true)
+			vRP.generateItem(user_id,"dollarsroll",math.random(minValue,maxValue),true)
 			TriggerEvent("blipsystem:serviceExit",source)
 			vRP.upgradeStress(user_id,10)
 			ilegalRace[user_id] = nil
