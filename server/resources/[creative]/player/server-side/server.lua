@@ -706,6 +706,17 @@ AddEventHandler("player:checkTrunk",function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYER:CHECKTRASH
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("player:checkTrash")
+AddEventHandler("player:checkTrash",function()
+	local source = source
+	local otherPlayer = vRPC.nearestPlayer(source)
+	if otherPlayer then
+		TriggerClientEvent("player:checkTrash",otherPlayer)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- OUTFIT - REMOVER
 -----------------------------------------------------------------------------------------------------------------------------------------
 local removeFit = {
