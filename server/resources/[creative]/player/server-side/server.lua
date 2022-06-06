@@ -243,6 +243,10 @@ AddEventHandler("playerDisconnect",function(user_id)
 		TriggerClientEvent("player:Commands",playerCarry[user_id],false)
 		playerCarry[user_id] = nil
 	end
+	
+	if Active[user_id] then
+		Active[user_id] = nil
+	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYER:WINSFUNCTIONS
@@ -296,20 +300,39 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYER:ROLLVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
+local Active = {}
 RegisterServerEvent("player:RollVehicle")
 AddEventHandler("player:RollVehicle",function()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if user_id then
-		local vehicle,vehNet = vRPC.vehList(source,5)
-		if vehicle then
-			local activePlayers = vRPC.activePlayers(source)
-			for _,v in ipairs(activePlayers) do
-				async(function()
-					TriggerClientEvent("target:RollVehicle",source,vehNet)
-				end)
+	if user_id and Active[user_id] == nil then
+		vRPC.stopActived(source)
+		Active[user_id] = os.time() + 60
+		TriggerClientEvent("Progress",source,60000)
+		TriggerClientEvent("inventory:Close",source)
+		TriggerClientEvent("inventory:Buttons",source,true)
+		vRPC.playAnim(source,false,{"mini@repair","fixing_a_player"},true)
+
+		repeat
+			if os.time() >= parseInt(Active[user_id]) then
+				Active[user_id] = nil
+				vRPC.removeObjects(source,"one")
+
+				local vehicle,vehNet = vRPC.vehList(source,5)
+				if vehicle then
+					local activePlayers = vRPC.activePlayers(source)
+					for _,v in ipairs(activePlayers) do
+						async(function()
+							TriggerClientEvent("target:RollVehicle",source,vehNet)
+						end)
+					end
+				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			end
-		end
+
+			Wait(100)
+		until Active[user_id] == nil
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
