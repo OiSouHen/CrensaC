@@ -882,6 +882,32 @@ CreateThread(function()
 			}
 		}
 	})
+	
+	AddCircleZone("Trucker",vec3(1239.87,-3257.2,7.09),0.5,{
+		name = "Trucker",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "trucker:initVehicles",
+				label = "Entrega de Veículos",
+				tunnel = "client"
+			},{
+				event = "trucker:initDiesel",
+				label = "Entrega de Diesel",
+				tunnel = "client"
+			},{
+				event = "trucker:initFuel",
+				label = "Entrega de Gasolina",
+				tunnel = "client"
+			},{
+				event = "trucker:initWood",
+				label = "Entrega de Madeira",
+				tunnel = "client"
+			}
+		}
+	})
 
 	AddCircleZone("foodJuice01",vec3(-1190.78,-904.23,13.99),0.5,{
 		name = "foodJuice01",
