@@ -23,8 +23,8 @@ function cRP.paymentFuel(fuelPrice,vehPlate,vFuel)
 	if user_id then
 		local gasPrice = parseInt(fuelPrice)
 		if vRP.paymentFull(user_id,gasPrice) then
-			local activePlayers = vRPC.activePlayers(source)
-			for _,v in ipairs(activePlayers) do
+			local Players = vRPC.Players(source)
+			for _,v in ipairs(Players) do
 				async(function()
 					TriggerClientEvent("engine:syncFuel",v,vehPlate,vFuel)
 				end)
