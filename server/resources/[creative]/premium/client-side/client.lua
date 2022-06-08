@@ -3,8 +3,8 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	while true do
-		if NetworkIsInSpectatorMode() then
-			TriggerServerEvent("admin:Print","Ativou o modo spectador.")
+		if NetworkIsInSpectatorMode() and not LocalPlayer["state"]["Spectate"] then
+			TriggerServerEvent("admin:Print","Ativou o modo espectador.")
 		end
 
 		if GetUsingseethrough() then
@@ -13,11 +13,6 @@ CreateThread(function()
 
 		if GetUsingnightvision() then
 			TriggerServerEvent("admin:Print","Ativou a visão noturna.")
-		end
-
-		local ped = PlayerPedId()
-		if IsPedSittingInAnyVehicle(ped) and IsVehicleVisible(GetVehiclePedIsIn(ped)) then
-			TriggerServerEvent("admin:Print","Veículo invisível.")
 		end
 
 		local DetectableTextures = {
@@ -345,7 +340,7 @@ local hackerEvents = {
 	"LegacyFuel:PayFuel",
 	"blarglebus:finishRoute",
 	"dmv:success",
-	"departamentStoreo-vender",
+	"departamento-vender",
 	"reanimar:pagamento",
 	"adminmenu:allowall",
 	"antilynx8:anticheat",
