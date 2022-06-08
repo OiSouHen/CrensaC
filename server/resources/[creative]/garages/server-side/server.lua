@@ -830,11 +830,6 @@ AddEventHandler("garages:Transfer",function(vehModel)
 
 		local myVehicle = vRP.query("vehicles/selectVehicles",{ user_id = user_id, vehicle = vehModel })
 		if myVehicle[1] then
-			if myVehicle[1]["rental"] >= 1 then
-				TriggerClientEvent("Notify",source,"amarelo","Veículos alugados não podem ser transferidos.",5000)
-				return
-			end
-
 			local passport = vKEYBOARD.keySingle(source,"Passaporte:")
             if not passport then
                 return
