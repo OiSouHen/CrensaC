@@ -1374,12 +1374,12 @@ AddEventHandler("homes:buyEmerald",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[1]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1405,12 +1405,12 @@ AddEventHandler("homes:buyDiamond",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[2]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1436,12 +1436,12 @@ AddEventHandler("homes:buySapphire",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[3]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1467,12 +1467,12 @@ AddEventHandler("homes:buyAmber",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[4]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1498,12 +1498,12 @@ AddEventHandler("homes:buyAmethyst",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[5]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1529,12 +1529,12 @@ AddEventHandler("homes:buyRuby",function(homeName)
 			local consult = vRP.query("propertys/permissions",{ name = homeName })
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[6]
-				if vRP.request(source,"Deseja assinar o contrato da propriedade?") then
+				if vRP.request(source,"Deseja comprar esta propriedade?") then
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] == nil then
 						local identity = vRP.userIdentity(user_id)
 						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						TriggerClientEvent("Notify",source,"verde","Contrato assinado.",5000)
+						exports["propertys"]:enterHomes(source,user_id,homeName,false)
 					end
 				end
 			end
@@ -1558,6 +1558,8 @@ AddEventHandler("homes:invokeSystem",function(mode)
 			local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
 			if consult[1] then
 				if mode == "vender" and consult[1]["owner"] >= 1 then
+					TriggerClientEvent("dynamic:closeSystem",source)
+
 					local homesPrice = parseInt(consult[1]["price"] * 0.7)
 
 					if vRP.request(source,"Concluir a venda por <b>$"..parseFormat(homesPrice).."</b> dólares?") then
@@ -1573,12 +1575,16 @@ AddEventHandler("homes:invokeSystem",function(mode)
 						end
 					end
 				elseif mode == "garagem" and consult[1]["owner"] >= 1 then
+					TriggerClientEvent("dynamic:closeSystem",source)
+
 					local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
 					if userPermissions[1] then
 						TriggerClientEvent("Notify",source,"amarelo","Fique no local onde vai abrir a garagem e pressione a tecla <b>E</b>.",10000)
 						vCLIENT.homeGarage(source,homeName)
 					end
 				elseif mode == "checar" then
+					TriggerClientEvent("dynamic:closeSystem",source)
+
 					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
 					if checkExist[1] then
 						local permList = ""
@@ -1596,6 +1602,8 @@ AddEventHandler("homes:invokeSystem",function(mode)
 						TriggerClientEvent("Notify",source,"azul","Lista de permissões da(o): <br>"..permList,20000)
 					end
 				elseif mode == "tax" then
+					TriggerClientEvent("dynamic:closeSystem",source)
+
 					local ownerConsult = vRP.query("propertys/userOwnermissions",{ name = homeName })
 					if ownerConsult[1] then
 						local taxPrice = parseInt(ownerConsult[1]["price"] * 0.1)
@@ -1788,6 +1796,19 @@ RegisterCommand("roupas",function(source,args,rawCommand)
 				end
 			end
 		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:BUYRUBY
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("propertys:openShop")
+AddEventHandler("propertys:openShop",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		TriggerClientEvent("dynamic:closeSystem",source)
+
+		TriggerClientEvent("skinshop:openShop",source)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
