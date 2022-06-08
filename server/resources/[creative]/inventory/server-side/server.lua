@@ -302,6 +302,7 @@ function cRP.requestInventory()
 					if itemDurability(v["item"]) then
 						v["durability"] = parseInt(os.time() - splitName[2])
 						v["days"] = itemDurability(v["item"])
+						v["serial"] = splitName[3]
 					else
 						v["durability"] = 0
 						v["days"] = 1
@@ -515,7 +516,7 @@ AddEventHandler("inventory:sendItem",function(Slot,Amount)
 	local Amount = parseInt(Amount)
 	local user_id = vRP.getUserId(source)
 	if user_id and Active[user_id] == nil then
-		local Player = vRPC.nearestPlayer(source)
+		local Player = vRPC.ClosestPed(source)
 		if Player then
 			Active[user_id] = os.time() + 100
 
@@ -912,12 +913,18 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "dismantle" then
 				TriggerClientEvent("inventory:Close",source)
 				if not vCLIENT.DismantleStatus(source) then
-					vCLIENT.Dismantle(source,math.random(100,1001))
+					-- local reputationValue = vRP.checkReputation(user_id,"Dismantle")
+					-- if reputationValue >= 0 then
+						-- vCLIENT.Dismantle(source,reputationValue)
+					-- else
+						vCLIENT.Dismantle(source,math.random(1000))
+					-- end
+
 					vRP.removeInventoryItem(user_id,"dismantle",1,true)
 				end
 			return end
 
-			if string.sub(nameItem,1,5) == "badge" then
+			if string.sub(nameItem,1,2) == "badge" then
 				if openIdentity[user_id] then
 					TriggerClientEvent("vRP:Identity",source)
 					openIdentity[user_id] = nil
@@ -929,7 +936,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						openIdentity[user_id] = true
 						TriggerClientEvent("inventory:Close",source)
 
-						if nameItem == "badge04" then
+						if nameItem == "badge02" then
 							vRPC.createObjects(source,"paper_1_rcm_alt1-8","player_one_dual-8","prop_medic_badge",49,28422,0.065,0.029,-0.035,80.0,-1.90,75.0)
 						else
 							vRPC.createObjects(source,"paper_1_rcm_alt1-8","player_one_dual-8","prop_police_badge",49,28422,0.065,0.029,-0.035,80.0,-1.90,75.0)
@@ -1033,8 +1040,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				TriggerClientEvent("inventory:Buttons",source,false)
 
 				local Dice = math.random(6)
-				local activePlayers = vRPC.activePlayers(source)
-				for _,v in ipairs(activePlayers) do
+				local Players = vRPC.Players(source)
+				for _,v in ipairs(Players) do
 					async(function()
 						TriggerClientEvent("showme:pressMe",v,source,"<img src='images/"..Dice..".png'>",10,true)
 					end)
@@ -1053,7 +1060,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				local identity = vRP.userIdentity(user_id)
 				TriggerClientEvent("chatME",source,"^5CARTAS^9"..identity["name"].." "..identity["name2"].."^0 tirou "..cards[card].." "..naipes[naipe].." do baralho.")
 
-				local players = vRPC.nearestPlayers(source,5)
+				local players = vRPC.ClosestPeds(source,5)
 				for _,v in pairs(players) do
 					TriggerClientEvent("chatME",v[2],"^5CARTAS^9"..identity["name"].." "..identity["name2"].."^0 tirou "..cards[card]..naipes[naipe].." do baralho.")
 				end
@@ -1459,7 +1466,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "gsrkit" then
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer then
 					Active[user_id] = os.time() + 10
 					TriggerClientEvent("Progress",source,10000)
@@ -1486,7 +1493,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "gdtkit" then
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer then
 					local nuser_id = vRP.getUserId(otherPlayer)
 					local identity = vRP.userIdentity(nuser_id)
@@ -1563,8 +1570,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,true)
 						vRPC.playAnim(source,false,{"mini@repair","fixing_a_player"},true)
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"open")
 							end)
@@ -1586,8 +1593,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							Wait(100)
 						until Active[user_id] == nil
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"close")
 							end)
@@ -1657,8 +1664,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,true)
 						vRPC.playAnim(source,false,{"mini@repair","fixing_a_player"},true)
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"open")
 							end)
@@ -1673,8 +1680,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 									vRP.giveInventoryItem(user_id,"advtoolbox-"..numberItem,1,false)
 								end
 
-								local activePlayers = vRPC.activePlayers(source)
-								for _,v in ipairs(activePlayers) do
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
 									async(function()
 										TriggerClientEvent("inventory:repairVehicle",v,vehNet,vehPlate)
 									end)
@@ -1684,8 +1691,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							end
 						end
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"close")
 							end)
@@ -1708,8 +1715,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,true)
 						vRPC.playAnim(source,false,{"mini@repair","fixing_a_player"},true)
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"open")
 							end)
@@ -1717,8 +1724,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vTASKBAR.taskMechanic(source) then
 							if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-								local activePlayers = vRPC.activePlayers(source)
-								for _,v in ipairs(activePlayers) do
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
 									async(function()
 										TriggerClientEvent("inventory:repairVehicle",v,vehNet,vehPlate)
 									end)
@@ -1728,8 +1735,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							end
 						end
 
-						local activePlayers = vRPC.activePlayers(source)
-						for _,v in ipairs(activePlayers) do
+						local Players = vRPC.Players(source)
+						for _,v in ipairs(Players) do
 							async(function()
 								TriggerClientEvent("player:syncHoodOptions",v,vehNet,"close")
 							end)
@@ -1774,8 +1781,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								end
 
 								if math.random(100) >= 75 then
-									local activePlayers = vRPC.activePlayers(source)
-									for _,v in ipairs(activePlayers) do
+									local Players = vRPC.Players(source)
+									for _,v in ipairs(Players) do
 										async(function()
 											TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
 										end)
@@ -1835,8 +1842,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 											TriggerClientEvent("target:Dismantles",source)
 
-											local activePlayers = vRPC.activePlayers(source)
-											for _,v in ipairs(activePlayers) do
+											local Players = vRPC.Players(source)
+											for _,v in ipairs(Players) do
 												async(function()
 													TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
 												end)
@@ -1868,8 +1875,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 									end
 									
 									if math.random(100) >= 75 then
-										local activePlayers = vRPC.activePlayers(source)
-										for _,v in ipairs(activePlayers) do
+										local Players = vRPC.Players(source)
+										for _,v in ipairs(Players) do
 											async(function()
 												TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
 											end)
@@ -2925,8 +2932,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 								if vTASKBAR.taskTyre(source) then
 									if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
-										local activePlayers = vRPC.activePlayers(source)
-										for _,v in ipairs(activePlayers) do
+										local Players = vRPC.Players(source)
+										for _,v in ipairs(Players) do
 											async(function()
 												TriggerClientEvent("inventory:repairTyre",v,vehNet,Tyre,vehPlate)
 											end)
@@ -2990,7 +2997,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "handcuff" then
 				if not vRPC.inVehicle(source) then
-					local otherPlayer = vRPC.nearestPlayer(source,0.8)
+					local otherPlayer = vRPC.ClosestPed(source,0.8)
 					if otherPlayer then
 						if vPLAYER.getHandcuff(otherPlayer) then
 							vPLAYER.toggleHandcuff(otherPlayer)
@@ -3019,7 +3026,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "hood" then
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer and vPLAYER.getHandcuff(otherPlayer) then
 					TriggerClientEvent("hud:toggleHood",otherPlayer)
 					TriggerClientEvent("inventory:Close",otherPlayer)
@@ -3035,7 +3042,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.removeObjects(source)
 						Carry[user_id] = nil
 					else
-						local otherPlayer = vRPC.nearestPlayer(source)
+						local otherPlayer = vRPC.ClosestPed(source)
 						if otherPlayer and (vRP.getHealth(otherPlayer) <= 101 or vPLAYER.getHandcuff(otherPlayer)) then
 							Carry[user_id] = otherPlayer
 
@@ -3065,7 +3072,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "pager" then
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer then
 					if vPLAYER.getHandcuff(otherPlayer) then
 						local nuser_id = vRP.getUserId(otherPlayer)
@@ -3811,8 +3818,8 @@ function cRP.stealTrunk(Entity)
 					TriggerClientEvent("Progress",source,30000)
 					TriggerClientEvent("inventory:Buttons",source,true)
 
-					local activePlayers = vRPC.activePlayers(source)
-					for _,v in ipairs(activePlayers) do
+					local Players = vRPC.Players(source)
+					for _,v in ipairs(Players) do
 						async(function()
 							TriggerClientEvent("player:syncDoorsOptions",v,vehNet,"open")
 						end)
@@ -3824,8 +3831,8 @@ function cRP.stealTrunk(Entity)
 							vRPC.stopAnim(source,false)
 							TriggerClientEvent("inventory:Buttons",source,false)
 
-							local activePlayers = vRPC.activePlayers(source)
-							for _,v in ipairs(activePlayers) do
+							local Players = vRPC.Players(source)
+							for _,v in ipairs(Players) do
 								async(function()
 									TriggerClientEvent("player:syncDoorsOptions",v,vehNet,"close")
 								end)
@@ -3854,8 +3861,8 @@ function cRP.stealTrunk(Entity)
 						Wait(100)
 					until Active[user_id] == nil
 				else
-					local activePlayers = vRPC.activePlayers(source)
-					for _,v in ipairs(activePlayers) do
+					local Players = vRPC.Players(source)
+					for _,v in ipairs(Players) do
 						async(function()
 							TriggerClientEvent("inventory:vehicleAlarm",v,vehNet,vehPlate)
 						end)
@@ -4279,7 +4286,6 @@ AddEventHandler("inventory:Dismantle",function(Entity)
 			if os.time() >= parseInt(Active[user_id]) then
 				Active[user_id] = nil
 				vRPC.removeObjects(source)
-				vRP.upgradeStress(user_id,10)
 				dismantleProgress[user_id] = nil
 				
 				TriggerClientEvent("player:applyGsr",source)
@@ -4295,6 +4301,9 @@ AddEventHandler("inventory:Dismantle",function(Entity)
 				
 				TriggerClientEvent("inventory:Disreset",source)
 				TriggerClientEvent("Notify",source,"amarelo","O veículo do seu contrato foi encaminhado para o <b>Impound</b> e o <b>Lester</b> disse que você poe assinar um novo contrato quando quiser.",10000)
+				
+				-- vRP.insertReputation(user_id,"Dismantle",10)
+				vRP.upgradeStress(user_id,10)
 			end
 			Wait(100)
 		until Active[user_id] == nil
@@ -4334,8 +4343,8 @@ AddEventHandler("inventory:removeTyres",function(Entity,Tyre)
 									if vCLIENT.tyreHealth(source,Entity[4],Tyre) == 1000.0 then
 										vRP.generateItem(user_id,"tyres",1,true)
 
-										local activePlayers = vRPC.activePlayers(source)
-										for _,v in ipairs(activePlayers) do
+										local Players = vRPC.Players(source)
+										for _,v in ipairs(Players) do
 											async(function()
 												TriggerClientEvent("inventory:explodeTyres",v,Entity[4],Entity[1],Tyre)
 											end)
