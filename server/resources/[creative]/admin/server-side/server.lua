@@ -332,8 +332,8 @@ RegisterCommand("fix",function(source,args,rawCommand)
 		if vRP.hasGroup(user_id,"Admin") then
 			local vehicle,vehNet,vehPlate = vRPC.vehList(source,10)
 			if vehicle then
-				local activePlayers = vRPC.activePlayers(source)
-				for _,v in ipairs(activePlayers) do
+				local Players = vRPC.Players(source)
+				for _,v in ipairs(Players) do
 					async(function()
 						TriggerClientEvent("inventory:repairAdmin",v,vehNet,vehPlate)
 					end)
@@ -352,8 +352,8 @@ RegisterCommand("limparea",function(source,args,rawCommand)
 			local ped = GetPlayerPed(source)
 			local coords = GetEntityCoords(ped)
 
-			local activePlayers = vRPC.activePlayers(source)
-			for _,v in ipairs(activePlayers) do
+			local Players = vRPC.Players(source)
+			for _,v in ipairs(Players) do
 				async(function()
 					TriggerClientEvent("syncarea",v,coords["x"],coords["y"],coords["z"],100)
 				end)
