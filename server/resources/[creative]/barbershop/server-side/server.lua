@@ -55,8 +55,8 @@ AddEventHandler("barbershop:debug",function()
 		local ped = GetPlayerPed(source)
 		local coords = GetEntityCoords(ped)
 
-		local activePlayers = vRPC.activePlayers(source)
-		for _,v in ipairs(activePlayers) do
+		local Players = vRPC.Players(source)
+		for _,v in ipairs(Players) do
 			async(function()
 				TriggerClientEvent("syncarea",v,coords["x"],coords["y"],coords["z"],1)
 			end)
