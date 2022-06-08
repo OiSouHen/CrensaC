@@ -66,8 +66,8 @@ end
 RegisterServerEvent("towdriver:ServerTow")
 AddEventHandler("towdriver:ServerTow",function(veh01,veh02,mode)
 	local source = source
-	local activePlayers = vRPC.activePlayers(source)
-	for _,v in ipairs(activePlayers) do
+	local Players = vRPC.Players(source)
+	for _,v in ipairs(Players) do
 		async(function()
 			TriggerClientEvent("towdriver:ClientTow",v,veh01,veh02,mode)
 		end)
