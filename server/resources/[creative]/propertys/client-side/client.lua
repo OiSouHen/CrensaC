@@ -153,6 +153,7 @@ function cRP.entranceHomes(homeName,v,interior)
 		table.insert(homes["intern"],{ 68.64,67.3,-23.4,"exit","Saída" })
 		table.insert(homes["intern"],{ 86.73,72.08,-24.01,"vault","Baú" })
 		table.insert(homes["intern"],{ 82.78,78.77,-24.01,"fridge","Geladeira" })
+		table.insert(homes["intern"],{ 60.02,69.87,-24.6,"wardrobe","Armário" })
 	elseif interior == "creativeLostudios" then
 		SetEntityCoords(ped,51.96,-38.46,-26.02,1,0,0,0)
 		
@@ -227,13 +228,18 @@ CreateThread(function()
 								end
 							elseif v[4] == "vault" or v[4] == "fridge" then
 								table.insert(innerTable,{ v[1],v[2],v[3],1.25,"E",v[5],"Pressione para acessar" })
-							
+
 								if vSERVER.checkPermissions(homes["open"]) then
 									TriggerEvent("sounds:source","chest",0.7)
 									SendNUIMessage({ action = "showMenu" })
 									SetNuiFocus(true,true)
 									homes["vault"] = v[4]
 								end
+							elseif v[4] == "wardrobe" then
+								table.insert(innerTable,{ v[1],v[2],v[3],1.25,"E",v[5],"Pressione para acessar" })
+
+								exports["dynamic"]:AddButton("Shopping","Abrir a loja de vestimentas.","propertys:openShop","",false,true)
+								exports["dynamic"]:openMenu()
 							end
 						end
 					end
@@ -270,7 +276,7 @@ function cRP.homeGarage(homeName)
 				homes["garage"] = homes["garage"] + 1
 
 				if homes["garage"] <= 1 then
-					TriggerEvent("Notify","amarelo","Fique no <b>local olhando</b> pra onde deseja que o veículo<br>apareça e pressione a tecla <b>E</b> novamente.",10000)
+					TriggerEvent("Notify","amarelo","Fique no <b>local olhando</b> pra onde deseja que o veículo apareça e pressione a tecla <b>E</b> novamente.",10000)
 					homeCoords[homeName] = { x = mathLegth(coords["x"]), y = mathLegth(coords["y"]), z = mathLegth(coords["z"]) }
 				else
 					TriggerEvent("Notify","verde","Garagem adicionada.",10000)
@@ -305,7 +311,7 @@ CreateThread(function()
 								if vSERVER.checkOwner(k) then
 									homes["pressButton"] = GetGameTimer() + 3000
 									exports["dynamic"]:AddButton("Entrar","Adentrar a propriedade.","homes:Enter",k,false,true)
-									exports["dynamic"]:AddButton("Credenciais","Adentrar a propriedade.","homes:invokeSystem","checar",false,true)
+									exports["dynamic"]:AddButton("Permissões","Checar permissões da propriedade.","homes:invokeSystem","checar",false,true)
 									exports["dynamic"]:AddButton("Fechadura","Trancar/Destrancar a propriedade.","homes:invokeSystem","trancar",false,true)
 									exports["dynamic"]:AddButton("Garagem","Adicionar uma garagem.","homes:invokeSystem","garagem",false,true)
 									exports["dynamic"]:AddButton("Hipoteca","Realizar pagamento da hipoteca.","homes:invokeSystem","tax",false,true)
