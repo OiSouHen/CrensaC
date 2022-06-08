@@ -64,7 +64,7 @@ AddEventHandler("skinshop:removeProps",function(mode)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local otherPlayer = vRPC.nearestPlayer(source)
+		local otherPlayer = vRPC.ClosestPed(source)
 		if otherPlayer then
 			if vRP.hasGroup(user_id,"Police") then
 				TriggerClientEvent("skinshop:set"..mode,otherPlayer)
