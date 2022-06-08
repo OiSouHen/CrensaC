@@ -125,12 +125,11 @@ local shops = {
 		["mode"] = "Buy",
 		["type"] = "Cash",
 		["list"] = {
+			["WEAPON_WRENCH"] = 725,
+			["toolbox"] = 625,
+			["advtoolbox"] = 1525,
 			["tyres"] = 225,
-			["toolbox"] = 575,
-			["lockpick"] = 525,
-			["advtoolbox"] = 1425,
-			["WEAPON_CROWBAR"] = 725,
-			["WEAPON_WRENCH"] = 725
+			["WEAPON_CROWBAR"] = 725
 		}
 	},
 	["mechanicBuy"] = {
@@ -138,10 +137,11 @@ local shops = {
 		["type"] = "Cash",
 		["perm"] = "Mechanic",
 		["list"] = {
-			["tyres"] = 125,
-			["toolbox"] = 275,
-			["lockpick"] = 325,
-			["advtoolbox"] = 925
+			["WEAPON_WRENCH"] = 365,
+			["toolbox"] = 315,
+			["advtoolbox"] = 765,
+			["tyres"] = 115,
+			["WEAPON_CROWBAR"] = 365
 		}
 	},
 	["Weapons"] = {
@@ -184,7 +184,8 @@ local shops = {
 			["ritmoneury"] = 425,
 			["wheelchair"] = 2750,
 			["defibrillator"] = 325,
-			["medicbag"] = 425
+			["medicbag"] = 425,
+			["badge02"] = 10
 		}
 	},
 	["Ammunation"] = {
@@ -395,15 +396,7 @@ local shops = {
 			["WEAPON_SMG_AMMO"] = 10,
 			["WEAPON_RIFLE_AMMO"] = 12,
 			["WEAPON_SHOTGUN_AMMO"] = 15,
-			["badge01"] = 10,
-			["badge02"] = 10,
-			["badge03"] = 10,
-			["badge05"] = 10,
-			["badge06"] = 10,
-			["badge07"] = 10,
-			["badge08"] = 10,
-			["badge09"] = 10,
-			["badge10"] = 10
+			["badge01"] = 10
 		}
 	},
 	["Criminal"] = {
