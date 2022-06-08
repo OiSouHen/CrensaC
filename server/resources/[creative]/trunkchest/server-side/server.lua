@@ -334,8 +334,8 @@ function cRP.chestClose()
 		local vehicle,vehNet = vRPC.vehList(source,3)
 		if vehicle then
 			if not vRPC.inVehicle(source) then
-				local activePlayers = vRPC.activePlayers(source)
-				for _,v in ipairs(activePlayers) do
+				local Players = vRPC.Players(source)
+				for _,v in ipairs(Players) do
 					async(function()
 						TriggerClientEvent("player:syncDoorsOptions",v,vehNet,"close")
 					end)
@@ -361,8 +361,8 @@ AddEventHandler("trunkchest:openTrunk",function()
 				if not vehBlock and parseInt(vehHealth) > 0 then
 					if vRP.userPlate(vehPlate) then
 						if not vRPC.inVehicle(source) then
-							local activePlayers = vRPC.activePlayers(source)
-							for _,v in ipairs(activePlayers) do
+							local Players = vRPC.Players(source)
+							for _,v in ipairs(Players) do
 								async(function()
 									TriggerClientEvent("player:syncDoorsOptions",v,vehNet,"open")
 								end)
