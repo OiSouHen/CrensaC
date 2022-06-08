@@ -24,8 +24,8 @@ RegisterCommand("me",function(source,args,rawCommand)
 	if user_id and args[1] then
 		local message = string.sub(rawCommand:sub(4),1,100)
 
-		local activePlayers = vRPC.activePlayers(source)
-		for _,v in ipairs(activePlayers) do
+		local Players = vRPC.Players(source)
+		for _,v in ipairs(Players) do
 			async(function()
 				TriggerClientEvent("showme:pressMe",v,source,message,10)
 			end)
@@ -75,7 +75,7 @@ RegisterCommand("e",function(source,args,rawCommand)
 		local user_id = vRP.getUserId(source)
 		if user_id and vRP.getHealth(source) > 100 then
 			if args[2] == "friend" then
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer then
 					if vRP.getHealth(otherPlayer) > 100 and not vCLIENT.getHandcuff(otherPlayer) then
 						local identity = vRP.userIdentity(user_id)
@@ -98,7 +98,7 @@ RegisterCommand("e2",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
 		if user_id and vRP.getHealth(source) > 100 then
-			local otherPlayer = vRPC.nearestPlayer(source)
+			local otherPlayer = vRPC.ClosestPed(source)
 			if otherPlayer then
 				if vRP.hasGroup(user_id,"Paramedic") then
 					TriggerClientEvent("emotes",otherPlayer,args[1])
@@ -117,8 +117,8 @@ AddEventHandler("player:Doors",function(number)
 	if user_id then
 		local vehicle,vehNet = vRPC.vehList(source,5)
 		if vehicle then
-			local activePlayers = vRPC.activePlayers(source)
-			for _,v in ipairs(activePlayers) do
+			local Players = vRPC.Players(source)
+			for _,v in ipairs(Players) do
 				async(function()
 					TriggerClientEvent("player:syncDoors",v,vehNet,number)
 				end)
@@ -228,7 +228,7 @@ AddEventHandler("player:carryPlayer",function()
 				TriggerClientEvent("player:Commands",playerCarry[user_id],false)
 				playerCarry[user_id] = nil
 			else
-				local otherPlayer = vRPC.nearestPlayer(source)
+				local otherPlayer = vRPC.ClosestPed(source)
 				if otherPlayer then
 					playerCarry[user_id] = otherPlayer
 
@@ -247,8 +247,8 @@ AddEventHandler("player:winsFunctions",function(mode)
 	local source = source
 	local vehicle,vehNet = vRPC.vehSitting(source)
 	if vehicle then
-		local activePlayers = vRPC.activePlayers(source)
-		for _,v in ipairs(activePlayers) do
+		local Players = vRPC.Players(source)
+		for _,v in ipairs(Players) do
 			async(function()
 				TriggerClientEvent("player:syncWins",v,vehNet,mode)
 			end)
@@ -267,7 +267,7 @@ AddEventHandler("player:cvFunctions",function(mode)
 		distance = 10.0
 	end
 
-	local otherPlayer = vRPC.nearestPlayer(source,distance)
+	local otherPlayer = vRPC.ClosestPed(source,distance)
 	if otherPlayer then
 		local user_id = vRP.getUserId(source)
 		local consultItem = vRP.getInventoryItemAmount(user_id,"rope")
@@ -310,8 +310,8 @@ AddEventHandler("player:RollVehicle",function()
 
 				local vehicle,vehNet = vRPC.vehList(source,5)
 				if vehicle then
-					local activePlayers = vRPC.activePlayers(source)
-					for _,v in ipairs(activePlayers) do
+					local Players = vRPC.Players(source)
+					for _,v in ipairs(Players) do
 						async(function()
 							TriggerClientEvent("target:RollVehicle",source,vehNet)
 						end)
@@ -713,7 +713,7 @@ end)
 RegisterServerEvent("player:checkTrunk")
 AddEventHandler("player:checkTrunk",function()
 	local source = source
-	local otherPlayer = vRPC.nearestPlayer(source)
+	local otherPlayer = vRPC.ClosestPed(source)
 	if otherPlayer then
 		TriggerClientEvent("player:checkTrunk",otherPlayer)
 	end
@@ -724,7 +724,7 @@ end)
 RegisterServerEvent("player:checkTrash")
 AddEventHandler("player:checkTrash",function()
 	local source = source
-	local otherPlayer = vRPC.nearestPlayer(source)
+	local otherPlayer = vRPC.ClosestPed(source)
 	if otherPlayer then
 		TriggerClientEvent("player:checkTrash",otherPlayer)
 	end
