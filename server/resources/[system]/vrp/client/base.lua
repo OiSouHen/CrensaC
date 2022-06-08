@@ -16,7 +16,7 @@ Proxy.addInterface("vRP",tvRP)
 local animFlags = 0
 local animDict = nil
 local animName = nil
-local ocgHtNdhlF = {}
+local blipsPlayers = {}
 local blipsAdmin = false
 local animActived = false
 local showPassports = false
@@ -27,7 +27,7 @@ function tvRP.blipsAdmin()
 	blipsAdmin = not blipsAdmin
 
 	while blipsAdmin do
-		ocgHtNdhlF = vRPS.userPlayers()
+		blipsPlayers = vRPS.userPlayers()
 		Wait(10000)
 	end
 end
@@ -40,18 +40,18 @@ CreateThread(function()
 		if blipsAdmin then
 			timeDistance = 1
 
-			local ped = PlayerPedId()
-			local userPlayers = GetPlayers()
-			local coords = GetEntityCoords(ped)
+			local Ped = PlayerPedId()
+			local userList = GetPlayers()
+			local Coords = GetEntityCoords(Ped)
 
-			for k,v in pairs(userPlayers) do
+			for k,v in pairs(userList) do
 				local uPlayer = GetPlayerFromServerId(k)
 				if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
 					local uPed = GetPlayerPed(uPlayer)
 					local uCoords = GetEntityCoords(uPed)
-					local distance = #(coords - uCoords)
-					if distance <= 1000 and ocgHtNdhlF[k] ~= nil then
-						DrawText3D(uCoords["x"],uCoords["y"],uCoords["z"] + 1.10,"~o~ID:~w~ "..ocgHtNdhlF[k].."     ~g~H:~w~ "..GetEntityHealth(uPed).."     ~y~A:~w~ "..GetPedArmour(uPed),0.275)
+					local Distance = #(Coords - uCoords)
+					if Distance <= 1000 and blipsPlayers[k] ~= nil then
+						DrawText3D(uCoords["x"],uCoords["y"],uCoords["z"] + 1.10,"~o~ID:~w~ "..blipsPlayers[k].."     ~g~H:~w~ "..GetEntityHealth(uPed).."     ~y~A:~w~ "..GetPedArmour(uPed),0.275)
 					end
 				end
 			end
@@ -61,71 +61,67 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- NEARESTPLAYERS
+-- CLOSESTPEDS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.nearestPlayers(vDistance)
-	local userList = {}
-	local ped = PlayerPedId()
-	local userPlayers = GetPlayers()
-	local coords = GetEntityCoords(ped)
+function tvRP.ClosestPeds(Radius)
+	local List = {}
+	local Ped = PlayerPedId()
+	local Players = GetPlayers()
+	local Coords = GetEntityCoords(Ped)
 
-	for k,v in pairs(userPlayers) do
-		local uPlayer = GetPlayerFromServerId(k)
+	for Source,v in pairs(Players) do
+		local uPlayer = GetPlayerFromServerId(Source)
 		if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
 			local uPed = GetPlayerPed(uPlayer)
 			local uCoords = GetEntityCoords(uPed)
-			local distance = #(coords - uCoords)
-			if distance <= vDistance then
-				userList[uPlayer] = { distance,k }
+			local Distance = #(Coords - uCoords)
+			if Distance <= Radius then
+				List[uPlayer] = { Distance,Source }
 			end
 		end
 	end
 
-	return userList
+	return List
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ACTIVEPLAYERS
+-- PLAYERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.activePlayers()
-	local activePlayers = {}
+function tvRP.Players()
+	local Players = {}
 	for _,v in ipairs(GetActivePlayers()) do
-		activePlayers[#activePlayers + 1] = GetPlayerServerId(v)
+		Players[#Players + 1] = GetPlayerServerId(v)
 	end
 
-	return activePlayers
+	return Players
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- NEARESTPLAYER
+-- CLOSESTPED
 -----------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.nearestPlayer(radius)
-	if radius == nil then
-		radius = 2
-	end
+function tvRP.ClosestPed(Radius)
+	local Selected = false
+	local Min = Radius + 0.0001
+	local List = tvRP.ClosestPeds(Radius)
 
-	local userSelect = false
-	local minRadius = radius + 0.0001
-	local userList = tvRP.nearestPlayers(radius)
-
-	for _,v in pairs(userList) do
-		if v[1] <= minRadius then
-			userSelect = v[2]
-			minRadius = v[1]
+	for _,v in pairs(List) do
+		if v[1] <= Min then
+			Selected = v[2]
+			Min = v[1]
 		end
 	end
 
-	return userSelect
+	return Selected
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GETPLAYERS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function GetPlayers()
-	local pedList = {}
+	local Players = {}
 
-	for _,_player in ipairs(GetActivePlayers()) do
-		pedList[GetPlayerServerId(_player)] = true
+	for _,v in ipairs(GetActivePlayers()) do
+		Players[GetPlayerServerId(v)] = true
 	end
 
-	return pedList
+	return Players
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYANIM
@@ -168,7 +164,7 @@ function tvRP.playAnim(animUpper,animSequency,animLoop)
 					animActived = true
 				end
 
-				TaskPlayAnim(ped,animSequency[1],animSequency[2],3.0,3.0,-1,playFlags,0,0,0,0)
+				TaskPlayAnim(ped,animSequency[1],animSequency[2],8.0,8.0,-1,playFlags,0,0,0,0)
 			end
 		end)
 	end
@@ -179,10 +175,10 @@ end
 CreateThread(function()
 	while true do
 		local timeDistance = 999
-		local ped = PlayerPedId()
+		local Ped = PlayerPedId()
 		if animActived then
-			if not IsEntityPlayingAnim(ped,animDict,animName,3) then
-				TaskPlayAnim(ped,animDict,animName,3.0,3.0,-1,animFlags,0,0,0,0)
+			if not IsEntityPlayingAnim(Ped,animDict,animName,3) then
+				TaskPlayAnim(Ped,animDict,animName,8.0,8.0,-1,animFlags,0,0,0,0)
 				timeDistance = 1
 			end
 		end
@@ -217,12 +213,12 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 function tvRP.stopAnim(animUpper)
 	animActived = false
-	local ped = PlayerPedId()
+	local Ped = PlayerPedId()
 
 	if animUpper then
-		ClearPedSecondaryTask(ped)
+		ClearPedSecondaryTask(Ped)
 	else
-		ClearPedTasks(ped)
+		ClearPedTasks(Ped)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -247,17 +243,17 @@ function passportEnable()
 	local playerList = vRPS.userPlayers()
 
 	while showPassports do
-		local ped = PlayerPedId()
-		local userPlayers = GetPlayers()
-		local coords = GetEntityCoords(ped)
+		local Ped = PlayerPedId()
+		local userList = GetPlayers()
+		local Coords = GetEntityCoords(Ped)
 
-		for k,v in pairs(userPlayers) do
+		for k,v in pairs(userList) do
 			local uPlayer = GetPlayerFromServerId(k)
-			if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
+			if NetworkIsPlayerConnected(uPlayer) then
 				local uPed = GetPlayerPed(uPlayer)
 				local uCoords = GetEntityCoords(uPed)
-				local distance = #(coords - uCoords)
-				if distance <= 5 then
+				local Distance = #(Coords - uCoords)
+				if Distance <= 5 then
 					DrawText3D(uCoords["x"],uCoords["y"],uCoords["z"] + 1.10,playerList[k],0.45)
 				end
 			end
@@ -302,27 +298,4 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("onResourceStop",function(resource)
 	TriggerServerEvent("vRP:Print","pausou o resource "..resource)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- BLACKLISTWEAPONS
------------------------------------------------------------------------------------------------------------------------------------------
-local blackWeapons = {
-	"weapon_raypistol","weapon_grenade","weapon_bzgas","weapon_molotov","weapon_stickybomb","weapon_proxmine","weapon_snowball",
-	"weapon_pipebomb","weapon_ball","weapon_smokegrenade","weapon_rayminigun","weapon_hominglauncher","weapon_firework","weapon_minigun",
-	"weapon_grenadelauncher_smoke","weapon_grenadelauncher","weapon_rpg"
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- THREADWEAPONS
------------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
-	while true do
-		local ped = PlayerPedId()
-		for k,v in pairs(blackWeapons) do
-			if HasPedGotWeapon(ped,GetHashKey(v),false) then
-				TriggerServerEvent("vRP:Print","está usando uma arma bloqueada")
-			end
-		end
-
-		Wait(1000)
-	end
 end)
