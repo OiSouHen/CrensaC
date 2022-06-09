@@ -211,13 +211,24 @@ local shops = {
 		["mode"] = "Buy",
 		["type"] = "Premium",
 		["list"] = {
+			["newchars"] = 75,
 			["chip"] = 60,
 			["gemstone"] = 1,
-			["premium"] = 75,
+			-- ["subscriber"] = 10,
+			["backalohomorawhite"] = 75,
+			["backalohomorablack"] = 75,
+			["backalohomorared"] = 75,
+			["backrudolphpurple"] = 75,
+			["backrudolphred"] = 75,
+			["backpolice"] = 75,
+			["backcamping"] = 50,
+			["backcyclist"] = 50,
+			["backschool"] = 50,
+			["backwar"] = 75,
 			["premiumplate"] = 50,
-			["newgarage"] = 30,
-			["newchars"] = 75,
+			["premium"] = 75,
 			["namechange"] = 50
+			-- ["newgarage"] = 30,
 		}
 	},
 	["Fishing"] = {
