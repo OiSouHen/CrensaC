@@ -838,18 +838,6 @@ AddEventHandler("garages:Transfer",function(vehModel)
 			local nuser_id = parseInt(passport[1])
 			local identity = vRP.userIdentity(nuser_id)
 			if identity then
-				local maxVehs = vRP.query("vehicles/countVehicles",{ user_id = parseInt(nuser_id), work = "false" })
-				local amountVehs = identity["garage"]
-
-				if vRP.userPremium(nuser_id) then
-					amountVehs = amountVehs + 2
-				end
-
-				if parseInt(maxVehs[1]["qtd"]) >= parseInt(amountVehs) then
-					TriggerClientEvent("Notify",source,"amarelo","Atingiu o máximo de veículos.",3000)
-					return
-				end
-
 				if vRP.request(source,"Transferir o veículo <b>"..vehicleName(vehModel).."</b> para <b>"..identity["name"].." "..identity["name2"].."</b>?") then
 					local vehicle = vRP.query("vehicles/selectVehicles",{ user_id = parseInt(nuser_id), vehicle = vehModel })
 					if vehicle[1] then
