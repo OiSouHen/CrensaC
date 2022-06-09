@@ -16,6 +16,7 @@ vTASKBAR = Tunnel.getInterface("taskbar")
 vDELIVER = Tunnel.getInterface("deliver")
 vPARAMEDIC = Tunnel.getInterface("paramedic")
 vKEYBOARD = Tunnel.getInterface("keyboard")
+vSKINSHOP = Tunnel.getInterface("skinshop")
 vCLIENT = Tunnel.getInterface("inventory")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
@@ -828,6 +829,246 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 		return end
 
 		if itemType(totalName) == "Usável" or itemType(totalName) == "Animal" then
+			if nameItem == "backschool" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"101-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"101")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backcamping" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"102-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"102")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backcyclist" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"103-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"103")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backalohomorawhite" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"104-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"104")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backalohomorablack" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"104-1")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"104")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backalohomorared" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"104-2")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"104")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backrudolphpurple" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"105-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"105")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backrudolphred" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"105-1")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"105")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backtwitch" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"106-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"106")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backpolice" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"107-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"107")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
 			if nameItem == "vehkey" then
 				local vehicle,vehNet,vehPlate = vRPC.vehList(source,5)
 				if vehicle then
@@ -1316,8 +1557,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "medkit" then
 				if (Healths[user_id] == nil or os.time() > Healths[user_id]) then
 					if vRP.getHealth(source) > 100 and vRP.getHealth(source) < 200 then
-						Active[user_id] = os.time() + 20
-						TriggerClientEvent("Progress",source,20000)
+						Active[user_id] = os.time() + 10
+						TriggerClientEvent("Progress",source,10000)
 						TriggerClientEvent("inventory:Close",source)
 						TriggerClientEvent("inventory:Buttons",source,true)
 						vRPC.playAnim(source,true,{"amb@world_human_clipboard@male@idle_a","idle_c"},true)
@@ -1347,8 +1588,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "gauze" then
-				Active[user_id] = os.time() + 5
-				TriggerClientEvent("Progress",source,5000)
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"amb@world_human_clipboard@male@idle_a","idle_c"},true)
