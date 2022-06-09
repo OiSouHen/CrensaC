@@ -60,7 +60,6 @@ vRP.prepare("vehicles/paymentArrest","UPDATE summerz_vehicles SET arrest = 0 WHE
 vRP.prepare("vehicles/moveVehicles","UPDATE summerz_vehicles SET user_id = @nuser_id WHERE user_id = @user_id AND vehicle = @vehicle")
 vRP.prepare("vehicles/plateVehiclesUpdate","UPDATE summerz_vehicles SET plate = @plate WHERE user_id = @user_id AND vehicle = @vehicle")
 vRP.prepare("vehicles/rentalVehiclesDays","UPDATE summerz_vehicles SET rental = rental + 2592000 WHERE user_id = @user_id AND vehicle = @vehicle")
-vRP.prepare("vehicles/countVehicles","SELECT COUNT(vehicle) as qtd FROM summerz_vehicles WHERE user_id = @user_id AND work = @work AND rental <= 0")
 vRP.prepare("vehicles/arrestVehicles","UPDATE summerz_vehicles SET arrest = UNIX_TIMESTAMP() + 2592000 WHERE user_id = @user_id AND vehicle = @vehicle")
 vRP.prepare("vehicles/updateVehiclesTax","UPDATE summerz_vehicles SET tax = UNIX_TIMESTAMP() + 2592000 WHERE user_id = @user_id AND vehicle = @vehicle")
 vRP.prepare("vehicles/rentalVehiclesUpdate","UPDATE summerz_vehicles SET rental = UNIX_TIMESTAMP() + 2592000 WHERE user_id = @user_id AND vehicle = @vehicle")

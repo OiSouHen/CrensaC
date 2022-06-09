@@ -1358,14 +1358,6 @@ local itemlist = {
 		["weight"] = 0.00,
 		["economy"] = 150000
 	},
-	["newgarage"] = {
-		["index"] = "newgarage",
-		["name"] = "+1 Garagem",
-		["type"] = "Usável",
-		["desc"] = "Limite de garagem em +1.",
-		["weight"] = 0.00,
-		["economy"] = 200000
-	},
 	["premiumplate"] = {
 		["index"] = "platepremium",
 		["name"] = "Placa Premium",
