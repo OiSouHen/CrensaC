@@ -1078,14 +1078,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "newgarage" then
-				if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
-					vRP.upgradeGarage(user_id)
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					TriggerClientEvent("Notify",source,"verde","Garagem liberada.",5000)
-				end
-			return end
-
 			if nameItem == "newchars" then
 				if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
 					vRP.upgradeChars(user_id)
