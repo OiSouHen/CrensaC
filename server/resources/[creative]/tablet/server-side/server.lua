@@ -121,20 +121,6 @@ function cRP.requestBuy(vehName)
 
 					local vehPrice = vehiclePrice(vehName)
 					if vRP.request(source,"Comprar <b>"..vehicleName(vehName).."</b> por <b>$"..parseFormat(vehPrice).."</b> dólares?") then
-						local maxVehs = vRP.query("vehicles/countVehicles",{ user_id = user_id, work = "false" })
-						local identity = vRP.userIdentity(user_id)
-						local amountVehs = identity["garage"]
-
-						if vRP.userPremium(user_id) then
-							amountVehs = amountVehs + 2
-						end
-
-						if parseInt(maxVehs[1]["qtd"]) >= parseInt(amountVehs) then
-							TriggerClientEvent("Notify",source,"amarelo","Atingiu o máximo de veículos.",3000)
-							actived[user_id] = nil
-							return
-						end
-
 						if vRP.paymentFull(user_id,vehPrice) then
 							vRP.execute("vehicles/addVehicles",{ user_id = user_id, vehicle = vehName, plate = vRP.generatePlate(), work = "false" })
 							TriggerClientEvent("Notify",source,"verde","Compra concluída.",5000)
