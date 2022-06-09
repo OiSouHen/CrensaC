@@ -166,6 +166,7 @@ function cRP.entranceHomes(homeName,v,interior)
 		table.insert(homes["intern"],{ 118.28,-108.11,-23.59,"exit","Saída" })
 		table.insert(homes["intern"],{ 117.84,-111.99,-31.21,"vault","Baú" })
 		table.insert(homes["intern"],{ 122.27,-110.1,-23.59,"fridge","Geladeira" })
+		table.insert(homes["intern"],{ 124.41,-118.58,-27.4,"wardrobe","Armário" })
 	elseif interior == "creativeTwoFloors" then
 		SetEntityCoords(ped,166.78,-144.32,-17.79,1,0,0,0)
 		

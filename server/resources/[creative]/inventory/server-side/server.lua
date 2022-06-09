@@ -1390,8 +1390,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "soap" then
 				if vPLAYER.checkSoap(source) then
-					Active[user_id] = os.time() + 30
-					TriggerClientEvent("Progress",source,30000)
+					Active[user_id] = os.time() + 20
+					TriggerClientEvent("Progress",source,20000)
 					TriggerClientEvent("inventory:Close",source)
 					TriggerClientEvent("inventory:Buttons",source,true)
 					vRPC.playAnim(source,false,{"amb@world_human_bum_wash@male@high@base","base"},true)
@@ -2174,8 +2174,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "absolut" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@world_human_drinking@beer@male@idle_a","idle_a","p_whiskey_notop",49,28422,0.0,0.0,0.05,0.0,0.0,0.0)
@@ -2199,8 +2199,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "hennessy" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@world_human_drinking@beer@male@idle_a","idle_a","p_whiskey_notop",49,28422,0.0,0.0,0.05,0.0,0.0,0.0)
@@ -2224,8 +2224,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "chandon" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@world_human_drinking@beer@male@idle_a","idle_a","prop_beer_blr",49,28422,0.0,0.0,-0.10,0.0,0.0,0.0)
@@ -2249,8 +2249,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "dewars" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@world_human_drinking@beer@male@idle_a","idle_a","prop_beer_blr",49,28422,0.0,0.0,-0.10,0.0,0.0,0.0)
@@ -2283,8 +2283,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "orangejuice" or nameItem == "passionjuice" or nameItem == "tangejuice" or nameItem == "grapejuice" or nameItem == "strawberryjuice" or nameItem == "bananajuice" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","vw_prop_casino_water_bottle_01a",49,60309,0.0,0.0,-0.06,0.0,0.0,130.0)
@@ -2311,8 +2311,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "orange" or nameItem == "apple" or nameItem == "strawberry" or nameItem == "coffee2" or nameItem == "grape" or nameItem == "tange" or nameItem == "banana" or nameItem == "passion" or nameItem == "tomato" or nameItem == "mushroom" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 10
-				TriggerClientEvent("Progress",source,10000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -2334,8 +2334,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "mushroomtea" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","vw_prop_casino_water_bottle_01a",49,60309,0.0,0.0,-0.06,0.0,0.0,130.0)
@@ -2357,8 +2357,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "water" or nameItem == "milkbottle" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","vw_prop_casino_water_bottle_01a",49,60309,0.0,0.0,-0.06,0.0,0.0,130.0)
@@ -2381,8 +2381,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "guarananatural" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_plastic_cup_02",49,60309,0.0,0.0,0.1,0.0,0.0,130.0)
@@ -2455,8 +2455,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "cola" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_ecola_can",49,60309,0.01,0.01,0.05,0.0,0.0,90.0)
@@ -2478,8 +2478,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "soda" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","ng_proc_sodacan_01b",49,60309,0.0,0.0,-0.04,0.0,0.0,130.0)
@@ -2582,8 +2582,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "pizza" or nameItem == "pizza2" or nameItem == "sushi" or nameItem == "nigirizushi" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -2613,8 +2613,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "hamburger" or nameItem == "hamburger2" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_cs_burger_01",49,60309)
@@ -2640,8 +2640,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "cannedsoup" or nameItem == "canofbeans" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -2844,8 +2844,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "cookedfishfillet" or nameItem == "cookedmeat" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -2871,8 +2871,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "hotdog" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@code_human_wander_eating_donut@male@idle_a","idle_c","prop_cs_hotdog_01",49,28422)
@@ -2894,8 +2894,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "sandwich" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_sandwich_01",49,18905,0.13,0.05,0.02,-50.0,16.0,60.0)
@@ -2917,8 +2917,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "tacos" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_taco_01",49,18905,0.16,0.06,0.02,-50.0,220.0,60.0)
@@ -2940,8 +2940,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "fries" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_food_bs_chips",49,18905,0.10,0.0,0.08,150.0,320.0,160.0)
@@ -2963,8 +2963,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "milkshake" or nameItem == "cappuccino" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@world_human_aa_coffee@idle_a", "idle_a","p_amb_coffeecup_01",49,28422)
@@ -2987,8 +2987,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "applelove" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_choc_ego",49,60309)
@@ -3012,8 +3012,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "cupcake" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_choc_ego",49,60309)
@@ -3061,8 +3061,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "chocolate" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 15
-				TriggerClientEvent("Progress",source,15000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"mp_player_inteat@burger","mp_player_int_eat_burger","prop_choc_ego",49,60309)
@@ -3085,8 +3085,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "donut" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 10
-				TriggerClientEvent("Progress",source,10000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.createObjects(source,"amb@code_human_wander_eating_donut@male@idle_a","idle_c","prop_amb_donut",49,28422)
@@ -3110,8 +3110,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "cookies" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 10
-				TriggerClientEvent("Progress",source,10000)
+				Active[user_id] = os.time() + 5
+				TriggerClientEvent("Progress",source,5000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
