@@ -19,7 +19,7 @@ AddEventHandler("playerConnect",function(user_id,source)
 		end
 
 		if dataTable["weight"] == nil then
-			dataTable["weight"] = 30
+			dataTable["weight"] = 20
 		end
 
 		if dataTable["inventory"] == nil then

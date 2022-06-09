@@ -629,7 +629,7 @@ CreateThread(function()
 			{
 				event = "inventory:makeProducts",
 				label = "Encher",
-				tunnel = "products",
+				tunnel = "police",
 				service = "emptybottle"
 			},
 			{

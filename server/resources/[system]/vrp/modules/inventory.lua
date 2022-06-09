@@ -11,7 +11,7 @@ function vRP.getWeight(user_id)
 	local dataTable = vRP.getDatatable(user_id)
 	if dataTable then
 		if dataTable["weight"] == nil then
-			dataTable["weight"] = 30
+			dataTable["weight"] = 20
 		end
 
 		return dataTable["weight"]
@@ -26,7 +26,7 @@ function vRP.setWeight(user_id,amount)
 	local dataTable = vRP.getDatatable(user_id)
 	if dataTable then
 		if dataTable["weight"] == nil then
-			dataTable["weight"] = 30
+			dataTable["weight"] = 20
 		end
 
 		dataTable["weight"] = dataTable["weight"] + parseInt(amount)
