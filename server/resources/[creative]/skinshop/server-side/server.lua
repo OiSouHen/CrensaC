@@ -72,3 +72,18 @@ AddEventHandler("skinshop:removeProps",function(mode)
 		end
 	end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VRP:BACKPACKWEIGHT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("vRP:BackpackWeight")
+AddEventHandler("vRP:BackpackWeight",function(Status)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if Status then
+			vRP.setWeight(user_id,50)
+		else
+			vRP.remWeight(user_id,50)
+		end
+	end
+end)
