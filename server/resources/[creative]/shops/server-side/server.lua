@@ -228,7 +228,6 @@ local shops = {
 			["premiumplate"] = 50,
 			["premium"] = 75,
 			["namechange"] = 50
-			-- ["newgarage"] = 30,
 		}
 	},
 	["Fishing"] = {
