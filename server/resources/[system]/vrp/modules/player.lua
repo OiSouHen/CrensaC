@@ -117,15 +117,20 @@ RegisterCommand("gg",function(source,args,rawCommand)
 		if user_id and vRPC.checkDeath(source) then
 			vRPC.respawnPlayer(source)
 
-			local dataTable = vRP.getDatatable(user_id)
-			if dataTable["inventory"] then
-				dataTable["inventory"] = {}
-				vRP.upgradeThirst(user_id,100)
-				vRP.upgradeHunger(user_id,100)
-				vRP.downgradeStress(user_id,100)
+			local paramedicResult = vRP.numPermission("Paramedic")
+			if parseInt(#paramedicResult) >= 1 then
+				local dataTable = vRP.getDatatable(user_id)
+				if dataTable["inventory"] then
+					dataTable["inventory"] = {}
+				end
+
+				TriggerEvent("inventory:CleanWeapons",user_id)
 			end
 
-			TriggerEvent("inventory:CleanWeapons",user_id)
+			vRP.upgradeThirst(user_id,100)
+			vRP.upgradeHunger(user_id,100)
+			vRP.downgradeStress(user_id,100)
+
 			TriggerClientEvent("dynamic:animalFunctions",source,"deletar")
 			TriggerEvent("discordLogs","Airport","**Passaporte:** "..parseFormat(user_id).."\n**Horário:** "..os.date("%H:%M:%S"),3092790)
 		end
