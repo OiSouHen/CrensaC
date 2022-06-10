@@ -63,6 +63,7 @@ end)
 RegisterNetEvent("update:Route")
 AddEventHandler("update:Route",function(Number)
 	Route = Number
+	LocalPlayer["state"]["Route"] = Number
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLANTS:INFORMATIONS
