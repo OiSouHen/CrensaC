@@ -114,6 +114,20 @@ INSERT INTO `summerz_chests` (`id`, `name`, `weight`, `perm`, `logs`) VALUES
 (26, 'trayPizza', 10, 'trayPizza', 0);
 
 --
+-- Estrutura da tabela `summerz_warehouses`
+--
+DROP TABLE IF EXISTS `summerz_warehouses`;
+CREATE TABLE `summerz_warehouses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `weight` int(10) NOT NULL DEFAULT 0,
+  `password` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+--
 -- Estrutura da tabela `summerz_entitydata`
 --
 DROP TABLE IF EXISTS `summerz_entitydata`;
