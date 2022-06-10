@@ -102,6 +102,15 @@ vRP.prepare("banneds/insertBanned","INSERT INTO summerz_banneds(steam,time) VALU
 vRP.prepare("chests/getChests","SELECT * FROM summerz_chests WHERE name = @name")
 vRP.prepare("chests/upgradeChests","UPDATE summerz_chests SET weight = weight + 25 WHERE name = @name")
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- WAREHOUSES
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.prepare("warehouses/getWarehouses","SELECT * FROM summerz_warehouses WHERE name = @name")
+vRP.prepare("warehouses/getownerWarehouses","SELECT * FROM summerz_warehouses WHERE name = @name AND user_id = @user_id")
+vRP.prepare("warehouses/upgradeWarehouses","UPDATE summerz_warehouses SET weight = weight + 10 WHERE name = @name")
+vRP.prepare("warehouses/checkpassWarehouses","SELECT * FROM summerz_warehouses WHERE name = @name AND password = @password")
+vRP.prepare("warehouses/updatepassWarehouses","UPDATE summerz_warehouses SET password = @password WHERE name = @name AND user_id = @user_id")
+vRP.prepare("warehouses/buyWarehouses","INSERT IGNORE INTO summerz_warehouses(name,weight,password,user_id) VALUES(@name,@weight,@password,@user_id)")
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- RACES
 -----------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare("races/checkResult","SELECT * FROM summerz_races WHERE raceid = @raceid AND user_id = @user_id")
