@@ -21,22 +21,6 @@ local shops = {
 			["silk"] = 3
 		}
 	},
-	["Imoveis"] = {
-		["mode"] = "Buy",
-		["type"] = "Cash",
-		["list"] = {
-			["contract1"] = 125000,
-			["contract2"] = 300000,
-			["contract3"] = 75000,
-			["contract4"] = 175000,
-			["contract5"] = 125000,
-			["contract6"] = 250000,
-			["contract7"] = 75000,
-			["contract8"] = 250000,
-			["contract9"] = 175000,
-			["contract10"] = 100000
-		}
-	},
 	["Identity"] = {
 		["mode"] = "Buy",
 		["type"] = "Cash",

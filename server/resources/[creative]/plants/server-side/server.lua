@@ -19,7 +19,7 @@ local Plants = {}
 -- PLANTTYPES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local plantTypes = {
-	["weedseed"] = { "Maconha","weedleaf" },
+	["weedclone"] = { "Maconha","weedleaf" },
 	["cokeseed"] = { "Cocaína","cokeleaf" },
 	["mushseed"] = { "Cogumelo","mushroom" }
 }

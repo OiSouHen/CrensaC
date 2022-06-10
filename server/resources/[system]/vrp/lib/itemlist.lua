@@ -434,12 +434,6 @@ local itemlist = {
 		["max"] = 3,
 		["economy"] = 75
 	},
-	["seaweed"] = {
-		["index"] = "seaweed",
-		["name"] = "Alga Marinha",
-		["type"] = "Comum",
-		["weight"] = 0.10
-	},
 	["cupcake"] = {
 		["index"] = "cupcake",
 		["name"] = "Cupcake",
@@ -558,12 +552,6 @@ local itemlist = {
 		["type"] = "Comum",
 		["weight"] = 0.55,
 		["economy"] = 10
-	},
-	["wheat"] = {
-		["index"] = "wheat",
-		["name"] = "Trigo",
-		["type"] = "Comum",
-		["weight"] = 0.10
 	},
 	["silk"] = {
 		["index"] = "silk",
@@ -1265,24 +1253,19 @@ local itemlist = {
 		["weight"] = 0.25,
 		["economy"] = 25
 	},
+	["weedclone"] = {
+		["index"] = "weedclone",
+		["name"] = "Clonagem de Maconha",
+		["type"] = "Usável",
+		["weight"] = 0.15
+	},
 	["weedleaf"] = {
 		["index"] = "weedleaf",
 		["name"] = "Folha de Maconha",
 		["type"] = "Comum",
-		["weight"] = 0.50
+		["weight"] = 0.30
 	},
-	["fertilizer"] = {
-		["index"] = "fertilizer",
-		["name"] = "Fertilizante",
-		["type"] = "Comum",
-		["weight"] = 5.0
-	},
-	["weedseed"] = {
-		["index"] = "weedseed",
-		["name"] = "Semente de Maconha",
-		["type"] = "Usável",
-		["weight"] = 0.10
-	},
+	
 	["joint"] = {
 		["index"] = "joint",
 		["name"] = "Baseado",
@@ -1348,14 +1331,20 @@ local itemlist = {
 		["name"] = "Brinquedo",
 		["type"] = "Comum",
 		["weight"] = 0.50,
-		["ilegal"] = true,
 		["economy"] = 100
+	},
+	["rolepass"] = {
+		["index"] = "rolepass",
+		["name"] = "Rolepass",
+		["type"] = "Usável",
+		["weight"] = 0.15,
+		["economy"] = 200000
 	},
 	["premium"] = {
 		["index"] = "premium",
 		["name"] = "Premium",
 		["type"] = "Usável",
-		["weight"] = 0.00,
+		["weight"] = 0.15,
 		["economy"] = 150000
 	},
 	["premiumplate"] = {
@@ -1388,86 +1377,6 @@ local itemlist = {
 		["type"] = "Usável",
 		["desc"] = "Troca o nome do personagem.",
 		["weight"] = 0.25,
-		["economy"] = 100000
-	},
-	["contract1"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 1.",
-		["weight"] = 0.00,
-		["economy"] = 125000
-	},
-	["contract2"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 2.",
-		["weight"] = 0.00,
-		["economy"] = 300000
-	},
-	["contract3"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 3.",
-		["weight"] = 0.00,
-		["economy"] = 75000
-	},
-	["contract4"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 4.",
-		["weight"] = 0.00,
-		["economy"] = 175000
-	},
-	["contract5"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 5.",
-		["weight"] = 0.00,
-		["economy"] = 125000
-	},
-	["contract6"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 6.",
-		["weight"] = 0.00,
-		["economy"] = 250000
-	},
-	["contract7"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 7.",
-		["weight"] = 0.00,
-		["economy"] = 75000
-	},
-	["contract8"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 8.",
-		["weight"] = 0.00,
-		["economy"] = 250000
-	},
-	["contract9"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do interior 9.",
-		["weight"] = 0.00,
-		["economy"] = 175000
-	},
-	["contract10"] = {
-		["index"] = "contract",
-		["name"] = "Contrato de Propriedade",
-		["type"] = "Usável",
-		["desc"] = "Assinatura de contrato do container.",
-		["weight"] = 0.00,
 		["economy"] = 100000
 	},
 	["milkbottle"] = {
@@ -1927,7 +1836,6 @@ local itemlist = {
 		["type"] = "Usável",
 		["durability"] = 3,
 		["weight"] = 1.25,
-		["ilegal"] = true,
 		["economy"] = 575
 	},
 	["toolbox"] = {

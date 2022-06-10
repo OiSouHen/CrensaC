@@ -108,7 +108,7 @@ local tableList = {
 		[4] = { ["timer"] = 5, ["item"] = "pouch", ["itemAmount"] = 1 },
 		[5] = { ["timer"] = 5, ["item"] = "switchblade", ["itemAmount"] = 1 },
 		[6] = { ["timer"] = 5, ["item"] = "joint", ["itemAmount"] = 1 },
-		[7] = { ["timer"] = 5, ["item"] = "weedseed", ["itemAmount"] = 1 },
+		[7] = { ["timer"] = 5, ["item"] = "weedclone", ["itemAmount"] = 1 },
 		[8] = { ["timer"] = 5, ["item"] = "cokeseed", ["itemAmount"] = 1 },
 		[9] = { ["timer"] = 5, ["item"] = "mushseed", ["itemAmount"] = 1 },
 		[10] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
@@ -267,7 +267,7 @@ local lootItens = {
 			[10] = { ["item"] = "alcohol", ["min"] = 1, ["max"] = 2 },
 			[11] = { ["item"] = "syringe", ["min"] = 2, ["max"] = 3 },
 			[12] = { ["item"] = "card01", ["min"] = 1, ["max"] = 1 },
-			[13] = { ["item"] = "weedseed", ["min"] = 2, ["max"] = 3 },
+			[13] = { ["item"] = "weedclone", ["min"] = 2, ["max"] = 3 },
 			[14] = { ["item"] = "cokeseed", ["min"] = 2, ["max"] = 3 },
 			[15] = { ["item"] = "mushseed", ["min"] = 2, ["max"] = 3 },
 			[16] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 }
@@ -2671,14 +2671,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
-			if nameItem == "weedseed" then
+			if nameItem == "weedclone" then
 				TriggerClientEvent("inventory:Close",source)
 				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 				if application then
 					local Route = GetPlayerRoutingBucket(source)
 					vRP.removeInventoryItem(user_id,totalName,1,false)
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					exports["plants"]:initPlants("weedseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
+					exports["plants"]:initPlants("weedclone",coords,Route,"bkr_prop_weed_med_01a",user_id)
 				end
 			return end
 

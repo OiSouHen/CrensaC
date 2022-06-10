@@ -457,17 +457,14 @@ local craftList = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["fishfillet"] = 1,
-					["wheat"] = 4
+					["fishfillet"] = 1
 				}
 			},
 			["sushi"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["fishfillet"] = 1,
-					["wheat"] = 6,
-					["seaweed"] = 1
+					["fishfillet"] = 1
 				}
 			},
 			["cupcake"] = {
@@ -475,7 +472,6 @@ local craftList = {
 				["destroy"] = false,
 				["require"] = {
 					["chocolate"] = 1,
-					["wheat"] = 10,
 					["milkbottle"] = 1
 				}
 			},
@@ -514,7 +510,6 @@ local craftList = {
 				["destroy"] = false,
 				["require"] = {
 					["cheese"] = 1,
-					["wheat"] = 10,
 					["ketchup"] = 1
 				}
 			},
@@ -523,7 +518,6 @@ local craftList = {
 				["destroy"] = false,
 				["require"] = {
 					["cheese"] = 1,
-					["wheat"] = 8,
 					["mushroom"] = 6
 				}
 			}
