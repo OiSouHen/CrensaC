@@ -18,6 +18,7 @@ vRP.userSources = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 Proxy.addInterface("vRP",vRP)
 Tunnel.bindInterface("vRP",tvRP)
+vSKINSHOP = Tunnel.getInterface("skinshop")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DISCORDHOOK
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -238,6 +239,10 @@ function playerDropped(source,reason)
 		if dataTable then
 			local ped = GetPlayerPed(source)
 			local coords = GetEntityCoords(ped)
+
+			if vSKINSHOP.checkBackpack(source) then
+				vRP.remWeight(user_id,50)
+			end
 
 			dataTable["armour"] = GetPedArmour(ped)
 			dataTable["health"] = GetEntityHealth(ped)
