@@ -691,6 +691,22 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 				end
 			end
 		return end
+		
+		if nameItem == "woodlog" then
+			if vDELIVER.Deliver(source,"Lumberman") then
+				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
+					vDELIVER.Update(source)
+
+					vRP.generateItem(user_id,"dollars",120,true)
+
+					if vRP.userPremium(user_id) then
+						vRP.generateItem(user_id,"dollars",10,true)
+					end
+
+					TriggerClientEvent("inventory:Update",source,"updateMochila")
+				end
+			end
+		return end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
