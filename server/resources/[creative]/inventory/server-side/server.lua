@@ -517,7 +517,7 @@ AddEventHandler("inventory:sendItem",function(Slot,Amount)
 	local Amount = parseInt(Amount)
 	local user_id = vRP.getUserId(source)
 	if user_id and Active[user_id] == nil then
-		local Player = vRPC.ClosestPed(source)
+		local Player = vRPC.ClosestPed(source,0.8)
 		if Player then
 			Active[user_id] = os.time() + 100
 
@@ -1062,6 +1062,30 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							TriggerClientEvent("skinshop:toggleBackpack",source,"107-0")
 						else
 							TriggerClientEvent("skinshop:removeBackpack",source,"107")
+						end
+					end
+
+					Citizen.Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "backwar" then
+				Active[user_id] = os.time() + 3
+				TriggerClientEvent("Progress",source,3000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.stopAnim(source,false)
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if not vSKINSHOP.checkBackpack(source) then
+							TriggerClientEvent("skinshop:toggleBackpack",source,"108-0")
+						else
+							TriggerClientEvent("skinshop:removeBackpack",source,"108")
 						end
 					end
 
