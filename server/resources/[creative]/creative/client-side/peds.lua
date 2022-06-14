@@ -792,6 +792,12 @@ local pedList = {
 		model = "ig_casey",
 		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
 	},
+	{ -- Agricultor
+		distance = 50,
+		coords = { 2129.11,5084.23,45.01,144.57 },
+		model = "a_m_o_ktown_01",
+		anim = { "anim@heists@heist_corona@single_team","single_team_loop_boss" }
+	},
 	{ -- Lenhador
 		distance = 50,
 		coords = { 2433.45,5013.46,46.99,314.65 },
