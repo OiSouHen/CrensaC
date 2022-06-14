@@ -532,19 +532,23 @@ AddEventHandler("inventory:sendItem",function(Slot,Amount)
 
 			local nuser_id = vRP.getUserId(Player)
 			if not vRP.checkMaxItens(nuser_id,Item,Amount) then
-				if (vRP.inventoryWeight(nuser_id) + itemWeight(Item) * Amount) <= vRP.getWeight(nuser_id) then
-					if vRP.tryGetInventoryItem(user_id,Item,Amount,true,Slot) then
-						vRPC.createObjects(source,"mp_safehouselost@","package_dropoff","prop_paper_bag_small",16,28422,0.0,-0.05,0.05,180.0,0.0,0.0)
+				if not vRP.checkBroken(Item) then
+					if (vRP.inventoryWeight(nuser_id) + itemWeight(Item) * Amount) <= vRP.getWeight(nuser_id) then
+						if vRP.tryGetInventoryItem(user_id,Item,Amount,true,Slot) then
+							vRPC.createObjects(source,"mp_safehouselost@","package_dropoff","prop_paper_bag_small",16,28422,0.0,-0.05,0.05,180.0,0.0,0.0)
 
-						Wait(3000)
+							Wait(3000)
 
-						vRP.giveInventoryItem(nuser_id,Item,Amount,true)
-						TriggerClientEvent("inventory:Update",source,"updateMochila")
-						TriggerClientEvent("inventory:Update",Player,"updateMochila")
-						vRPC.removeObjects(source)
+							vRP.giveInventoryItem(nuser_id,Item,Amount,true)
+							TriggerClientEvent("inventory:Update",source,"updateMochila")
+							TriggerClientEvent("inventory:Update",Player,"updateMochila")
+							vRPC.removeObjects(source)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
 					end
 				else
-					TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
+					TriggerClientEvent("Notify",source,"vermelho","<b>"..itemName(Item).."</b> quebrado.",5000)
 				end
 			else
 				TriggerClientEvent("Notify",source,"amarelo","Limite atingido.",3000)
