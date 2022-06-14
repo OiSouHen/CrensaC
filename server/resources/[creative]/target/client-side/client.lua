@@ -833,8 +833,8 @@ CreateThread(function()
 		}
 	})
 	
-	AddCircleZone("dollarsRoll03",vec3(-1181.8,-888.09,19.97),0.5,{
-		name = "dollarsRoll03",
+	AddCircleZone("dollarsRoll02",vec3(-1181.8,-888.09,19.97),0.5,{
+		name = "dollarsRoll02",
 		heading = 3374176
 	},{
 		distance = 1.25,

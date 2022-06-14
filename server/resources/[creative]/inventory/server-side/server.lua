@@ -55,7 +55,7 @@ local tableList = {
 	["tablecoke"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
 		[1] = { ["timer"] = 10, ["need"] = "sulfuric", ["needAmount"] = 1 },
-		[2] = { ["timer"] = 10, ["need"] = "cokeseed", ["needAmount"] = 1 },
+		[2] = { ["timer"] = 10, ["need"] = "cokeleaf", ["needAmount"] = 1 },
 		[3] = { ["timer"] = 10, ["item"] = "cocaine", ["itemAmount"] = 3 }
 	},
 	["tablemeth"] = {
