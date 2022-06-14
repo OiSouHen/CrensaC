@@ -140,7 +140,7 @@ local shopList = {
 	{ -32.14,-1039.04,28.59,"Mechanic",false },
 	{ 1179.12,2635.86,37.74,"Mechanic",false },
 	{ -1636.74,-1092.17,13.08,"Oxy",false },
-	{ 563.19,2752.92,42.87,"Petz",false },
+	{ 562.36,2741.52,42.87,"Petz",false },
 	{ -1196.9,-901.58,13.99,"BurgerShot",false },
 	{ 806.22,-761.68,26.77,"PizzaThis",false },
 	{ -588.5,-1066.23,22.34,"UwuCoffee",false },
