@@ -1225,6 +1225,22 @@ local craftList = {
 	},
 	["Lester"] = {
 		["list"] = {
+			["blocksignal"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["aluminum"] = 3,
+					["tarp"] = 1,
+					["plastic"] = 6
+				}
+			},
+			["weedclone"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 50
+				}
+			},
 			["vest"] = {
 				["amount"] = 1,
 				["destroy"] = false,
@@ -1235,13 +1251,43 @@ local craftList = {
 					["sheetmetal"] = 5
 				}
 			},
-			["blocksignal"] = {
+			["tablecoke"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["aluminum"] = 3,
+					["woodlog"] = 10,
+					["rubber"] = 15,
+					["explosives"] = 3,
 					["tarp"] = 1,
-					["plastic"] = 6
+					["glass"] = 25,
+					["aluminum"] = 10,
+					["sheetmetal"] = 2
+				}
+			},
+			["tablemeth"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["woodlog"] = 10,
+					["rubber"] = 15,
+					["explosives"] = 3,
+					["tarp"] = 1,
+					["glass"] = 25,
+					["aluminum"] = 10,
+					["sheetmetal"] = 2
+				}
+			},
+			["tableweed"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["woodlog"] = 10,
+					["rubber"] = 15,
+					["explosives"] = 3,
+					["tarp"] = 1,
+					["glass"] = 25,
+					["aluminum"] = 10,
+					["sheetmetal"] = 2
 				}
 			}
 		}
