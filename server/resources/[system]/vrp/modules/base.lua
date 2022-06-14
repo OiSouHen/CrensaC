@@ -18,7 +18,6 @@ vRP.userSources = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 Proxy.addInterface("vRP",vRP)
 Tunnel.bindInterface("vRP",tvRP)
-vSKINSHOP = Tunnel.getInterface("skinshop")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DISCORDHOOK
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +75,7 @@ end
 -- UPDATETXT
 -----------------------------------------------------------------------------------------------------------------------------------------
 function vRP.updateTxt(archive,text)
-	archive = io.open("resources/logsystem/"..archive,"a")
+	archive = io.open("resources/[system]/logsystem/"..archive,"a")
 	if archive then
 		archive:write(text.."\n")
 	end
@@ -239,10 +238,6 @@ function playerDropped(source,reason)
 		if dataTable then
 			local ped = GetPlayerPed(source)
 			local coords = GetEntityCoords(ped)
-
-			if vSKINSHOP.checkBackpack(source) then
-				vRP.remWeight(user_id,50)
-			end
 
 			dataTable["armour"] = GetPedArmour(ped)
 			dataTable["health"] = GetEntityHealth(ped)

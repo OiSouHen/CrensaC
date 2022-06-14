@@ -264,7 +264,18 @@ end
 -- CHECKBACKPACK
 -----------------------------------------------------------------------------------------------------------------------------------------
 local checkBackpack = {
-	["defibrillator"] = 100
+	["defibrillator"] = 100,
+	["backschool"] = 101,
+	["backcamping"] = 102,
+	["backcyclist"] = 103,
+	["backalohomorawhite"] = 104,
+	["backalohomorablack"] = 104,
+	["backalohomorared"] = 104,
+	["backrudolphpurple"] = 105,
+	["backrudolphred"] = 105,
+	["backtwitch"] = 106,
+	["backpolice"] = 107,
+	["backwar"] = 108
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VERIFYITENS
@@ -421,6 +432,7 @@ AddEventHandler("admin:KickAll",function()
 		end
 	end
 
+	print("Obrigado por fazer parte do Grupo Crensa.")
 	print("Save no banco de dados terminou, ja pode reiniciar o servidor.")
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
