@@ -308,6 +308,8 @@ RegisterCommand("hash",function(source,args,rawCommand)
 			local vehicle = vRPC.vehicleHash(source)
 			if vehicle then
 				vRP.updateTxt("hash.txt",vehicle)
+				vKEYBOARD.keyCopy(source,"Hash:",vehicle)
+				TriggerClientEvent("Notify",source,"amarelo","Salva em <b>resources/[system]/logsystem/hash.txt</b>.",10000)
 			end
 		end
 	end
