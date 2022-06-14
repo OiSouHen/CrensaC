@@ -947,8 +947,14 @@ AddEventHandler("playerDisconnect",function(user_id)
 		TriggerClientEvent("player:Commands",playerCarry[user_id],false)
 		playerCarry[user_id] = nil
 	end
-	
+
 	if Active[user_id] then
 		Active[user_id] = nil
+	end
+
+	if not vSKINSHOP.checkBackpack(user_id) then
+		return true
+	else
+		vRP.remWeight(user_id,50)
 	end
 end)

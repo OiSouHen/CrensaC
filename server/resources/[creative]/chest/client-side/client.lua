@@ -136,9 +136,9 @@ end)
 -- REQUESTCHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestChest",function(data,cb)
-	local myInventory,myChest,invPeso,invMaxpeso,chestPeso,chestMaxpeso = vSERVER.openChest(chestOpen)
-	if myInventory then
-		cb({ myInventory = myInventory, myChest = myChest, invPeso = invPeso, invMaxpeso = invMaxpeso, chestPeso = chestPeso, chestMaxpeso = chestMaxpeso })
+	local Inventory,Chest,invPeso,invMaxpeso,chestPeso,chestMaxpeso = vSERVER.openChest(chestOpen)
+	if Inventory then
+		cb({ Inventory = Inventory, Chest = Chest, invPeso = invPeso, invMaxpeso = invMaxpeso, chestPeso = chestPeso, chestMaxpeso = chestMaxpeso })
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -293,8 +293,8 @@ const requestChest = () => {
 		for (let x = 1; x <= data["invMaxpeso"]; x++){
 			const slot = x.toString();
 
-			if (data.myInventory[slot] !== undefined){
-				const v = data.myInventory[slot];
+			if (data.Inventory[slot] !== undefined){
+				const v = data.Inventory[slot];
 				var maxDurability = 86400 * v["days"];
 				var newDurability = (maxDurability - v["durability"]) / maxDurability;
 				var actualPercent = newDurability * 100;
@@ -326,8 +326,8 @@ const requestChest = () => {
 		for (let x = 1; x <= 100; x++){
 			const slot = x.toString();
 
-			if (data.myChest[slot] !== undefined){
-				const v = data.myChest[slot];
+			if (data.Chest[slot] !== undefined){
+				const v = data.Chest[slot];
 				var maxDurability = 86400 * v["days"];
 				var newDurability = (maxDurability - v["durability"]) / maxDurability;
 				var actualPercent = newDurability * 100;

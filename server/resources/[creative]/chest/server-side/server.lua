@@ -61,7 +61,7 @@ function cRP.openChest(chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local myInventory = {}
+		local Inventory = {}
 		local inventory = vRP.userInventory(user_id)
 		for k,v in pairs(inventory) do
 			v["amount"] = parseInt(v["amount"])
@@ -89,10 +89,10 @@ function cRP.openChest(chestName)
 				v["days"] = 1
 			end
 
-			myInventory[k] = v
+			Inventory[k] = v
 		end
 
-		local myChest = {}
+		local Chest = {}
 		local result = vRP.getSrvdata("stackChest:"..chestName)
 		for k,v in pairs(result) do
 			v["amount"] = parseInt(v["amount"])
@@ -120,12 +120,12 @@ function cRP.openChest(chestName)
 				v["days"] = 1
 			end
 
-			myChest[k] = v
+			Chest[k] = v
 		end
 
 		local consultChest = vRP.query("chests/getChests",{ name = chestName })
 		if consultChest[1] then
-			return myInventory,myChest,vRP.inventoryWeight(user_id),vRP.getWeight(user_id),vRP.chestWeight(result),consultChest[1]["weight"]
+			return Inventory,Chest,vRP.inventoryWeight(user_id),vRP.getWeight(user_id),vRP.chestWeight(result),consultChest[1]["weight"]
 		end
 	end
 end
