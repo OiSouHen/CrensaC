@@ -20,8 +20,7 @@ local Plants = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 local plantTypes = {
 	["weedclone"] = { "Maconha","weedleaf" },
-	["cokeseed"] = { "Cocaína","cokeleaf" },
-	["mushseed"] = { "Cogumelo","mushroom" }
+	["cokeseed"] = { "Cocaína","cokeleaf" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INITPLANTS
@@ -52,11 +51,6 @@ AddEventHandler("plants:Collect",function(Number)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id and Plants[Number] then
-		if vRP.hasGroup(user_id,"Moderator") then
-			TriggerClientEvent("Notify",source,"vermelho","Passaporte: "..Plants[Number]["user_id"],5000)
-			return
-		end
-		
 		local percPlants = 100
 		if os.time() < Plants[Number]["time"] then
 			local timePlants = parseInt((os.time() - Plants[Number]["time"]) / 120) + 100
@@ -76,7 +70,7 @@ AddEventHandler("plants:Collect",function(Number)
 
 				Wait(10000)
 
-				vRP.generateItem(user_id,plantTypes[Type][2],3,true)
+				vRP.generateItem(user_id,plantTypes[Type][2],2,true)
 				TriggerClientEvent("player:Commands",source,false)
 				TriggerClientEvent("plants:Remover",-1,Number)
 				TriggerClientEvent("vRP:Cancel",source,false)
