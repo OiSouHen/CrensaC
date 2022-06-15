@@ -33,6 +33,13 @@ AddEventHandler("impound:Check",function(entity)
 			vRP.generateItem(user_id,"aluminum",math.random(3,5),true)
 			vRP.generateItem(user_id,"copper",math.random(3,5),true)
 
+			if math.random(1000) >= 950 then
+				vRP.generateItem(user_id,"engineb",1,true)
+				vRP.generateItem(user_id,"transmissiona",1,true)
+				vRP.generateItem(user_id,"braked",1,true)
+				vRP.generateItem(user_id,"suspensionc",1,true)
+			end
+
 			TriggerClientEvent("garages:Delete",source,entity[3])
 			vRP.upgradeStress(user_id,5)
 		end
