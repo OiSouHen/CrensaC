@@ -211,7 +211,6 @@ local prisonItens = {
 	{ ["item"] = "cigarette", ["min"] = 4, ["max"] = 8, ["perc"] = 100 },
 	{ ["item"] = "cannedsoup", ["min"] = 1, ["max"] = 1, ["perc"] = 20 },
 	{ ["item"] = "canofbeans", ["min"] = 1, ["max"] = 1, ["perc"] = 20 },
-	{ ["item"] = "key", ["min"] = 1, ["max"] = 1, ["perc"] = 25 },
 	{ ["item"] = "cotton", ["min"] = 1, ["max"] = 1, ["perc"] = 50 },
 	{ ["item"] = "saline", ["min"] = 1, ["max"] = 1, ["perc"] = 50 },
 	{ ["item"] = "sulfuric", ["min"] = 1, ["max"] = 1, ["perc"] = 50 }
@@ -235,48 +234,11 @@ function cRP.reducePrison()
 
 		local identity = vRP.userIdentity(user_id)
 		if parseInt(identity["prison"]) <= 0 then
-			vCLIENT.syncPrison(source,false,true)
+			vCLIENT.syncPrison(source,false,false)
 		else
 			vCLIENT.asyncServices(source)
 			TriggerClientEvent("Notify",source,"azul","Restam <b>"..parseInt(identity["prison"]).." serviços</b>.",5000)
 		end
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- CHECKKEY
------------------------------------------------------------------------------------------------------------------------------------------
-function cRP.checkKey()
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id then
-		local policeResult = vRP.numPermission("Police")
-		if parseInt(#policeResult) <= 5 then
-			TriggerClientEvent("Notify",source,"amarelo","Sistema indisponível no momento.",5000)
-			return false
-		end
-
-		local consultItem = vRP.getInventoryItemAmount(user_id,"key")
-		if consultItem[1] > 0 then
-			if not vRP.checkBroken(consultItem[2]) then
-				if vRP.tryGetInventoryItem(user_id,consultItem[2],1,true) then
-					vCLIENT.syncPrison(source,false,false)
-					prisonMarkers[source] = { 600,user_id }
-					vRP.execute("characters/fixPrison",{ user_id = user_id })
-
-					for k,v in pairs(policeResult) do
-						async(function()
-							TriggerClientEvent("Notify",v,"amarelo","Recebemos a informação de um fugitivo da penitenciária.",5000)
-						end)
-					end
-
-					TriggerEvent("blipsystem:serviceEnter",source,"Prisioneiro",48)
-
-					return true
-				end
-			end
-		end
-
-		return false
 	end
 end
 --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -286,6 +248,6 @@ AddEventHandler("playerConnect",function(user_id,source)
 	local identity = vRP.userIdentity(user_id)
 	if parseInt(identity["prison"]) > 0 then
 		TriggerClientEvent("Notify",source,"azul","Restam <b>"..parseInt(identity["prison"]).." serviços</b>.",5000)
-		vCLIENT.syncPrison(source,true,true)
+		vCLIENT.syncPrison(source,true,false)
 	end
 end)

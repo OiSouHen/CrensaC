@@ -345,7 +345,7 @@ AddEventHandler("inventory:Badges",function(x,y,z)
 		local Inventory = vRP.userInventory(user_id)
 		if Inventory then
 			for k,v in pairs(Inventory) do
-				if string.sub(v["item"],1,5) == "badge" then
+				if string.sub(v["item"],1,2) == "badge" then
 					local Amount = 1
 					local Item = v["item"]
 
