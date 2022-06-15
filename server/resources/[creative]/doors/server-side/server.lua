@@ -136,6 +136,15 @@ function cRP.doorsPermission(doorNumber)
 
 					local taskResult = vTASKBAR.taskDoors(source)
 					if taskResult then
+						local coords = vRPC.getEntityCoords(source)
+						local policeResult = vRP.numPermission("Police")
+						for k,v in pairs(policeResult) do
+							async(function()
+								vRPC.playSound(v,"ATM_WINDOW","HUD_FRONTEND_DEFAULT_SOUNDSET")
+								TriggerClientEvent("NotifyPush",v,{ code = 20, title = "Tranca de Porta Violada", x = coords["x"], y = coords["y"], z = coords["z"], criminal = "Alarme de segurança", time = "Recebido às "..os.date("%H:%M"), blipColor = 16 })
+							end)
+						end
+
 						return true
 					end
 				end
