@@ -875,7 +875,7 @@ CreateThread(function()
 				{
 					event = "inventory:makeProducts",
 					label = "Retirar Leite",
-					tunnel = "products",
+					tunnel = "police",
 					service = "milkBottle"
 				}
 			}
