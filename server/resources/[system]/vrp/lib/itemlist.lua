@@ -1306,12 +1306,6 @@ local itemlist = {
 		["weight"] = 0.15,
 		["economy"] = 5
 	},
-	["mushseed"] = {
-		["index"] = "mushseed",
-		["name"] = "Semente de Cogumelo",
-		["type"] = "Usável",
-		["weight"] = 0.10
-	},
 	["meth"] = {
 		["index"] = "meth",
 		["name"] = "Metanfetamina",
