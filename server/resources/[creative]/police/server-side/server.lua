@@ -101,7 +101,7 @@ function cRP.initPrison(nuser_id,services,fines,text)
 			if identity then
 				local otherPlayer = vRP.userSource(nuser_id)
 				if otherPlayer then
-					vCLIENT.syncPrison(otherPlayer,true,false)
+					vCLIENT.syncPrison(otherPlayer,true,true)
 					TriggerClientEvent("radio:outServers",otherPlayer)
 				end
 
