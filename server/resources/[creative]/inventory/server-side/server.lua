@@ -70,20 +70,93 @@ local tableList = {
 		[2] = { ["timer"] = 10, ["need"] = "weedleaf", ["needAmount"] = 1 },
 		[3] = { ["timer"] = 10, ["item"] = "joint", ["itemAmount"] = 3 }
 	},
-	["foodJuice"] = {
+	["burgershot1"] = {
 		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
-		[1] = { ["timer"] = 10, ["item"] = "foodjuice", ["itemAmount"] = 1 }
+		[1] = { ["timer"] = 10, ["item"] = "burgershot1", ["itemAmount"] = 1 }
 	},
-	["foodBurger"] = {
+	["burgershot2"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
-		[1] = { ["timer"] = 10, ["item"] = "foodburger", ["itemAmount"] = 1 }
+		[1] = { ["timer"] = 10, ["item"] = "burgershot2", ["itemAmount"] = 1 }
 	},
-	["foodBox"] = {
+	["burgershot3"] = {
 		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
 		[1] = { ["timer"] = 10, ["need"] = {
-			{ ["item"] = "foodburger", ["amount"] = 1 },
-			{ ["item"] = "foodjuice", ["amount"] = 1 }
-		}, ["needAmount"] = 1, ["item"] = "foodbox", ["itemAmount"] = 1 }
+			{ ["item"] = "burgershot2", ["amount"] = 1 },
+			{ ["item"] = "burgershot1", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "burgershot3", ["itemAmount"] = 1 }
+	},
+	["burgershot4"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "drugtoy", ["amount"] = 1 },
+			{ ["item"] = "burgershot3", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "burgershot4", ["itemAmount"] = 1 }
+	},
+	["pizzathis1"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["item"] = "pizzathis1", ["itemAmount"] = 1 }
+	},
+	["pizzathis2"] = {
+		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
+		[1] = { ["timer"] = 10, ["item"] = "pizzathis2", ["itemAmount"] = 1 }
+	},
+	["pizzathis3"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "pizzathis2", ["amount"] = 1 },
+			{ ["item"] = "pizzathis1", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "pizzathis3", ["itemAmount"] = 1 }
+	},
+	["pizzathis4"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "drugtoy", ["amount"] = 1 },
+			{ ["item"] = "pizzathis3", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "pizzathis4", ["itemAmount"] = 1 }
+	},
+	["uwucoffee1"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["item"] = "uwucoffee1", ["itemAmount"] = 1 }
+	},
+	["uwucoffee2"] = {
+		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
+		[1] = { ["timer"] = 10, ["item"] = "uwucoffee2", ["itemAmount"] = 1 }
+	},
+	["uwucoffee3"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "uwucoffee2", ["amount"] = 1 },
+			{ ["item"] = "uwucoffee1", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "uwucoffee3", ["itemAmount"] = 1 }
+	},
+	["uwucoffee4"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "drugtoy", ["amount"] = 1 },
+			{ ["item"] = "uwucoffee3", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "uwucoffee4", ["itemAmount"] = 1 }
+	},
+	["beanmachine1"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["item"] = "beanmachine1", ["itemAmount"] = 1 }
+	},
+	["beanmachine2"] = {
+		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
+		[1] = { ["timer"] = 10, ["item"] = "beanmachine2", ["itemAmount"] = 1 }
+	},
+	["beanmachine3"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "beanmachine2", ["amount"] = 1 },
+			{ ["item"] = "beanmachine1", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "beanmachine3", ["itemAmount"] = 1 }
+	},
+	["beanmachine4"] = {
+		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
+		[1] = { ["timer"] = 10, ["need"] = {
+			{ ["item"] = "drugtoy", ["amount"] = 1 },
+			{ ["item"] = "beanmachine3", ["amount"] = 1 }
+		}, ["needAmount"] = 1, ["item"] = "beanmachine4", ["itemAmount"] = 1 }
 	},
 	["milkBottle"] = {
 		["anim"] = { "amb@prop_human_parking_meter@female@idle_a","idle_a_female" },
@@ -110,27 +183,26 @@ local tableList = {
 		[6] = { ["timer"] = 5, ["item"] = "joint", ["itemAmount"] = 1 },
 		[7] = { ["timer"] = 5, ["item"] = "weedclone", ["itemAmount"] = 1 },
 		[8] = { ["timer"] = 5, ["item"] = "cokeseed", ["itemAmount"] = 1 },
-		[9] = { ["timer"] = 5, ["item"] = "mushseed", ["itemAmount"] = 1 },
-		[10] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
-		[11] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
-		[12] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
-		[13] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
-		[14] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
-		[15] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
-		[16] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
-		[17] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
-		[18] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
-		[19] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
-		[20] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
-		[21] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
-		[22] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
-		[23] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
-		[24] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
-		[25] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
-		[26] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
-		[27] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
-		[28] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
-		[29] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
+		[9] = { ["timer"] = 5, ["item"] = "acetone", ["itemAmount"] = 1 },
+		[10] = { ["timer"] = 5, ["item"] = "water", ["itemAmount"] = 1 },
+		[11] = { ["timer"] = 5, ["item"] = "copper", ["itemAmount"] = 1 },
+		[12] = { ["timer"] = 5, ["item"] = "cigarette", ["itemAmount"] = 1 },
+		[13] = { ["timer"] = 5, ["item"] = "lighter", ["itemAmount"] = 1 },
+		[14] = { ["timer"] = 5, ["item"] = "dollars", ["itemAmount"] = 1 },
+		[15] = { ["timer"] = 5, ["item"] = "elastic", ["itemAmount"] = 1 },
+		[16] = { ["timer"] = 5, ["item"] = "rose", ["itemAmount"] = 1 },
+		[17] = { ["timer"] = 5, ["item"] = "teddy", ["itemAmount"] = 1 },
+		[18] = { ["timer"] = 5, ["item"] = "binoculars", ["itemAmount"] = 1 },
+		[19] = { ["timer"] = 5, ["item"] = "camera", ["itemAmount"] = 1 },
+		[20] = { ["timer"] = 5, ["item"] = "silverring", ["itemAmount"] = 1 },
+		[21] = { ["timer"] = 5, ["item"] = "goldring", ["itemAmount"] = 1 },
+		[22] = { ["timer"] = 5, ["item"] = "silvercoin", ["itemAmount"] = 1 },
+		[23] = { ["timer"] = 5, ["item"] = "goldcoin", ["itemAmount"] = 1 },
+		[24] = { ["timer"] = 5, ["item"] = "watch", ["itemAmount"] = 1 },
+		[25] = { ["timer"] = 5, ["item"] = "bracelet", ["itemAmount"] = 1 },
+		[26] = { ["timer"] = 5, ["item"] = "dices", ["itemAmount"] = 1 },
+		[27] = { ["timer"] = 5, ["item"] = "cup", ["itemAmount"] = 1 },
+		[28] = { ["timer"] = 5, ["item"] = "slipper", ["itemAmount"] = 1 }
 	},
 	["fishfillet"] = {
 		["anim"] = { "anim@amb@business@coc@coc_unpack_cut@","fullcut_cycle_v6_cokecutter" },
@@ -269,8 +341,7 @@ local lootItens = {
 			[12] = { ["item"] = "card01", ["min"] = 1, ["max"] = 1 },
 			[13] = { ["item"] = "weedclone", ["min"] = 2, ["max"] = 3 },
 			[14] = { ["item"] = "cokeseed", ["min"] = 2, ["max"] = 3 },
-			[15] = { ["item"] = "mushseed", ["min"] = 2, ["max"] = 3 },
-			[16] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 }
+			[15] = { ["item"] = "silk", ["min"] = 1, ["max"] = 3 }
 		}
 	}
 }
@@ -2734,18 +2805,6 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 					vRP.removeInventoryItem(user_id,totalName,1,false)
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
 					exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
-				end
-			return end
-
-			if nameItem == "mushseed" then
-				local rand = math.random(2)
-				TriggerClientEvent("inventory:Close",source)
-				local application,coords = vRPC.objectCoords(source,"prop_stoneshroom"..rand)
-				if application then
-					local Route = GetPlayerRoutingBucket(source)
-					vRP.removeInventoryItem(user_id,totalName,1,false)
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					exports["plants"]:initPlants("mushseed",coords,Route,"prop_stoneshroom"..rand,user_id)
 				end
 			return end
 
