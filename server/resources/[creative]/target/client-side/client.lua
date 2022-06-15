@@ -909,8 +909,23 @@ CreateThread(function()
 		}
 	})
 
-	AddCircleZone("foodJuice01",vec3(-1190.78,-904.23,13.99),0.5,{
-		name = "foodJuice01",
+	-- AddCircleZone("foodJuice01",vec3(-1190.78,-904.23,13.99),0.5,{
+		-- name = "foodJuice01",
+		-- heading = 3374176
+	-- },{
+		-- distance = 1.25,
+		-- options = {
+			-- {
+				-- event = "inventory:makeProducts",
+				-- label = "Encher Copo",
+				-- tunnel = "police",
+				-- service = "foodJuice"
+			-- }
+		-- }
+	-- })
+	
+	AddCircleZone("Juice01",vec3(-1190.76,-904.24,13.99),0.5,{
+		name = "Juice01",
 		heading = 3374176
 	},{
 		distance = 1.25,
@@ -919,58 +934,13 @@ CreateThread(function()
 				event = "inventory:makeProducts",
 				label = "Encher Copo",
 				tunnel = "police",
-				service = "foodJuice"
+				service = "burgershot1"
 			}
 		}
 	})
 
-	AddCircleZone("foodJuice02",vec3(-1190.12,-905.16,13.99),0.5,{
-		name = "foodJuice02",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Encher Copo",
-				tunnel = "police",
-				service = "foodJuice"
-			}
-		}
-	})
-
-	AddCircleZone("foodJuice03",vec3(1585.82,6459.13,26.02),0.5,{
-		name = "foodJuice03",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Encher Copo",
-				tunnel = "police",
-				service = "foodJuice"
-			}
-		}
-	})
-
-	AddCircleZone("foodJuice04",vec3(810.69,-764.42,26.77),0.5,{
-		name = "foodJuice04",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Encher Copo",
-				tunnel = "police",
-				service = "foodJuice"
-			}
-		}
-	})
-
-	AddCircleZone("foodBurger01",vec3(-1202.08,-897.21,13.99),0.5,{
-		name = "foodBurger01",
+	AddCircleZone("Burger01",vec3(-1202.09,-897.2,13.99),0.5,{
+		name = "Burger01",
 		heading = 3374176
 	},{
 		distance = 1.0,
@@ -979,88 +949,13 @@ CreateThread(function()
 				event = "inventory:makeProducts",
 				label = "Montar Lanche",
 				tunnel = "police",
-				service = "foodBurger"
+				service = "burgershot2"
 			}
 		}
 	})
 
-	AddCircleZone("foodBurger02",vec3(-1202.55,-896.55,13.99),0.5,{
-		name = "foodBurger02",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Montar Lanche",
-				tunnel = "police",
-				service = "foodBurger"
-			}
-		}
-	})
-
-	AddCircleZone("foodBurger03",vec3(1587.93,6458.15,26.02),0.5,{
-		name = "foodBurger03",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Montar Lanche",
-				tunnel = "police",
-				service = "foodBurger"
-			}
-		}
-	})
-
-	AddCircleZone("foodBurger04",vec3(1587.33,6458.44,26.02),0.5,{
-		name = "foodBurger04",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Montar Lanche",
-				tunnel = "police",
-				service = "foodBurger"
-			}
-		}
-	})
-
-	AddCircleZone("foodBurger05",vec3(807.67,-762.31,26.77),0.5,{
-		name = "foodBurger05",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Montar Lanche",
-				tunnel = "police",
-				service = "foodBurger"
-			}
-		}
-	})
-
-	AddCircleZone("foodBurger06",vec3(807.68,-760.2,26.77),0.5,{
-		name = "foodBurger06",
-		heading = 3374176
-	},{
-		distance = 1.0,
-		options = {
-			{
-				event = "inventory:makeProducts",
-				label = "Montar Lanche",
-				tunnel = "police",
-				service = "foodBurger"
-			}
-		}
-	})
-
-	AddCircleZone("foodBox01",vec3(-1197.91,-892.21,13.99),0.5,{
-		name = "foodBox01",
+	AddCircleZone("Box01",vec3(-1197.92,-892.28,13.99),0.5,{
+		name = "Box01",
 		heading = 3374176
 	},{
 		distance = 1.25,
@@ -1069,13 +964,48 @@ CreateThread(function()
 				event = "inventory:makeProducts",
 				label = "Montar Combo",
 				tunnel = "police",
-				service = "foodBox"
+				service = "burgershot3"
+			},{
+				event = "inventory:makeProducts",
+				label = "Montar Combo + Brinquedo",
+				tunnel = "police",
+				service = "burgershot4"
+			}
+		}
+	})
+	
+	AddCircleZone("Juice02",vec3(810.69,-764.58,26.77),0.5,{
+		name = "Juice02",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Encher Copo",
+				tunnel = "police",
+				service = "pizzathis1"
 			}
 		}
 	})
 
-	AddCircleZone("foodBox02",vec3(1592.02,6456.23,26.02),0.5,{
-		name = "foodBox02",
+	AddCircleZone("Burger02",vec3(807.68,-762.3,26.77),0.5,{
+		name = "Burger02",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Montar Lanche",
+				tunnel = "police",
+				service = "pizzathis2"
+			}
+		}
+	})
+
+	AddCircleZone("Box02",vec3(809.87,-761.15,26.77),0.5,{
+		name = "Box02",
 		heading = 3374176
 	},{
 		distance = 1.25,
@@ -1084,13 +1014,48 @@ CreateThread(function()
 				event = "inventory:makeProducts",
 				label = "Montar Combo",
 				tunnel = "police",
-				service = "foodBox"
+				service = "pizzathis3"
+			},{
+				event = "inventory:makeProducts",
+				label = "Montar Combo + Brinquedo",
+				tunnel = "police",
+				service = "pizzathis4"
 			}
 		}
 	})
 
-	AddCircleZone("foodBox03",vec3(812.26,-754.98,26.77),0.5,{
-		name = "foodBox03",
+	AddCircleZone("Juice03",vec3(-590.36,-1058.54,22.34),0.5,{
+		name = "Juice03",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Encher Copo",
+				tunnel = "police",
+				service = "uwucoffee1"
+			}
+		}
+	})
+
+	AddCircleZone("Burger03",vec3(-590.49,-1056.51,22.36),0.5,{
+		name = "Burger03",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Montar Lanche",
+				tunnel = "police",
+				service = "uwucoffee2"
+			}
+		}
+	})
+
+	AddCircleZone("Box03",vec3(-590.5,-1063.02,22.36),0.5,{
+		name = "Box03",
 		heading = 3374176
 	},{
 		distance = 1.25,
@@ -1099,11 +1064,66 @@ CreateThread(function()
 				event = "inventory:makeProducts",
 				label = "Montar Combo",
 				tunnel = "police",
-				service = "foodBox"
+				service = "uwucoffee3"
+			},{
+				event = "inventory:makeProducts",
+				label = "Montar Combo + Brinquedo",
+				tunnel = "police",
+				service = "uwucoffee4"
 			}
 		}
 	})
 
+	AddCircleZone("Juice04",vec3(126.28,-1035.83,29.27),0.5,{
+		name = "Juice04",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Encher Copo",
+				tunnel = "police",
+				service = "beanmachine1"
+			}
+		}
+	})
+
+	AddCircleZone("Burger04",vec3(122.31,-1038.35,29.27),0.5,{
+		name = "Burger04",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Montar Lanche",
+				tunnel = "police",
+				service = "beanmachine2"
+			}
+		}
+	})
+
+	AddCircleZone("Box04",vec3(122.79,-1044.03,29.27),0.5,{
+		name = "Box04",
+		heading = 3374176
+	},{
+		distance = 1.25,
+		options = {
+			{
+				event = "inventory:makeProducts",
+				label = "Montar Combo",
+				tunnel = "police",
+				service = "beanmachine3"
+			},{
+				event = "inventory:makeProducts",
+				label = "Montar Combo + Brinquedo",
+				tunnel = "police",
+				service = "beanmachine4"
+			}
+		}
+	})
+	
 	AddCircleZone("jewelry01",vec3(-626.67,-238.58,38.05),0.75,{
 		name = "jewelry01",
 		heading = 3374176
