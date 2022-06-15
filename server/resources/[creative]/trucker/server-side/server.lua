@@ -48,12 +48,16 @@ function cRP.Payment()
 			deliveryPackage[user_id] = 0
 		end
 
-		vRP.generateItem(user_id,"plasticbottle",math.random(8,12),true)
-		vRP.generateItem(user_id,"glassbottle",math.random(8,12),true)
-		vRP.generateItem(user_id,"elastic",math.random(8,12),true)
-		vRP.generateItem(user_id,"metalcan",math.random(8,12),true)
+		vRP.generateItem(user_id,"tarp",math.random(4,6),true)
 		vRP.generateItem(user_id,"battery",math.random(8,12),true)
-		vRP.generateItem(user_id,"fabric",math.random(4,6),true)
+		vRP.generateItem(user_id,"elastic",math.random(8,12),true)
+		vRP.generateItem(user_id,"techtrash",math.random(4,6),true)
+		vRP.generateItem(user_id,"roadsigns",math.random(4,6),true)
+		vRP.generateItem(user_id,"metalcan",math.random(8,12),true)
+		vRP.generateItem(user_id,"explosives",math.random(2,4),true)
+		vRP.generateItem(user_id,"sheetmetal",math.random(4,6),true)
+		vRP.generateItem(user_id,"glassbottle",math.random(8,12),true)
+		vRP.generateItem(user_id,"plasticbottle",math.random(8,12),true)
 
 		deliveryPackage[user_id] = deliveryPackage[user_id] + 1
 	end
