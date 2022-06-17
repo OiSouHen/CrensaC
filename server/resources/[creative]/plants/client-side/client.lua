@@ -41,7 +41,7 @@ CreateThread(function()
 						}
 					})
 
-					createModels(k,v["prop"],v["coords"])
+					createModels(k,v["coords"])
 				end
 			else
 				if Objects[k] then
@@ -80,8 +80,9 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CREATEMODELS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function createModels(Number,model,coords)
-	local mHash = GetHashKey(model)
+function createModels(Number,coords)
+	local Model = "bkr_prop_weed_med_01a"
+	local mHash = GetHashKey(Model)
 
 	RequestModel(mHash)
 	while not HasModelLoaded(mHash) do
