@@ -921,267 +921,146 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 		if itemType(totalName) == "Usável" or itemType(totalName) == "Animal" then
 			if nameItem == "backschool" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"101-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"101")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"101-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"101")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backcamping" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"102-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"102")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"102-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"102")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backcyclist" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"103-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"103")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"103-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"103")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backalohomorawhite" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"104-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"104")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"104-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"104")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backalohomorablack" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"104-1")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"104")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"104-1")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"104")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backalohomorared" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"104-2")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"104")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"104-2")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"104")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backrudolphpurple" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"105-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"105")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"105-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"105")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backrudolphred" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"105-1")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"105")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"105-1")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"105")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backtwitch" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"106-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"106")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"106-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"106")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backpolice" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"107-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"107")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"107-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"107")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "backwar" then
-				Active[user_id] = os.time() + 3
-				TriggerClientEvent("Progress",source,3000)
-				TriggerClientEvent("inventory:Close",source)
-				TriggerClientEvent("inventory:Buttons",source,true)
-				vRPC.playAnim(source,true,{"clothingtie","try_tie_negative_a"},true)
-
-				repeat
-					if os.time() >= parseInt(Active[user_id]) then
-						Active[user_id] = nil
-						vRPC.stopAnim(source,false)
-						TriggerClientEvent("inventory:Buttons",source,false)
-
-						if not vSKINSHOP.checkBackpack(source) then
-							TriggerClientEvent("skinshop:toggleBackpack",source,"108-0")
-						else
-							TriggerClientEvent("skinshop:removeBackpack",source,"108")
-						end
-					end
-
-					Citizen.Wait(100)
-				until Active[user_id] == nil
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"108-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"108")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "vehkey" then
@@ -1208,7 +1087,16 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "defibrillator" then
-				TriggerClientEvent("skinshop:toggleBackpack",source,100)
+				local backpack = vRP.query("characters/getUsers",{ id = user_id })
+				if backpack[1]["backpack"] == 0 then
+					TriggerClientEvent("skinshop:toggleBackpack",source,"100-0")
+					vRP.execute("characters/updateBackpack",{ backpack = 1, id = user_id })
+				else
+					TriggerClientEvent("skinshop:removeBackpack",source,"100")
+					vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
+				end
+				
+				TriggerClientEvent("inventory:Update",source,"updateMochila")
 			return end
 
 			if nameItem == "gemstone" then
