@@ -146,19 +146,21 @@ function cRP.entranceHomes(homeName,v,interior)
 		
 		table.insert(homes["intern"],{ 86.41,-91.47,-24.2,"exit","Saída" })
 		table.insert(homes["intern"],{ 92.51,-105.44,-24.2,"vault","Baú" })
+		table.insert(homes["intern"],{ 96.98,-108.39,-24.2,"wardrobe","Armário" })
 		table.insert(homes["intern"],{ 96.49,-98.25,-24.2,"fridge","Geladeira" })
 	elseif interior == "creativeOneFloors" then
 		SetEntityCoords(ped,68.64,67.3,-23.4,1,0,0,0)
 		
 		table.insert(homes["intern"],{ 68.64,67.3,-23.4,"exit","Saída" })
 		table.insert(homes["intern"],{ 86.73,72.08,-24.01,"vault","Baú" })
-		table.insert(homes["intern"],{ 82.78,78.77,-24.01,"fridge","Geladeira" })
 		table.insert(homes["intern"],{ 60.02,69.87,-24.6,"wardrobe","Armário" })
+		table.insert(homes["intern"],{ 82.78,78.77,-24.01,"fridge","Geladeira" })
 	elseif interior == "creativeLostudios" then
-		SetEntityCoords(ped,51.96,-38.46,-26.02,1,0,0,0)
+		SetEntityCoords(ped,51.61,-39.05,-25.86,1,0,0,0)
 		
-		table.insert(homes["intern"],{ 51.96,-38.46,-26.02,"exit","Saída" })
-		table.insert(homes["intern"],{ 54.55,-45.08,-24.01,"vault","Baú" })
+		table.insert(homes["intern"],{ 51.61,-39.05,-25.86,"exit","Saída" })
+		table.insert(homes["intern"],{ 46.91,-44.83,-24.01,"vault","Baú" })
+		table.insert(homes["intern"],{ 54.49,-45.03,-24.01,"wardrobe","Armário" })
 		table.insert(homes["intern"],{ 45.92,-46.41,-24.01,"fridge","Geladeira" })
 	elseif interior == "creativeThreeFloors" then
 		SetEntityCoords(ped,118.28,-108.11,-23.59,1,0,0,0)
@@ -172,12 +174,14 @@ function cRP.entranceHomes(homeName,v,interior)
 		
 		table.insert(homes["intern"],{ 166.78,-144.32,-17.79,"exit","Saída" })
 		table.insert(homes["intern"],{ 160.71,-149.67,-17.79,"vault","Baú" })
+		table.insert(homes["intern"],{ 150.3,-157.6,-23.99,"wardrobe","Armário" })
 		table.insert(homes["intern"],{ 160.05,-156.6,-19.19,"fridge","Geladeira" })
 	elseif interior == "creativeFranklin" then
 		SetEntityCoords(ped,28.58,-24.35,-24.01,1,0,0,0)
 		
 		table.insert(homes["intern"],{ 28.58,-24.35,-24.01,"exit","Saída" })
-		table.insert(homes["intern"],{ 30.93,-28.36,-24.01,"vault","Baú" })
+		table.insert(homes["intern"],{ 30.88,-25.88,-24.01,"vault","Baú" })
+		table.insert(homes["intern"],{ 31.03,-28.21,-24.01,"wardrobe","Armário" })
 		table.insert(homes["intern"],{ 18.89,-29.72,-24.01,"fridge","Geladeira" })
 	end
 	

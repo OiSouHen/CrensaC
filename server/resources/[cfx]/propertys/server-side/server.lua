@@ -2127,15 +2127,24 @@ exports("initNewspapers",function(source)
 	return false
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ensurehomes
+-- HENSAENSUREHOMES
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("ensurehomes",function(source,args,rawCommand)
+RegisterCommand("hensaensurehomes",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.hasGroup(user_id,"Admin") then
 			vCLIENT.updateHomes(-1,homes)
 			vCLIENT.updateHomes(source,homes)
-			TriggerClientEvent("Notify",source,"amarelo","Ensure.",3000)
+			TriggerClientEvent("Notify",source,"verde","Casas atualizadas.",5000)
 		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HENSACRENSA
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand("hensacrensa",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		vRP.generateItem(user_id,args[1],parseInt(args[2]),true)
 	end
 end)
