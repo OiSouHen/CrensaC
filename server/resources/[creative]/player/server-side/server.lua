@@ -951,10 +951,4 @@ AddEventHandler("playerDisconnect",function(user_id)
 	if Active[user_id] then
 		Active[user_id] = nil
 	end
-
-	if not vSKINSHOP.checkBackpack(user_id) then
-		return true
-	else
-		vRP.remWeight(user_id,50)
-	end
 end)
