@@ -718,26 +718,3 @@ function cRP.checkBackpack()
 
 	return false
 end
------------------------------------------------------------------------------------------------------------------------------------------
--- THREADHOVERFY
------------------------------------------------------------------------------------------------------------------------------------------
-local BackWeight = false
-CreateThread(function()
-	while true do
-		if skinData["backpack"] then
-			if skinData["backpack"]["item"] ~= 0 and skinData["backpack"]["item"] >= 100 then
-				if not BackWeight then
-					TriggerServerEvent("vRP:BackpackWeight",true)
-					BackWeight = true
-				end
-			else
-				if BackWeight then
-					TriggerServerEvent("vRP:BackpackWeight",false)
-					BackWeight = false
-				end
-			end
-		end
-
-		Wait(1000)
-	end
-end)
