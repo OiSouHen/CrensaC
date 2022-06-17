@@ -8,16 +8,21 @@ local selfReturn = {}
 -- GETWEIGHT
 -----------------------------------------------------------------------------------------------------------------------------------------	
 function vRP.getWeight(user_id)
-	local dataTable = vRP.getDatatable(user_id)
-	if dataTable then
-		if dataTable["weight"] == nil then
-			dataTable["weight"] = 20
-		end
+    local dataTable = vRP.getDatatable(user_id)
+    local backpack = vRP.query("characters/getUsers",{ id = user_id })
+    if backpack[1]["backpack"] == 0 then
+        if dataTable then
+            if dataTable["weight"] == nil then
+                dataTable["weight"] = 20
+            end
 
-		return dataTable["weight"]
-	end
+            return dataTable["weight"]
+        end
+    else
+        return dataTable["weight"] + 50
+    end
 
-	return 0
+    return 0
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETWEIGHT
@@ -290,6 +295,7 @@ function verifyItens(user_id,nameItem)
 	elseif checkBackpack[midName] then
 		local consultItem = vRP.getInventoryItemAmount(user_id,nameItem)
 		if consultItem[1] <= 0 then
+			vRP.execute("characters/updateBackpack",{ backpack = 0, id = user_id })
 			TriggerClientEvent("skinshop:removeBackpack",source,checkBackpack[midName])
 		end
 	end

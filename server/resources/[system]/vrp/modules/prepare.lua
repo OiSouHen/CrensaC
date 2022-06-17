@@ -8,6 +8,7 @@ vRP.prepare("characters/getSerial","SELECT id FROM summerz_characters WHERE seri
 vRP.prepare("characters/getBlood","SELECT id FROM summerz_characters WHERE blood = @blood")
 vRP.prepare("characters/updatePort","UPDATE summerz_characters SET port = @port WHERE id = @id")
 vRP.prepare("characters/updatePhone","UPDATE summerz_characters SET phone = @phone WHERE id = @id")
+vRP.prepare("characters/updateBackpack","UPDATE summerz_characters SET backpack = @backpack WHERE id = @id")
 vRP.prepare("characters/removeCharacters","UPDATE summerz_characters SET deleted = 1 WHERE id = @id")
 vRP.prepare("characters/addFines","UPDATE summerz_characters SET fines = fines + @fines WHERE id = @id")
 vRP.prepare("characters/setPrison","UPDATE summerz_characters SET prison = @prison WHERE id = @user_id")
