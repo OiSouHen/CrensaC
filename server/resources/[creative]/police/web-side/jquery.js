@@ -61,7 +61,8 @@ const functionSearch = (passaporte) => {
 							<b>Nome:</b> ${data["result"][1]}<br>
 							<b>Telefone:</b> ${data["result"][2]}<br>
 							<b>Multas:</b> $${formatarNumero(data["result"][3])}<br>
-							<b>Porte:</b> ${data["result"][5] == 0 ? "Não":"Sim"} <update id="portSearch" data-id="${passaporte}">Atualizar</update>
+							<b>Porte:</b> ${data["result"][5] == 0 ? "Não":"Sim"} <update id="portSearch" data-id="${passaporte}">Atualizar</update><br>
+							<b>Período Criminal:</b> ${data["result"][6] == 0 ? "Regular":"Irregular"} <update id="criminalSearch" data-id="${passaporte}">Atualizar</update>
 						</div>
 
 						${data["result"][4].map((data) => (`
@@ -97,9 +98,13 @@ $(document).on("click",".buttonSearch",function(e){
 	const passaporte = $('#searchPassaporte').val();
 	functionSearch(passaporte);
 });
-/* ----------CLICKBUY---------- */
+/* ----------PORTSEARCH---------- */
 $(document).on("click","#portSearch",function(e){
 	$.post("http://police/updatePort",JSON.stringify({ passaporte: e["target"]["dataset"]["id"] }));
+});
+/* ----------CRIMINALSEARCH---------- */
+$(document).on("click","#criminalSearch",function(e){
+	$.post("http://police/updateCriminal",JSON.stringify({ passaporte: e["target"]["dataset"]["id"] }));
 });
 /* ---------------------------------------------------------------------------------------------------------------- */
 const functionPrender = () => {

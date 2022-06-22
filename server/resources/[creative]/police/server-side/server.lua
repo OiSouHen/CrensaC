@@ -135,7 +135,7 @@ function cRP.searchUser(nuser_id)
 			local fines = vRP.getFines(nuser_id)
 			local records = vRP.query("prison/getRecords",{ nuser_id = parseInt(nuser_id) })
 
-			return { true,identity["name"].." "..identity["name2"],identity["phone"],fines,records,identity["port"] }
+			return { true,identity["name"].." "..identity["name2"],identity["phone"],fines,records,identity["port"],identity["criminal"] }
 		end
 	end
 
@@ -183,6 +183,28 @@ function cRP.updatePort(nuser_id)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- UPDATECRIMINAL
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.updateCriminal(nuser_id)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local criminalStatus = "Regular"
+		local nuser_id = parseInt(nuser_id)
+		local identity = vRP.userIdentity(nuser_id)
+
+		if parseInt(identity["criminal"]) == 0 then
+			criminalStatus = "Irregular"
+			vRP.upgradeCriminal(nuser_id,1)
+		else
+			vRP.upgradeCriminal(nuser_id,0)
+		end
+
+		TriggerClientEvent("police:Update",source,"reloadSearch",parseInt(nuser_id))
+		TriggerEvent("discordLogs","Police","**Por:** "..parseFormat(user_id).."\n**Passaporte:** "..parseFormat(nuser_id).."\n**Criminal:** "..criminalStatus.."\n**Horário:** "..os.date("%H:%M:%S"),6303352)
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- PRISONSYNC
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
@@ -216,9 +238,10 @@ local prisonItens = {
 	{ ["item"] = "sulfuric", ["min"] = 1, ["max"] = 1, ["perc"] = 50 }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
--- REDUCEPRISON
+-- POLICE:REDUCES
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.reducePrison()
+RegisterServerEvent("police:Reduces")
+AddEventHandler("police:Reduces",function()
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
@@ -240,7 +263,7 @@ function cRP.reducePrison()
 			TriggerClientEvent("Notify",source,"azul","Restam <b>"..parseInt(identity["prison"]).." serviços</b>.",5000)
 		end
 	end
-end
+end)
 --------------------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERCONNECT
 --------------------------------------------------------------------------------------------------------------------------------------------------

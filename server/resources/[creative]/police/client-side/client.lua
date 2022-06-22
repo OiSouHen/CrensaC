@@ -38,6 +38,12 @@ RegisterNUICallback("updatePort",function(data)
 	vSERVER.updatePort(data["passaporte"])
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- UPDATECRIMINAL
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("updateCriminal",function(data)
+	vSERVER.updateCriminal(data["passaporte"])
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- SEARCHUSER
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("searchUser",function(data,cb)
@@ -85,6 +91,65 @@ exports("checkPrison",function()
 	return inPrison
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- REDUCES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local reduceList = {
+	["1"] = { 1698.86,2472.69,45.56 },
+	["2"] = { 1698.48,2472.36,45.56 },
+	["3"] = { 1635.66,2490.23,45.56 },
+	["4"] = { 1634.63,2490.1,45.56 },
+	["5"] = { 1618.41,2521.55,45.56 },
+	["6"] = { 1607.39,2541.39,45.56 },
+	["7"] = { 1606.3,2542.63,45.56 },
+	["8"] = { 1624.83,2567.86,45.56 },
+	["9"] = { 1624.78,2567.12,45.56 },
+	["10"] = { 1643.77,2565.0,45.56 },
+	["11"] = { 1665.05,2567.68,45.56 },
+	["12"] = { 1715.97,2567.16,45.56 },
+	["13"] = { 1715.97,2567.95,45.56 },
+	["14"] = { 1716.02,2568.78,45.56 },
+	["15"] = { 1768.79,2565.76,45.56 },
+	["16"] = { 1769.77,2565.7,45.56 },
+	["17"] = { 1772.72,2536.83,45.56 },
+	["18"] = { 1758.19,2508.99,45.56 },
+	["19"] = { 1757.87,2507.77,45.56 },
+	["20"] = { 1719.9,2502.66,45.56 },
+	["21"] = { 1695.28,2506.62,45.56 },
+	["22"] = { 1663.84,2515.34,45.56 },
+	["23"] = { 1664.44,2516.1,45.56 },
+	["24"] = { 1628.63,2543.64,45.56 },
+	["25"] = { 1636.16,2553.61,45.56 },
+	["26"] = { 1648.41,2536.3,45.56 },
+	["27"] = { 1657.61,2549.28,45.56 },
+	["28"] = { 1649.78,2538.35,45.56 },
+	["29"] = { 1699.18,2535.8,45.56 },
+	["30"] = { 1699.57,2534.67,45.56 },
+	["31"] = { 1699.39,2532.1,45.56 },
+	["32"] = { 1777.42,2560.84,45.66 },
+	["33"] = { 1784.21,2561.16,45.66 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADTARGET
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	for Number,v in pairs(reduceList) do
+		exports["target"]:AddCircleZone("Prison:"..Number,vec3(v[1],v[2],v[3]),0.75,{
+			name = "Prison:"..Number,
+			heading = 3374176
+		},{
+			shop = Number,
+			distance = 1.0,
+			options = {
+				{
+					event = "police:Reduces",
+					tunnel = "shopserver",
+					label = "Vasculhar"
+				}
+			}
+		})
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local inLocates = {
@@ -130,54 +195,54 @@ local inLocates = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREAD - SYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
-	SetNuiFocus(false,false)
+-- CreateThread(function()
+	-- SetNuiFocus(false,false)
 
-	while true do
-		local timeDistance = 999
-		if inPrison then
-			local ped = PlayerPedId()
-			local coords = GetEntityCoords(ped)
-			local distance = #(coords - vec3(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3]))
+	-- while true do
+		-- local timeDistance = 999
+		-- if inPrison then
+			-- local ped = PlayerPedId()
+			-- local coords = GetEntityCoords(ped)
+			-- local distance = #(coords - vec3(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3]))
 
-			if distance <= 150 then
-				timeDistance = 1
-				DrawText3D(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3],"~g~E~w~   VASCULHAR")
+			-- if distance <= 150 then
+				-- timeDistance = 1
+				-- DrawText3D(inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3],"~g~E~w~   VASCULHAR")
 
-				if distance <= 1 and GetGameTimer() >= inTimer and IsControlJustPressed(1,38) and not IsPedInAnyVehicle(ped) then
-					inTimer = GetGameTimer() + 3000
+				-- if distance <= 1 and GetGameTimer() >= inTimer and IsControlJustPressed(1,38) and not IsPedInAnyVehicle(ped) then
+					-- inTimer = GetGameTimer() + 3000
 
-					LocalPlayer["state"]["Cancel"] = true
-					LocalPlayer["state"]["Commands"] = true
-					SetEntityHeading(ped,inLocates[inSelect][4])
-					vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
-					SetEntityCoords(ped,inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3] - 1,1,0,0,0)
+					-- LocalPlayer["state"]["Cancel"] = true
+					-- LocalPlayer["state"]["Commands"] = true
+					-- SetEntityHeading(ped,inLocates[inSelect][4])
+					-- vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+					-- SetEntityCoords(ped,inLocates[inSelect][1],inLocates[inSelect][2],inLocates[inSelect][3] - 1,1,0,0,0)
 
-					Wait(10000)
+					-- Wait(10000)
 
-					LocalPlayer["state"]["Commands"] = false
-					LocalPlayer["state"]["Cancel"] = false
-					vSERVER.reducePrison()
-					vRP.removeObjects()
-				end
-			end
+					-- LocalPlayer["state"]["Commands"] = false
+					-- LocalPlayer["state"]["Cancel"] = false
+					-- vSERVER.reducePrison()
+					-- vRP.removeObjects()
+				-- end
+			-- end
 
-			if GetEntityHealth(ped) <= 100 then
-				if not inDeath then
-					timeDeath = GetGameTimer() + 60000
-					inDeath = true
-				else
-					if GetGameTimer() >= timeDeath then
-						vRP.revivePlayer(125)
-						inDeath = false
-					end
-				end
-			end
-		end
+			-- if GetEntityHealth(ped) <= 100 then
+				-- if not inDeath then
+					-- timeDeath = GetGameTimer() + 60000
+					-- inDeath = true
+				-- else
+					-- if GetGameTimer() >= timeDeath then
+						-- vRP.revivePlayer(125)
+						-- inDeath = false
+					-- end
+				-- end
+			-- end
+		-- end
 
-		Wait(timeDistance)
-	end
-end)
+		-- Wait(timeDistance)
+	-- end
+-- end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SYNCPRISON
 -----------------------------------------------------------------------------------------------------------------------------------------
