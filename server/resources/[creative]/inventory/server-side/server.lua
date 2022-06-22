@@ -3250,7 +3250,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "hood" then
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,0.8)
 				if otherPlayer and vPLAYER.getHandcuff(otherPlayer) then
 					TriggerClientEvent("hud:toggleHood",otherPlayer)
 					TriggerClientEvent("inventory:Close",otherPlayer)
@@ -3266,7 +3266,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.removeObjects(source)
 						Carry[user_id] = nil
 					else
-						local otherPlayer = vRPC.ClosestPed(source)
+						local otherPlayer = vRPC.ClosestPed(source,0.8)
 						if otherPlayer and (vRP.getHealth(otherPlayer) <= 101 or vPLAYER.getHandcuff(otherPlayer)) then
 							Carry[user_id] = otherPlayer
 
