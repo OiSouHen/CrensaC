@@ -306,7 +306,7 @@ AddEventHandler("player:RollVehicle",function()
 		repeat
 			if os.time() >= parseInt(Active[user_id]) then
 				Active[user_id] = nil
-				vRPC.removeObjects(source,"one")
+				vRPC.removeObjects(source)
 
 				local vehicle,vehNet = vRPC.vehList(source,5)
 				if vehicle then
