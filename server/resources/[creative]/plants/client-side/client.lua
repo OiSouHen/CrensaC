@@ -69,13 +69,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("plants:Informations")
 AddEventHandler("plants:Informations",function(Number)
-	-- local Informations = vSERVER.Informations(Number)
-	-- if Informations then
-		exports["dynamic"]:AddButton("Coletar","Clique aqui para coletar.","plants:Collect",Number,false,true)
-		exports["dynamic"]:AddButton("Clonagem","Clique aqui para clonar.","plants:Cloning",Number,false,true)
-
-		exports["dynamic"]:openMenu()
-	-- end
+	exports["dynamic"]:AddButton("Coletar","Clique aqui para coletar.","plants:Collect",Number,false,true)
+	exports["dynamic"]:AddButton("Clonagem","Clique aqui para clonar.","plants:Cloning",Number,false,true)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CREATEMODELS
