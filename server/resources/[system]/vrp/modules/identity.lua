@@ -52,7 +52,7 @@ function vRP.updatePrison(user_id)
 	vRP.execute("characters/removePrison",{ user_id = user_id, prison = 1 })
 
 	if vRP.userInfos[user_id] then
-		vRP.userInfos[user_id]["prison"] = vRP.userInfos[user_id]["prison"] - 1
+		vRP.userInfos[user_id]["prison"] = vRP.userInfos[user_id]["prison"] - math.random(2)
 
 		if vRP.userInfos[user_id]["prison"] < 0 then
 			vRP.userInfos[user_id]["prison"] = 0
@@ -68,6 +68,16 @@ function vRP.upgradePort(user_id,statusPort)
 	end
 
 	vRP.execute("characters/updatePort",{ port = statusPort, id = user_id })
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- UPGRADECRIMINAL
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vRP.upgradeCriminal(user_id,statusCriminal)
+	if vRP.userInfos[user_id] then
+		vRP.userInfos[user_id]["criminal"] = parseInt(statusCriminal)
+	end
+
+	vRP.execute("characters/updateCriminal",{ criminal = statusCriminal, id = user_id })
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UPGRADEGARAGE

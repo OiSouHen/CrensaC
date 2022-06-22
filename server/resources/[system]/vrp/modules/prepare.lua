@@ -7,6 +7,7 @@ vRP.prepare("characters/getPhone","SELECT id FROM summerz_characters WHERE phone
 vRP.prepare("characters/getSerial","SELECT id FROM summerz_characters WHERE serial = @serial")
 vRP.prepare("characters/getBlood","SELECT id FROM summerz_characters WHERE blood = @blood")
 vRP.prepare("characters/updatePort","UPDATE summerz_characters SET port = @port WHERE id = @id")
+vRP.prepare("characters/updateCriminal","UPDATE summerz_characters SET criminal = @criminal WHERE id = @id")
 vRP.prepare("characters/updatePhone","UPDATE summerz_characters SET phone = @phone WHERE id = @id")
 vRP.prepare("characters/updateBackpack","UPDATE summerz_characters SET backpack = @backpack WHERE id = @id")
 vRP.prepare("characters/removeCharacters","UPDATE summerz_characters SET deleted = 1 WHERE id = @id")
@@ -84,7 +85,7 @@ vRP.prepare("propertys/updateTax","UPDATE summerz_propertys SET tax = UNIX_TIMES
 vRP.prepare("propertys/updateVault","UPDATE summerz_propertys SET vault = vault + 10, price = price + 10000 WHERE name = @name AND owner = 1")
 vRP.prepare("propertys/updateFridge","UPDATE summerz_propertys SET fridge = fridge + 10, price = price + 10000 WHERE name = @name AND owner = 1")
 vRP.prepare("propertys/newPermissions","INSERT IGNORE INTO summerz_propertys(name,interior,user_id,owner) VALUES(@name,@interior,@user_id,@owner)")
-vRP.prepare("propertys/buying","INSERT IGNORE INTO summerz_propertys(name,interior,price,user_id,tax,residents,vault,fridge,owner) VALUES(@name,@interior,@price,@user_id,UNIX_TIMESTAMP() + 604800,@residents,@vault,@fridge,1)")
+vRP.prepare("propertys/buying","INSERT IGNORE INTO summerz_propertys(name,interior,price,user_id,tax,vault,fridge,owner) VALUES(@name,@interior,@price,@user_id,UNIX_TIMESTAMP() + 604800,@vault,@fridge,1)")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PRISON
 -----------------------------------------------------------------------------------------------------------------------------------------
