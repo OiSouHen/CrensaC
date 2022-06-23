@@ -75,7 +75,7 @@ RegisterCommand("e",function(source,args,rawCommand)
 		local user_id = vRP.getUserId(source)
 		if user_id and vRP.getHealth(source) > 100 then
 			if args[2] == "friend" then
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,1)
 				if otherPlayer then
 					if vRP.getHealth(otherPlayer) > 100 and not vCLIENT.getHandcuff(otherPlayer) then
 						local identity = vRP.userIdentity(user_id)
@@ -98,7 +98,7 @@ RegisterCommand("e2",function(source,args,rawCommand)
 	if exports["chat"]:statusChat(source) then
 		local user_id = vRP.getUserId(source)
 		if user_id and vRP.getHealth(source) > 100 then
-			local otherPlayer = vRPC.ClosestPed(source)
+			local otherPlayer = vRPC.ClosestPed(source,1)
 			if otherPlayer then
 				if vRP.hasGroup(user_id,"Paramedic") then
 					TriggerClientEvent("emotes",otherPlayer,args[1])
@@ -228,7 +228,7 @@ AddEventHandler("player:carryPlayer",function()
 				TriggerClientEvent("player:Commands",playerCarry[user_id],false)
 				playerCarry[user_id] = nil
 			else
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,0.8)
 				if otherPlayer then
 					playerCarry[user_id] = otherPlayer
 
@@ -713,7 +713,7 @@ end)
 RegisterServerEvent("player:checkTrunk")
 AddEventHandler("player:checkTrunk",function()
 	local source = source
-	local otherPlayer = vRPC.ClosestPed(source)
+	local otherPlayer = vRPC.ClosestPed(source,1)
 	if otherPlayer then
 		TriggerClientEvent("player:checkTrunk",otherPlayer)
 	end
@@ -724,7 +724,7 @@ end)
 RegisterServerEvent("player:checkTrash")
 AddEventHandler("player:checkTrash",function()
 	local source = source
-	local otherPlayer = vRPC.ClosestPed(source)
+	local otherPlayer = vRPC.ClosestPed(source,1)
 	if otherPlayer then
 		TriggerClientEvent("player:checkTrash",otherPlayer)
 	end

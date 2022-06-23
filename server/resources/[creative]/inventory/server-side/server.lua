@@ -1702,7 +1702,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "gsrkit" then
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,1)
 				if otherPlayer then
 					Active[user_id] = os.time() + 10
 					TriggerClientEvent("Progress",source,10000)
@@ -1729,7 +1729,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "gdtkit" then
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,1)
 				if otherPlayer then
 					local nuser_id = vRP.getUserId(otherPlayer)
 					local identity = vRP.userIdentity(nuser_id)
@@ -3296,7 +3296,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			return end
 
 			if nameItem == "pager" then
-				local otherPlayer = vRPC.ClosestPed(source)
+				local otherPlayer = vRPC.ClosestPed(source,1)
 				if otherPlayer then
 					if vPLAYER.getHandcuff(otherPlayer) then
 						local nuser_id = vRP.getUserId(otherPlayer)

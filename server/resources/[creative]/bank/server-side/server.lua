@@ -13,6 +13,7 @@ Tunnel.bindInterface("bank",cRP)
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local actived = {}
+local bankTime = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REQUESTWANTED
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -36,8 +37,17 @@ function cRP.bankDeposit(amount)
 	if user_id and actived[user_id] == nil then
 		actived[user_id] = true
 
+		if bankTime[user_id] then
+			if GetGameTimer() < bankTime[user_id] then
+				local bankTimes = parseInt((bankTime[user_id] - GetGameTimer()) / 1000)
+				TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..bankTimes.." segundos</b>.",5000)
+				return
+			end
+		end
+
 		if parseInt(amount) > 0 then
 			if vRP.tryGetInventoryItem(user_id,"dollars",amount,true) then
+				bankTime[user_id] = GetGameTimer() + 60000
 				vRP.addBank(user_id,amount,"Private")
 			else
 				TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -63,8 +73,18 @@ function cRP.bankWithdraw(amount)
 			return false
 		end
 
+		if bankTime[user_id] then
+			if GetGameTimer() < bankTime[user_id] then
+				local bankTimes = parseInt((bankTime[user_id] - GetGameTimer()) / 1000)
+				TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..bankTimes.." segundos</b>.",5000)
+				return
+			end
+		end
+
 		local value = parseInt(amount)
 		if (vRP.inventoryWeight(user_id) + (itemWeight("dollars") * value)) <= vRP.getWeight(user_id) then
+			bankTime[user_id] = GetGameTimer() + 60000
+
 			if not vRP.withdrawCash(user_id,value) then
 				TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 			end
