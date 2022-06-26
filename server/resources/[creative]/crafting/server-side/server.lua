@@ -537,7 +537,7 @@ local craftList = {
 			}
 		}
 	},
-	["PopsDiner"] = {
+	["UwuCoffee"] = {
 		["list"] = {
 			["orangejuice"] = {
 				["amount"] = 1,
