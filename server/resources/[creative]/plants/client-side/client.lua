@@ -71,6 +71,8 @@ RegisterNetEvent("plants:Informations")
 AddEventHandler("plants:Informations",function(Number)
 	exports["dynamic"]:AddButton("Coletar","Clique aqui para coletar.","plants:Collect",Number,false,true)
 	exports["dynamic"]:AddButton("Clonagem","Clique aqui para clonar.","plants:Cloning",Number,false,true)
+
+	exports["dynamic"]:openMenu()
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CREATEMODELS
