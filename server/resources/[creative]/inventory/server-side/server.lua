@@ -667,7 +667,7 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 			end
 		return end
 
-		if nameItem == "burgershot3" or nameItem == "burgershot4" then
+		if nameItem == "burgershot3" or nameItem == "burgershot4" or nameItem == "dollars100" or nameItem == "dollars500" or nameItem == "dollars1000" then
 			if vDELIVER.Deliver(source,"BurgerShot") then
 				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
 					vDELIVER.Update(source)
@@ -684,6 +684,12 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 						if vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",10,true)
 						end
+					elseif nameItem == "dollars100" then
+						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
+					elseif nameItem == "dollars500" then
+						vRP.generateItem(user_id,"dollars",math.random(400,500),true)
+					elseif nameItem == "dollars1000" then
+						vRP.generateItem(user_id,"dollars",math.random(900,1000),true)
 					end
 
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
@@ -691,7 +697,7 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 			end
 		return end
 		
-		if nameItem == "pizzathis3" or nameItem == "pizzathis4" then
+		if nameItem == "pizzathis3" or nameItem == "pizzathis4" or nameItem == "dollars100" or nameItem == "dollars500" or nameItem == "dollars1000" then
 			if vDELIVER.Deliver(source,"PizzaThis") then
 				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
 					vDELIVER.Update(source)
@@ -708,6 +714,12 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 						if vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",10,true)
 						end
+					elseif nameItem == "dollars100" then
+						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
+					elseif nameItem == "dollars500" then
+						vRP.generateItem(user_id,"dollars",math.random(400,500),true)
+					elseif nameItem == "dollars1000" then
+						vRP.generateItem(user_id,"dollars",math.random(900,1000),true)
 					end
 
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
@@ -715,7 +727,7 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 			end
 		return end
 		
-		if nameItem == "uwucoffee3" or nameItem == "uwucoffee4" then
+		if nameItem == "uwucoffee3" or nameItem == "uwucoffee4" or nameItem == "dollars100" or nameItem == "dollars500" or nameItem == "dollars1000" then
 			if vDELIVER.Deliver(source,"UwuCoffee") then
 				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
 					vDELIVER.Update(source)
@@ -732,6 +744,12 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 						if vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",10,true)
 						end
+					elseif nameItem == "dollars100" then
+						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
+					elseif nameItem == "dollars500" then
+						vRP.generateItem(user_id,"dollars",math.random(400,500),true)
+					elseif nameItem == "dollars1000" then
+						vRP.generateItem(user_id,"dollars",math.random(900,1000),true)
 					end
 
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
@@ -739,7 +757,7 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 			end
 		return end
 		
-		if nameItem == "beanmachine3" or nameItem == "beanmachine4" then
+		if nameItem == "beanmachine3" or nameItem == "beanmachine4" or nameItem == "dollars100" or nameItem == "dollars500" or nameItem == "dollars1000" then
 			if vDELIVER.Deliver(source,"BeanMachine") then
 				if vRP.tryGetInventoryItem(user_id,totalName,Amount,false,Slot) then
 					vDELIVER.Update(source)
@@ -756,6 +774,12 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 						if vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",10,true)
 						end
+					elseif nameItem == "dollars100" then
+						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
+					elseif nameItem == "dollars500" then
+						vRP.generateItem(user_id,"dollars",math.random(400,500),true)
+					elseif nameItem == "dollars1000" then
+						vRP.generateItem(user_id,"dollars",math.random(900,1000),true)
 					end
 
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
@@ -1665,6 +1689,81 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 					Wait(100)
 				until Active[user_id] == nil
+			return end
+
+			if nameItem == "dessertspass" then
+				local ped = GetPlayerPed(source)
+				local coords = GetEntityCoords(ped)
+				local distance = #(coords - vector3(-583.42,-1062.03,22.34))
+				if distance <= 5 then
+					local FoodsResult = vRP.getUsersByPermission("Desserts")
+					if parseInt(#FoodsResult) >= 1 then
+						TriggerClientEvent("inventory:Close",source)
+						TriggerClientEvent("Notify",source,"amarelo","Existem pessoas trabalhando no <b>Uwu Café</b>.",5000)
+					else
+						if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
+							if math.random(10) >= 5 then
+								vRP.generateItem(user_id,"hamburger",1,false)
+								vRP.generateItem(user_id,"cola",1,false)
+							else
+								vRP.generateItem(user_id,"hamburger2",1,false)
+								vRP.generateItem(user_id,"soda",1,false)
+							end
+
+							TriggerClientEvent("inventory:Update",source,"updateMochila")
+						end
+					end
+				end
+			return end
+
+			if nameItem == "pizzathispass" then
+				local ped = GetPlayerPed(source)
+				local coords = GetEntityCoords(ped)
+				local distance = #(coords - vector3(810.32,-752.82,26.77))
+				if distance <= 5 then
+					local FoodsResult = vRP.getUsersByPermission("PizzaThis")
+					if parseInt(#FoodsResult) >= 1 then
+						TriggerClientEvent("inventory:Close",source)
+						TriggerClientEvent("Notify",source,"amarelo","Existem pessoas trabalhando no <b>Pizza This</b>.",5000)
+					else
+						if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
+							if math.random(10) >= 5 then
+								vRP.generateItem(user_id,"hamburger",1,false)
+								vRP.generateItem(user_id,"cola",1,false)
+							else
+								vRP.generateItem(user_id,"hamburger2",1,false)
+								vRP.generateItem(user_id,"soda",1,false)
+							end
+
+							TriggerClientEvent("inventory:Update",source,"updateMochila")
+						end
+					end
+				end
+			return end
+
+			if nameItem == "burgershotpass" then
+				local ped = GetPlayerPed(source)
+				local coords = GetEntityCoords(ped)
+				local distance = #(coords - vector3(-1194.69,-891.85,13.99))
+				if distance <= 5 then
+					local FoodsResult = vRP.getUsersByPermission("BurgerShot")
+					if parseInt(#FoodsResult) >= 1 then
+						TriggerClientEvent("inventory:Close",source)
+						TriggerClientEvent("Notify",source,"amarelo","Existem pessoas trabalhando no <b>BurgerShot</b>.",5000)
+					else
+						if vRP.tryGetInventoryItem(user_id,totalName,1,false,Slot) then
+							if math.random(10) >= 5 then
+								vRP.generateItem(user_id,"hamburger",1,false)
+								vRP.generateItem(user_id,"cola",1,false)
+							else
+								vRP.generateItem(user_id,"hamburger2",1,false)
+								vRP.generateItem(user_id,"soda",1,false)
+							end
+
+							TriggerClientEvent("inventory:Update",source,"updateMochila")
+						end
+					end
+				end
 			return end
 
 			if nameItem == "teddy" then
