@@ -9,11 +9,11 @@
 --
 DROP TABLE IF EXISTS `summerz_accounts`;
 CREATE TABLE IF NOT EXISTS `summerz_accounts` (
-  `whitelist` tinyint(1) NOT NULL DEFAULT '0',
-  `chars` int(10) NOT NULL DEFAULT '1',
-  `gems` int(20) NOT NULL DEFAULT '0',
-  `premium` int(20) NOT NULL DEFAULT '0',
-  `priority` int(3) NOT NULL DEFAULT '0',
+  `whitelist` tinyint(1) NOT NULL DEFAULT 0,
+  `chars` int(10) NOT NULL DEFAULT 1,
+  `gems` int(20) NOT NULL DEFAULT 0,
+  `premium` int(20) NOT NULL DEFAULT 0,
+  `priority` int(3) NOT NULL DEFAULT 0,
   `discord` varchar(50) NOT NULL DEFAULT '0',
   `steam` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`steam`) USING BTREE,
@@ -26,10 +26,10 @@ CREATE TABLE IF NOT EXISTS `summerz_accounts` (
 DROP TABLE IF EXISTS `summerz_bank`;
 CREATE TABLE IF NOT EXISTS `summerz_bank` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(20) NOT NULL DEFAULT '0',
-  `value` int(20) NOT NULL DEFAULT '0',
+  `user_id` int(20) NOT NULL DEFAULT 0,
+  `value` int(20) NOT NULL DEFAULT 0,
   `mode` varchar(50) DEFAULT 'Private',
-  `owner` tinyint(1) NOT NULL DEFAULT '0',
+  `owner` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `summerz_banneds`;
 CREATE TABLE IF NOT EXISTS `summerz_banneds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `steam` varchar(50) NOT NULL,
-  `time` int(20) NOT NULL DEFAULT '0',
+  `time` int(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -78,9 +78,9 @@ DROP TABLE IF EXISTS `summerz_chests`;
 CREATE TABLE IF NOT EXISTS `summerz_chests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `weight` int(10) NOT NULL DEFAULT '0',
+  `weight` int(10) NOT NULL DEFAULT 0,
   `perm` varchar(50) NOT NULL,
-  `logs` int(1) NOT NULL DEFAULT '0',
+  `logs` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
@@ -149,8 +149,8 @@ CREATE TABLE IF NOT EXISTS `summerz_fidentity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `name2` varchar(50) NOT NULL DEFAULT '',
-  `port` int(1) NOT NULL DEFAULT '1',
-  `blood` int(1) NOT NULL DEFAULT '1',
+  `port` int(1) NOT NULL DEFAULT 1,
+  `blood` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -175,9 +175,9 @@ DROP TABLE IF EXISTS `summerz_prison`;
 CREATE TABLE IF NOT EXISTS `summerz_prison` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `police` varchar(255) DEFAULT '0',
-  `nuser_id` int(11) NOT NULL DEFAULT '0',
-  `services` int(11) NOT NULL DEFAULT '0',
-  `fines` int(20) NOT NULL DEFAULT '0',
+  `nuser_id` int(11) NOT NULL DEFAULT 0,
+  `services` int(11) NOT NULL DEFAULT 0,
+  `fines` int(20) NOT NULL DEFAULT 0,
   `text` longtext,
   `date` text,
   PRIMARY KEY (`id`),
@@ -190,14 +190,14 @@ CREATE TABLE IF NOT EXISTS `summerz_prison` (
 DROP TABLE IF EXISTS `summerz_propertys`;
 CREATE TABLE IF NOT EXISTS `summerz_propertys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT 'Homes0001',
-  `interior` varchar(50) NOT NULL DEFAULT 'Middle',
-  `tax` int(20) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `price` int(20) NOT NULL DEFAULT '0',
-  `vault` int(10) NOT NULL DEFAULT '1',
-  `fridge` int(10) NOT NULL DEFAULT '1',
-  `owner` int(1) NOT NULL DEFAULT '0',
+  `name` varchar(50) NOT NULL DEFAULT 'Hensa',
+  `interior` varchar(50) NOT NULL DEFAULT 'Crensa',
+  `tax` int(20) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `price` int(20) NOT NULL DEFAULT 0,
+  `vault` int(10) NOT NULL DEFAULT 1,
+  `fridge` int(10) NOT NULL DEFAULT 1,
+  `owner` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
