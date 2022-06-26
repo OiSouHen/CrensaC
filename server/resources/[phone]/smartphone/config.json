@@ -42,5 +42,16 @@
       "number": "0800 075",
       "permission": "Taxi"
     }
-  ]
+  ],
+    "exclusive": {
+        "weazel": {
+            "tags": [
+                "Noticias"
+            ],
+            "permission": "Admin"
+        },
+        "casino": {
+            "maxBet": 100000
+        }
+    }
 }

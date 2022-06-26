@@ -5,6 +5,7 @@ local permList = {}
 local selfReturn = {}
 permList["Taxi"] = {}
 permList["Police"] = {}
+permList["Foods"] = {}
 permList["Runners"] = {}
 permList["Mechanic"] = {}
 permList["Paramedic"] = {}
@@ -88,9 +89,6 @@ local permissions = {
 	["Runners"] = {
 		["Runners"] = true
 	},
-	["PopsDiner"] = {
-		["PopsDiner"] = true
-	},
 	["BurgerShot"] = {
 		["BurgerShot"] = true
 	},
@@ -111,7 +109,6 @@ local permissions = {
 	},
 	["Foods"] = {
 		["Desserts"] = true,
-		["PopsDiner"] = true,
 		["BurgerShot"] = true,
 		["PizzaThis"] = true
 	}
@@ -297,6 +294,20 @@ function vRP.removePermission(user_id,perm)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- GETUSERSBYPERMISSION
+-----------------------------------------------------------------------------------------------------------------------------------------
+function vRP.getUsersByPermission(perm)
+    local tableList = {}
+
+    for user_id,source in pairs(vRP.userList()) do
+        if vRP.hasPermission(user_id, perm) then
+            table.insert(tableList, user_id)
+        end
+    end
+
+    return tableList
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERDISCONNECT
 -----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("playerDisconnect",function(user_id,source)
@@ -398,15 +409,3 @@ AddEventHandler("playerConnect",function(user_id,source)
 		TriggerClientEvent("player:Relationship",source,"TheLost")
 	end
 end)
-
-function vRP.getUsersByPermission(perm)
-    local tableList = {}
-
-    for user_id,source in pairs(vRP.userList()) do
-        if vRP.hasPermission(user_id, perm) then
-            table.insert(tableList, user_id)
-        end
-    end
-
-    return tableList
-end
