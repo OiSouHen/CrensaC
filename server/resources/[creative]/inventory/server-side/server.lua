@@ -416,7 +416,7 @@ AddEventHandler("inventory:Badges",function(x,y,z)
 		local Inventory = vRP.userInventory(user_id)
 		if Inventory then
 			for k,v in pairs(Inventory) do
-				if string.sub(v["item"],1,2) == "badge" then
+				if string.sub(v["item"],1,5) == "badge" then
 					local Amount = 1
 					local Item = v["item"]
 
@@ -1173,18 +1173,18 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 			if nameItem == "dismantle" then
 				TriggerClientEvent("inventory:Close",source)
 				if not vCLIENT.DismantleStatus(source) then
-					-- local reputationValue = vRP.checkReputation(user_id,"Dismantle")
-					-- if reputationValue >= 0 then
-						-- vCLIENT.Dismantle(source,reputationValue)
-					-- else
+					local reputationValue = vRP.checkReputation(user_id,"Dismantle")
+					if reputationValue >= 0 then
+						vCLIENT.Dismantle(source,reputationValue)
+					else
 						vCLIENT.Dismantle(source,math.random(1000))
-					-- end
+					end
 
 					vRP.removeInventoryItem(user_id,"dismantle",1,true)
 				end
 			return end
 
-			if string.sub(nameItem,1,2) == "badge" then
+			if string.sub(nameItem,1,5) == "badge" then
 				if openIdentity[user_id] then
 					TriggerClientEvent("vRP:Identity",source)
 					openIdentity[user_id] = nil
@@ -2775,6 +2775,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "weedclone" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 				if application then
 					local Route = GetPlayerRoutingBucket(source)
@@ -2782,10 +2784,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
 					exports["plants"]:initPlants("weedclone",coords,Route,"bkr_prop_weed_med_01a",user_id)
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "cokeseed" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 				if application then
 					local Route = GetPlayerRoutingBucket(source)
@@ -2793,10 +2799,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
 					exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "tablecoke" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_coke_table01a")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2811,10 +2821,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "tablemeth" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_meth_table01a")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2829,10 +2843,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "tableweed" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"bkr_prop_weed_table_01a")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2847,10 +2865,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "campfire" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"prop_beach_fire")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2865,10 +2887,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "barrier" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"prop_mp_barrier_02b")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2883,10 +2909,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "medicbag" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"xm_prop_x17_bag_med_01a")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2901,10 +2931,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "chair01" then
 				TriggerClientEvent("inventory:Close",source)
+
+				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords,heading = vRPC.objectCoords(source,"prop_off_chair_01")
 				if application then
 					if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
@@ -2919,6 +2953,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Close",source)
 					end
 				end
+
+				TriggerClientEvent("inventory:Buttons",source,false)
 			return end
 
 			if nameItem == "carp" or nameItem == "codfish" or nameItem == "catfish" or nameItem == "goldenfish" or nameItem == "horsefish" or nameItem == "tilapia" or nameItem == "pacu" or nameItem == "pirarucu" or nameItem == "tambaqui" then
