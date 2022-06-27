@@ -24,6 +24,11 @@ local homes = {
 	["pressButton"] = GetGameTimer()
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- LOCALPLAYER
+-----------------------------------------------------------------------------------------------------------------------------------------
+LocalPlayer["state"]["homeName"] = 0
+LocalPlayer["state"]["Propertys"] = false
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- HOMES:UPDATECALLED
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("homes:UpdateCalled")
@@ -137,6 +142,8 @@ function cRP.entranceHomes(homeName,v,interior)
 
 	homes["current"] = v
 	homes["open"] = homeName
+	LocalPlayer["state"]["homeName"] = homeName
+	LocalPlayer["state"]["Propertys"] = true
 	TriggerEvent("sounds:source","enterhouse",0.7)
 
 	local ped = PlayerPedId()
@@ -222,6 +229,8 @@ CreateThread(function()
 
 									TriggerEvent("sounds:source","outhouse",0.5)
 									vSERVER.removeNetwork(homes["open"])
+									LocalPlayer["state"]["Propertys"] = false
+									LocalPlayer["state"]["homeName"] = 0
 									homes["called"] = false
 									homes["intern"] = {}
 									homes["open"] = ""
@@ -316,7 +325,6 @@ CreateThread(function()
 								if vSERVER.checkOwner(k) then
 									homes["pressButton"] = GetGameTimer() + 3000
 									exports["dynamic"]:AddButton("Entrar","Adentrar a propriedade.","homes:Enter",k,false,true)
-									exports["dynamic"]:AddButton("Permissões","Checar permissões da propriedade.","homes:invokeSystem","checar",false,true)
 									exports["dynamic"]:AddButton("Fechadura","Trancar/Destrancar a propriedade.","homes:invokeSystem","trancar",false,true)
 									exports["dynamic"]:AddButton("Garagem","Adicionar uma garagem.","homes:invokeSystem","garagem",false,true)
 									exports["dynamic"]:AddButton("Hipoteca","Realizar pagamento da hipoteca.","homes:invokeSystem","tax",false,true)
@@ -328,33 +336,33 @@ CreateThread(function()
 									-- [1]
 									exports["dynamic"]:SubMenu("Emerald","Informações sobre o interior.","Emerald")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buyEmerald",k,"Emerald",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$200.000</yellow> dólares.","","","Emerald",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>200Kg</yellow> no baú e <yellow>20Kg</yellow> na geladeira.","","","Emerald",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.EmeraldPrice).."</yellow> dólares.","","","Emerald",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.EmeraldVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.EmeraldFridge).."Kg</yellow> na geladeira.","","","Emerald",false)
 									-- [2]
 									exports["dynamic"]:SubMenu("Diamond","Informações sobre o interior.","Diamond")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buyDiamond",k,"Diamond",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$100.000</yellow> dólares.","","","Diamond",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>100Kg</yellow> no baú e <yellow>10Kg</yellow> na geladeira.","","","Diamond",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.DiamondPrice).."</yellow> dólares.","","","Diamond",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.DiamondVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.DiamondFridge).."Kg</yellow> na geladeira.","","","Diamond",false)
 									-- [3]
 									exports["dynamic"]:SubMenu("Sapphire","Informações sobre o interior.","Sapphire")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buySapphire",k,"Sapphire",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$350.000</yellow> dólares.","","","Sapphire",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>350Kg</yellow> no baú e <yellow>35Kg</yellow> na geladeira.","","","Sapphire",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.SapphirePrice).."</yellow> dólares.","","","Sapphire",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.SapphireVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.SapphireFridge).."Kg</yellow> na geladeira.","","","Sapphire",false)
 									-- [4]
 									exports["dynamic"]:SubMenu("Amber","Informações sobre o interior.","Amber")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buyAmber",k,"Amber",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$650.000</yellow> dólares.","","","Amber",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>650Kg</yellow> no baú e <yellow>65Kg</yellow> na geladeira.","","","Amber",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.AmberPrice).."</yellow> dólares.","","","Amber",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.AmberVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.AmberFridge).."Kg</yellow> na geladeira.","","","Amber",false)
 									-- [5]
 									exports["dynamic"]:SubMenu("Amethyst","Informações sobre o interior.","Amethyst")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buyAmethyst",k,"Amethyst",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$500.000</yellow> dólares.","","","Amethyst",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>500Kg</yellow> no baú e <yellow>50Kg</yellow> na geladeira.","","","Amethyst",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.AmethystPrice).."</yellow> dólares.","","","Amethyst",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.AmethystVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.AmethystFridge).."Kg</yellow> na geladeira.","","","Amethyst",false)
 									-- [6]
 									exports["dynamic"]:SubMenu("Ruby","Informações sobre o interior.","Ruby")
 									exports["dynamic"]:AddButton("Comprar","Adquirir a propriedade.","homes:buyRuby",k,"Ruby",true)
-									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$200.000</yellow> dólares.","","","Ruby",false)
-									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>200Kg</yellow> no baú e <yellow>20Kg</yellow> na geladeira.","","","Ruby",false)
+									exports["dynamic"]:AddButton("Valor","Custo de <yellow>$"..parseFormat(config.RubyPrice).."</yellow> dólares.","","","Ruby",false)
+									exports["dynamic"]:AddButton("Compartimento","Total de <yellow>"..parseFormat(config.RubyVault).."Kg</yellow> no baú e <yellow>"..parseFormat(config.RubyFridge).."Kg</yellow> na geladeira.","","","Ruby",false)
 
 									exports["dynamic"]:openMenu()
 								end
@@ -367,4 +375,32 @@ CreateThread(function()
 
 		Wait(timeDistance)
 	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PROPERTYS:PROPERTYPANEL
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("propertys:propertyPanel")
+AddEventHandler("propertys:propertyPanel",function()
+	homes["pressButton"] = GetGameTimer() + 3000
+
+	exports["dynamic"]:AddButton("Fechadura","Trancar/Destrancar a propriedade.","homes:doorStatus",LocalPlayer["state"]["homeName"],false,true)
+
+	exports["dynamic"]:SubMenu("Diagrama","Informações sobre o uso.","Diagram")
+	exports["dynamic"]:AddButton("Aumentar Armário","Adiciona mais <yellow>10Kg</yellow> no <yellow>Armário</yellow>.","homes:upgradeVault",LocalPlayer["state"]["homeName"],"Diagram",true)
+	exports["dynamic"]:AddButton("Aumentar Geladeira","Adiciona mais <yellow>10Kg</yellow> na <yellow>Geladeira</yellow>.","homes:upgradeFridge",LocalPlayer["state"]["homeName"],"Diagram",true)
+
+	exports["dynamic"]:SubMenu("Permissões","Gerenciar a propriedade.","Permissions")
+	exports["dynamic"]:AddButton("Permissões","Checar permissões da propriedade.","homes:permissionsCheck",LocalPlayer["state"]["homeName"],"Permissions",true)
+	exports["dynamic"]:AddButton("Adicionar","Adicionar morador nesta propriedade.","homes:permissionsAdd",LocalPlayer["state"]["homeName"],"Permissions",true)
+
+	exports["dynamic"]:openMenu()
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SETHENSA
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("setHensa")
+AddEventHandler("setHensa",function()
+	StartScreenEffect("RaceTurbo",1,true)
+	StartScreenEffect("DrugsTrevorClownsFight",1,true)
+	StartScreenEffect("DrugsMichaelAliensFight",1,true)
 end)

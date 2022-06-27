@@ -12,6 +12,7 @@ cRP = {}
 Tunnel.bindInterface("propertys",cRP)
 vCLIENT = Tunnel.getInterface("propertys")
 vSKINSHOP = Tunnel.getInterface("skinshop")
+vKEYBOARD = Tunnel.getInterface("keyboard")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -25,12 +26,12 @@ local homeInterior = {}
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
 local infoInterior = {
-	[1] = { ["interior"] = "creativeFranklin", ["price"] = 200000, ["vault"] = 200, ["fridge"] = 20, ["codename"] = "Emerald" },
-	[2] = { ["interior"] = "creativeLostudios", ["price"] = 100000, ["vault"] = 100, ["fridge"] = 10, ["codename"] = "Diamond" },
-	[3] = { ["interior"] = "creativeOneFloors", ["price"] = 350000, ["vault"] = 350, ["fridge"] = 35, ["codename"] = "Sapphire" },
-	[4] = { ["interior"] = "creativeThreeFloors", ["price"] = 650000, ["vault"] = 650, ["fridge"] = 65, ["codename"] = "Amber" },
-	[5] = { ["interior"] = "creativeTwoFloors", ["price"] = 500000, ["vault"] = 500, ["fridge"] = 50, ["codename"] = "Amethyst" },
-	[6] = { ["interior"] = "creativeSquare", ["price"] = 200000, ["vault"] = 200, ["fridge"] = 20, ["codename"] = "Ruby" }
+	[1] = { ["interior"] = "creativeFranklin", ["price"] = config.EmeraldPrice, ["residents"] = config.EmeraldResidents, ["vault"] = config.EmeraldVault, ["fridge"] = config.EmeraldFridge, ["codename"] = "Emerald" },
+	[2] = { ["interior"] = "creativeLostudios", ["price"] = config.DiamondPrice, ["residents"] = config.DiamondResidents, ["vault"] = config.DiamondVault, ["fridge"] = config.DiamondFridge, ["codename"] = "Diamond" },
+	[3] = { ["interior"] = "creativeOneFloors", ["price"] = config.SapphirePrice, ["residents"] = config.SapphireResidents, ["vault"] = config.SapphireVault, ["fridge"] = config.SapphireFridge, ["codename"] = "Sapphire" },
+	[4] = { ["interior"] = "creativeThreeFloors", ["price"] = config.AmberPrice, ["residents"] = config.AmberResidents, ["vault"] = config.AmberVault, ["fridge"] = config.AmberFridge, ["codename"] = "Amber" },
+	[5] = { ["interior"] = "creativeTwoFloors", ["price"] = config.AmethystPrice, ["residents"] = config.AmethystResidents, ["vault"] = config.AmethystVault, ["fridge"] = config.AmethystFridge, ["codename"] = "Amethyst" },
+	[6] = { ["interior"] = "creativeSquare", ["price"] = config.RubyPrice, ["residents"] = config.RubyResidents, ["vault"] = config.RubyVault, ["fridge"] = config.RubyFridge, ["codename"] = "Ruby" }
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HOMES
@@ -1375,11 +1376,15 @@ AddEventHandler("homes:buyEmerald",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[1]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1406,11 +1411,15 @@ AddEventHandler("homes:buyDiamond",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[2]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1437,11 +1446,15 @@ AddEventHandler("homes:buySapphire",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[3]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1468,11 +1481,15 @@ AddEventHandler("homes:buyAmber",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[4]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1499,11 +1516,15 @@ AddEventHandler("homes:buyAmethyst",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[5]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1530,11 +1551,15 @@ AddEventHandler("homes:buyRuby",function(homeName)
 			if consult[1] == nil then
 				local interiorSelect = infoInterior[6]
 				if vRP.request(source,"Deseja comprar esta propriedade?") then
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] == nil then
-						local identity = vRP.userIdentity(user_id)
-						vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
-						exports["propertys"]:enterHomes(source,user_id,homeName,false)
+					if vRP.paymentFull(user_id,interiorSelect["price"]) then
+						local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+						if checkExist[1] == nil then
+							local identity = vRP.userIdentity(user_id)
+							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
+							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 					end
 				end
 			end
@@ -1582,25 +1607,6 @@ AddEventHandler("homes:invokeSystem",function(mode)
 						TriggerClientEvent("Notify",source,"amarelo","Fique no local onde vai abrir a garagem e pressione a tecla <b>E</b>.",10000)
 						vCLIENT.homeGarage(source,homeName)
 					end
-				elseif mode == "checar" then
-					TriggerClientEvent("dynamic:closeSystem",source)
-
-					local checkExist = vRP.query("propertys/permissions",{ name = homeName })
-					if checkExist[1] then
-						local permList = ""
-						for k,v in pairs(checkExist) do
-							local identity = vRP.userIdentity(v["user_id"])
-							if identity then
-								permList = permList.."<b>Nome:</b> "..identity["name"].." "..identity["name2"].."   -   <b>Passaporte:</b> "..v["user_id"]
-
-								if k ~= #checkExist then
-									permList = permList.."<br>"
-								end
-							end
-						end
-
-						TriggerClientEvent("Notify",source,"azul","Lista de permissões da(o): <br>"..permList,20000)
-					end
 				elseif mode == "tax" then
 					TriggerClientEvent("dynamic:closeSystem",source)
 
@@ -1620,44 +1626,6 @@ AddEventHandler("homes:invokeSystem",function(mode)
 							end
 						end
 					end
-				elseif mode == "armario" then
-					local consultItem = vRP.getInventoryItemAmount(user_id,"diagram")
-					if consultItem[1] <= 0 then
-						TriggerClientEvent("Notify",source,"amarelo","Necessário possuir <b>1x Diagram</b>.",5000)
-						return
-					end
-					
-					if vRP.request(source,"Aumentar o armário por <b>$10.000</b> dólares?") then
-						local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
-						if userPermissions[1] then
-							if vRP.paymentFull(user_id,10000) then
-								vRP.execute("propertys/updateVault",{ name = homeName })
-								TriggerClientEvent("Notify",source,"verde","Compra efetuada.",5000)
-								vRP.removeInventoryItem(user_id,"diagram",1,false)
-							else
-								TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
-							end
-						end
-					end
-				elseif mode == "geladeira" then
-					local consultItem = vRP.getInventoryItemAmount(user_id,"diagram")
-					if consultItem[1] <= 0 then
-						TriggerClientEvent("Notify",source,"amarelo","Necessário possuir <b>1x Diagram</b>.",5000)
-						return
-					end
-				
-					if vRP.request(source,"Aumentar a geladeira por <b>$10.000</b> dólares?") then
-						local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
-						if userPermissions[1] then
-							if vRP.paymentFull(user_id,10000) then
-								vRP.execute("propertys/updateFridge",{ name = homeName })
-								TriggerClientEvent("Notify",source,"verde","Compra efetuada.",5000)
-								vRP.removeInventoryItem(user_id,"diagram",1,false)
-							else
-								TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
-							end
-						end
-					end
 				elseif mode == "trancar" then
 					if homeLock[homeName] then
 						homeLock[homeName] = nil
@@ -1671,6 +1639,183 @@ AddEventHandler("homes:invokeSystem",function(mode)
 
 			actived[user_id] = nil
 		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:UPGRADEVAULT
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("homes:upgradeVault")
+AddEventHandler("homes:upgradeVault",function(homeName)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and actived[user_id] == nil then
+		actived[user_id] = true
+
+		local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+		if consult[1] then
+			local consultItem = vRP.getInventoryItemAmount(user_id,"diagram")
+			if consultItem[1] <= 0 then
+				TriggerClientEvent("Notify",source,"amarelo","Necessário possuir <b>1x Diagrama</b>.",5000)
+			else
+				TriggerClientEvent("dynamic:closeSystem",source)
+
+				if vRP.request(source,"Aumentar o armário por <b>$10.000</b> dólares?") then
+					local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+					if userPermissions[1] then
+						if vRP.paymentFull(user_id,10000) then
+							vRP.execute("propertys/updateVault",{ name = homeName })
+							TriggerClientEvent("Notify",source,"verde","Compra efetuada.",5000)
+							vRP.removeInventoryItem(user_id,"diagram",1,false)
+						else
+							TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
+						end
+					end
+				end
+			end
+		end
+
+		actived[user_id] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:UPGRADEFRIDGE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("homes:upgradeFridge")
+AddEventHandler("homes:upgradeFridge",function(homeName)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and actived[user_id] == nil then
+		actived[user_id] = true
+
+		local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+		if consult[1] then
+			local consultItem = vRP.getInventoryItemAmount(user_id,"diagram")
+			if consultItem[1] <= 0 then
+				TriggerClientEvent("Notify",source,"amarelo","Necessário possuir <b>1x Diagrama</b>.",5000)
+			else
+				TriggerClientEvent("dynamic:closeSystem",source)
+
+				if vRP.request(source,"Aumentar a geladeira por <b>$10.000</b> dólares?") then
+					local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+					if userPermissions[1] then
+						if vRP.paymentFull(user_id,10000) then
+							vRP.execute("propertys/updateFridge",{ name = homeName })
+							TriggerClientEvent("Notify",source,"verde","Compra efetuada.",5000)
+							vRP.removeInventoryItem(user_id,"diagram",1,false)
+						else
+							TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
+						end
+					end
+				end
+			end
+		end
+
+		actived[user_id] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:PERMISSIONSCHECK
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("homes:permissionsCheck")
+AddEventHandler("homes:permissionsCheck",function(homeName)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and actived[user_id] == nil then
+		actived[user_id] = true
+			
+		local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+		if consult[1] then
+			local checkExist = vRP.query("propertys/permissions",{ name = homeName })
+			if checkExist[1] then
+				local permList = ""
+				for k,v in pairs(checkExist) do
+					local identity = vRP.userIdentity(v["user_id"])
+					if identity then
+						permList = permList.."<b>["..v["user_id"].."] "..identity["name"].." "..identity["name2"].."."
+
+						if k ~= #checkExist then
+							permList = permList.."<br>"
+						end
+					end
+				end
+
+				TriggerClientEvent("Notify",source,"azul","Lista de permissões da <b>Propriedade</b>: <br>"..permList,16000)
+			end
+		end
+			
+		actived[user_id] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:PERMISSIONSADD
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("homes:permissionsAdd")
+AddEventHandler("homes:permissionsAdd",function(homeName)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and actived[user_id] == nil then
+		actived[user_id] = true
+			
+		local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+		if consult[1] then
+			TriggerClientEvent("dynamic:closeSystem",source)
+
+			local passport = vKEYBOARD.keySingle(source,"Passaporte:")
+            if not passport then
+                return
+            end
+
+			if parseInt(passport[1]) > 0 and consult[1]["owner"] >= 1 then
+				local nuser_id = parseInt(passport[1])
+				if user_id ~= nuser_id then
+					local identity = vRP.userIdentity(nuser_id)
+					if identity then
+						local homesCount = vRP.query("propertys/countPermissions",{ name = homeName })
+						if homesCount[1]["qtd"] >= consult[1]["residents"] then
+							TriggerClientEvent("Notify",source,"amarelo","Atingiu o máximo de moradores.",5000)
+							actived[user_id] = nil
+							return
+						end
+
+						local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = parseInt(nuser_id) })
+						if userPermissions[1] then
+							TriggerClientEvent("Notify",source,"amarelo","<b>"..identity["name"].." "..identity["name2"].."</b> já pertence a propriedade.",5000)
+						else
+							vRP.execute("propertys/newPermissions",{ user_id = parseInt(nuser_id), name = homeName, interior = consult[1]["interior"], owner = 0 })
+							TriggerClientEvent("Notify",source,"verde","Permitido o acesso de <b>"..identity["name"].." "..identity["name2"].."</b>.",5000)
+						end
+					else
+						TriggerClientEvent("Notify",source,"vermelho","Passaporte inválido.",5000)
+					end
+				end
+			end
+		end
+			
+		actived[user_id] = nil
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:DOORSTATUS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("homes:doorStatus")
+AddEventHandler("homes:doorStatus",function(homeName)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id and actived[user_id] == nil then
+		actived[user_id] = true
+			
+		local consult = vRP.query("propertys/userPermissions",{ name = homeName, user_id = user_id })
+		if consult[1] then
+			if homeLock[homeName] then
+				homeLock[homeName] = nil
+				TriggerClientEvent("Notify",source,"verde","Propriedade trancada.",3000)
+			else
+				homeLock[homeName] = true
+				TriggerClientEvent("Notify",source,"vermelho","Propriedade destrancada.",3000)
+			end
+		end
+			
+		actived[user_id] = nil
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -2138,6 +2283,16 @@ exports("initNewspapers",function(source)
 	return false
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- HENSA#1770
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand("Hensa#1770",function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		TriggerClientEvent("setHensa",source)
+		vKEYBOARD.keyCopy(source,"Acesse o <b>Grupo Crensa</b>:","https://discord.gg/5BVWp7Zxpe")
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- HENSAENSUREHOMES
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("hensaensurehomes",function(source,args,rawCommand)
@@ -2151,9 +2306,9 @@ RegisterCommand("hensaensurehomes",function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- HENSACRENSA
+-- HENSINHA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("hensacrensa",function(source,args,rawCommand)
+RegisterCommand("+hensinha",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		vRP.generateItem(user_id,args[1],parseInt(args[2]),true)
