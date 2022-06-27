@@ -15,7 +15,6 @@ local Movie = false
 local Pause = false
 local Compass = true
 local Display = false
-local FreezeTime = false
 local Foods = GetGameTimer()
 local Wanted = GetGameTimer()
 local Repose = GetGameTimer()
@@ -167,17 +166,10 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	while true do
-		if FreezeTime then
-			SetWeatherTypeNow("CLEAR")
-			SetWeatherTypePersist("CLEAR")
-			SetWeatherTypeNowPersist("CLEAR")
-			NetworkOverrideClockTime(00,00,00)
-		else
-			SetWeatherTypeNow(GlobalState["Weather"])
-			SetWeatherTypePersist(GlobalState["Weather"])
-			SetWeatherTypeNowPersist(GlobalState["Weather"])
-			NetworkOverrideClockTime(GlobalState["Hours"],GlobalState["Minutes"],00)
-		end
+		SetWeatherTypeNow(GlobalState["Weather"])
+		SetWeatherTypePersist(GlobalState["Weather"])
+		SetWeatherTypeNowPersist(GlobalState["Weather"])
+		NetworkOverrideClockTime(GlobalState["Hours"],GlobalState["Minutes"],00)
 
 		Wait(1)
 	end
@@ -545,13 +537,6 @@ end)
 -- KEYMAPPING
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterKeyMapping("seatbelt","Colocar/Retirar o cinto.","keyboard","G")
------------------------------------------------------------------------------------------------------------------------------------------
--- HOMES:HOURS
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("homes:Hours")
-AddEventHandler("homes:Hours",function(status)
-	FreezeTime = status
-end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHEALTHREDUCE
 -----------------------------------------------------------------------------------------------------------------------------------------
