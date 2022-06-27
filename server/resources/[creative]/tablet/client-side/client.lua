@@ -90,7 +90,8 @@ local benCoords = { 0.0,0.0,0.0 }
 -- REQUESTDRIVE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestDrive",function(data)
-	if vSERVER.startDrive() then
+	local startDrive,vehPlate = vSERVER.startDrive()
+	if startDrive then
 		SetNuiFocus(false,false)
 		SetCursorLocation(0.5,0.5)
 		SendNUIMessage({ action = "closeSystem" })
@@ -105,7 +106,7 @@ RegisterNUICallback("requestDrive",function(data)
 
 		Wait(1000)
 
-		vehCreate(data["name"])
+		vehCreate(data["name"],vehPlate)
 
 		Wait(1000)
 
@@ -131,6 +132,7 @@ function vehCreate(vehName,vehPlate)
 			vehDrive = CreateVehicle(mHash,1209.74,2713.49,37.81,175.75,false,false)
 		end
 
+		SetVehicleNumberPlateText(vehDrive,vehPlate)
 		SetEntityInvincible(vehDrive,true)
 		SetModelAsNoLongerNeeded(mHash)
 	end
