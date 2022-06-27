@@ -628,6 +628,59 @@ local craftList = {
 			}
 		}
 	},
+	["Containers"] = {
+		["list"] = {
+			["WEAPON_NAILGUN"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 3250
+				}
+			},
+			["credential"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 1000
+				}
+			},
+			["lockpick"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 575
+				}
+			},
+			["nitro"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 400
+				}
+			},
+			["notebook"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 4250
+				}
+			},
+			["WEAPON_NAIL_AMMO"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 2
+				}
+			},
+			["dismantle"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 125
+				}
+			}
+		}
+	},
 	["ammuShop"] = {
 		["list"] = {
 			["attachsFlashlight"] = {
