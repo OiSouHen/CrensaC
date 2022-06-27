@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS `summerz_propertys` (
   `tax` int(20) NOT NULL DEFAULT 0,
   `user_id` int(11) NOT NULL DEFAULT 0,
   `price` int(20) NOT NULL DEFAULT 0,
+  `residents` int(1) NOT NULL DEFAULT 3,
   `vault` int(10) NOT NULL DEFAULT 1,
   `fridge` int(10) NOT NULL DEFAULT 1,
   `owner` int(1) NOT NULL DEFAULT 0,
