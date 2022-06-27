@@ -1774,15 +1774,14 @@ AddEventHandler("homes:permissionsAdd",function(homeName)
 						if homesCount[1]["qtd"] >= consult[1]["residents"] then
 							TriggerClientEvent("Notify",source,"amarelo","Atingiu o máximo de moradores.",5000)
 							actived[user_id] = nil
-							return
-						end
-
-						local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = parseInt(nuser_id) })
-						if userPermissions[1] then
-							TriggerClientEvent("Notify",source,"amarelo","<b>"..identity["name"].." "..identity["name2"].."</b> já pertence a propriedade.",5000)
 						else
-							vRP.execute("propertys/newPermissions",{ user_id = parseInt(nuser_id), name = homeName, interior = consult[1]["interior"], owner = 0 })
-							TriggerClientEvent("Notify",source,"verde","Permitido o acesso de <b>"..identity["name"].." "..identity["name2"].."</b>.",5000)
+							local userPermissions = vRP.query("propertys/userPermissions",{ name = homeName, user_id = parseInt(nuser_id) })
+							if userPermissions[1] then
+								TriggerClientEvent("Notify",source,"amarelo","<b>"..identity["name"].." "..identity["name2"].."</b> já pertence a propriedade.",5000)
+							else
+								vRP.execute("propertys/newPermissions",{ user_id = parseInt(nuser_id), name = homeName, interior = consult[1]["interior"], owner = 0 })
+								TriggerClientEvent("Notify",source,"verde","Permitido o acesso de <b>"..identity["name"].." "..identity["name2"].."</b>.",5000)
+							end
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","Passaporte inválido.",5000)
