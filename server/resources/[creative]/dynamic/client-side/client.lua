@@ -75,6 +75,11 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 		local Coords = GetEntityCoords(Ped)
 
 		if GetEntityHealth(Ped) > 100 then
+			if LocalPlayer["state"]["Propertys"] then
+				TriggerEvent("propertys:propertyPanel")
+				return
+			end
+			
 			exports["dynamic"]:AddButton("Chapéu","Colocar/Retirar o chapéu.","player:outfitFunctions","Hat","clothes",true)
 			exports["dynamic"]:AddButton("Máscara","Colocar/Retirar a máscara.","player:outfitFunctions","Mask","clothes",true)
 			exports["dynamic"]:AddButton("Óculos","Colocar/Retirar o óculos.","player:outfitFunctions","Glasses","clothes",true)
