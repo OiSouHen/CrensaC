@@ -135,13 +135,19 @@ function cRP.getSalary()
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.userPremium(user_id) then
-			TriggerEvent("vRP:updateSalary",user_id,825)
-			TriggerClientEvent("Notify",source,"azul","Salário de <b>$825</b> recebido.",5000)
+			TriggerEvent("vRP:updateSalary",user_id,1000)
+			TriggerClientEvent("Notify",source,"azul","Salário de <b>$1.000</b> recebido.",5000)
 		end
 
 		if vRP.hasGroup(user_id,"Emergency") then
-			TriggerEvent("vRP:updateSalary",user_id,1500)
-			TriggerClientEvent("Notify",source,"azul","Salário de <b>$1.500</b> recebido.",5000)
+			local emergencyResult = vRP.numPermission("Emergency")
+			if parseInt(#emergencyResult) >= 6 then
+				TriggerEvent("vRP:updateSalary",user_id,2500)
+				TriggerClientEvent("Notify",source,"azul","Salário de <b>$2.500</b> recebido.",5000)
+			else
+				TriggerEvent("vRP:updateSalary",user_id,1500)
+				TriggerClientEvent("Notify",source,"azul","Salário de <b>$1.500</b> recebido.",5000)
+			end
 		end
 	end
 end
