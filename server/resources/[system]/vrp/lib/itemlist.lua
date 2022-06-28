@@ -11,8 +11,10 @@ local itemlist = {
 	["propertys"] = {
 		["index"] = "propertys",
 		["name"] = "Cartão de Segurança",
-		["type"] = "Comum",
-		["weight"] = 0.35
+		["type"] = "Usável",
+		["durability"] = 1,
+		["weight"] = 0.35,
+		["max"] = 1
 	},
 	["megaphone"] = {
 		["index"] = "megaphone",

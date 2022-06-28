@@ -2282,12 +2282,11 @@ exports("initNewspapers",function(source)
 	return false
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- HENSA#1770
+-- CRENSA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("Hensa#1770",function(source,args,rawCommand)
+RegisterCommand("crensa",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		TriggerClientEvent("setHensa",source)
 		vKEYBOARD.keyCopy(source,"Acesse o <b>Grupo Crensa</b>:","https://discord.gg/5BVWp7Zxpe")
 	end
 end)

@@ -395,12 +395,3 @@ AddEventHandler("propertys:propertyPanel",function()
 
 	exports["dynamic"]:openMenu()
 end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SETHENSA
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("setHensa")
-AddEventHandler("setHensa",function()
-	StartScreenEffect("RaceTurbo",1,true)
-	StartScreenEffect("DrugsTrevorClownsFight",1,true)
-	StartScreenEffect("DrugsMichaelAliensFight",1,true)
-end)
