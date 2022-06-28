@@ -675,15 +675,25 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 
 					if nameItem == "burgershot3" then
 						vRP.generateItem(user_id,"dollars",120,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local burgershotReputation = vRP.checkReputation(user_id,"BurgerShot")
+						if burgershotReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",12,true)
+						end
+
+						if burgershotReputation <= 1001 then
+							vRP.insertReputation(user_id,"BurgerShot",10)
 						end
 					elseif nameItem == "burgershot4" then
 						vRP.generateItem(user_id,"dollars",270,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local burgershotReputation = vRP.checkReputation(user_id,"BurgerShot")
+						if burgershotReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",27,true)
+						end
+
+						if burgershotReputation <= 1001 then
+							vRP.insertReputation(user_id,"BurgerShot",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -705,15 +715,25 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 
 					if nameItem == "pizzathis3" then
 						vRP.generateItem(user_id,"dollars",120,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local pizzathisReputation = vRP.checkReputation(user_id,"PizzaThis")
+						if pizzathisReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",12,true)
+						end
+
+						if pizzathisReputation <= 1001 then
+							vRP.insertReputation(user_id,"PizzaThis",10)
 						end
 					elseif nameItem == "pizzathis4" then
 						vRP.generateItem(user_id,"dollars",270,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local pizzathisReputation = vRP.checkReputation(user_id,"PizzaThis")
+						if pizzathisReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",27,true)
+						end
+
+						if pizzathisReputation <= 1001 then
+							vRP.insertReputation(user_id,"PizzaThis",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -736,14 +756,24 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 					if nameItem == "uwucoffee3" then
 						vRP.generateItem(user_id,"dollars",120,true)
 						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+						local uwucoffeeReputation = vRP.checkReputation(user_id,"UwuCoffee")
+						if uwucoffeeReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",12,true)
+						end
+
+						if uwucoffeeReputation <= 1001 then
+							vRP.insertReputation(user_id,"UwuCoffee",10)
 						end
 					elseif nameItem == "uwucoffee4" then
 						vRP.generateItem(user_id,"dollars",270,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local uwucoffeeReputation = vRP.checkReputation(user_id,"UwuCoffee")
+						if uwucoffeeReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",27,true)
+						end
+
+						if uwucoffeeReputation <= 1001 then
+							vRP.insertReputation(user_id,"UwuCoffee",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -765,15 +795,25 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 
 					if nameItem == "beanmachine3" then
 						vRP.generateItem(user_id,"dollars",120,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local beanmachineReputation = vRP.checkReputation(user_id,"BeanMachine")
+						if beanmachineReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",12,true)
+						end
+
+						if beanmachineReputation <= 1001 then
+							vRP.insertReputation(user_id,"BeanMachine",10)
 						end
 					elseif nameItem == "beanmachine4" then
 						vRP.generateItem(user_id,"dollars",270,true)
-						
-						if vRP.userPremium(user_id) then
-							vRP.generateItem(user_id,"dollars",10,true)
+
+						local beanmachineReputation = vRP.checkReputation(user_id,"BeanMachine")
+						if beanmachineReputation >= 100 or vRP.userPremium(user_id) then
+							vRP.generateItem(user_id,"dollars",27,true)
+						end
+
+						if beanmachineReputation <= 1001 then
+							vRP.insertReputation(user_id,"BeanMachine",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -795,8 +835,13 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 
 					vRP.generateItem(user_id,"dollars",120,true)
 
-					if vRP.userPremium(user_id) then
-						vRP.generateItem(user_id,"dollars",10,true)
+					local lumbermanReputation = vRP.checkReputation(user_id,"Lumberman")
+					if lumbermanReputation >= 100 or vRP.userPremium(user_id) then
+						vRP.generateItem(user_id,"dollars",12,true)
+					end
+
+					if lumbermanReputation <= 1001 then
+						vRP.insertReputation(user_id,"Lumberman",10)
 					end
 
 					TriggerClientEvent("inventory:Update",source,"updateMochila")
