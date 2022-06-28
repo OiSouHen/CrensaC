@@ -98,7 +98,7 @@ RegisterCommand("+radiotalk",function(source,args,rawCommand)
 			while not HasAnimDictLoaded("random@arrests") do
 				Wait(1)
 			end
-			TaskPlayAnim(ped,"random@arrests","generic_radio_chatter",8.0,0.0,-1,49,0,0,0,0)
+			TaskPlayAnim(ped,"random@arrests","generic_radio_chatter",8.0,8.0,-1,49,0,0,0,0)
 
 			CreateThread(function()
 				TriggerEvent("pma-voice:radioActive",true)
@@ -132,7 +132,7 @@ RegisterCommand("-radiotalk",function(source,args,rawCommand)
 		TriggerEvent("pma-voice:radioActive",false)
 		playMicClicks(false)
 
-		StopAnimTask(ped,"random@arrests","generic_radio_chatter",-4.0)
+		StopAnimTask(ped,"random@arrests","generic_radio_chatter",8.0)
 		TriggerServerEvent("pma-voice:setTalkingOnRadio",false)
 	end
 end,false)

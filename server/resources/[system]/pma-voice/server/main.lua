@@ -72,5 +72,6 @@ function getPlayersInRadioChannel(channel)
 
 	return {}
 end
+
 exports("getPlayersInRadioChannel",getPlayersInRadioChannel)
 exports("GetPlayersInRadioChannel",getPlayersInRadioChannel)

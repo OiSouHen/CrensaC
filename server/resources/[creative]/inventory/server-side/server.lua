@@ -37,6 +37,7 @@ local Animals = {}
 local Attachs = {}
 local Scanners = {}
 local Stockade = {}
+local Megaphone = {}
 local userAmount = {}
 
 local openIdentity = {}
@@ -1174,10 +1175,10 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				TriggerClientEvent("inventory:Close",source)
 				if not vCLIENT.DismantleStatus(source) then
 					local reputationValue = vRP.checkReputation(user_id,"Dismantle")
-					if reputationValue >= 0 then
+					if reputationValue >= 100 then
 						vCLIENT.Dismantle(source,reputationValue)
 					else
-						vCLIENT.Dismantle(source,math.random(1000))
+						vCLIENT.Dismantle(source,math.random(99))
 					end
 
 					vRP.removeInventoryItem(user_id,"dismantle",1,true)
@@ -2374,6 +2375,16 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				until Active[user_id] == nil
 			return end
 
+			if nameItem == "megaphone" then
+				vRPC.stopActived(source)
+				Megaphone[user_id] = true
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("player:Megaphone",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				TriggerClientEvent("pma-voice:Megaphone",source,true)
+				vRPC.createObjects(source,"anim@random@shop_clothes@watches","base","prop_megaphone_01",49,60309,0.10,0.04,0.012,-60.0,100.0,-30.0)
+			return end
+
 			if nameItem == "scanner" then
 				vRPC.stopActived(source)
 				Scanners[user_id] = true
@@ -3552,6 +3563,10 @@ AddEventHandler("playerDisconnect",function(user_id)
 		Scanners[user_id] = nil
 	end
 
+	if Megaphone[user_id] then
+		Megaphone[user_id] = nil
+	end
+
 	if openIdentity[user_id] then
 		openIdentity[user_id] = nil
 	end
@@ -3637,6 +3652,11 @@ AddEventHandler("inventory:Cancel",function()
 			TriggerClientEvent("inventory:updateScanner",source,false)
 			TriggerClientEvent("inventory:Buttons",source,false)
 			Scanners[user_id] = nil
+		end
+
+		if Megaphone[user_id] then
+			TriggerClientEvent("inventory:Buttons",source,false)
+			Megaphone[user_id] = nil
 		end
 
 		vRPC.removeObjects(source)
@@ -4611,7 +4631,7 @@ AddEventHandler("inventory:Drink",function()
 		TriggerClientEvent("inventory:Close",source)
 		TriggerClientEvent("inventory:Buttons",source,true)
 		vRPC.createObjects(source,"mp_player_intdrink","loop_bottle","prop_plastic_cup_02",49,60309,0.0,0.0,0.1,0.0,0.0,130.0)
-		
+
 		repeat
 			if os.time() >= parseInt(Active[user_id]) then
 				Active[user_id] = nil
@@ -4619,13 +4639,13 @@ AddEventHandler("inventory:Drink",function()
 				vRPC.removeObjects(source,"one")
 				TriggerClientEvent("inventory:Buttons",source,false)
 			end
-			
+
 			Wait(100)
 		until Active[user_id] == nil
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- INVENTORY:DESMANCHAR
+-- INVENTORY:DISMANTLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("inventory:Dismantle")
 AddEventHandler("inventory:Dismantle",function(Entity)
@@ -4635,33 +4655,43 @@ AddEventHandler("inventory:Dismantle",function(Entity)
 	if user_id and Active[user_id] == nil then
 		dismantleProgress[user_id] = vehName
 		Active[user_id] = os.time() + 15
-		
+
 		TriggerClientEvent("Progress",source,15000)
 		TriggerClientEvent("inventory:Close",source)
 		TriggerClientEvent("inventory:Buttons",source,true)
 		vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
-		
+
 		repeat
 			if os.time() >= parseInt(Active[user_id]) then
 				Active[user_id] = nil
 				vRPC.removeObjects(source)
 				dismantleProgress[user_id] = nil
-				
+
 				TriggerClientEvent("player:applyGsr",source)
 				TriggerClientEvent("inventory:Buttons",source,false)
 				TriggerEvent("garages:deleteVehicle",Entity[4],Entity[1])
 				
-				vRP.generateItem(user_id,"dollarsroll",math.random(80,120),true)
+				local Players = vRPC.Players(source)
+				for _,v in ipairs(Players) do
+					async(function()
+						vRP.generateItem(v,"dollarsroll",math.random(95,165),true)
+					end)
+				end
+
 				vRP.generateItem(user_id,"dismantle",1,true)
-				
+
 				if math.random(1000) <= 25 then
 					vRP.generateItem(user_id,"plate",1,true)
 				end
-				
+
 				TriggerClientEvent("inventory:Disreset",source)
 				TriggerClientEvent("Notify",source,"amarelo","O veículo do seu contrato foi encaminhado para o <b>Impound</b> e o <b>Lester</b> disse que você poe assinar um novo contrato quando quiser.",10000)
-				
-				-- vRP.insertReputation(user_id,"Dismantle",10)
+
+				local reputationValue = vRP.checkReputation(user_id,"Dismantle")
+				if reputationValue <= 1001 then
+					vRP.insertReputation(user_id,"Dismantle",20)
+				end
+
 				vRP.upgradeStress(user_id,10)
 			end
 			Wait(100)

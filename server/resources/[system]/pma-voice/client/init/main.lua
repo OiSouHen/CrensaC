@@ -11,9 +11,7 @@ callData = {}
 
 function setVolume(volume,volumeType)
 	type_check({ volume, "number" })
-	local volume = volume
-
-	volume = volume / 100
+	local volume = volume / 100
 
 	if volumeType then
 		local volumeTbl = volumes[volumeType]
@@ -47,14 +45,14 @@ end)
 
 local radioEffectId = CreateAudioSubmix("Radio")
 SetAudioSubmixEffectRadioFx(radioEffectId,0)
-SetAudioSubmixEffectParamInt(radioEffectId,0,GetHashKey("default"),1)
+SetAudioSubmixEffectParamInt(radioEffectId,0,`default`,1)
 AddAudioSubmixOutput(radioEffectId,0)
 
 local phoneEffectId = CreateAudioSubmix("Phone")
 SetAudioSubmixEffectRadioFx(phoneEffectId,1)
-SetAudioSubmixEffectParamInt(phoneEffectId,1,GetHashKey("default"),1)
-SetAudioSubmixEffectParamFloat(phoneEffectId,1,GetHashKey("freq_low"),300.0)
-SetAudioSubmixEffectParamFloat(phoneEffectId,1,GetHashKey("freq_hi"),6000.0)
+SetAudioSubmixEffectParamInt(phoneEffectId,1,`default`,1)
+SetAudioSubmixEffectParamFloat(phoneEffectId,1,`freq_low`,300.0)
+SetAudioSubmixEffectParamFloat(phoneEffectId,1,`freq_hi`,6000.0)
 AddAudioSubmixOutput(phoneEffectId,1)
 
 local submixFunctions = {
@@ -121,6 +119,10 @@ function playMicClicks(clickType)
 		volume = (clickType and (volumes["radio"]) or 0.05)
 	})
 end
+
+RegisterNetEvent("pma-voice:syncMegaphone",function(Source,Status)
+	toggleVoice(Source,Status,"radio")
+end)
 
 function setVoiceProperty(type,value)
 	if type == "radioEnabled" then

@@ -33,7 +33,7 @@ function addNearbyPlayers()
 	for i = 1,#players do
 		local ply = players[i]
 		local serverId = GetPlayerServerId(ply)
-
+		
 		if serverId == playerServerId then
 			goto skip_loop
 		end
