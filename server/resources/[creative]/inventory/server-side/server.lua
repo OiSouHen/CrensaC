@@ -2287,6 +2287,34 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				end
 			return end
 
+			if nameItem == "propertys" then
+				if not vPLAYER.getHandcuff(source) then
+					if exports["hud"]:Wanted(user_id) then
+						return
+					end
+
+					local homeName = exports["propertys"]:homesTheft(source)
+					if homeName then
+						vRPC.stopActived(source)
+						vRP.upgradeStress(user_id,2)
+						Active[user_id] = os.time() + 100
+						TriggerClientEvent("inventory:Close",source)
+						TriggerClientEvent("inventory:Buttons",source,true)
+						vRPC.playAnim(source,false,{"missheistfbi3b_ig7","lift_fibagent_loop"},false)
+
+						if vTASKBAR.taskLockpick(source) then
+							exports["propertys"]:enterHomes(source,user_id,homeName,true)
+						else
+							exports["propertys"]:resetTheft(homeName)
+						end
+
+						TriggerClientEvent("inventory:Buttons",source,false)
+						vRPC.stopAnim(source,false)
+						Active[user_id] = nil
+					end
+				end
+			return end
+
 			if nameItem == "blocksignal" then
 				if not vPLAYER.getHandcuff(source) then
 					local vehicle,vehNet,vehPlate = vRPC.vehList(source,4)
