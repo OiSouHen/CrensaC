@@ -644,6 +644,13 @@ local craftList = {
 					["dollarsroll"] = 1000
 				}
 			},
+			["propertys"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 695
+				}
+			},
 			["lockpick"] = {
 				["amount"] = 1,
 				["destroy"] = false,
