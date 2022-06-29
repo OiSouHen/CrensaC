@@ -2874,10 +2874,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 				if application then
-					local Route = GetPlayerRoutingBucket(source)
-					vRP.removeInventoryItem(user_id,totalName,1,false)
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					exports["plants"]:initPlants("weedclone",coords,Route,"bkr_prop_weed_med_01a",user_id)
+					if vTASKBAR.Weeds(source) then
+						local Route = GetPlayerRoutingBucket(source)
+						vRP.removeInventoryItem(user_id,totalName,1,false)
+						TriggerClientEvent("inventory:Update",source,"updateMochila")
+						exports["plants"]:initPlants("weedclone",coords,Route,"bkr_prop_weed_med_01a",user_id)
+					else
+						vRP.removeInventoryItem(user_id,totalName,1,true)
+					end
 				end
 
 				TriggerClientEvent("inventory:Buttons",source,false)
@@ -2889,10 +2893,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				local application,coords = vRPC.objectCoords(source,"bkr_prop_weed_med_01a")
 				if application then
-					local Route = GetPlayerRoutingBucket(source)
-					vRP.removeInventoryItem(user_id,totalName,1,false)
-					TriggerClientEvent("inventory:Update",source,"updateMochila")
-					exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
+					if vTASKBAR.Weeds(source) then
+						local Route = GetPlayerRoutingBucket(source)
+						vRP.removeInventoryItem(user_id,totalName,1,false)
+						TriggerClientEvent("inventory:Update",source,"updateMochila")
+						exports["plants"]:initPlants("cokeseed",coords,Route,"bkr_prop_weed_med_01a",user_id)
+					else
+						vRP.removeInventoryItem(user_id,totalName,1,true)
+					end
 				end
 
 				TriggerClientEvent("inventory:Buttons",source,false)
