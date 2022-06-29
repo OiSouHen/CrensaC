@@ -7,7 +7,7 @@ vRPS = Tunnel.getInterface("vRP")
 -- CONNECTION
 -----------------------------------------------------------------------------------------------------------------------------------------
 vSERVER = Tunnel.getInterface("dynamic")
-vGARAGES = Tunnel.getInterface("garages")
+vINVENTORY = Tunnel.getInterface("inventory")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 		local Coords = GetEntityCoords(Ped)
 
 		if GetEntityHealth(Ped) > 100 then
-			if LocalPlayer["state"]["Propertys"] then
+			if LocalPlayer["state"]["Propertys"] and not LocalPlayer["state"]["Theft"] then
 				TriggerEvent("propertys:propertyPanel")
 				return
 			end
@@ -115,9 +115,16 @@ RegisterCommand("globalFunctions",function(source,args,rawCommand)
 
 			exports["dynamic"]:SubMenu("Roupas","Colocar/Retirar roupas.","clothes")
 
+			-- local Experience = vSERVER.Experience()
+			-- for Name,Exp in pairs(Experience) do
+				-- exports["dynamic"]:AddButton(Name,"Você possuí <yellow>"..Exp.." pontos</yellow> na classe <yellow>"..ClassCategory(Exp).."</yellow>.","","","Experience",false)
+			-- end
+
 			if animalHash ~= nil then
 				exports["dynamic"]:SubMenu("Domésticos","Todas as funções dos animais domésticos.","animal")
 			end
+			
+			-- exports["dynamic"]:SubMenu("Experiência","Todas as suas habilidades.","Experience")
 
 			exports["dynamic"]:SubMenu("Outros","Todas as funções do personagem.","others")
 
