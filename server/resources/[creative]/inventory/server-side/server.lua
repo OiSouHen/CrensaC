@@ -4607,7 +4607,7 @@ AddEventHandler("inventory:DrugsPeds",function()
 			vRP.upgradeStress(user_id,3)
 			TriggerClientEvent("player:applyGsr",source)
 			vRP.generateItem(user_id,"dollarsroll",userAmount[user_id][3],true)
-			
+
 			if math.random(100) >= 75 then
 				local ped = GetPlayerPed(source)
 				local coords = GetEntityCoords(ped)
