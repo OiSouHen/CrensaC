@@ -676,24 +676,24 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 					if nameItem == "burgershot3" then
 						vRP.generateItem(user_id,"dollars",120,true)
 
-						local burgershotReputation = vRP.checkReputation(user_id,"Foods")
+						local burgershotReputation = vRP.checkReputation(user_id,"BurgerShot")
 						if burgershotReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",12,true)
 						end
 
 						if burgershotReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"BurgerShot",10)
 						end
 					elseif nameItem == "burgershot4" then
 						vRP.generateItem(user_id,"dollars",270,true)
 
-						local burgershotReputation = vRP.checkReputation(user_id,"Foods")
+						local burgershotReputation = vRP.checkReputation(user_id,"BurgerShot")
 						if burgershotReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",27,true)
 						end
 
 						if burgershotReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"BurgerShot",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -716,24 +716,24 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 					if nameItem == "pizzathis3" then
 						vRP.generateItem(user_id,"dollars",120,true)
 
-						local pizzathisReputation = vRP.checkReputation(user_id,"Foods")
+						local pizzathisReputation = vRP.checkReputation(user_id,"PizzaThis")
 						if pizzathisReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",12,true)
 						end
 
 						if pizzathisReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"PizzaThis",10)
 						end
 					elseif nameItem == "pizzathis4" then
 						vRP.generateItem(user_id,"dollars",270,true)
 
-						local pizzathisReputation = vRP.checkReputation(user_id,"Foods")
+						local pizzathisReputation = vRP.checkReputation(user_id,"PizzaThis")
 						if pizzathisReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",27,true)
 						end
 
 						if pizzathisReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"PizzaThis",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -756,24 +756,24 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 					if nameItem == "uwucoffee3" then
 						vRP.generateItem(user_id,"dollars",120,true)
 						
-						local uwucoffeeReputation = vRP.checkReputation(user_id,"Foods")
+						local uwucoffeeReputation = vRP.checkReputation(user_id,"UwuCoffee")
 						if uwucoffeeReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",12,true)
 						end
 
 						if uwucoffeeReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"UwuCoffee",10)
 						end
 					elseif nameItem == "uwucoffee4" then
 						vRP.generateItem(user_id,"dollars",270,true)
 
-						local uwucoffeeReputation = vRP.checkReputation(user_id,"Foods")
+						local uwucoffeeReputation = vRP.checkReputation(user_id,"UwuCoffee")
 						if uwucoffeeReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",27,true)
 						end
 
 						if uwucoffeeReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"UwuCoffee",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -796,24 +796,24 @@ AddEventHandler("inventory:Deliver",function(Slot,Amount)
 					if nameItem == "beanmachine3" then
 						vRP.generateItem(user_id,"dollars",120,true)
 
-						local beanmachineReputation = vRP.checkReputation(user_id,"Foods")
+						local beanmachineReputation = vRP.checkReputation(user_id,"BeanMachine")
 						if beanmachineReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",12,true)
 						end
 
 						if beanmachineReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"BeanMachine",10)
 						end
 					elseif nameItem == "beanmachine4" then
 						vRP.generateItem(user_id,"dollars",270,true)
 
-						local beanmachineReputation = vRP.checkReputation(user_id,"Foods")
+						local beanmachineReputation = vRP.checkReputation(user_id,"BeanMachine")
 						if beanmachineReputation >= 100 or vRP.userPremium(user_id) then
 							vRP.generateItem(user_id,"dollars",27,true)
 						end
 
 						if beanmachineReputation <= 1001 then
-							vRP.insertReputation(user_id,"Foods",10)
+							vRP.insertReputation(user_id,"BeanMachine",10)
 						end
 					elseif nameItem == "dollars100" then
 						vRP.generateItem(user_id,"dollars",math.random(90,100),true)
@@ -3329,10 +3329,10 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 				until Active[user_id] == nil
 			return end
 
-			if nameItem == "cookies" then
+			if nameItem == "onionrings" or nameItem == "chickenfries" then
 				vRPC.stopActived(source)
-				Active[user_id] = os.time() + 5
-				TriggerClientEvent("Progress",source,5000)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
 				TriggerClientEvent("inventory:Close",source)
 				TriggerClientEvent("inventory:Buttons",source,true)
 				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
@@ -3345,8 +3345,78 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							TriggerClientEvent("setEnergetic",source,20,1.10)
-							vRP.downgradeStress(user_id,10)
-							vRP.upgradeHunger(user_id,5)
+							vRP.upgradeHunger(user_id,10)
+
+							local ped = GetPlayerPed(source)
+							local coords = GetEntityCoords(ped)
+							local distance = #(coords - vector3(-1194.69,-891.85,13.99))
+							if distance <= 5 then
+								vRP.upgradeHunger(user_id,5)
+								vRP.insertReputation(user_id,"BurgerShot",5)
+							end
+						end
+					end
+
+					Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "calzone" then
+				vRPC.stopActived(source)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.removeObjects(source,"one")
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							vRP.upgradeHunger(user_id,10)
+
+							local ped = GetPlayerPed(source)
+							local coords = GetEntityCoords(ped)
+							local distance = #(coords - vector3(810.32,-752.82,26.77))
+							if distance <= 5 then
+								vRP.upgradeHunger(user_id,5)
+								vRP.insertReputation(user_id,"PizzaThis",5)
+							end
+						end
+					end
+
+					Wait(100)
+				until Active[user_id] == nil
+			return end
+
+			if nameItem == "cookies" then
+				vRPC.stopActived(source)
+				Active[user_id] = os.time() + 10
+				TriggerClientEvent("Progress",source,10000)
+				TriggerClientEvent("inventory:Close",source)
+				TriggerClientEvent("inventory:Buttons",source,true)
+				vRPC.playAnim(source,true,{"mp_player_inteat@burger","mp_player_int_eat_burger"},true)
+
+				repeat
+					if os.time() >= parseInt(Active[user_id]) then
+						Active[user_id] = nil
+						vRPC.removeObjects(source,"one")
+						TriggerClientEvent("inventory:Buttons",source,false)
+
+						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
+							TriggerClientEvent("setEnergetic",source,20,1.10)
+							vRP.upgradeHunger(user_id,10)
+
+							local ped = GetPlayerPed(source)
+							local coords = GetEntityCoords(ped)
+							local distance = #(coords - vector3(-583.42,-1062.03,22.34))
+							if distance <= 5 then
+								vRP.downgradeStress(user_id,10)
+								vRP.insertReputation(user_id,"UwuCoffee",5)
+							end
 						end
 					end
 
