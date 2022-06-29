@@ -21,6 +21,7 @@ local homeLock = {}
 local homeEnter = {}
 local Newspapers = {}
 local routeHomes = {}
+local theftTimers = {}
 local homeInterior = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
@@ -1354,6 +1355,7 @@ AddEventHandler("homes:invadeSystem",function()
 		if user_id then
 			if vRP.hasGroup(user_id,"Police") then
 				exports["propertys"]:enterHomes(source,user_id,homeName,false)
+				TriggerClientEvent("homes:invadePolice",source)
 			end
 		end
 	end
@@ -1842,13 +1844,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 local myHomeList = {}
 AddEventHandler("playerConnect",function(user_id,source)
-	if myHomeList[user_id] == nil then
-		myHomeList[user_id] = {}
-		
-		TriggerClientEvent("spawn:justSpawn",source,myHomeList[user_id],true)
-	else
-		TriggerClientEvent("spawn:justSpawn",source,{},false)
-	end
+	TriggerClientEvent("spawn:justSpawn",source,{},false)
 
 	vCLIENT.updateHomes(source,homes)
 end)
@@ -2237,6 +2233,171 @@ function cRP.removeNetwork(homeName)
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- MOBILETHEFT
+-----------------------------------------------------------------------------------------------------------------------------------------
+local mobileTheft = {
+	["MOBILE"] = {
+		{ item = "notepad", min = 1, max = 5 },
+		{ item = "keyboard", min = 1, max = 1 },
+		{ item = "mouse", min = 1, max = 1 },
+		{ item = "silverring", min = 1, max = 1 },
+		{ item = "goldring", min = 1, max = 1 },
+		{ item = "watch", min = 2, max = 4 },
+		{ item = "playstation", min = 1, max = 1 },
+		{ item = "xbox", min = 1, max = 1 },
+		{ item = "legos", min = 1, max = 1 },
+		{ item = "ominitrix", min = 1, max = 1 },
+		{ item = "bracelet", min = 1, max = 1 },
+		{ item = "dildo", min = 1, max = 1 },
+		{ item = "sapphire", min = 1, max = 3 },
+		{ item = "amethyst", min = 1, max = 4 },
+		{ item = "amber", min = 1, max = 4 },
+		{ item = "turquoise", min = 1, max = 5 },
+		{ item = "spray01", min = 1, max = 2 },
+		{ item = "spray02", min = 1, max = 2 },
+		{ item = "spray03", min = 1, max = 2 },
+		{ item = "spray04", min = 1, max = 2 },
+		{ item = "brick", min = 1, max = 5 },
+		{ item = "dices", min = 1, max = 2 },
+		{ item = "dish", min = 1, max = 3 },
+		{ item = "pan", min = 1, max = 1 },
+		{ item = "sneakers", min = 1, max = 2 },
+		{ item = "fan", min = 1, max = 2 },
+		{ item = "rimel", min = 1, max = 3 },
+		{ item = "blender", min = 1, max = 1 },
+		{ item = "switch", min = 1, max = 3 },
+		{ item = "brush", min = 1, max = 2 },
+		{ item = "domino", min = 1, max = 3 },
+		{ item = "floppy", min = 1, max = 4 },
+		{ item = "horseshoe", min = 1, max = 1 },
+		{ item = "cup", min = 1, max = 2 },
+		{ item = "deck", min = 1, max = 2 },
+		{ item = "eraser", min = 1, max = 2 },
+		{ item = "pliers", min = 1, max = 2 },
+		{ item = "lampshade", min = 1, max = 1 },
+		{ item = "slipper", min = 1, max = 1 },
+		{ item = "soap", min = 1, max = 1 }
+	},
+	["LOCKER"] = {
+		{ item = "silvercoin", min = 55, max = 65 },
+		{ item = "silvercoin", min = 65, max = 75 },
+		{ item = "silvercoin", min = 75, max = 85 },
+		{ item = "goldcoin", min = 25, max = 35 },
+		{ item = "goldcoin", min = 30, max = 40 },
+		{ item = "goldcoin", min = 35, max = 45 },
+		{ item = "silverring", min = 2, max = 3 },
+		{ item = "silverring", min = 3, max = 4 },
+		{ item = "silverring", min = 4, max = 5 },
+		{ item = "goldring", min = 2, max = 3 },
+		{ item = "goldring", min = 3, max = 4 },
+		{ item = "goldring", min = 4, max = 5 },
+		{ item = "card01", min = 1, max = 1 },
+		{ item = "card02", min = 1, max = 1 },
+		{ item = "card03", min = 1, max = 1 },
+		{ item = "card04", min = 1, max = 1 },
+		{ item = "card05", min = 1, max = 1 },
+		{ item = "pendrive", min = 1, max = 1 },
+		{ item = "watch", min = 5, max = 10 }
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PAYMENTTHEFT
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.paymentTheft(mobile)
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local policeResult = vRP.numPermission("Police")
+		local randItem = math.random(#mobileTheft[mobile])
+		local value = math.random(mobileTheft[mobile][randItem]["min"],mobileTheft[mobile][randItem]["max"])
+
+		if (vRP.inventoryWeight(user_id) + (itemWeight(mobileTheft[mobile][randItem]["item"]) * parseInt(value))) <= vRP.getWeight(user_id) then
+			if parseInt(#policeResult) <= 4 then
+				if math.random(100) <= 40 then
+					vRP.generateItem(user_id,mobileTheft[mobile][randItem]["item"],parseInt(value),true)
+					TriggerClientEvent("player:applyGsr",source)
+				else
+					TriggerClientEvent("Notify",source,"amarelo","Compartimento vazio.",5000)
+				end
+			else
+				if math.random(100) <= 80 then
+					vRP.generateItem(user_id,mobileTheft[mobile][randItem]["item"],parseInt(value),true)
+					TriggerClientEvent("player:applyGsr",source)
+				else
+					TriggerClientEvent("Notify",source,"amarelo","Compartimento vazio.",5000)
+				end
+			end
+		else
+			TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
+		end
+
+		vRP.upgradeStress(user_id,1)
+
+		if math.random(1000) >= 950 then
+			TriggerEvent("Wanted",source,user_id,120)
+			TriggerClientEvent("homes:UpdateCalled",source)
+			TriggerClientEvent("sounds:source",source,"alarm",1.0)
+
+			local ped = GetPlayerPed(source)
+			local coords = GetEntityCoords(ped)
+
+			for k,v in pairs(policeResult) do
+				async(function()
+					TriggerClientEvent("NotifyPush",v,{ code = 90, title = "Roubo de Propriedade", x = coords["x"], y = coords["y"], z = coords["z"], criminal = "Alarme de segurança", time = "Recebido às "..os.date("%H:%M"), blipColor = 43 })
+				end)
+			end
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CALLPOLICE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.callPolice()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		TriggerClientEvent("sounds:source",source,"alarm",1.0)
+
+		local ped = GetPlayerPed(source)
+		local coords = GetEntityCoords(ped)
+
+		local policeResult = vRP.numPermission("Police")
+		for k,v in pairs(policeResult) do
+			async(function()
+				TriggerClientEvent("NotifyPush",v,{ code = 90, title = "Roubo de Propriedade", x = coords["x"], y = coords["y"], z = coords["z"], criminal = "Alarme de segurança", time = "Recebido às "..os.date("%H:%M"), blipColor = 43 })
+			end)
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMESTHEFT
+-----------------------------------------------------------------------------------------------------------------------------------------
+exports("homesTheft",function(source)
+	local ped = GetPlayerPed(source)
+	local coords = GetEntityCoords(ped)
+
+	for homeName,v in pairs(homes) do
+		local distance = #(coords - vector3(v[1],v[2],v[3]))
+		if distance <= 1.5 then
+			if theftTimers[homeName] then
+				if os.time() >= theftTimers[homeName] then
+					theftTimers[homeName] = os.time() + 18000
+					return homeName
+				else
+					local homeTimers = parseInt(theftTimers[homeName] - os.time())
+					TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..parseFormat(homeTimers).." segundos</b>.",5000)
+					return false
+				end
+			else
+				theftTimers[homeName] = os.time() + 18000
+				return homeName
+			end
+		end
+	end
+
+	return false
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- ENTERHOMES
 -----------------------------------------------------------------------------------------------------------------------------------------
 exports("enterHomes",function(source,user_id,homeName,status)
@@ -2261,6 +2422,12 @@ CreateThread(function()
 		routeSelect = routeSelect + 1
 		routeHomes[k] = routeSelect
 	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- RESETTHEFT
+-----------------------------------------------------------------------------------------------------------------------------------------
+exports("resetTheft",function(homeName)
+	theftTimers[homeName] = nil
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INITNEWSPAPERS

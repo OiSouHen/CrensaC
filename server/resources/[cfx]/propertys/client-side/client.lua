@@ -16,17 +16,23 @@ vSERVER = Tunnel.getInterface("propertys")
 local homes = {
 	["list"] = {},
 	["open"] = "",
+	["theft"] = "",
 	["vault"] = "",
 	["garage"] = 0,
+	["shell"] = nil,
 	["intern"] = {},
 	["current"] = {},
+	["locker"] = nil,
 	["called"] = false,
+	["theftCoords"] = {},
+	["police"] = GetGameTimer(),
 	["pressButton"] = GetGameTimer()
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LOCALPLAYER
 -----------------------------------------------------------------------------------------------------------------------------------------
 LocalPlayer["state"]["homeName"] = 0
+LocalPlayer["state"]["Theft"] = false
 LocalPlayer["state"]["Propertys"] = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HOMES:UPDATECALLED
@@ -55,6 +61,32 @@ function getGridzone(x,y)
 	return toChannel(gridChunk)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- LOCKERCOORDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local lockerCoords = {
+	["creativeThreeFloors"] = { 121.15,-116.36,-31.21 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THEFTCOORDS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local theftCoords = {
+	["creativeThreeFloors"] = {
+		["MOBILE01"] = { 120.48,-119.2,-23.81 },
+		["MOBILE02"] = { 120.76,-123.73,-23.99 },
+		["MOBILE03"] = { 128.95,-124.14,-24.01 },
+		["MOBILE04"] = { 126.77,-109.6,-23.59 },
+		["MOBILE05"] = { 120.86,-124.03,-27.4 },
+		["MOBILE06"] = { 124.49,-118.29,-27.4 },
+		["MOBILE07"] = { 126.93,-110.87,-27.38 },
+		["MOBILE08"] = { 119.99,-105.45,-31.21 },
+		["MOBILE09"] = { 117.93,-110.32,-31.21 },
+		["MOBILE10"] = { 115.92,-113.81,-31.21 },
+		["MOBILE11"] = { 117.87,-111.99,-31.21 },
+		["MOBILE12"] = { 116.84,-116.05,-31.21 },
+		["LOCKER"] = { 121.15,-116.36,-31.21 }
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- UPDATEHOMES
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.updateHomes(homesTable)
@@ -75,7 +107,7 @@ function cRP.updateHomes(homesTable)
 	TriggerEvent("hoverfy:Insert",innerTable)
 	
 	FreezeEntityPosition(ped,true)
-	Citizen.Wait(1000)
+	Wait(1000)
 	FreezeEntityPosition(ped,false)
 	ClearPedTasks(ped)
 	DoScreenFadeIn(1000)
@@ -137,7 +169,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ENTRANCEHOMES
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.entranceHomes(homeName,v,interior)
+function cRP.entranceHomes(homeName,v,interior,theft)
 	DoScreenFadeOut(0)
 
 	homes["current"] = v
@@ -150,54 +182,170 @@ function cRP.entranceHomes(homeName,v,interior)
 
 	if interior == "creativeSquare" then
 		SetEntityCoords(ped,86.41,-91.47,-24.2,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 86.41,-91.47,-24.2,"exit","Saída" })
-		table.insert(homes["intern"],{ 92.51,-105.44,-24.2,"vault","Baú" })
-		table.insert(homes["intern"],{ 96.98,-108.39,-24.2,"wardrobe","Armário" })
-		table.insert(homes["intern"],{ 96.49,-98.25,-24.2,"fridge","Geladeira" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 92.51,-105.44,-24.2,"vault","Baú" })
+			table.insert(homes["intern"],{ 96.98,-108.39,-24.2,"wardrobe","Armário" })
+			table.insert(homes["intern"],{ 96.49,-98.25,-24.2,"fridge","Geladeira" })
+		end
 	elseif interior == "creativeOneFloors" then
 		SetEntityCoords(ped,68.64,67.3,-23.4,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 68.64,67.3,-23.4,"exit","Saída" })
-		table.insert(homes["intern"],{ 86.73,72.08,-24.01,"vault","Baú" })
-		table.insert(homes["intern"],{ 60.02,69.87,-24.6,"wardrobe","Armário" })
-		table.insert(homes["intern"],{ 82.78,78.77,-24.01,"fridge","Geladeira" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 86.73,72.08,-24.01,"vault","Baú" })
+			table.insert(homes["intern"],{ 60.02,69.87,-24.6,"wardrobe","Armário" })
+			table.insert(homes["intern"],{ 82.78,78.77,-24.01,"fridge","Geladeira" })
+		end
 	elseif interior == "creativeLostudios" then
 		SetEntityCoords(ped,51.61,-39.05,-25.86,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 51.61,-39.05,-25.86,"exit","Saída" })
-		table.insert(homes["intern"],{ 46.91,-44.83,-24.01,"vault","Baú" })
-		table.insert(homes["intern"],{ 54.49,-45.03,-24.01,"wardrobe","Armário" })
-		table.insert(homes["intern"],{ 45.92,-46.41,-24.01,"fridge","Geladeira" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 46.91,-44.83,-24.01,"vault","Baú" })
+			table.insert(homes["intern"],{ 54.49,-45.03,-24.01,"wardrobe","Armário" })
+			table.insert(homes["intern"],{ 45.92,-46.41,-24.01,"fridge","Geladeira" })
+		end
 	elseif interior == "creativeThreeFloors" then
 		SetEntityCoords(ped,118.4,-108.39,-23.57,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 118.4,-108.39,-23.57,"exit","Saída" })
-		table.insert(homes["intern"],{ 117.84,-111.99,-31.21,"vault","Baú" })
-		table.insert(homes["intern"],{ 122.27,-110.1,-23.59,"fridge","Geladeira" })
-		table.insert(homes["intern"],{ 124.41,-118.58,-27.4,"wardrobe","Armário" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 117.84,-111.99,-31.21,"vault","Baú" })
+			table.insert(homes["intern"],{ 122.27,-110.1,-23.59,"fridge","Geladeira" })
+			table.insert(homes["intern"],{ 124.41,-118.58,-27.4,"wardrobe","Armário" })
+		end
 	elseif interior == "creativeTwoFloors" then
 		SetEntityCoords(ped,166.78,-144.32,-17.79,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 166.78,-144.32,-17.79,"exit","Saída" })
-		table.insert(homes["intern"],{ 160.71,-149.67,-17.79,"vault","Baú" })
-		table.insert(homes["intern"],{ 150.3,-157.6,-23.99,"wardrobe","Armário" })
-		table.insert(homes["intern"],{ 160.05,-156.6,-19.19,"fridge","Geladeira" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 160.71,-149.67,-17.79,"vault","Baú" })
+			table.insert(homes["intern"],{ 150.3,-157.6,-23.99,"wardrobe","Armário" })
+			table.insert(homes["intern"],{ 160.05,-156.6,-19.19,"fridge","Geladeira" })
+		end
 	elseif interior == "creativeFranklin" then
 		SetEntityCoords(ped,28.58,-24.35,-24.01,1,0,0,0)
-		
 		table.insert(homes["intern"],{ 28.58,-24.35,-24.01,"exit","Saída" })
-		table.insert(homes["intern"],{ 30.88,-25.88,-24.01,"vault","Baú" })
-		table.insert(homes["intern"],{ 31.03,-28.21,-24.01,"wardrobe","Armário" })
-		table.insert(homes["intern"],{ 18.89,-29.72,-24.01,"fridge","Geladeira" })
+
+		if not theft then
+			table.insert(homes["intern"],{ 30.88,-25.88,-24.01,"vault","Baú" })
+			table.insert(homes["intern"],{ 31.03,-28.21,-24.01,"wardrobe","Armário" })
+			table.insert(homes["intern"],{ 18.89,-29.72,-24.01,"fridge","Geladeira" })
+		end
 	end
-	
+
 	FreezeEntityPosition(ped,true)
-	Citizen.Wait(1000)
+	Wait(1000)
 	FreezeEntityPosition(ped,false)
-	ClearPedTasks(ped)
 	DoScreenFadeIn(1000)
+
+	if theft then
+		homes["theft"] = interior
+		LocalPlayer["state"]["Theft"] = true
+		homes["police"] = GetGameTimer() + 15000
+
+		if math.random(100) >= 95 then
+			homes["police"] = GetGameTimer() + 15000
+			homes["called"] = true
+			vSERVER.callPolice()
+		end
+
+		if math.random(100) >= 90 then
+			if DoesEntityExist(homes["locker"]) then
+				DeleteEntity(homes["locker"])
+				homes["locker"] = nil
+			end
+
+			local mHash = GetHashKey("prop_ld_int_safe_01")
+
+			RequestModel(mHash)
+			while not HasModelLoaded(mHash) do
+				Wait(1)
+			end
+
+			if HasModelLoaded(mHash) then
+				homes["locker"] = CreateObjectNoOffset(mHash,v[1] + lockerCoords[interior][1],v[2] + lockerCoords[interior][2],lockerCoords[interior][3],false,false,false)
+
+				SetEntityHeading(homes["locker"],lockerCoords[interior][4])
+				FreezeEntityPosition(homes["locker"],true)
+			end
+		else
+			homes["theftCoords"]["LOCKER"] = true
+		end
+	end
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THREADROBBERYS
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	SetNuiFocus(false,false)
+
+	while true do
+		local innerTable = {}
+		local timeDistance = 999
+		if homes["theft"] ~= "" and homes["open"] ~= "" then
+			local ped = PlayerPedId()
+			if not IsPedInAnyVehicle(ped) then
+				local speed = GetEntitySpeed(ped)
+				local coords = GetEntityCoords(ped)
+
+				if speed > 2 and GetGameTimer() >= homes["police"] and not homes["called"] then
+					homes["police"] = GetGameTimer() + 15000
+					vSERVER.callPolice()
+				end
+
+				if theftCoords[homes["theft"]] then
+					for k,v in pairs(theftCoords[homes["theft"]]) do
+						if not homes["theftCoords"][k] then
+							local distance = #(coords - vector3(v[1],v[2],v[3]))
+
+							if distance <= 1.25 then
+								timeDistance = 1
+								table.insert(innerTable,{ v[1],v[2],v[3],1.25,"E","Vasculhar","Pressione para vasculhar" })
+
+								if IsControlJustPressed(1,38) and MumbleIsConnected() then
+									if k == "LOCKER" then
+										local safeCracking = exports["safecrack"]:safeCraking(3)
+										if safeCracking then
+											vSERVER.paymentTheft("LOCKER")
+										end
+
+										homes["theftCoords"][k] = true
+									else
+										LocalPlayer["state"]["Cancel"] = true
+										vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+
+										local taskBar = exports["taskbar"]:taskThree()
+										if taskBar then
+											LocalPlayer["state"]["Commands"] = true
+											vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+
+											TriggerEvent("Progress",10000)
+											Citizen.Wait(10000)
+
+											LocalPlayer["state"]["Commands"] = false
+											vSERVER.paymentTheft("MOBILE")
+											homes["theftCoords"][k] = true
+										end
+
+										LocalPlayer["state"]["Cancel"] = false
+										vRP.removeObjects()
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+
+		TriggerEvent("hoverfy:Insert",innerTable)
+
+		Wait(timeDistance)
+	end
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADINTERN
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -230,10 +378,18 @@ CreateThread(function()
 									TriggerEvent("sounds:source","outhouse",0.5)
 									vSERVER.removeNetwork(homes["open"])
 									LocalPlayer["state"]["Propertys"] = false
+									LocalPlayer["state"]["Theft"] = false
 									LocalPlayer["state"]["homeName"] = 0
+									homes["theftCoords"] = {}
 									homes["called"] = false
 									homes["intern"] = {}
+									homes["theft"] = ""
 									homes["open"] = ""
+
+									if DoesEntityExist(homes["locker"]) then
+										DeleteEntity(homes["locker"])
+										homes["locker"] = nil
+									end
 
 									FreezeEntityPosition(ped,true)
 									Wait(1000)
@@ -260,11 +416,18 @@ CreateThread(function()
 				end
 			end
 		end
-		
+
 		TriggerEvent("hoverfy:Insert",innerTable)
 
 		Wait(timeDistance)
 	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMES:INVADEPOLICE
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("homes:invadePolice")
+AddEventHandler("homes:invadePolice",function()
+	LocalPlayer["state"]["Theft"] = true
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HOMEGARAGE
