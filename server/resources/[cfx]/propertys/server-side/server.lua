@@ -19,6 +19,7 @@ vKEYBOARD = Tunnel.getInterface("keyboard")
 local actived = {}
 local homeLock = {}
 local homeEnter = {}
+local homeBlips = {}
 local Newspapers = {}
 local routeHomes = {}
 local theftTimers = {}
@@ -1384,6 +1385,7 @@ AddEventHandler("homes:buyEmerald",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1419,6 +1421,7 @@ AddEventHandler("homes:buyDiamond",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1454,6 +1457,7 @@ AddEventHandler("homes:buySapphire",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1489,6 +1493,7 @@ AddEventHandler("homes:buyAmber",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1524,6 +1529,7 @@ AddEventHandler("homes:buyAmethyst",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1559,6 +1565,7 @@ AddEventHandler("homes:buyRuby",function(homeName)
 							local identity = vRP.userIdentity(user_id)
 							vRP.execute("propertys/buying",{ name = homeName, user_id = user_id, interior = interiorSelect["interior"], price = interiorSelect["price"], residents = interiorSelect["residents"], vault = interiorSelect["vault"], fridge = interiorSelect["fridge"] })
 							exports["propertys"]:enterHomes(source,user_id,homeName,false)
+							homeBlips[homeName]["color"] = 6
 						end
 					else
 						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
@@ -1599,6 +1606,7 @@ AddEventHandler("homes:invokeSystem",function(mode)
 							vRP.remSrvdata("wardrobe:"..homeName)
 							vRP.remSrvdata("fridge:"..homeName)
 							vRP.remSrvdata("vault:"..homeName)
+							homeBlips[homeName]["color"] = 2
 						end
 					end
 				elseif mode == "garagem" and consult[1]["owner"] >= 1 then
@@ -1834,6 +1842,7 @@ end)
 -- 					vRP.remSrvdata("wardrobe:"..v["name"])
 -- 					vRP.remSrvdata("fridge:"..v["name"])
 -- 					vRP.remSrvdata("vault:"..v["name"])
+--					homeBlips[homeName]["color"] = 2
 -- 				end
 -- 			end
 -- 		end
@@ -2421,8 +2430,23 @@ CreateThread(function()
 	for k,v in pairs(homes) do
 		routeSelect = routeSelect + 1
 		routeHomes[k] = routeSelect
+
+		homeBlips[k] = { x = v[1], y = v[2], z = v[3], color = 2 }
+	end
+
+	local consult = vRP.query("propertys/totalHomes")
+	if consult[1] then
+		for k,v in pairs(consult) do
+			homeBlips[v["name"]]["color"] = 6
+		end
 	end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HOMEBLIPS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function cRP.homeBlips()
+	return homeBlips
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- RESETTHEFT
 -----------------------------------------------------------------------------------------------------------------------------------------
