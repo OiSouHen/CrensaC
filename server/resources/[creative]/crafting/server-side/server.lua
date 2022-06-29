@@ -672,18 +672,18 @@ local craftList = {
 					["dollarsroll"] = 4250
 				}
 			},
-			["WEAPON_NAIL_AMMO"] = {
-				["amount"] = 1,
-				["destroy"] = false,
-				["require"] = {
-					["dollarsroll"] = 2
-				}
-			},
 			["dismantle"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
 					["dollarsroll"] = 125
+				}
+			},
+			["WEAPON_NAIL_AMMO"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["dollarsroll"] = 1
 				}
 			}
 		}
