@@ -5,6 +5,7 @@ local permList = {}
 local selfReturn = {}
 permList["Taxi"] = {}
 permList["Police"] = {}
+permList["Emergency"] = {}
 permList["Foods"] = {}
 permList["Runners"] = {}
 permList["Mechanic"] = {}

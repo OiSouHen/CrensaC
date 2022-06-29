@@ -14,6 +14,7 @@ local itemlist = {
 		["type"] = "Usável",
 		["durability"] = 1,
 		["weight"] = 0.35,
+		["economy"] = 695,
 		["max"] = 1
 	},
 	["megaphone"] = {
