@@ -391,12 +391,12 @@ CreateThread(function()
 										homes["theftCoords"][k] = true
 									else
 										LocalPlayer["state"]["Cancel"] = true
-										vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+										vRP.playAnim(false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 
 										local taskBar = exports["taskbar"]:taskThree()
 										if taskBar then
 											LocalPlayer["state"]["Commands"] = true
-											vRP.playAnim(false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+											vRP.playAnim(false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 
 											TriggerEvent("Progress",10000)
 											Citizen.Wait(10000)
