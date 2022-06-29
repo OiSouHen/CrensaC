@@ -74,6 +74,7 @@ vRP.prepare("vehicles/updateVehicles","UPDATE summerz_vehicles SET engine = @eng
 vRP.prepare("propertys/selling","DELETE FROM summerz_propertys WHERE name = @name")
 vRP.prepare("propertys/permissions","SELECT * FROM summerz_propertys WHERE name = @name")
 vRP.prepare("propertys/totalHomes","SELECT name,tax FROM summerz_propertys WHERE owner = 1")
+vRP.prepare("propertys/totalMyHomes","SELECT name,tax FROM summerz_propertys WHERE user_id = @user_id AND owner = 1")
 vRP.prepare("propertys/userList","SELECT name FROM summerz_propertys WHERE user_id = @user_id")
 vRP.prepare("propertys/countUsers","SELECT COUNT(*) as qtd FROM summerz_propertys WHERE user_id = @user_id")
 vRP.prepare("propertys/countPermissions","SELECT COUNT(*) as qtd FROM summerz_propertys WHERE name = @name")
