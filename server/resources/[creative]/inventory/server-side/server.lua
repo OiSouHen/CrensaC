@@ -2306,6 +2306,17 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							exports["propertys"]:enterHomes(source,user_id,homeName,true)
 						else
 							exports["propertys"]:resetTheft(homeName)
+
+							if math.random(100) >= 50 then
+								TriggerClientEvent("Notify",source,"amarelo","A vizinhança foi avisada de um suposto roubo.",5000)
+								TriggerClientEvent("inventory:DisPed",source)
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
+									async(function()
+										TriggerClientEvent("sounds:source",source,"alarm",1.0)
+									end)
+								end
+							end
 						end
 
 						TriggerClientEvent("inventory:Buttons",source,false)
