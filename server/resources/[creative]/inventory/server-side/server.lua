@@ -2322,6 +2322,9 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						TriggerClientEvent("inventory:Buttons",source,false)
 						vRPC.stopAnim(source,false)
 						Active[user_id] = nil
+					else
+						TriggerClientEvent("inventory:Close",source)
+						TriggerClientEvent("homes:toggleMyPropertys",source)
 					end
 				end
 			return end
