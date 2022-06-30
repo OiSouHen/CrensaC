@@ -27,6 +27,7 @@ local Ammos = {}
 local Loots = {}
 local Boxes = {}
 local Active = {}
+local Proper = {}
 local Trashs = {}
 local Armors = {}
 local Plates = {}
@@ -294,7 +295,6 @@ local stealItens = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 local lootItens = {
 	["Medic"] = {
-		["null"] = 75,
 		["cooldown"] = 3600,
 		["list"] = {
 			[1] = { ["item"] = "alcohol", ["min"] = 1, ["max"] = 3 },
@@ -309,7 +309,6 @@ local lootItens = {
 		}
 	},
 	["Weapons"] = {
-		["null"] = 50,
 		["cooldown"] = 7200,
 		["list"] = {
 			[1] = { ["item"] = "roadsigns", ["min"] = 1, ["max"] = 1 },
@@ -325,7 +324,6 @@ local lootItens = {
 		}
 	},
 	["Supplies"] = {
-		["null"] = 75,
 		["cooldown"] = 3600,
 		["list"] = {
 			[1] = { ["item"] = "tarp", ["min"] = 1, ["max"] = 1 },
@@ -2289,6 +2287,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "propertys" then
 				if not vPLAYER.getHandcuff(source) then
+					TriggerClientEvent("inventory:Close",source)
+
 					if exports["hud"]:Wanted(user_id) then
 						return
 					end
@@ -2323,8 +2323,14 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						vRPC.stopAnim(source,false)
 						Active[user_id] = nil
 					else
-						TriggerClientEvent("inventory:Close",source)
-						TriggerClientEvent("homes:toggleMyPropertys",source)
+						if (Proper[user_id] == nil or os.time() > Proper[user_id]) then
+							Proper[user_id] = os.time() + 600
+							TriggerClientEvent("homes:togglePropertys",source)
+							TriggerClientEvent("Notify",source,"amarelo","Propriedades marcadas por <b>30 segundos</b>.",6000)
+						else
+							local waitTimers = parseInt(Proper[user_id] - os.time())
+							TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..waitTimers.." segundos</b>.",5000)
+						end
 					end
 				end
 			return end
@@ -3720,6 +3726,10 @@ AddEventHandler("playerDisconnect",function(user_id)
 		Healths[user_id] = nil
 	end
 
+	if Proper[user_id] then
+		Proper[user_id] = nil
+	end
+
 	if Armors[user_id] then
 		Armors[user_id] = nil
 	end
@@ -4129,7 +4139,8 @@ AddEventHandler("inventory:lootSystem",function(Entity,Service)
 
 			if Boxes[Entity][user_id] then
 				if os.time() <= Boxes[Entity][user_id] then
-					TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
+					local waitTimers = parseInt(Boxes[Entity][user_id] - os.time())
+					TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..waitTimers.." segundos</b>.",5000)
 					return
 				end
 			end
@@ -4148,25 +4159,16 @@ AddEventHandler("inventory:lootSystem",function(Entity,Service)
 					vRPC.stopAnim(source,false)
 					TriggerClientEvent("inventory:Buttons",source,false)
 
-					local itemSelect = { "",1 }
+					local randItem = math.random(#lootItens[Service]["list"])
+					local randAmount = math.random(lootItens[Service]["list"][randItem]["min"],lootItens[Service]["list"][randItem]["max"])
+					itemSelect = { lootItens[Service]["list"][randItem]["item"],randAmount }
 
-					if math.random(100) <= lootItens[Service]["null"] then
-						local randItem = math.random(#lootItens[Service]["list"])
-						local randAmount = math.random(lootItens[Service]["list"][randItem]["min"],lootItens[Service]["list"][randItem]["max"])
-
-						itemSelect = { lootItens[Service]["list"][randItem]["item"],randAmount }
-					end
-
-					if itemSelect[1] == "" then
-						TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
+					if (vRP.inventoryWeight(user_id) + (itemWeight(itemSelect[1]) * parseInt(itemSelect[2]))) <= vRP.getWeight(user_id) then
+						vRP.generateItem(user_id,itemSelect[1],itemSelect[2],true)
+						vRP.upgradeStress(user_id,2)
 					else
-						if (vRP.inventoryWeight(user_id) + (itemWeight(itemSelect[1]) * parseInt(itemSelect[2]))) <= vRP.getWeight(user_id) then
-							vRP.generateItem(user_id,itemSelect[1],itemSelect[2],true)
-							vRP.upgradeStress(user_id,2)
-						else
-							TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
-							Boxes[Entity][user_id] = nil
-						end
+						TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
+						Boxes[Entity][user_id] = nil
 					end
 
 					Loots[user_id] = nil
