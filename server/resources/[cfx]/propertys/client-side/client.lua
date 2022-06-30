@@ -506,10 +506,10 @@ AddEventHandler("homes:invadePolice",function()
 	LocalPlayer["state"]["Theft"] = true
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- HOMES:TOGGLEMYPROPERTYS
+-- HOMES:TOGGLEPROPERTYS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("homes:toggleMyPropertys")
-AddEventHandler("homes:toggleMyPropertys",function()
+RegisterNetEvent("homes:togglePropertys")
+AddEventHandler("homes:togglePropertys",function()
 	if homes["blips"] then
 		homes["blips"] = false
 		TriggerEvent("Notify","amarelo","<b>Propriedades</b> desmarcadas.",3000)
@@ -522,13 +522,23 @@ AddEventHandler("homes:toggleMyPropertys",function()
 	else
 		homes["blips"] = true
 		local result = vSERVER.homeBlips()
-		TriggerEvent("Notify","amarelo","<b>Propriedades</b> marcadas.",3000)
 
 		for k,v in pairs(result) do
 			homes["blipsCoords"][k] = AddBlipForRadius(v["x"],v["y"],v["z"],10.0)
 			SetBlipAlpha(homes["blipsCoords"][k],200)
 			SetBlipColour(homes["blipsCoords"][k],v["color"])
 		end
+
+		SetTimeout(30000,function()
+			homes["blips"] = false
+			TriggerEvent("Notify","amarelo","<b>Propriedades</b> desmarcadas.",3000)
+
+			for k,v in pairs(homes["blipsCoords"]) do
+				if DoesBlipExist(v) then
+					RemoveBlip(v)
+				end
+			end
+		end)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
