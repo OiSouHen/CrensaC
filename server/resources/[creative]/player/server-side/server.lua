@@ -899,6 +899,7 @@ local discordLinks = {
 	["Disconnect"] = "",
 	["Airport"] = "",
 	["Deaths"] = "",
+	["SetGroup"] = "",
 	["Police"] = "",
 	["State"] = "",
 	["Lspd"] = "",
