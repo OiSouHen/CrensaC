@@ -172,6 +172,12 @@ RegisterCommand("emergencyFunctions",function(source,args,rawCommand)
 
 					exports["dynamic"]:SubMenu("Fardamentos","Todos os fardamentos médicos.","preMedic")
 				end
+				
+				if vSERVER.checkPermissions("masterPolice") then
+					exports["dynamic"]:AddButton("Adicionar contingente","Adicione uma nova pessoa ao grupo.","dynamic:setGroup","waitPolice",false,true)
+				elseif vSERVER.checkPermissions("masterParamedic") then
+					exports["dynamic"]:AddButton("Adicionar contingente","Adicione uma nova pessoa ao grupo.","dynamic:setGroup","waitParamedic",false,true)
+				end
 
 				exports["dynamic"]:openMenu()
 			end
