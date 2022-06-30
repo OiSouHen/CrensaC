@@ -2876,7 +2876,7 @@ local itemlist = {
 		["index"] = "goldcoin",
 		["name"] = "Moeda de Ouro",
 		["type"] = "Usável",
-		["weight"] = 0.0-5,
+		["weight"] = 0.05,
 		["economy"] = 40
 	},
 	["watch"] = {

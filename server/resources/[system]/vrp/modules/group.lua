@@ -21,6 +21,9 @@ local permissions = {
 		["Admin"] = true,
 		["Moderator"] = true
 	},
+	["masterPolice"] = {
+		["masterPolice"] = true
+	},
 	["Police"] = {
 		["Lspd"] = true,
 		["State"] = true,
@@ -42,6 +45,9 @@ local permissions = {
 	},
 	["Sheriff"] = {
 		["Sheriff"] = true
+	},
+	["masterParamedic"] = {
+		["masterParamedic"] = true
 	},
 	["Paramedic"] = {
 		["Paramedic"] = true
@@ -86,6 +92,9 @@ local permissions = {
 	},
 	["Triads"] = {
 		["Triads"] = true
+	},
+	["Razors"] = {
+		["Razors"] = true
 	},
 	["Runners"] = {
 		["Runners"] = true
