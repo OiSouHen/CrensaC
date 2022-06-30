@@ -2308,20 +2308,20 @@ local craftList = {
 			}
 		}
 	},
-	["fuelShop"] = {
+	["Fuels"] = {
 		["list"] = {
 			["WEAPON_PETROLCAN"] = {
 				["amount"] = 1,
 				["destroy"] = false,
 				["require"] = {
-					["dollars"] = 50
+					["dollars"] = 75
 				}
 			},
 			["WEAPON_PETROLCAN_AMMO"] = {
 				["amount"] = 4500,
 				["destroy"] = false,
 				["require"] = {
-					["dollars"] = 200
+					["dollars"] = 205
 				}
 			}
 		}
