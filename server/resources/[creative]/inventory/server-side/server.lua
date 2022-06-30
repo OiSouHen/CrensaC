@@ -2313,7 +2313,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 								local Players = vRPC.Players(source)
 								for _,v in ipairs(Players) do
 									async(function()
-										TriggerClientEvent("sounds:source",source,"alarm",1.0)
+										TriggerClientEvent("sounds:source",v,"alarm",1.0)
 									end)
 								end
 							end
