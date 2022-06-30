@@ -800,7 +800,7 @@ CreateThread(function()
 	AddTargetModel({ -2007231801,1339433404,1694452750,1933174915,-462817101,-469694731,-164877493 },{
 		options = {
 			{
-				event = "crafting:fuelShop",
+				event = "crafting:Fuels",
 				label = "Combustível",
 				tunnel = "client"
 			}
