@@ -4035,6 +4035,14 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 				return
 			end
 		end
+		
+		if Service == "Parquimetro" then
+			consultItem = vRP.getInventoryItemAmount(user_id,"lockpick")
+			if consultItem[1] <= 0 then
+				TriggerClientEvent("Notify",source,"amarelo","Precisa de <b>1x "..itemName("lockpick").."</b>.",5000)
+				return
+			end
+		end
 
 		if Entity[1] ~= nil and Entity[2] ~= nil and Entity[4] ~= nil then
 			local hash = Entity[1]
@@ -4058,9 +4066,17 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 					end
 				end
 
-				Active[user_id] = os.time() + 5
-				TriggerClientEvent("Progress",source,5000)
-				vRPC.playAnim(source,false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+				if Service == "Parquimetro" then
+					Active[user_id] = os.time() + 30
+					TriggerClientEvent("Progress",source,30000)
+
+					vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
+				else
+					Active[user_id] = os.time() + 5
+					TriggerClientEvent("Progress",source,5000)
+
+					vRPC.playAnim(source,false,{"amb@prop_human_parking_meter@female@idle_a","idle_a_female"},true)
+				end
 
 				verifyObjects[user_id] = { model,hash }
 				TriggerClientEvent("inventory:Close",source)
@@ -4090,14 +4106,48 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 							end
 						elseif Service == "Jornaleiro" then
 							itemSelect = { "newspaper",math.random(2) }
+						elseif Service == "Parquimetro" then
+							local randItem = math.random(35)
+							if parseInt(randItem) >= 21 and parseInt(randItem) <= 30 then
+								itemSelect = { "goldcoin",math.random(3,6) }
+							elseif parseInt(randItem) >= 11 and parseInt(randItem) <= 20 then
+								itemSelect = { "silvercoin",math.random(6,12) }
+							elseif parseInt(randItem) >= 0 and parseInt(randItem) <= 10 then
+								itemSelect = { "dollars",math.random(75) }
+							end
+
+							local policeResult = vRP.numPermission("Police")
+							for k,v in pairs(policeResult) do
+								async(function()
+									TriggerClientEvent("NotifyPush",v,{ code = 31, title = "Roubo de Parquímetro", x = coords["x"], y = coords["y"], z = coords["z"], time = "Recebido às "..os.date("%H:%M"), blipColor = 44 })
+								end)
+							end
 						end
 
 						if itemSelect[1] == "" then
-							TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
+							if Service == "Parquimetro" then
+								vRP.removeInventoryItem(user_id,"lockpick",1,true)
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
+									async(function()
+										TriggerClientEvent("Notify",v,"amarelo","O <b>Parquímetro</b> irá explodir em breve.",5000)
+									end)
+								end
+
+								Wait(10000)
+								TriggerClientEvent("vRP:Explosion",source,coords)
+							else
+								TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
+							end
 						else
 							if (vRP.inventoryWeight(user_id) + (itemWeight(itemSelect[1]) * itemSelect[2])) <= vRP.getWeight(user_id) then
 								vRP.generateItem(user_id,itemSelect[1],itemSelect[2],true)
-								vRP.upgradeStress(user_id,1)
+
+								if Service == "Parquimetro" then
+									vRP.upgradeStress(user_id,5)
+								else
+									vRP.upgradeStress(user_id,1)
+								end
 							else
 								TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
 								Trashs[model][hash] = nil
