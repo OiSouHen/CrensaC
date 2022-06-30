@@ -991,7 +991,6 @@ CreateThread(function()
 		if Megaphone then
 			local Ped = PlayerPedId()
 			if not IsEntityPlayingAnim(Ped,"anim@random@shop_clothes@watches","base",3) then
-				-- TriggerServerEvent("pma-voice:Megaphone",false)
 				TriggerEvent("pma-voice:Megaphone",false)
 				Megaphone = false
 			end

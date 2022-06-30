@@ -715,6 +715,30 @@ AddEventHandler("player:presetFunctions",function(number)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYER:CHECKSHOES
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("player:checkShoes")
+AddEventHandler("player:checkShoes",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		local otherPlayer = vRPC.ClosestPed(source,1)
+		if otherPlayer then
+			local otherPlayer_id = vRP.getUserId(otherPlayer)
+				if vSKINSHOP.checkShoes(otherPlayer) then
+					if Active[otherPlayer_id] == nil then
+						Active[otherPlayer_id] = os.time() + 60
+						vRP.generateItem(user_id,"WEAPON_SHOES",2,true)
+					else
+						local waitTimers = parseInt(Active[otherPlayer_id] - os.time())
+						TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..waitTimers.." segundos</b>.",5000)
+					end
+				end
+			end
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYER:CHECKTRUNK
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("player:checkTrunk")
