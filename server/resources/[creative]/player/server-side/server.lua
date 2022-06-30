@@ -725,14 +725,13 @@ AddEventHandler("player:checkShoes",function()
 		local otherPlayer = vRPC.ClosestPed(source,1)
 		if otherPlayer then
 			local otherPlayer_id = vRP.getUserId(otherPlayer)
-				if vSKINSHOP.checkShoes(otherPlayer) then
-					if Active[otherPlayer_id] == nil then
-						Active[otherPlayer_id] = os.time() + 60
-						vRP.generateItem(user_id,"WEAPON_SHOES",2,true)
-					else
-						local waitTimers = parseInt(Active[otherPlayer_id] - os.time())
-						TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..waitTimers.." segundos</b>.",5000)
-					end
+			if vSKINSHOP.checkShoes(otherPlayer) then
+				if Active[otherPlayer_id] == nil then
+					Active[otherPlayer_id] = os.time() + 60
+					vRP.generateItem(user_id,"WEAPON_SHOES",2,true)
+				else
+					local waitTimers = parseInt(Active[otherPlayer_id] - os.time())
+					TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..waitTimers.." segundos</b>.",5000)
 				end
 			end
 		end
