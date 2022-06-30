@@ -11,6 +11,7 @@ vRPC = Tunnel.getInterface("vRP")
 cRP = {}
 Tunnel.bindInterface("plants",cRP)
 vCLIENT = Tunnel.getInterface("plants")
+vTASKBAR = Tunnel.getInterface("taskbar")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +71,11 @@ AddEventHandler("plants:Collect",function(Number)
 
 				Wait(10000)
 
-				vRP.generateItem(user_id,plantTypes[Type][2],2,true)
+				if math.random(100) >= 50 then
+					vRP.generateItem(user_id,"mushroom",math.random(2),true)
+				end
+
+				vRP.generateItem(user_id,plantTypes[Type][2],math.random(2,3),true)
 				TriggerClientEvent("player:Commands",source,false)
 				TriggerClientEvent("plants:Remover",-1,Number)
 				TriggerClientEvent("vRP:Cancel",source,false)
@@ -79,7 +84,8 @@ AddEventHandler("plants:Collect",function(Number)
 				TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
 			end
 		else
-			TriggerClientEvent("Notify",source,"amarelo","<b>"..plantTypes[Plants[Number]["type"]][1].."</b> ainda em crescimento.",5000)
+			local collectTime = parseInt(Plants[Number]["time"] - os.time())
+			TriggerClientEvent("Notify",source,"amarelo","Aguarde <b>"..collectTime.." segundos</b> para coletar.",5000)
 		end
 	end
 end)
@@ -98,24 +104,29 @@ AddEventHandler("plants:Cloning",function(Number)
 		end
 			
 		if (Plants[Number]["time"] - os.time()) <= 6000 then
-			TriggerClientEvent("dynamic:closeSystem",source)
-			local provPlants = Plants[Number]
-			Plants[Number] = nil
+			if vTASKBAR.Weeds(source) then
+				TriggerClientEvent("dynamic:closeSystem",source)
+				local provPlants = Plants[Number]
+				Plants[Number] = nil
 
-			TriggerClientEvent("Progress",source,10000)
-			TriggerClientEvent("vRP:Cancel",source,true)
-			TriggerClientEvent("player:Commands",source,true)
-			vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
+				TriggerClientEvent("Progress",source,10000)
+				TriggerClientEvent("vRP:Cancel",source,true)
+				TriggerClientEvent("player:Commands",source,true)
+				vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 
-			Wait(10000)
+				Wait(10000)
 
-			vRP.generateItem(user_id,provPlants["type"],2,true)
-			TriggerClientEvent("player:Commands",source,false)
-			TriggerClientEvent("plants:Remover",-1,Number)
-			TriggerClientEvent("vRP:Cancel",source,false)
-			vRPC.stopAnim(source,false)
+				vRP.generateItem(user_id,provPlants["type"],2,true)
+				TriggerClientEvent("player:Commands",source,false)
+				TriggerClientEvent("plants:Remover",-1,Number)
+				TriggerClientEvent("vRP:Cancel",source,false)
+				vRPC.stopAnim(source,false)
+			else
+				TriggerClientEvent("plants:Remover",-1,Number)
+			end
 		else
-			TriggerClientEvent("Notify",source,"amarelo","O progresso mínimo para a <b>Clonagem</b> é de <b>50%</b>.",5000)
+			local cloneTime = parseInt(Plants[Number]["time"] - os.time() - 6000)
+			TriggerClientEvent("Notify",source,"amarelo","Aguarde <b>"..cloneTime.." segundos</b> para clonar.",5000)
 		end
 	end
 end)
@@ -139,7 +150,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ASYNCFUNCTIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
 	local coordsFile = LoadResourceFile("logsystem","plants.json")
 	Plants = json.decode(coordsFile)
 end)
