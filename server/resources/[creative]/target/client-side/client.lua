@@ -807,6 +807,18 @@ CreateThread(function()
 		},
 		distance = 0.75
 	})
+
+	AddTargetModel({ -1940238623,2108567945 },{
+		options = {
+			{
+				event = "inventory:verifyObjects",
+				label = "Roubar",
+				tunnel = "police",
+				service = "Parquimetro"
+			}
+		},
+		distance = 0.75
+	})
 	
 	AddCircleZone("dollarsRoll01",vec3(-610.87,-1089.48,25.86),0.5,{
 		name = "dollarsRoll01",
