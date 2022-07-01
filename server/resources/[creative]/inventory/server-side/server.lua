@@ -4073,14 +4073,9 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 					end
 				end
 
-				if Service == "Parquimetro" then
-					Active[user_id] = os.time() + 30
-					TriggerClientEvent("Progress",source,30000)
-
-					vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
-				elseif Service == "Gasoline" then
-					Active[user_id] = os.time() + 30
-					TriggerClientEvent("Progress",source,30000)
+				if Service == "Parquimetro" or Service == "Gasoline" then
+					Active[user_id] = os.time() + 10
+					TriggerClientEvent("Progress",source,10000)
 
 					vRPC.playAnim(source,false,{"anim@amb@clubhouse@tutorial@bkr_tut_ig3@","machinic_loop_mechandplayer"},true)
 				else
@@ -4142,18 +4137,23 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 								local Players = vRPC.Players(source)
 								for _,v in ipairs(Players) do
 									async(function()
-										TriggerClientEvent("Notify",v,"amarelo","Um <b>Parquímetro</b> irá explodir em <b>10 segundos</b>.",5000)
+										TriggerClientEvent("Notify",v,"amarelo","Um <b>Parquímetro</b> irá explodir em segundos.",5000)
 									end)
 								end
 
-								Wait(11000)
+								Wait(30000)
 								TriggerClientEvent("vRP:Explosion",source,coords)
 							elseif Service == "Gasoline" then
 								vRP.removeInventoryItem(user_id,"c4",1,true)
-								vRP.upgradeStress(user_id,5)
-								TriggerClientEvent("Notify",source,"amarelo","Bomba programada em <b>1 minuto</b>.",5000)
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
+									async(function()
+										TriggerClientEvent("Notify",v,"amarelo","Uma <b>Bomba</b> irá explodir em segundos.",5000)
+									end)
+								end
 
-								Wait(60000)
+								Wait(30000)
+								vRP.upgradeStress(user_id,4)
 								TriggerClientEvent("vRP:Explosion",source,coords)
 							else
 								TriggerClientEvent("Notify",source,"amarelo","Nada encontrado.",5000)
@@ -4161,19 +4161,19 @@ AddEventHandler("inventory:verifyObjects",function(Entity,Service)
 						else
 							if Service == "Gasoline" then
 								vRP.removeInventoryItem(user_id,"c4",1,true)
-								vRP.upgradeStress(user_id,5)
-								TriggerClientEvent("Notify",source,"amarelo","Bomba programada em <b>1 minuto</b>.",5000)
+								local Players = vRPC.Players(source)
+								for _,v in ipairs(Players) do
+									async(function()
+										TriggerClientEvent("Notify",v,"amarelo","Uma <b>Bomba</b> irá explodir em segundos.",5000)
+									end)
+								end
 
-								Wait(60000)
+								Wait(30000)
+								vRP.upgradeStress(user_id,4)
 								TriggerClientEvent("vRP:Explosion",source,coords)
 							elseif (vRP.inventoryWeight(user_id) + (itemWeight(itemSelect[1]) * itemSelect[2])) <= vRP.getWeight(user_id) then
 								vRP.generateItem(user_id,itemSelect[1],itemSelect[2],true)
-
-								if Service == "Parquimetro" then
-									vRP.upgradeStress(user_id,5)
-								else
-									vRP.upgradeStress(user_id,1)
-								end
+								vRP.upgradeStress(user_id,1)
 							else
 								TriggerClientEvent("Notify",source,"vermelho","Mochila cheia.",5000)
 								Trashs[model][hash] = nil
