@@ -325,7 +325,7 @@ function cRP.entranceHomes(homeName,v,interior,theft)
 		if math.random(100) >= 95 then
 			homes["police"] = GetGameTimer() + 15000
 			homes["called"] = true
-			vSERVER.callPolice()
+			vSERVER.callPolice(homes["current"][1],homes["current"][2],homes["current"][3])
 		end
 
 		if math.random(100) >= 90 then
@@ -369,7 +369,9 @@ CreateThread(function()
 
 				if speed > 2 and GetGameTimer() >= homes["police"] and not homes["called"] then
 					homes["police"] = GetGameTimer() + 15000
-					vSERVER.callPolice()
+					for k,v in pairs(homes["intern"]) do
+						vSERVER.callPolice(homes["current"][1],homes["current"][2],homes["current"][3])
+					end
 				end
 
 				if theftCoords[homes["theft"]] then

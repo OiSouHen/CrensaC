@@ -2361,19 +2361,18 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CALLPOLICE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.callPolice()
+function cRP.callPolice(disX,disY,disZ)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		TriggerClientEvent("sounds:source",source,"alarm",1.0)
 
 		local ped = GetPlayerPed(source)
-		local coords = GetEntityCoords(ped)
 
 		local policeResult = vRP.numPermission("Police")
 		for k,v in pairs(policeResult) do
 			async(function()
-				TriggerClientEvent("NotifyPush",v,{ code = 90, title = "Roubo de Propriedade", x = coords["x"], y = coords["y"], z = coords["z"], criminal = "Alarme de segurança", time = "Recebido às "..os.date("%H:%M"), blipColor = 43 })
+				TriggerClientEvent("NotifyPush",v,{ code = 90, title = "Roubo de Propriedade", x = disX, y = disY, z = disZ, criminal = "Alarme de segurança", time = "Recebido às "..os.date("%H:%M"), blipColor = 43 })
 			end)
 		end
 	end
