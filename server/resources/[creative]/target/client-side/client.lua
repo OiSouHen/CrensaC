@@ -1135,7 +1135,91 @@ CreateThread(function()
 			}
 		}
 	})
-	
+
+	AddCircleZone("PackSend01",vec3(1175.08,2706.9,38.1),0.75,{
+		name = "PackSend01",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("PackSend02",vec3(-2962.52,483.05,15.7),0.75,{
+		name = "PackSend02",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("PackSend03",vec3(-1212.51,-330.75,37.78),0.75,{
+		name = "PackSend03",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("PackSend04",vec3(-351.05,-49.96,49.03),0.75,{
+		name = "PackSend04",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("PackSend05",vec3(314.23,-279.19,54.17),0.75,{
+		name = "PackSend05",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
+	AddCircleZone("PackSend06",vec3(149.79,-1040.79,29.37),0.75,{
+		name = "PackSend06",
+		heading = 3374176
+	},{
+		distance = 1.0,
+		options = {
+			{
+				event = "inventory:Packs",
+				label = "Entregar Pacote",
+				tunnel = "server"
+			}
+		}
+	})
+
 	AddCircleZone("jewelry01",vec3(-626.67,-238.58,38.05),0.75,{
 		name = "jewelry01",
 		heading = 3374176
