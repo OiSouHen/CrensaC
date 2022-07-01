@@ -28,14 +28,14 @@ function cRP.Warehouse(Number)
 				end
 
 				if vRP.paymentFull(user_id,buyPrice) then
-					vRP.execute("warehouses/buyWarehouses",{ name = Number, weight = 350, password = newWarehouses[1], user_id = user_id })
+					vRP.execute("warehouses/buyWarehouses",{ name = Number, weight = 100, password = newWarehouses[1], user_id = user_id })
 					TriggerClientEvent("Notify",source,"verde","Armazém comprado.",5000)
 				else
 					TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
 				end
 			end
 		else
-			local enterWarehouses = vKEYBOARD.keyWord(source,"Senha de acesso:")
+			local enterWarehouses = vKEYBOARD.keyWord(source,"Senha:")
 			if not enterWarehouses then
 				return
 			end
