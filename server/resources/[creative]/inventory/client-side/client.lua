@@ -1896,7 +1896,7 @@ local disWeapons = { "WEAPON_HEAVYPISTOL","WEAPON_SMG","WEAPON_ASSAULTSMG","WEAP
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("inventory:DisPed")
 AddEventHandler("inventory:DisPed",function()
-local Ped = PlayerPedId()
+	local Ped = PlayerPedId()
 	local Rand = math.random(#disPeds)
 	local Coords = GetEntityCoords(Ped)
 	local Weapon = math.random(#disWeapons)
