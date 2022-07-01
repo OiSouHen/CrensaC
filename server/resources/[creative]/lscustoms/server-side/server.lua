@@ -46,9 +46,14 @@ AddEventHandler("lscustoms:attemptPurchase",function(type,mod)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if type == "engines" or type == "brakes" or type == "transmission" or type == "suspension" or type == "shield" then
-			if vRP.paymentFull(user_id,parseInt(vehicleCustomisationPrices[type][mod])) then
-				TriggerClientEvent("lscustoms:purchaseSuccessful",source)
+			if vRP.hasGroup(user_id,"Mechanic") then
+				if vRP.paymentFull(user_id,parseInt(vehicleCustomisationPrices[type][mod])) then
+					TriggerClientEvent("lscustoms:purchaseSuccessful",source)
+				else
+					TriggerClientEvent("lscustoms:purchaseFailed",source)
+				end
 			else
+				TriggerClientEvent("Notify",source,"amarelo","Sem permissão.",3000)
 				TriggerClientEvent("lscustoms:purchaseFailed",source)
 			end
 		else
