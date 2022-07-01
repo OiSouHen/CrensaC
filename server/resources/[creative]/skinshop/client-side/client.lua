@@ -637,13 +637,17 @@ function cRP.checkShoes()
 	if GetEntityModel(Ped) == GetHashKey("mp_f_freemode_01") then
 		Number = 35
 	end
+	
+	if skinData["shoes"]["item"] >= 0 then
+		if skinData["shoes"]["item"] ~= Number then
+			skinData["shoes"]["item"] = Number
+			skinData["shoes"]["texture"] = 0
+			SetPedComponentVariation(Ped,6,skinData["shoes"]["item"],skinData["shoes"]["texture"],1)
 
-	if skinData["shoes"]["item"] ~= Number then
-		skinData["shoes"]["item"] = Number
-		skinData["shoes"]["texture"] = 0
-		SetPedComponentVariation(Ped,6,skinData["shoes"]["item"],skinData["shoes"]["texture"],1)
-
-		return true
+			return true
+		end
+	else
+		return false
 	end
 
 	return false
