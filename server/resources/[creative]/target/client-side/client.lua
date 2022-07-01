@@ -803,6 +803,11 @@ CreateThread(function()
 				event = "crafting:Fuels",
 				label = "Combustível",
 				tunnel = "client"
+			},{
+				event = "inventory:verifyObjects",
+				label = "Explodir",
+				tunnel = "police",
+				service = "Gasoline"
 			}
 		},
 		distance = 0.75
