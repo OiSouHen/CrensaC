@@ -40,6 +40,7 @@ local Scanners = {}
 local Stockade = {}
 local Megaphone = {}
 local userAmount = {}
+local Packsdelivery = {}
 
 local openIdentity = {}
 local verifyObjects = {}
@@ -587,7 +588,7 @@ AddEventHandler("inventory:sendItem",function(Slot,Amount)
 	local Amount = parseInt(Amount)
 	local user_id = vRP.getUserId(source)
 	if user_id and Active[user_id] == nil then
-		local Player = vRPC.ClosestPed(source,0.8)
+		local Player = vRPC.ClosestPed(source,1)
 		if Player then
 			Active[user_id] = os.time() + 100
 
@@ -4823,6 +4824,80 @@ AddEventHandler("inventory:makeProducts",function(Entity,Table)
 
 				Wait(100)
 			until Active[user_id] == nil
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PACKS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local Packs = {
+	["PackSend01"] = { 1175.08,2706.9,38.1 },
+	["PackSend02"] = { -2962.52,483.05,15.7 },
+	["PackSend03"] = { -1212.51,-330.75,37.78 },
+	["PackSend04"] = { -351.05,-49.96,49.03 },
+	["PackSend05"] = { 314.23,-279.19,54.17 },
+	["PackSend06"] = { 149.79,-1040.79,29.37 }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NEARESTBANKS
+-----------------------------------------------------------------------------------------------------------------------------------------
+function nearestBanks(source)
+	local ped = GetPlayerPed(source)
+	local coords = GetEntityCoords(ped)
+
+	for k,v in pairs(Packs) do
+		local distance = #(coords - vec3(v[1],v[2],v[3]))
+		if distance <= 1.5 then
+			return k
+		end
+	end
+
+	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INITPACKS
+-----------------------------------------------------------------------------------------------------------------------------------------
+exports("initPacks",function(source)
+	local fleecaName = nearestBanks(source)
+	if fleecaName then
+		if Packsdelivery[fleecaName] == nil then
+			Packsdelivery[fleecaName] = os.time() + 3600
+			return true
+		else
+			if os.time() >= Packsdelivery[fleecaName] then
+				Packsdelivery[fleecaName] = os.time() + 3600
+				return true
+			end
+
+			local deliveryTime = parseInt(Packsdelivery[fleecaName] - os.time())
+			TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..deliveryTime.." segundos</b>.",5000)
+		end
+	end
+
+	return false
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVENTORY:PACKS
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterServerEvent("inventory:Packs")
+AddEventHandler("inventory:Packs",function()
+	local source = source
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if exports["inventory"]:initPacks(source) then
+			if vRP.tryGetInventoryItem(user_id,"dollars100",1,false) then
+				vRP.generateItem(user_id,"dollars",1000,true)
+			end
+
+			if vRP.tryGetInventoryItem(user_id,"dollars500",1,false) then
+				vRP.generateItem(user_id,"dollars",5000,true)
+			end
+
+			if vRP.tryGetInventoryItem(user_id,"dollars1000",1,false) then
+				vRP.generateItem(user_id,"dollars",10000,true)
+			end
+
+			TriggerClientEvent("inventory:Update",source,"updateMochila")
 		end
 	end
 end)
