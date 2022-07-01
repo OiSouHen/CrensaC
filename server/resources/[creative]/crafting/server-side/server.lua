@@ -123,6 +123,15 @@ local craftList = {
 	},
 	["Mercado"] = {
 		["list"] = {
+			["chair01"] = {
+				["amount"] = 1,
+				["destroy"] = false,
+				["require"] = {
+					["aluminum"] = 15,
+					["plastic"] = 5,
+					["rubber"] = 10
+				}
+			},
 			["keyboard"] = {
 				["amount"] = 1,
 				["destroy"] = false,
