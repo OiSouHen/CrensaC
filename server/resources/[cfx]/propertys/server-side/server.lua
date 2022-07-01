@@ -2467,6 +2467,9 @@ exports("initNewspapers",function(source)
 				Newspapers[homeName] = os.time() + 3600
 				return true
 			end
+
+			local newspaperTime = parseInt(Newspapers[homeName] - os.time())
+			TriggerClientEvent("Notify",source,"azul","Aguarde <b>"..newspaperTime.." segundos</b>.",5000)
 		end
 	end
 
